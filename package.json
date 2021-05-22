@@ -13,13 +13,6 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
-  "devDependencies": {
-    "eslint": "*",
-    "prettier": "*",
-    "babel-eslint": "*",
-    "eslint-config-prettier": "*",
-    "eslint-plugin-react": "*"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -43,5 +36,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "prettier": "^2.3.0"
   }
 }
