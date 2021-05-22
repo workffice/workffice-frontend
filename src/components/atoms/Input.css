@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+input {
+  /* Rectangle 1 */
+  width: 30%;
+  height: 2rem;
+  margin-bottom: 2%;
+  /* Text */
+  background: #ffffff;
+  margin-left: 2%;
+  border-radius: 6px;
+  text-indent: 2%;
+  font-weight: lighter;
+  font-family: 'Fira Sans', sans-serif;
+  color: #0000;
+}

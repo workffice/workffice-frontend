@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Ubuntu:wght@500&display=swap');
+button {
+  width: 30.7%;
+  height: 2rem;
+  background: #018abe;
+  border-radius: 6px;
+  line-height: 22px;
+  margin-left: 2%;
+
+  /* Text */
+  font-style: normal;
+  font-size: 16px;
+  font-family: 'Ubuntu', sans-serif;
+  color: #ffffff;
+}
