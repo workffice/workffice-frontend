@@ -28,11 +28,7 @@
     "bootstrap4",
     "reactstrap"
   ],
-  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com)",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/ct-paper-dashboard-pro-react/issues"
-  },
-  "homepage": "https://demos.creative-tim.com/paper-dashboard-pro-react/#/",
+  "author": "Workffice frontend",
   "dependencies": {
     "bootstrap": "4.6.0",
     "chart.js": "3.2.1",
@@ -76,8 +72,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
-    "prettier": "^2.3.0",
-    "gulp": "4.0.2",
-    "gulp-append-prepend": "1.0.9"
+    "prettier": "^2.3.0"
   }
 }
