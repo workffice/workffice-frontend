@@ -37,10 +37,10 @@ function Register() {
                 <i className="nc-icon nc-tv-2" />
               </div>
               <div className="description">
-                <h5 className="info-title">Marketing</h5>
+                <h5 className="info-title">Simple y rápido</h5>
                 <p className="description">
-                  We've created the marketing campaign of the website. It was a
-                  very interesting collaboration.
+                  Te registras, buscas la oficina que necesitas, pagás tu reserva y 
+                  comenza a utilizarla.
                 </p>
               </div>
             </div>
@@ -49,10 +49,10 @@ function Register() {
                 <i className="nc-icon nc-html5" />
               </div>
               <div className="description">
-                <h5 className="info-title">Fully Coded in HTML5</h5>
+                <h5 className="info-title">Oficinas</h5>
                 <p className="description">
-                  We've developed the website with HTML5 and CSS3. The client
-                  has access to the code using GitHub.
+                  Encontrá oficinas privadas o compartidas con los servicios que necesitás
+                  para realizar tu trabajo.
                 </p>
               </div>
             </div>
@@ -61,10 +61,9 @@ function Register() {
                 <i className="nc-icon nc-atom" />
               </div>
               <div className="description">
-                <h5 className="info-title">Built Audience</h5>
+                <h5 className="info-title">Reserva</h5>
                 <p className="description">
-                  There is also a Fully Customizable CMS Admin Dashboard for
-                  this product.
+                  Gestioná tus horarios de alquiler de manera rápida y sencilla.
                 </p>
               </div>
             </div>

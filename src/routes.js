@@ -8,11 +8,6 @@ const routes = [
     mini: 'L',
     component: Login,
     layout: '/auth',
-    // path: "/dashboard",
-    // name: "Dashboard",
-    // icon: "nc-icon nc-bank",
-    // component: Dashboard,
-    // layout: "/admin",
   },
   {
     path: '/register',
