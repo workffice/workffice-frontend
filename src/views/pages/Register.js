@@ -1,6 +1,5 @@
 
 import React from "react";
-
 import {
   Button,
   Card,
@@ -9,7 +8,7 @@ import {
   CardFooter,
   CardTitle,
   // Label,
-  // FormGroup,
+  FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -33,21 +32,15 @@ function Register() {
         <Row>
           <Col className="ml-auto" lg="5" md="5">
             <div className="info-area info-horizontal mt-5">
-              <div className="icon icon-primary">
-                <i className="nc-icon nc-tv-2" />
-              </div>
               <div className="description">
                 <h5 className="info-title">Simple y rápido</h5>
                 <p className="description">
-                  Te registras, buscas la oficina que necesitas, pagás tu reserva y 
+                  Te registras, buscas la oficina que necesitas, pagás tu reserva y
                   comenza a utilizarla.
                 </p>
               </div>
             </div>
             <div className="info-area info-horizontal">
-              <div className="icon icon-primary">
-                <i className="nc-icon nc-html5" />
-              </div>
               <div className="description">
                 <h5 className="info-title">Oficinas</h5>
                 <p className="description">
@@ -57,9 +50,6 @@ function Register() {
               </div>
             </div>
             <div className="info-area info-horizontal">
-              <div className="icon icon-info">
-                <i className="nc-icon nc-atom" />
-              </div>
               <div className="description">
                 <h5 className="info-title">Reserva</h5>
                 <p className="description">
@@ -81,34 +71,22 @@ function Register() {
                         <i className="fa fa-user" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Nombre..." type="text" />
+                    <Input placeholder="Email.." type="email" />
                   </InputGroup>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="fa fa-user" />
+                        <i className="fa fa-key" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Apellido..." type="text" />
+                    <Input placeholder="Contraseña..." type="password" />
                   </InputGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fa fa-envelope" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input placeholder="Correo..." type="email" />
-                  </InputGroup>
-                  {/* <FormGroup check className="text-left">
-                    <Label check>
-                      <Input defaultChecked type="checkbox" />
-                      <span className="form-check-sign" />I agree to the{" "}
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        terms and conditions
-                      </a>
-                      .
-                    </Label>
-                  </FormGroup> */}
+                  <FormGroup>
+                    <Input type="select" name="select" id="select">
+                      <option value="RENTER">Usuario Cliente</option>
+                      <option value="OFFICE_HOLDER">Propietario de oficinas</option>
+                    </Input>
+                  </FormGroup>
                 </Form>
               </CardBody>
               <CardFooter>
