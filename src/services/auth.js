@@ -5,7 +5,7 @@ import {
     AUTH_CHANGE_PASSWORD_URL,
     AUTH_RECOVER_PASSWORD_URL,
     AUTH_LOGOUT_URL,
-  } from '../utils/Constants';
+  } from '../api/Constants';
   import callApi from './index';
   import { getOneErrors } from '../utils/index';
   

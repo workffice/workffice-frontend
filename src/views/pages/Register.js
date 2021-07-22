@@ -18,6 +18,19 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { connect } from 'react-redux';
+import { createStart } from '../../stores/actions/auth';
+
+const mapDispatchToProps = (dispatch) => ({
+  create: (data) => dispatch(createStart(data)),
+});
+
+onCreate = async (data) => {
+  const { createUser } = this.props;
+  if (data) {
+    createUser(data);
+  }
+}
 
 function Register() {
   React.useEffect(() => {
@@ -94,7 +107,7 @@ function Register() {
                   className="btn-round"
                   color="info"
                   href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) => e.onCreate()}
                 >
                   Crear cuenta
                 </Button>
@@ -114,4 +127,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default connect(null, mapDispatchToProps)(Register);

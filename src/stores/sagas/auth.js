@@ -6,17 +6,7 @@ import {
   takeLeading,
 } from 'redux-saga/effects';
 
-import {
-  LOGIN_START,
-  LOGIN_SUCCESSFULL,
-  LOG_OUT_START,
-  LOG_OUT_START_HAVING_SEGMENT,
-  LOG_OUT_FINISH,
-  CHANGE_PASSWORD_START,
-  CHANGE_PASSWORD_SUCCESSFULL,
-  RECOVER_PASSWORD_START,
-  RECOVER_PASSWORD_SUCCESSFULL,
-} from '../actions/auth';
+import * as AuthActions from '../actions/auth';
 import {
   removeSession,
   processToken,
@@ -28,6 +18,7 @@ import { showConfirmationModal } from './modal';
 import { turnLoading } from '../actions';
 import AsyncStorageEnum from '../../utils/AsyncStorageEnum';
 import {
+  create as createService,
   login as loginService,
   changePassword as changePasswordService,
   recoverPassword as recoverPasswordService,
@@ -36,6 +27,23 @@ import {
 import * as SegmentsActions from '../actions/segments';
 import * as FilterSortSearchActions from '../actions/filterSortSearch';
 import * as QueueActions from '../actions/queue';
+
+export const createUser = function* ({payload}) {
+  try {
+    yield put(turnLoading(true));
+    const response = yield call(createService, payload.userCredentials);
+    if (response) {
+      const { uri } = response;
+      yield put(turnLoading(false));
+      yield call(payload.callback);
+      // yield put(FilterSortSearchActions.resetFilterAndSort());
+      return yield put({ type: CREATE_PENDING, payload: token }); //TODO:VER SI DEVUELVE ALGO O NO.
+    }
+  } catch (e) {
+    yield put(turnLoading(false));
+    //yield call(printError, e);
+  }
+}
 
 export const login = function* ({ payload }) {
   try {
