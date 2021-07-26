@@ -18,21 +18,58 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { connect } from 'react-redux';
-import { createStart } from '../../stores/actions/auth';
+// import { connect } from 'react-redux';
+// import { createStart } from '../../stores/actions/auth';
+import { useFormik } from "formik";
+import { RegisterInfo } from "../../components/RegisterInfo/RegisterInfo";
 
-const mapDispatchToProps = (dispatch) => ({
-  create: (data) => dispatch(createStart(data)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   create: (data) => dispatch(createStart(data)),
+// });
 
-onCreate = async (data) => {
-  const { createUser } = this.props;
-  if (data) {
-    createUser(data);
-  }
-}
+// onCreate = async (data) => {
+//   const { createUser } = this.props;
+//   if (data) {
+//     createUser(data);
+//   }
+// }
 
 function Register() {
+
+  const validate = values => {
+    const errors = {};
+    if (!values.password) {
+      errors.password = 'Required';
+    } else if (values.password.length < 8) {
+      errors.password = 'Must be 8 characters or more';
+    }
+
+    if (!values.userType) {
+      errors.userType = 'Required';
+    }
+
+    if (!values.email) {
+      errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Invalid email address';
+    }
+
+    return errors;
+  };
+
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      userType: '',
+    },
+    validate,
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   React.useEffect(() => {
     document.body.classList.toggle("register-page");
     return function cleanup() {
@@ -44,32 +81,7 @@ function Register() {
       <Container>
         <Row>
           <Col className="ml-auto" lg="5" md="5">
-            <div className="info-area info-horizontal mt-5">
-              <div className="description">
-                <h5 className="info-title">Simple y rápido</h5>
-                <p className="description">
-                  Te registras, buscas la oficina que necesitas, pagás tu reserva y
-                  comenza a utilizarla.
-                </p>
-              </div>
-            </div>
-            <div className="info-area info-horizontal">
-              <div className="description">
-                <h5 className="info-title">Oficinas</h5>
-                <p className="description">
-                  Encontrá oficinas privadas o compartidas con los servicios que necesitás
-                  para realizar tu trabajo.
-                </p>
-              </div>
-            </div>
-            <div className="info-area info-horizontal">
-              <div className="description">
-                <h5 className="info-title">Reserva</h5>
-                <p className="description">
-                  Gestioná tus horarios de alquiler de manera rápida y sencilla.
-                </p>
-              </div>
-            </div>
+            <RegisterInfo />
           </Col>
           <Col className="mr-auto" lg="4" md="6">
             <Card className="card-signup text-center">
@@ -77,25 +89,45 @@ function Register() {
                 <CardTitle tag="h4">Creemos tu cuenta</CardTitle>
               </CardHeader>
               <CardBody>
-                <Form action="" className="form" method="">
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fa fa-user" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input placeholder="Email.." type="email" />
-                  </InputGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fa fa-key" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input placeholder="Contraseña..." type="password" />
-                  </InputGroup>
+                {/* FORMULARIO REGISTRO*/}
+                <Form action="" className="form" method="" onSubmit={formik.handleSubmit}>
+                  <FormGroup className={formik.errors.email && formik.touched.email ? 'has-danger' : 'has-success'}>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="fa fa-user" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        name="email"
+                        placeholder="Email.."
+                        type="email"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email} />
+                    </InputGroup>
+                    {formik.errors.email && formik.touched.email && formik.validateOnChange.email? <div className="error">{formik.errors.email}</div> : null}
+                  </FormGroup>
+                  <FormGroup className={formik.errors.password && formik.touched.password ? 'has-danger' : 'has-success'}>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="fa fa-key" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        name="password"
+                        placeholder="Contraseña..."
+                        type="password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                      />
+                    </InputGroup>
+                    {formik.errors.password && formik.touched.password  && formik.validateOnChange.password? <div className="error">{formik.errors.password}</div> : null}
+                  </FormGroup>
                   <FormGroup>
-                    <Input type="select" name="select" id="select">
+                    <Input type="select" name="userType" id="select">
                       <option value="RENTER">Usuario Cliente</option>
                       <option value="OFFICE_HOLDER">Propietario de oficinas</option>
                     </Input>
@@ -106,8 +138,7 @@ function Register() {
                 <Button
                   className="btn-round"
                   color="info"
-                  href="#pablo"
-                  onClick={(e) => e.onCreate()}
+                  type="submit"
                 >
                   Crear cuenta
                 </Button>
@@ -127,4 +158,4 @@ function Register() {
   );
 }
 
-export default connect(null, mapDispatchToProps)(Register);
+export default Register;

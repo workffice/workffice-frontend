@@ -1,6 +1,5 @@
 import {
-  API_AUTH_URL,
-  API_AUTHENTICATIONS_URL,
+  API_AUTH_URL
 } from '../environment/environment';
 
 export const HTTP_METHODS = {

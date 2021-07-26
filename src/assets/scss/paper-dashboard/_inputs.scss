@@ -217,6 +217,7 @@
 
     & i{
       opacity: .5;
+      margin-right: 5px !important;
     }
 
     @include transition-input-focus-color();
