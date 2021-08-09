@@ -1,6 +1,7 @@
 import Login from './views/pages/Login';
 import Register from './views/pages/Register';
 import RecoveryPassword from './views/pages/RecoveryPassword';
+import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
 const routes = [
   {
     path: '/login',
@@ -21,6 +22,13 @@ const routes = [
     name: 'RecoveryPassword',
     mini: 'LS',
     component: RecoveryPassword,
+    layout: '/auth',
+  },
+  {
+    path: '/confirmation-account',
+    name: 'ConfirmationAccount',
+    mini: 'LS',
+    component: ConfirmationAccount,
     layout: '/auth',
   },
 
