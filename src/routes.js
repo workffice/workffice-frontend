@@ -2,10 +2,6 @@ import Login from './views/pages/authentication/Login';
 import Register from './views/pages/authentication/Register';
 import RecoveryPassword from './views/pages/authentication/RecoveryPassword';
 import { Dashboard } from './views/pages/backoffice/Dashboard';
-
-import Login from './views/pages/Login';
-import Register from './views/pages/Register';
-import RecoveryPassword from './views/pages/RecoveryPassword';
 import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
 const routes = [
   {
