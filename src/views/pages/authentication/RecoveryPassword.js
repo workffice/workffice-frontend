@@ -46,7 +46,7 @@ function LockScreen() {
               <img
                 alt="..."
                 className="recovery-password-user"
-                src={require("../../assets/img/Recurso 5.png").default}
+                src={require("../../../assets/img/Recurso 5.png").default}
               />
             </CardHeader>
             <CardBody>
@@ -75,7 +75,7 @@ function LockScreen() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../assets/img/bg/luke-chesser.jpg").default
+          backgroundImage: `url(${require("../../../assets/img/bg/luke-chesser.jpg").default
             })`,
         }}
       />

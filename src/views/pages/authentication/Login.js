@@ -133,7 +133,7 @@ function Login() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../assets/img/bg/office1.jpg").default
+          backgroundImage: `url(${require("../../../assets/img/bg/office1.jpg").default
             })`,
         }}
       />

@@ -1,7 +1,9 @@
-import Login from './views/pages/Login';
-import Register from './views/pages/Register';
-import RecoveryPassword from './views/pages/RecoveryPassword';
+import Login from './views/pages/authentication/Login';
+import Register from './views/pages/authentication/Register';
+import RecoveryPassword from './views/pages/authentication/RecoveryPassword';
+import { Dashboard } from './views/pages/backoffice/Dashboard';
 import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
+
 const routes = [
   {
     path: '/login',
@@ -31,6 +33,17 @@ const routes = [
     component: ConfirmationAccount,
     layout: '/auth',
   },
+
+  // ADMIN ROUTES
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    mini: 'LS',
+    component: Dashboard,
+    layout: '/admin',
+  },
+  
+
 
   // {
   //   collapse: true,

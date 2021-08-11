@@ -3,23 +3,12 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 // import { connect } from 'react-redux';
 // import { createStart } from '../../stores/actions/auth';
+// import { useFormik } from "formik";
 
-import { RegisterInfo } from "../../components/Register/RegisterInfo";
-import { RegisterForm } from "../../components/Register/RegisterForm";
-
-// const mapDispatchToProps = (dispatch) => ({
-//   create: (data) => dispatch(createStart(data)),
-// });
-
-// onCreate = async (data) => {
-//   const { createUser } = this.props;
-//   if (data) {
-//     createUser(data);
-//   }
-// }
+import { RegisterInfo } from "../../../components/Register/RegisterInfo";
+import { RegisterForm } from "../../../components/Register/RegisterForm";
 
 function Register() {
-
 
   React.useEffect(() => {
     document.body.classList.toggle("register-page");
@@ -42,7 +31,7 @@ function Register() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../assets/img/bg/Office.jpg").default
+          backgroundImage: `url(${require("../../../assets/img/bg/Office.jpg").default
             })`,
         }}
       />
