@@ -13600,76 +13600,76 @@ img {
   margin-bottom: 0 !important;
 }
 
-.login-page .content .container {
+. .content .container {
   margin-top: 8vh;
 }
 
-.login-page .card-login {
+. .card-login {
   border-radius: 6px;
   padding-bottom: 0.7rem;
 }
-.login-page .card-login .btn-wd {
+. .card-login .btn-wd {
   min-width: 180px;
 }
-.login-page .card-login .logo-container {
+. .card-login .logo-container {
   width: 65px;
   margin: 0 auto;
   margin-bottom: 55px;
 }
-.login-page .card-login .logo-container img {
+. .card-login .logo-container img {
   width: 100%;
 }
-.login-page .card-login .input-group:last-child {
+. .card-login .input-group:last-child {
   margin-bottom: 40px;
 }
-.login-page .card-login.card-plain .form-control::-moz-placeholder {
+. .card-login.card-plain .form-control::-moz-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control:-moz-placeholder {
+. .card-login.card-plain .form-control:-moz-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control::-webkit-input-placeholder {
+. .card-login.card-plain .form-control::-webkit-input-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control:-ms-input-placeholder {
+. .card-login.card-plain .form-control:-ms-input-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control {
+. .card-login.card-plain .form-control {
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-control:focus {
+. .card-login.card-plain .form-control:focus {
   border-color: #ffffff;
   background-color: transparent;
   color: #ffffff;
 }
-.login-page .card-login.card-plain .has-success:after,
-.login-page .card-login.card-plain .has-danger:after {
+. .card-login.card-plain .has-success:after,
+. .card-login.card-plain .has-danger:after {
   color: #ffffff;
 }
-.login-page .card-login.card-plain .has-danger .form-control {
+. .card-login.card-plain .has-danger .form-control {
   background-color: transparent;
 }
-.login-page .card-login.card-plain .input-group-prepend .input-group-text,
-.login-page .card-login.card-plain .input-group-append .input-group-text {
+. .card-login.card-plain .input-group-prepend .input-group-text,
+. .card-login.card-plain .input-group-append .input-group-text {
   background-color: transparent;
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group-focus
   .input-group-append
@@ -13678,39 +13678,39 @@ img {
   border-color: #ffffff;
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-group.no-border .form-control,
-.login-page .card-login.card-plain .input-group.no-border .form-control {
+. .card-login.card-plain .form-group.no-border .form-control,
+. .card-login.card-plain .input-group.no-border .form-control {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-group.no-border .form-control:focus,
-.login-page .card-login.card-plain .form-group.no-border .form-control:active,
-.login-page .card-login.card-plain .form-group.no-border .form-control:active,
-.login-page .card-login.card-plain .input-group.no-border .form-control:focus,
-.login-page .card-login.card-plain .input-group.no-border .form-control:active,
-.login-page .card-login.card-plain .input-group.no-border .form-control:active {
+. .card-login.card-plain .form-group.no-border .form-control:focus,
+. .card-login.card-plain .form-group.no-border .form-control:active,
+. .card-login.card-plain .form-group.no-border .form-control:active,
+. .card-login.card-plain .input-group.no-border .form-control:focus,
+. .card-login.card-plain .input-group.no-border .form-control:active,
+. .card-login.card-plain .input-group.no-border .form-control:active {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
@@ -13718,73 +13718,73 @@ img {
   .input-group-text {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
@@ -13793,25 +13793,25 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control:focus
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control:focus
   + .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control:focus
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control:focus
@@ -13820,22 +13820,22 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .input-group-append
@@ -13844,22 +13844,22 @@ img {
   border: none;
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border.input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border.input-group-focus
   .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border.input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border.input-group-focus
   .input-group-append
@@ -13867,13 +13867,13 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .input-group-addon,
-.login-page .card-login.card-plain .form-group.no-border .input-group-addon,
-.login-page .card-login.card-plain .input-group.no-border .input-group-addon {
+. .card-login.card-plain .input-group-addon,
+. .card-login.card-plain .form-group.no-border .input-group-addon,
+. .card-login.card-plain .input-group.no-border .input-group-addon {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.login-page .link {
+. .link {
   font-size: 10px;
   color: #ffffff;
   text-decoration: none;
@@ -13968,21 +13968,21 @@ img {
 }
 
 .register-page .navbar .navbar-collapse .nav-item .nav-link,
-.login-page .navbar .navbar-collapse .nav-item .nav-link,
+. .navbar .navbar-collapse .nav-item .nav-link,
 .lock-page .navbar .navbar-collapse .nav-item .nav-link {
   text-transform: capitalize;
   color: #ffffff !important;
 }
 
 .register-page .navbar.navbar-transparent,
-.login-page .navbar.navbar-transparent,
+. .navbar.navbar-transparent,
 .lock-page .navbar.navbar-transparent {
   border-bottom: 1px solid transparent;
   margin-top: 25px;
 }
 
 .register-page .navbar .navbar-brand,
-.login-page .navbar .navbar-brand,
+. .navbar .navbar-brand,
 .lock-page .navbar .navbar-brand {
   color: #ffffff !important;
 }
@@ -13992,7 +13992,7 @@ img {
     .navbar.bg-white
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
-  .login-page .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab,
+  . .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab,
   .lock-page .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab {
     background: #66615b !important;
   }
@@ -14002,17 +14002,17 @@ img {
     .navbar-nav
     .nav-item
     .nav-link,
-  .login-page .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link,
+  . .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link,
   .lock-page .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link {
     color: #66615b !important;
   }
   .register-page .navbar.bg-white .navbar-brand,
-  .login-page .navbar.bg-white .navbar-brand,
+  . .navbar.bg-white .navbar-brand,
   .lock-page .navbar.bg-white .navbar-brand {
     color: #66615b !important;
   }
   .register-page .navbar.navbar-transparent .navbar-toggle,
-  .login-page .navbar.navbar-transparent .navbar-toggle,
+  . .navbar.navbar-transparent .navbar-toggle,
   .lock-page .navbar.navbar-transparent .navbar-toggle {
     display: none;
   }
@@ -14020,7 +14020,7 @@ img {
     .navbar.navbar-transparent
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
-  .login-page
+  .
     .navbar.navbar-transparent
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
@@ -15524,7 +15524,7 @@ img {
   .typography-line span {
     width: 60px !important;
   }
-  .login-page .navbar,
+  . .navbar,
   .lock-page .navbar,
   .register-page .navbar {
     padding: 0.5rem 1rem;
@@ -15548,7 +15548,7 @@ img {
 }
 
 @media screen and (max-width: 374px) {
-  .login-page .content {
+  . .content {
     padding-top: 10vh;
   }
 }
@@ -15635,72 +15635,72 @@ img {
   margin-left: 3px;
 }
 
-.login-page .card-login {
+. .card-login {
   border-radius: 6px;
   padding-bottom: 0.7rem;
 }
-.login-page .card-login .btn-wd {
+. .card-login .btn-wd {
   min-width: 180px;
 }
-.login-page .card-login .logo-container {
+. .card-login .logo-container {
   width: 65px;
   margin: 0 auto;
   margin-bottom: 55px;
 }
-.login-page .card-login .logo-container img {
+. .card-login .logo-container img {
   width: 100%;
 }
-.login-page .card-login .input-group:last-child {
+. .card-login .input-group:last-child {
   margin-bottom: 40px;
 }
-.login-page .card-login.card-plain .form-control::-moz-placeholder {
+. .card-login.card-plain .form-control::-moz-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control:-moz-placeholder {
+. .card-login.card-plain .form-control:-moz-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control::-webkit-input-placeholder {
+. .card-login.card-plain .form-control::-webkit-input-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control:-ms-input-placeholder {
+. .card-login.card-plain .form-control:-ms-input-placeholder {
   color: #ebebeb;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.login-page .card-login.card-plain .form-control {
+. .card-login.card-plain .form-control {
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-control:focus {
+. .card-login.card-plain .form-control:focus {
   border-color: #ffffff;
   background-color: transparent;
   color: #ffffff;
 }
-.login-page .card-login.card-plain .has-success:after,
-.login-page .card-login.card-plain .has-danger:after {
+. .card-login.card-plain .has-success:after,
+. .card-login.card-plain .has-danger:after {
   color: #ffffff;
 }
-.login-page .card-login.card-plain .has-danger .form-control {
+. .card-login.card-plain .has-danger .form-control {
   background-color: transparent;
 }
-.login-page .card-login.card-plain .input-group-prepend .input-group-text,
-.login-page .card-login.card-plain .input-group-append .input-group-text {
+. .card-login.card-plain .input-group-prepend .input-group-text,
+. .card-login.card-plain .input-group-append .input-group-text {
   background-color: transparent;
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group-focus
   .input-group-append
@@ -15709,39 +15709,39 @@ img {
   border-color: #ffffff;
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-group.no-border .form-control,
-.login-page .card-login.card-plain .input-group.no-border .form-control {
+. .card-login.card-plain .form-group.no-border .form-control,
+. .card-login.card-plain .input-group.no-border .form-control {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .form-group.no-border .form-control:focus,
-.login-page .card-login.card-plain .form-group.no-border .form-control:active,
-.login-page .card-login.card-plain .form-group.no-border .form-control:active,
-.login-page .card-login.card-plain .input-group.no-border .form-control:focus,
-.login-page .card-login.card-plain .input-group.no-border .form-control:active,
-.login-page .card-login.card-plain .input-group.no-border .form-control:active {
+. .card-login.card-plain .form-group.no-border .form-control:focus,
+. .card-login.card-plain .form-group.no-border .form-control:active,
+. .card-login.card-plain .form-group.no-border .form-control:active,
+. .card-login.card-plain .input-group.no-border .form-control:focus,
+. .card-login.card-plain .input-group.no-border .form-control:active,
+. .card-login.card-plain .input-group.no-border .form-control:active {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
@@ -15749,73 +15749,73 @@ img {
   .input-group-text {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-prepend
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:focus,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
   + .input-group-append
   .input-group-text:active,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control
@@ -15824,25 +15824,25 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control:focus
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .form-control:focus
   + .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control:focus
   + .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .form-control:focus
@@ -15851,22 +15851,22 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border
   .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border
   .input-group-append
@@ -15875,22 +15875,22 @@ img {
   border: none;
   color: #ffffff;
 }
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border.input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .form-group.no-border.input-group-focus
   .input-group-append
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border.input-group-focus
   .input-group-prepend
   .input-group-text,
-.login-page
+.
   .card-login.card-plain
   .input-group.no-border.input-group-focus
   .input-group-append
@@ -15898,13 +15898,13 @@ img {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
-.login-page .card-login.card-plain .input-group-addon,
-.login-page .card-login.card-plain .form-group.no-border .input-group-addon,
-.login-page .card-login.card-plain .input-group.no-border .input-group-addon {
+. .card-login.card-plain .input-group-addon,
+. .card-login.card-plain .form-group.no-border .input-group-addon,
+. .card-login.card-plain .input-group.no-border .input-group-addon {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.login-page .link {
+. .link {
   font-size: 10px;
   color: #ffffff;
   text-decoration: none;
@@ -15984,32 +15984,32 @@ img {
 }
 
 .register-page .navbar .navbar-collapse .nav-item .nav-link,
-.login-page .navbar .navbar-collapse .nav-item .nav-link,
+. .navbar .navbar-collapse .nav-item .nav-link,
 .lock-page .navbar .navbar-collapse .nav-item .nav-link {
   text-transform: capitalize;
   color: #ffffff !important;
 }
 .register-page .navbar .navbar-collapse .nav-item .nav-link i,
-.login-page .navbar .navbar-collapse .nav-item .nav-link i,
+. .navbar .navbar-collapse .nav-item .nav-link i,
 .lock-page .navbar .navbar-collapse .nav-item .nav-link i {
   margin-right: 4px;
 }
 
 .register-page .navbar.navbar-transparent,
-.login-page .navbar.navbar-transparent,
+. .navbar.navbar-transparent,
 .lock-page .navbar.navbar-transparent {
   border-bottom: 1px solid transparent;
   margin-top: 25px;
 }
 
 .register-page .navbar .navbar-brand,
-.login-page .navbar .navbar-brand,
+. .navbar .navbar-brand,
 .lock-page .navbar .navbar-brand {
   color: #ffffff !important;
 }
 
 .register-page,
-.login-page,
+.,
 .lock-page {
   width: 100%;
 }
@@ -16019,7 +16019,7 @@ img {
     .navbar.bg-white
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
-  .login-page .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab,
+  . .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab,
   .lock-page .navbar.bg-white .navbar-toggler .navbar-toggler-bar.navbar-kebab {
     background: #66615b !important;
   }
@@ -16029,17 +16029,17 @@ img {
     .navbar-nav
     .nav-item
     .nav-link,
-  .login-page .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link,
+  . .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link,
   .lock-page .navbar.bg-white .navbar-collapse .navbar-nav .nav-item .nav-link {
     color: #66615b !important;
   }
   .register-page .navbar.bg-white .navbar-brand,
-  .login-page .navbar.bg-white .navbar-brand,
+  . .navbar.bg-white .navbar-brand,
   .lock-page .navbar.bg-white .navbar-brand {
     color: #66615b !important;
   }
   .register-page .navbar.navbar-transparent .navbar-toggle,
-  .login-page .navbar.navbar-transparent .navbar-toggle,
+  . .navbar.navbar-transparent .navbar-toggle,
   .lock-page .navbar.navbar-transparent .navbar-toggle {
     display: none;
   }
@@ -16047,7 +16047,7 @@ img {
     .navbar.navbar-transparent
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
-  .login-page
+  .
     .navbar.navbar-transparent
     .navbar-toggler
     .navbar-toggler-bar.navbar-kebab,
@@ -17337,7 +17337,7 @@ License - nucleoapp.com/license/
   .typography-line span {
     width: 60px !important;
   }
-  .login-page .navbar,
+  . .navbar,
   .lock-page .navbar,
   .register-page .navbar {
     padding: 0.5rem 1rem;
