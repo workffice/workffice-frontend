@@ -1,19 +1,17 @@
-
-import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
 // import { connect } from 'react-redux';
 // import { createStart } from '../../stores/actions/auth';
 // import { useFormik } from "formik";
 
-import { RegisterInfo } from "../../../components/Register/RegisterInfo";
-import { RegisterForm } from "../../../components/Register/RegisterForm";
+import { RegisterInfo } from '../../../components/Register/RegisterInfo';
+import { RegisterForm } from '../../../components/Register/RegisterForm';
 
 function Register() {
-
   React.useEffect(() => {
-    document.body.classList.toggle("register-page");
+    document.body.classList.toggle('register-page');
     return function cleanup() {
-      document.body.classList.toggle("register-page");
+      document.body.classList.toggle('register-page');
     };
   });
   return (
@@ -31,8 +29,9 @@ function Register() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../../assets/img/bg/Office.jpg").default
-            })`,
+          backgroundImage: `url(${
+            require('../../../assets/img/bg/Office.jpg').default
+          })`,
         }}
       />
     </div>

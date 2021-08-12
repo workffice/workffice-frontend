@@ -42,8 +42,6 @@ const routes = [
     component: Dashboard,
     layout: '/admin',
   },
-  
-
 
   // {
   //   collapse: true,
