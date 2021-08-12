@@ -5,7 +5,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 // import Footer from '../components/Footer/Footer';
-import routes from '../routes.js';
+import {routes} from './admin.routes.js';
 
 var ps;
 
@@ -58,12 +58,6 @@ export const AdminLayout = (props) => {
             <div className="main-panel" ref={mainPanel}>
                 <AdminNavbar {...props} />
                 <Switch>{getRoutes(routes)}</Switch>
-                {/* {
-                    // we don't want the Footer to be rendered on full screen maps page
-                    props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
-                        <Footer />
-                    )
-                } */}
             </div>
         </div>
     );
