@@ -14,19 +14,19 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 // react plugin used to create switch buttons
-import Switch from "react-bootstrap-switch";
+import Switch from 'react-bootstrap-switch';
 
-import { Button } from "reactstrap";
+import { Button } from 'reactstrap';
 
 function FixedPlugin(props) {
-  const [classes, setClasses] = React.useState("dropdown show");
+  const [classes, setClasses] = React.useState('dropdown show');
   const handleClick = () => {
-    if (classes === "dropdown") {
-      setClasses("dropdown show");
+    if (classes === 'dropdown') {
+      setClasses('dropdown show');
     } else {
-      setClasses("dropdown");
+      setClasses('dropdown');
     }
   };
   return (
@@ -41,35 +41,35 @@ function FixedPlugin(props) {
             <div className="badge-colors text-center">
               <span
                 className={
-                  props.bgColor === "black"
-                    ? "badge filter badge-dark active"
-                    : "badge filter badge-dark"
+                  props.bgColor === 'black'
+                    ? 'badge filter badge-dark active'
+                    : 'badge filter badge-dark'
                 }
                 data-color="black"
                 onClick={() => {
-                  props.handleBgClick("black");
+                  props.handleBgClick('black');
                 }}
               />
               <span
                 className={
-                  props.bgColor === "brown"
-                    ? "badge filter badge-default active"
-                    : "badge filter badge-default"
+                  props.bgColor === 'brown'
+                    ? 'badge filter badge-default active'
+                    : 'badge filter badge-default'
                 }
                 data-color="black"
                 onClick={() => {
-                  props.handleBgClick("brown");
+                  props.handleBgClick('brown');
                 }}
               />
               <span
                 className={
-                  props.bgColor === "white"
-                    ? "badge filter badge-light active"
-                    : "badge filter badge-light"
+                  props.bgColor === 'white'
+                    ? 'badge filter badge-light active'
+                    : 'badge filter badge-light'
                 }
                 data-color="white"
                 onClick={() => {
-                  props.handleBgClick("white");
+                  props.handleBgClick('white');
                 }}
               />
             </div>
@@ -79,57 +79,57 @@ function FixedPlugin(props) {
             <div className="badge-colors text-center">
               <span
                 className={
-                  props.activeColor === "primary"
-                    ? "badge filter badge-primary active"
-                    : "badge filter badge-primary"
+                  props.activeColor === 'primary'
+                    ? 'badge filter badge-primary active'
+                    : 'badge filter badge-primary'
                 }
                 data-color="primary"
                 onClick={() => {
-                  props.handleActiveClick("primary");
+                  props.handleActiveClick('primary');
                 }}
               />
               <span
                 className={
-                  props.activeColor === "info"
-                    ? "badge filter badge-info active"
-                    : "badge filter badge-info"
+                  props.activeColor === 'info'
+                    ? 'badge filter badge-info active'
+                    : 'badge filter badge-info'
                 }
                 data-color="info"
                 onClick={() => {
-                  props.handleActiveClick("info");
+                  props.handleActiveClick('info');
                 }}
               />
               <span
                 className={
-                  props.activeColor === "success"
-                    ? "badge filter badge-success active"
-                    : "badge filter badge-success"
+                  props.activeColor === 'success'
+                    ? 'badge filter badge-success active'
+                    : 'badge filter badge-success'
                 }
                 data-color="success"
                 onClick={() => {
-                  props.handleActiveClick("success");
+                  props.handleActiveClick('success');
                 }}
               />
               <span
                 className={
-                  props.activeColor === "warning"
-                    ? "badge filter badge-warning active"
-                    : "badge filter badge-warning"
+                  props.activeColor === 'warning'
+                    ? 'badge filter badge-warning active'
+                    : 'badge filter badge-warning'
                 }
                 data-color="warning"
                 onClick={() => {
-                  props.handleActiveClick("warning");
+                  props.handleActiveClick('warning');
                 }}
               />
               <span
                 className={
-                  props.activeColor === "danger"
-                    ? "badge filter badge-danger active"
-                    : "badge filter badge-danger"
+                  props.activeColor === 'danger'
+                    ? 'badge filter badge-danger active'
+                    : 'badge filter badge-danger'
                 }
                 data-color="danger"
                 onClick={() => {
-                  props.handleActiveClick("danger");
+                  props.handleActiveClick('danger');
                 }}
               />
             </div>
@@ -151,8 +151,7 @@ function FixedPlugin(props) {
               color="primary"
               block
               className="btn-round"
-              target="_blank"
-            >
+              target="_blank">
               Buy now
             </Button>
           </li>
@@ -163,8 +162,7 @@ function FixedPlugin(props) {
               block
               className="btn-round"
               outline
-              target="_blank"
-            >
+              target="_blank">
               <i className="nc-icon nc-paper" /> Documentation
             </Button>
           </li>
@@ -174,8 +172,7 @@ function FixedPlugin(props) {
               color="info"
               block
               className="btn-round"
-              target="_blank"
-            >
+              target="_blank">
               Get free version
             </Button>
           </li>

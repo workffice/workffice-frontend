@@ -1,5 +1,4 @@
-
-import React from "react";
+import React from 'react';
 
 import {
   Button,
@@ -15,13 +14,12 @@ import {
   Container,
   Col,
   Row,
-  FormGroup
-} from "reactstrap";
+  FormGroup,
+} from 'reactstrap';
 
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 
 function Login() {
-
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -36,13 +34,14 @@ function Login() {
 
     if (!values.email) {
       errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
       errors.email = 'Invalid email address';
     }
 
     return errors;
   };
-
 
   const formik = useFormik({
     initialValues: {
@@ -56,11 +55,10 @@ function Login() {
     },
   });
 
-
   React.useEffect(() => {
-    document.body.classList.toggle("login-page");
+    document.body.classList.toggle('login-page');
     return function cleanup() {
-      document.body.classList.toggle("login-page");
+      document.body.classList.toggle('login-page');
     };
   });
   return (
@@ -77,7 +75,8 @@ function Login() {
                   </CardHeader>
                 </CardHeader>
                 <CardBody>
-                  <FormGroup className={formik.errors.email ? 'has-danger' : ''}>
+                  <FormGroup
+                    className={formik.errors.email ? 'has-danger' : ''}>
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -90,11 +89,15 @@ function Login() {
                         type="email"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.email} />
+                        value={formik.values.email}
+                      />
                     </InputGroup>
-                    {formik.errors.email && formik.touched.email ? <div className="error">{formik.errors.email}</div> : null}
+                    {formik.errors.email && formik.touched.email ? (
+                      <div className="error">{formik.errors.email}</div>
+                    ) : null}
                   </FormGroup>
-                  <FormGroup className={formik.errors.password ? 'has-danger' : ''}>
+                  <FormGroup
+                    className={formik.errors.password ? 'has-danger' : ''}>
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -111,7 +114,9 @@ function Login() {
                         autoComplete="off"
                       />
                     </InputGroup>
-                    {formik.errors.password && formik.touched.password ? <div className="error">{formik.errors.password}</div> : null}
+                    {formik.errors.password && formik.touched.password ? (
+                      <div className="error">{formik.errors.password}</div>
+                    ) : null}
                   </FormGroup>
                   <br />
                 </CardBody>
@@ -120,8 +125,7 @@ function Login() {
                     block
                     className="btn-round mb-3"
                     color="success"
-                    type="submit"
-                  >
+                    type="submit">
                     Iniciar Sesión
                   </Button>
                 </CardFooter>
@@ -133,8 +137,9 @@ function Login() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../../assets/img/bg/office1.jpg").default
-            })`,
+          backgroundImage: `url(${
+            require('../../../assets/img/bg/office1.jpg').default
+          })`,
         }}
       />
     </div>

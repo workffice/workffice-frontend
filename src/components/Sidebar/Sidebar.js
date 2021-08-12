@@ -14,14 +14,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { Nav, Collapse } from "reactstrap";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Nav, Collapse } from 'reactstrap';
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
+import PerfectScrollbar from 'perfect-scrollbar';
 
-import avatar from "../../assets/img/faces/erik-lucatero-2.jpg";
-import logo from "../../assets/img/Recurso 6.png";
+import avatar from '../../assets/img/faces/erik-lucatero-2.jpg';
+import logo from '../../assets/img/Recurso 6.png';
 
 var ps;
 
@@ -31,9 +31,9 @@ function Sidebar(props) {
   const sidebar = React.useRef();
   // this creates the intial state of this component based on the collapse routes
   // that it gets through props.routes
-  const getCollapseStates = (routes) => {
+  const getCollapseStates = routes => {
     let initialState = {};
-    routes.map((prop,/*  key */) => {
+    routes.map((prop /*  key */) => {
       if (prop.collapse) {
         initialState = {
           [prop.state]: getCollapseInitialState(prop.views),
@@ -48,7 +48,7 @@ function Sidebar(props) {
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
-  const getCollapseInitialState = (routes) => {
+  const getCollapseInitialState = routes => {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse && getCollapseInitialState(routes[i].views)) {
         return true;
@@ -59,28 +59,26 @@ function Sidebar(props) {
     return false;
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (routes) => {
+  const createLinks = routes => {
     return routes.map((prop, key) => {
       if (prop.redirect) {
         return null;
       }
       if (prop.collapse) {
         var st = {};
-        st[prop["state"]] = !collapseStates[prop.state];
+        st[prop['state']] = !collapseStates[prop.state];
         return (
           <li
-            className={getCollapseInitialState(prop.views) ? "active" : ""}
-            key={key}
-          >
+            className={getCollapseInitialState(prop.views) ? 'active' : ''}
+            key={key}>
             <a
               href="#pablo"
               data-toggle="collapse"
               aria-expanded={collapseStates[prop.state]}
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 setCollapseStates(st);
-              }}
-            >
+              }}>
               {prop.icon !== undefined ? (
                 <>
                   <i className={prop.icon} />
@@ -125,12 +123,12 @@ function Sidebar(props) {
     });
   };
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  const activeRoute = routeName => {
+    return props.location.pathname.indexOf(routeName) > -1 ? 'active' : '';
   };
   React.useEffect(() => {
     // if you are using a Windows Machine, the scrollbars will have a Mac look
-    if (navigator.platform.indexOf("Win") > -1) {
+    if (navigator.platform.indexOf('Win') > -1) {
       ps = new PerfectScrollbar(sidebar.current, {
         suppressScrollX: true,
         suppressScrollY: false,
@@ -139,7 +137,7 @@ function Sidebar(props) {
     return function cleanup() {
       // we need to destroy the false scrollbar when we navigate
       // to a page that doesn't have this component rendered
-      if (navigator.platform.indexOf("Win") > -1) {
+      if (navigator.platform.indexOf('Win') > -1) {
         ps.destroy();
       }
     };
@@ -151,20 +149,14 @@ function Sidebar(props) {
     <div
       className="sidebar"
       data-color={props.bgColor}
-      data-active-color={props.activeColor}
-    >
+      data-active-color={props.activeColor}>
       <div className="logo">
-        <a
-          className="simple-text logo-mini"
-        >
+        <a className="simple-text logo-mini">
           <div className="logo-img">
             <img src={logo} alt="workffice-logo" />
           </div>
         </a>
-        <a
-          href="#"
-          className="simple-text logo-normal"
-        >
+        <a href="#" className="simple-text logo-normal">
           Bienvenido
         </a>
       </div>
@@ -179,8 +171,7 @@ function Sidebar(props) {
               href="#pablo"
               data-toggle="collapse"
               aria-expanded={openAvatar}
-              onClick={() => setOpenAvatar(!openAvatar)}
-            >
+              onClick={() => setOpenAvatar(!openAvatar)}>
               <span>
                 Chiche Arano
                 <b className="caret" />

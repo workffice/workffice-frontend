@@ -83,7 +83,7 @@ function AdminNavbar() {
         className={classnames('navbar-absolute fixed-top', color)}
         expand="lg">
         <Container fluid>
-          <div className="navbar-wrapper">            
+          <div className="navbar-wrapper">
             <div
               className={classnames('navbar-toggle', {
                 toggled: sidebarOpen,

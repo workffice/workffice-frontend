@@ -1,6 +1,4 @@
-import {
-  API_AUTH_URL
-} from '../environment/environment';
+import { API_AUTH_URL } from '../environment/environment';
 
 export const HTTP_METHODS = {
   GET: 'get',
@@ -33,4 +31,3 @@ export const AUTH_CREATE_URL = `${API_AUTH_URL}`;
 // export const AUTH_CHANGE_PASSWORD_URL = `${API_AUTH_URL}${AUTH_ENDPOINTS.CHANGE_PASSWORD}`;
 // export const AUTH_RECOVER_PASSWORD_URL = `${API_AUTH_URL}${AUTH_ENDPOINTS.RECOVER_PASSWORD}`;
 // export const AUTH_LOGOUT_URL = `${API_AUTHENTICATIONS_URL}${AUTH_ENDPOINTS.LOGOUT}`; //falta ver lo del token
-

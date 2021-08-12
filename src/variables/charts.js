@@ -15,7 +15,7 @@
 
 */
 // default color for the charts
-let chartColor = "#FFFFFF";
+let chartColor = '#FFFFFF';
 // ##############################
 // // // Function that converts a hex color number to a RGB color number
 // #############################
@@ -25,9 +25,9 @@ const hexToRGB = (hex, alpha) => {
     b = parseInt(hex.slice(5, 7), 16);
 
   if (alpha) {
-    return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
   } else {
-    return "rgb(" + r + ", " + g + ", " + b + ")";
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
   }
 };
 
@@ -41,21 +41,21 @@ const hexToRGB = (hex, alpha) => {
 const chartExample1 = {
   data: {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
     ],
     datasets: [
       {
-        label: "Active Users",
-        borderColor: "#6bd098",
+        label: 'Active Users',
+        borderColor: '#6bd098',
         pointRadius: 0,
         pointHoverRadius: 0,
         fill: false,
@@ -80,7 +80,7 @@ const chartExample1 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
           //padding: 20
@@ -97,7 +97,7 @@ const chartExample1 = {
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
@@ -108,22 +108,22 @@ const chartExample1 = {
 // // // used inside src/views/Dashboard.js
 // #########################################
 const chartExample2 = {
-  data: (canvas) => {
-    let ctx = canvas.getContext("2d");
+  data: canvas => {
+    let ctx = canvas.getContext('2d');
 
     let gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, "#18ce0f");
+    gradientStroke.addColorStop(0, '#18ce0f');
     gradientStroke.addColorStop(1, chartColor);
 
     let gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, hexToRGB("#18ce0f", 0.4));
+    gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
+    gradientFill.addColorStop(1, hexToRGB('#18ce0f', 0.4));
     return {
-      labels: ["12pm", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+      labels: ['12pm', '3pm', '6pm', '9pm', '12am', '3am', '6am', '9am'],
       datasets: [
         {
-          label: "Email Stats",
-          borderColor: "#ef8156",
+          label: 'Email Stats',
+          borderColor: '#ef8156',
           pointHoverRadius: 0,
           pointRadius: 0,
           fill: false,
@@ -149,7 +149,7 @@ const chartExample2 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
         },
@@ -165,7 +165,7 @@ const chartExample2 = {
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
@@ -176,34 +176,34 @@ const chartExample2 = {
 // // // used inside src/views/Dashboard.js
 // #########################################
 const chartExample3 = {
-  data: (canvas) => {
-    let ctx = canvas.getContext("2d");
+  data: canvas => {
+    let ctx = canvas.getContext('2d');
 
     let gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, "#2CA8FF");
+    gradientStroke.addColorStop(0, '#2CA8FF');
     gradientStroke.addColorStop(1, chartColor);
 
     let gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    gradientFill.addColorStop(1, hexToRGB("#2CA8FF", 0.4));
+    gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
+    gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.4));
     return {
       labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
       ],
       datasets: [
         {
-          label: "Active Countries",
+          label: 'Active Countries',
           backgroundColor: gradientFill,
-          borderColor: "#fbc658",
+          borderColor: '#fbc658',
           pointHoverRadius: 0,
           pointRadius: 0,
           fill: false,
@@ -228,7 +228,7 @@ const chartExample3 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
         },
@@ -244,7 +244,7 @@ const chartExample3 = {
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
@@ -257,89 +257,33 @@ const chartExample3 = {
 const chartExample4 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     ],
     datasets: [
       {
-        label: "Data",
-        borderColor: "#fcc468",
+        label: 'Data',
+        borderColor: '#fcc468',
         fill: true,
-        backgroundColor: "#fcc468",
-        hoverBorderColor: "#fcc468",
+        backgroundColor: '#fcc468',
+        hoverBorderColor: '#fcc468',
         borderWidth: 8,
         barPercentage: 0.4,
         data: [
-          100,
-          120,
-          80,
-          100,
-          90,
-          130,
-          110,
-          100,
-          80,
-          110,
-          130,
-          140,
-          130,
-          120,
-          130,
-          80,
-          100,
-          90,
-          120,
-          130,
+          100, 120, 80, 100, 90, 130, 110, 100, 80, 110, 130, 140, 130, 120,
+          130, 80, 100, 90, 120, 130,
         ],
       },
       {
-        label: "Data",
-        borderColor: "#4cbdd7",
+        label: 'Data',
+        borderColor: '#4cbdd7',
         fill: true,
-        backgroundColor: "#4cbdd7",
-        hoverBorderColor: "#4cbdd7",
+        backgroundColor: '#4cbdd7',
+        hoverBorderColor: '#4cbdd7',
         borderWidth: 8,
         barPercentage: 0.4,
         data: [
-          80,
-          140,
-          50,
-          120,
-          50,
-          150,
-          60,
-          130,
-          50,
-          130,
-          150,
-          100,
-          110,
-          80,
-          140,
-          50,
-          140,
-          50,
-          110,
-          150,
+          80, 140, 50, 120, 50, 150, 60, 130, 50, 130, 150, 100, 110, 80, 140,
+          50, 140, 50, 110, 150,
         ],
       },
     ],
@@ -351,16 +295,16 @@ const chartExample4 = {
       },
 
       tooltips: {
-        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFillColor: 'rgba(0,0,0,0.5)',
         tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         tooltipFontSize: 14,
-        tooltipFontStyle: "normal",
-        tooltipFontColor: "#fff",
+        tooltipFontStyle: 'normal',
+        tooltipFontColor: '#fff',
         tooltipTitleFontFamily:
           "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         tooltipTitleFontSize: 14,
-        tooltipTitleFontStyle: "bold",
-        tooltipTitleFontColor: "#fff",
+        tooltipTitleFontStyle: 'bold',
+        tooltipTitleFontColor: '#fff',
         tooltipYPadding: 6,
         tooltipXPadding: 6,
         tooltipCaretSize: 8,
@@ -371,16 +315,16 @@ const chartExample4 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: true,
           maxTicksLimit: 5,
           padding: 20,
         },
         grid: {
-          zeroLineColor: "transparent",
+          zeroLineColor: 'transparent',
           display: true,
           drawBorder: false,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
       x: {
@@ -390,7 +334,7 @@ const chartExample4 = {
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
@@ -405,10 +349,10 @@ const chartExample5 = {
     labels: [1, 2],
     datasets: [
       {
-        label: "Emails",
+        label: 'Emails',
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#4acccd", "#f4f3ef"],
+        backgroundColor: ['#4acccd', '#f4f3ef'],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [60, 40],
@@ -425,9 +369,9 @@ const chartExample5 = {
       },
       title: {
         display: true,
-        text: "60%",
-        position: "bottom",
-        color: "#66615c",
+        text: '60%',
+        position: 'bottom',
+        color: '#66615c',
         font: {
           weight: 400,
           size: 30,
@@ -435,7 +379,7 @@ const chartExample5 = {
       },
     },
     maintainAspectRatio: false,
-    cutout: "90%",
+    cutout: '90%',
     scales: {
       y: {
         ticks: {
@@ -467,10 +411,10 @@ const chartExample6 = {
     labels: [1, 2],
     datasets: [
       {
-        label: "Emails",
+        label: 'Emails',
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#fcc468", "#f4f3ef"],
+        backgroundColor: ['#fcc468', '#f4f3ef'],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [34, 66],
@@ -487,9 +431,9 @@ const chartExample6 = {
       },
       title: {
         display: true,
-        text: "34%",
-        position: "bottom",
-        color: "#66615c",
+        text: '34%',
+        position: 'bottom',
+        color: '#66615c',
         font: {
           weight: 400,
           size: 30,
@@ -497,7 +441,7 @@ const chartExample6 = {
       },
     },
     maintainAspectRatio: false,
-    cutout: "90%",
+    cutout: '90%',
     scales: {
       y: {
         ticks: {
@@ -529,10 +473,10 @@ const chartExample7 = {
     labels: [1, 2],
     datasets: [
       {
-        label: "Emails",
+        label: 'Emails',
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#f17e5d", "#f4f3ef"],
+        backgroundColor: ['#f17e5d', '#f4f3ef'],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [80, 20],
@@ -549,9 +493,9 @@ const chartExample7 = {
       },
       title: {
         display: true,
-        text: "80%",
-        position: "bottom",
-        color: "#66615c",
+        text: '80%',
+        position: 'bottom',
+        color: '#66615c',
         font: {
           weight: 400,
           size: 30,
@@ -559,7 +503,7 @@ const chartExample7 = {
       },
     },
     maintainAspectRatio: false,
-    cutout: "90%",
+    cutout: '90%',
     scales: {
       y: {
         ticks: {
@@ -591,10 +535,10 @@ const chartExample8 = {
     labels: [1, 2],
     datasets: [
       {
-        label: "Emails",
+        label: 'Emails',
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#66615b", "#f4f3ef"],
+        backgroundColor: ['#66615b', '#f4f3ef'],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [11, 89],
@@ -611,9 +555,9 @@ const chartExample8 = {
       },
       title: {
         display: true,
-        text: "11%",
-        position: "bottom",
-        color: "#66615c",
+        text: '11%',
+        position: 'bottom',
+        color: '#66615c',
         font: {
           weight: 400,
           size: 30,
@@ -621,7 +565,7 @@ const chartExample8 = {
       },
     },
     maintainAspectRatio: false,
-    cutout: "90%",
+    cutout: '90%',
     scales: {
       y: {
         ticks: {
@@ -651,12 +595,12 @@ const chartExample8 = {
 
 const chartExample9 = {
   data: {
-    labels: ["6pm", "9pm", "11pm", "2am", "4am", "6am", "8am"],
+    labels: ['6pm', '9pm', '11pm', '2am', '4am', '6am', '8am'],
     datasets: [
       {
-        label: "Active Users",
-        borderColor: "#f17e5d",
-        pointBackgroundColor: "#f17e5d",
+        label: 'Active Users',
+        borderColor: '#f17e5d',
+        pointBackgroundColor: '#f17e5d',
         pointRadius: 3,
         pointHoverRadius: 3,
         lineTension: 0,
@@ -680,27 +624,27 @@ const chartExample9 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
         },
         grid: {
           drawBorder: false,
           borderDash: [8, 5],
-          zeroLineColor: "transparent",
-          color: "#9f9f9f",
+          zeroLineColor: 'transparent',
+          color: '#9f9f9f',
         },
       },
       x: {
         grid: {
           drawBorder: false,
           borderDash: [8, 5],
-          color: "#9f9f9f",
-          zeroLineColor: "transparent",
+          color: '#9f9f9f',
+          zeroLineColor: 'transparent',
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
@@ -714,58 +658,20 @@ const chartExample9 = {
 const chartExample10 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     ],
     datasets: [
       {
-        label: "Data",
-        borderColor: "#fcc468",
+        label: 'Data',
+        borderColor: '#fcc468',
         fill: true,
-        backgroundColor: "#fcc468",
-        hoverBorderColor: "#fcc468",
+        backgroundColor: '#fcc468',
+        hoverBorderColor: '#fcc468',
         borderWidth: 5,
         barPercentage: 0.4,
         data: [
-          100,
-          120,
-          80,
-          100,
-          90,
-          130,
-          110,
-          100,
-          80,
-          110,
-          130,
-          140,
-          130,
-          120,
-          130,
-          80,
-          100,
-          90,
-          120,
-          130,
+          100, 120, 80, 100, 90, 130, 110, 100, 80, 110, 130, 140, 130, 120,
+          130, 80, 100, 90, 120, 130,
         ],
       },
     ],
@@ -777,16 +683,16 @@ const chartExample10 = {
       },
 
       tooltips: {
-        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFillColor: 'rgba(0,0,0,0.5)',
         tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         tooltipFontSize: 14,
-        tooltipFontStyle: "normal",
-        tooltipFontColor: "#fff",
+        tooltipFontStyle: 'normal',
+        tooltipFontColor: '#fff',
         tooltipTitleFontFamily:
           "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         tooltipTitleFontSize: 14,
-        tooltipTitleFontStyle: "bold",
-        tooltipTitleFontColor: "#fff",
+        tooltipTitleFontStyle: 'bold',
+        tooltipTitleFontColor: '#fff',
         tooltipYPadding: 6,
         tooltipXPadding: 6,
         tooltipCaretSize: 8,
@@ -797,30 +703,30 @@ const chartExample10 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
-          fontStyle: "bold",
+          color: '#9f9f9f',
+          fontStyle: 'bold',
           beginAtZero: true,
           maxTicksLimit: 5,
           padding: 20,
         },
         grid: {
-          zeroLineColor: "transparent",
+          zeroLineColor: 'transparent',
           display: true,
           drawBorder: false,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
       x: {
         grid: {
-          zeroLineColor: "white",
+          zeroLineColor: 'white',
           display: false,
           drawBorder: false,
-          color: "transparent",
+          color: 'transparent',
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
-          fontStyle: "bold",
+          color: '#9f9f9f',
+          fontStyle: 'bold',
         },
       },
     },
@@ -836,10 +742,10 @@ const chartExample11 = {
     labels: [1, 2, 3],
     datasets: [
       {
-        label: "Emails",
+        label: 'Emails',
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468"],
+        backgroundColor: ['#e3e3e3', '#4acccd', '#fcc468'],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [542, 480, 430],
@@ -864,15 +770,15 @@ const chartExample11 = {
         },
         grid: {
           drawBorder: false,
-          zeroLineColor: "transparent",
-          color: "rgba(255,255,255,0.05)",
+          zeroLineColor: 'transparent',
+          color: 'rgba(255,255,255,0.05)',
         },
       },
       x: {
         grid: {
           drawBorder: false,
-          color: "rgba(255,255,255,0.1)",
-          zeroLineColor: "transparent",
+          color: 'rgba(255,255,255,0.1)',
+          zeroLineColor: 'transparent',
         },
         ticks: {
           display: false,
@@ -887,24 +793,24 @@ const chartExample11 = {
 // #########################################
 
 const chartExample12 = {
-  data: (canvas) => {
+  data: canvas => {
     return {
       labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
       ],
       datasets: [
         {
-          borderColor: "#6bd098",
-          backgroundColor: "#6bd098",
+          borderColor: '#6bd098',
+          backgroundColor: '#6bd098',
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
@@ -913,8 +819,8 @@ const chartExample12 = {
           data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
         },
         {
-          borderColor: "#f17e5d",
-          backgroundColor: "#f17e5d",
+          borderColor: '#f17e5d',
+          backgroundColor: '#f17e5d',
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
@@ -923,8 +829,8 @@ const chartExample12 = {
           data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420],
         },
         {
-          borderColor: "#fcc468",
-          backgroundColor: "#fcc468",
+          borderColor: '#fcc468',
+          backgroundColor: '#fcc468',
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
@@ -943,7 +849,7 @@ const chartExample12 = {
     scales: {
       y: {
         ticks: {
-          color: "#9f9f9f",
+          color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
         },
@@ -960,7 +866,7 @@ const chartExample12 = {
         },
         ticks: {
           padding: 20,
-          color: "#9f9f9f",
+          color: '#9f9f9f',
         },
       },
     },
