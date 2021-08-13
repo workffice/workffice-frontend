@@ -1,10 +1,4 @@
-import {
-  all,
-  call,
-  put,
-  takeLatest,
-  takeLeading,
-} from 'redux-saga/effects';
+import { all, call, put, takeLatest, takeLeading } from 'redux-saga/effects';
 
 import * as AuthActions from '../actions/auth';
 import {
@@ -28,7 +22,7 @@ import * as SegmentsActions from '../actions/segments';
 import * as FilterSortSearchActions from '../actions/filterSortSearch';
 import * as QueueActions from '../actions/queue';
 
-export const createUser = function* ({payload}) {
+export const createUser = function* ({ payload }) {
   try {
     yield put(turnLoading(true));
     const response = yield call(createService, payload.userCredentials);
@@ -43,7 +37,7 @@ export const createUser = function* ({payload}) {
     yield put(turnLoading(false));
     //yield call(printError, e);
   }
-}
+};
 
 export const login = function* ({ payload }) {
   try {
@@ -95,11 +89,17 @@ export const changePassword = function* ({ payload }) {
 export const recoverPassword = function* ({ payload }) {
   try {
     yield put(turnLoading(true));
-    const response = yield call(recoverPasswordService, payload.recoverCredentials);
+    const response = yield call(
+      recoverPasswordService,
+      payload.recoverCredentials
+    );
     if (response) {
       yield put(turnLoading(false));
       yield call(payload.callback);
-      return yield put({ type: RECOVER_PASSWORD_SUCCESSFULL, payload: response });
+      return yield put({
+        type: RECOVER_PASSWORD_SUCCESSFULL,
+        payload: response,
+      });
     }
   } catch (e) {
     yield put(turnLoading(false));
@@ -114,7 +114,7 @@ function* confirmlogout({ payload: callback }) {
     '¿Está seguro de \nfinalizar la sesión?',
     'Sí',
     callback,
-    'No',
+    'No'
   );
 }
 
@@ -123,8 +123,7 @@ function* logout({ payload: callback }) {
     yield put(turnLoading(true));
     yield call(logoutService);
   } catch (error) {
-  }
-  finally {
+  } finally {
     yield call(removeSession);
     yield call(callback);
     yield put(ProcessedSegmentQueue.resetQueue());
