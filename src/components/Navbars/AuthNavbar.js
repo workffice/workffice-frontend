@@ -1,9 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import logo from '../../assets/img/Recurso 6.png';
-
-// reactstrap components
 import {
   Collapse,
   NavbarBrand,
@@ -12,6 +9,9 @@ import {
   Nav,
   Container,
 } from 'reactstrap';
+import logo from '../../assets/img/Recurso 6.png';
+
+// reactstrap components
 
 function AuthNavbar() {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -34,7 +34,7 @@ function AuthNavbar() {
       <Container>
         <div className="navbar-wrapper">
           <NavbarBrand href="#" onClick={e => e.preventDefault()}>
-            <img src={logo}></img>
+            <img src={logo} />
           </NavbarBrand>
         </div>
         <button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import {
   Button,
@@ -14,8 +14,12 @@ import {
   InputGroupText,
   InputGroup,
 } from 'reactstrap';
+// import { useHistory } from 'react-router-dom';
 
-export const RegisterForm = () => {
+export const RegisterForm = props => {
+  // const history = useHistory();
+  const [userCredentials, setUserCredentials] = useState(undefined);
+
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -43,8 +47,11 @@ export const RegisterForm = () => {
       type: 'OFFICE_HOLDER',
     },
     validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 3));
+    onSubmit: async values => {
+      setUserCredentials(values);
+      console.info("UserCredential",userCredentials);
+      await props.onRegister(userCredentials);
+      // history.push('/');
     },
   });
   return (
@@ -76,8 +83,8 @@ export const RegisterForm = () => {
               />
             </InputGroup>
             {formik.errors.email &&
-            formik.touched.email &&
-            formik.validateOnChange.email ? (
+              formik.touched.email &&
+              formik.validateOnChange.email ? (
               <div className="error">{formik.errors.email}</div>
             ) : null}
           </FormGroup>
@@ -103,8 +110,8 @@ export const RegisterForm = () => {
               />
             </InputGroup>
             {formik.errors.password &&
-            formik.touched.password &&
-            formik.validateOnChange.password ? (
+              formik.touched.password &&
+              formik.validateOnChange.password ? (
               <div className="error">{formik.errors.password}</div>
             ) : null}
           </FormGroup>

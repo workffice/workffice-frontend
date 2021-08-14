@@ -1,13 +1,13 @@
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
 demo = {
-  initPickColor: function () {
+  initPickColor() {
     $('.pick-class-label').click(function () {
-      var new_class = $(this).attr('new-class');
-      var old_class = $('#display-buttons').attr('data-class');
-      var display_div = $('#display-buttons');
+      let new_class = $(this).attr('new-class');
+      let old_class = $('#display-buttons').attr('data-class');
+      let display_div = $('#display-buttons');
       if (display_div.length) {
-        var display_buttons = display_div.find('.btn');
+        let display_buttons = display_div.find('.btn');
         display_buttons.removeClass(old_class);
         display_buttons.addClass(new_class);
         display_div.attr('data-class', new_class);
@@ -15,7 +15,7 @@ demo = {
     });
   },
 
-  checkFullPageBackgroundImage: function () {
+  checkFullPageBackgroundImage() {
     $page = $('.full-page');
     image_src = $page.data('image');
 
@@ -28,7 +28,7 @@ demo = {
     }
   },
 
-  initDateTimePicker: function () {
+  initDateTimePicker() {
     if ($('.datetimepicker').length != 0) {
       $('.datetimepicker').datetimepicker({
         icons: {
@@ -65,7 +65,7 @@ demo = {
     if ($('.timepicker').length != 0) {
       $('.timepicker').datetimepicker({
         //          format: 'H:mm',    // use this format if you want the 24hours timepicker
-        format: 'h:mm A', //use this format if you want the 12hours timpiecker with AM/PM toggle
+        format: 'h:mm A', // use this format if you want the 12hours timpiecker with AM/PM toggle
         icons: {
           time: 'fa fa-clock-o',
           date: 'fa fa-calendar',
@@ -81,7 +81,7 @@ demo = {
     }
   },
 
-  initFullCalendar: function () {
+  initFullCalendar() {
     $calendar = $('#fullCalendar');
 
     today = new Date();
@@ -90,7 +90,7 @@ demo = {
     d = today.getDate();
 
     $calendar.fullCalendar({
-      viewRender: function (view, element) {
+      viewRender(view, element) {
         // We make sure that we activate the perfect scrollbar when the view isn't on Month
         if (view.name != 'month') {
           $(element).find('.fc-scroller').perfectScrollbar();
@@ -118,7 +118,7 @@ demo = {
         },
       },
 
-      select: function (start, end) {
+      select(start, end) {
         // on select we show the Sweet Alert modal with an input
         swal({
           title: 'Create an Event',
@@ -200,7 +200,7 @@ demo = {
     });
   },
 
-  showSwal: function (type) {
+  showSwal(type) {
     if (type == 'basic') {
       swal({
         title: "Here's a message!",
@@ -233,7 +233,7 @@ demo = {
         confirmButtonText: 'Yes, delete it!',
         buttonsStyling: false,
       })
-        .then(function () {
+        .then(() => {
           swal({
             title: 'Deleted!',
             text: 'Your file has been deleted.',
@@ -256,7 +256,7 @@ demo = {
         buttonsStyling: false,
       })
         .then(
-          function () {
+          () => {
             swal({
               title: 'Deleted!',
               text: 'Your imaginary file has been deleted.',
@@ -265,7 +265,7 @@ demo = {
               buttonsStyling: false,
             }).catch(swal.noop);
           },
-          function (dismiss) {
+          dismiss => {
             // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
             if (dismiss === 'cancel') {
               swal({
@@ -308,11 +308,10 @@ demo = {
         cancelButtonClass: 'btn btn-danger',
         buttonsStyling: false,
       })
-        .then(function (result) {
+        .then(result => {
           swal({
             type: 'success',
-            html:
-              'You entered: <strong>' + $('#input-field').val() + '</strong>',
+            html: `You entered: <strong>${$('#input-field').val()}</strong>`,
             confirmButtonClass: 'btn btn-success',
             buttonsStyling: false,
           }).catch(swal.noop);
@@ -321,9 +320,9 @@ demo = {
     }
   },
 
-  initWizard: function () {
+  initWizard() {
     // Code for the Validator
-    var $validator = $('.card-wizard form').validate({
+    let $validator = $('.card-wizard form').validate({
       rules: {
         firstname: {
           required: true,
@@ -338,13 +337,13 @@ demo = {
           minlength: 3,
         },
       },
-      highlight: function (element) {
+      highlight(element) {
         $(element)
           .closest('.input-group')
           .removeClass('has-success')
           .addClass('has-danger');
       },
-      success: function (element) {
+      success(element) {
         $(element)
           .closest('.input-group')
           .removeClass('has-danger')
@@ -358,7 +357,7 @@ demo = {
       nextSelector: '.btn-next',
       previousSelector: '.btn-previous',
 
-      onNext: function (tab, navigation, index) {
+      onNext(tab, navigation, index) {
         var $valid = $('.card-wizard form').valid();
         if (!$valid) {
           $validator.focusInvalid();
@@ -366,7 +365,7 @@ demo = {
         }
       },
 
-      onInit: function (tab, navigation, index) {
+      onInit(tab, navigation, index) {
         //check number of tabs and fill the entire row
         var $total = navigation.find('li').length;
         var $wizard = navigation.closest('.card-wizard');
@@ -381,7 +380,7 @@ demo = {
         $('.moving-tab').css('transition', 'transform 0s');
       },
 
-      onTabClick: function (tab, navigation, index) {
+      onTabClick(tab, navigation, index) {
         var $valid = $('.card-wizard form').valid();
 
         if (!$valid) {
@@ -391,7 +390,7 @@ demo = {
         }
       },
 
-      onTabShow: function (tab, navigation, index) {
+      onTabShow(tab, navigation, index) {
         var $total = navigation.find('li').length;
         var $current = index + 1;
 
@@ -458,11 +457,11 @@ demo = {
 
     $('.set-full-height').css('height', 'auto');
 
-    //Function to show image before upload
+    // Function to show image before upload
 
     function readURL(input) {
       if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
         reader.onload = function (e) {
           $('#wizardPicturePreview')
@@ -473,7 +472,7 @@ demo = {
       }
     }
 
-    $(window).resize(function () {
+    $(window).resize(() => {
       $('.card-wizard').each(function () {
         $wizard = $(this);
 
@@ -503,10 +502,10 @@ demo = {
         $li_width = 50;
       }
 
-      $wizard.find('.nav li').css('width', $li_width + '%');
+      $wizard.find('.nav li').css('width', `${$li_width}%`);
 
       step_width = move_distance;
-      move_distance = move_distance * index_temp;
+      move_distance *= index_temp;
 
       $current = index + 1;
 
@@ -518,21 +517,20 @@ demo = {
 
       if (mobile_device) {
         vertical_level = parseInt(index / 2);
-        vertical_level = vertical_level * 38;
+        vertical_level *= 38;
       }
 
       $wizard.find('.moving-tab').css('width', step_width);
       $('.moving-tab').css({
-        transform:
-          'translate3d(' + move_distance + 'px, ' + vertical_level + 'px, 0)',
+        transform: `translate3d(${move_distance}px, ${vertical_level}px, 0)`,
         transition: 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)',
       });
     }
   },
 
-  initSliders: function () {
+  initSliders() {
     // Sliders for demo purpose in refine cards section
-    var slider = document.getElementById('sliderRegular');
+    let slider = document.getElementById('sliderRegular');
 
     noUiSlider.create(slider, {
       start: 40,
@@ -543,7 +541,7 @@ demo = {
       },
     });
 
-    var slider2 = document.getElementById('sliderDouble');
+    let slider2 = document.getElementById('sliderDouble');
 
     noUiSlider.create(slider2, {
       start: [20, 60],
@@ -555,8 +553,8 @@ demo = {
     });
   },
 
-  initVectorMap: function () {
-    var mapData = {
+  initVectorMap() {
+    let mapData = {
       AU: 760,
       BR: 550,
       CA: 120,
@@ -596,12 +594,12 @@ demo = {
     });
   },
 
-  initGoogleMaps: function () {
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
+  initGoogleMaps() {
+    let myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+    let mapOptions = {
       zoom: 13,
       center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
       styles: [
         {
           featureType: 'water',
@@ -734,9 +732,9 @@ demo = {
         },
       ],
     };
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    let map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: myLatlng,
       title: 'Hello World!',
     });
@@ -745,13 +743,13 @@ demo = {
     marker.setMap(map);
   },
 
-  initSmallGoogleMaps: function () {
+  initSmallGoogleMaps() {
     // Regular Map
     var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
     var mapOptions = {
       zoom: 8,
       center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
     };
 
     var map = new google.maps.Map(
@@ -771,7 +769,7 @@ demo = {
     var mapOptions = {
       zoom: 13,
       center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
       disableDefaultUI: true, // a way to quickly hide all controls
       zoomControl: true,
       styles: [
@@ -923,7 +921,7 @@ demo = {
     var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
     var mapOptions = {
       zoom: 3,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
       center: myLatlng,
       mapTypeId: google.maps.MapTypeId.SATELLITE,
     };
@@ -941,7 +939,7 @@ demo = {
     marker.setMap(map);
   },
 
-  showNotification: function (from, align) {
+  showNotification(from, align) {
     color = Math.floor(Math.random() * 4 + 1);
 
     $.notify(
@@ -954,8 +952,8 @@ demo = {
         type: type[color],
         timer: 8000,
         placement: {
-          from: from,
-          align: align,
+          from,
+          align,
         },
       }
     );
@@ -963,7 +961,7 @@ demo = {
 
   // CHARTS
 
-  initChartPageCharts: function () {
+  initChartPageCharts() {
     chartColor = '#FFFFFF';
 
     ctx = document.getElementById('chartHours').getContext('2d');
@@ -1026,7 +1024,7 @@ demo = {
                 fontColor: '#9f9f9f',
                 beginAtZero: false,
                 maxTicksLimit: 5,
-                //padding: 20
+                // padding: 20
               },
               gridLines: {
                 drawBorder: false,
@@ -1438,7 +1436,7 @@ demo = {
                 fontColor: '#9f9f9f',
                 beginAtZero: false,
                 maxTicksLimit: 5,
-                //padding: 20
+                // padding: 20
               },
               gridLines: {
                 drawBorder: false,
@@ -1577,7 +1575,7 @@ demo = {
     };
   },
 
-  initDocChart: function () {
+  initDocChart() {
     ctx = document.getElementById('BarChartExample').getContext('2d');
 
     myChart = new Chart(ctx, {
@@ -1677,11 +1675,11 @@ demo = {
     });
   },
 
-  initDashboardPageCharts: function () {
+  initDashboardPageCharts() {
     chartColor = '#FFFFFF';
 
-    var cardStatsMiniLineColor = '#fff',
-      cardStatsMiniDotColor = '#fff';
+    let cardStatsMiniLineColor = '#fff';
+    var cardStatsMiniDotColor = '#fff';
 
     ctx = document.getElementById('chartActivity').getContext('2d');
 
@@ -1790,7 +1788,7 @@ demo = {
     });
 
     Chart.pluginService.register({
-      beforeDraw: function (chart) {
+      beforeDraw(chart) {
         if (chart.config.options.elements.center) {
           //Get ctx from string
           var ctx = chart.chart.ctx;
@@ -2149,7 +2147,7 @@ demo = {
                 fontColor: '#9f9f9f',
                 beginAtZero: false,
                 maxTicksLimit: 5,
-                //padding: 20
+                // padding: 20
               },
               gridLines: {
                 drawBorder: false,
@@ -2221,7 +2219,7 @@ demo = {
                 fontColor: '#9f9f9f',
                 beginAtZero: false,
                 maxTicksLimit: 5,
-                //padding: 20
+                // padding: 20
               },
               gridLines: {
                 drawBorder: false,
@@ -2250,7 +2248,7 @@ demo = {
       },
     });
 
-    var e = document.getElementById('activeCountries').getContext('2d');
+    let e = document.getElementById('activeCountries').getContext('2d');
 
     gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
     gradientStroke.addColorStop(0, '#2CA8FF');
@@ -2260,7 +2258,7 @@ demo = {
     gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
     gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.4));
 
-    var a = {
+    let a = {
       type: 'line',
       data: {
         labels: [
@@ -2304,7 +2302,7 @@ demo = {
                 fontColor: '#9f9f9f',
                 beginAtZero: false,
                 maxTicksLimit: 5,
-                //padding: 20
+                // padding: 20
               },
               gridLines: {
                 drawBorder: false,
@@ -2333,6 +2331,6 @@ demo = {
       },
     };
 
-    var viewsChart = new Chart(e, a);
+    let viewsChart = new Chart(e, a);
   },
 };

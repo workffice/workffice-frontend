@@ -15,20 +15,19 @@
 
 */
 // default color for the charts
-let chartColor = '#FFFFFF';
+const chartColor = '#FFFFFF';
 // ##############################
 // // // Function that converts a hex color number to a RGB color number
 // #############################
 const hexToRGB = (hex, alpha) => {
-  var r = parseInt(hex.slice(1, 3), 16),
-    g = parseInt(hex.slice(3, 5), 16),
-    b = parseInt(hex.slice(5, 7), 16);
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
 
   if (alpha) {
-    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
-  } else {
-    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
+  return `rgb(${r}, ${g}, ${b})`;
 };
 
 // ##############################
@@ -83,7 +82,7 @@ const chartExample1 = {
           color: '#9f9f9f',
           beginAtZero: false,
           maxTicksLimit: 5,
-          //padding: 20
+          // padding: 20
         },
         grid: {
           drawBorder: false,
@@ -109,13 +108,13 @@ const chartExample1 = {
 // #########################################
 const chartExample2 = {
   data: canvas => {
-    let ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
-    let gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    const gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
     gradientStroke.addColorStop(0, '#18ce0f');
     gradientStroke.addColorStop(1, chartColor);
 
-    let gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+    const gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
     gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
     gradientFill.addColorStop(1, hexToRGB('#18ce0f', 0.4));
     return {
@@ -177,13 +176,13 @@ const chartExample2 = {
 // #########################################
 const chartExample3 = {
   data: canvas => {
-    let ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
-    let gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    const gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
     gradientStroke.addColorStop(0, '#2CA8FF');
     gradientStroke.addColorStop(1, chartColor);
 
-    let gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+    const gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
     gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
     gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.4));
     return {
@@ -793,54 +792,52 @@ const chartExample11 = {
 // #########################################
 
 const chartExample12 = {
-  data: canvas => {
-    return {
-      labels: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-      ],
-      datasets: [
-        {
-          borderColor: '#6bd098',
-          backgroundColor: '#6bd098',
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
-        },
-        {
-          borderColor: '#f17e5d',
-          backgroundColor: '#f17e5d',
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420],
-        },
-        {
-          borderColor: '#fcc468',
-          backgroundColor: '#fcc468',
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484],
-        },
-      ],
-    };
-  },
+  data: canvas => ({
+    labels: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+    ],
+    datasets: [
+      {
+        borderColor: '#6bd098',
+        backgroundColor: '#6bd098',
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
+      },
+      {
+        borderColor: '#f17e5d',
+        backgroundColor: '#f17e5d',
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420],
+      },
+      {
+        borderColor: '#fcc468',
+        backgroundColor: '#fcc468',
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484],
+      },
+    ],
+  }),
   options: {
     plugins: {
       legend: { display: false },

@@ -8,7 +8,7 @@ import Footer from '../components/Footer/Footer.js';
 
 import routes from '../routes.js';
 
-var ps;
+let ps;
 
 function Pages() {
   const fullPages = React.useRef();
@@ -22,8 +22,8 @@ function Pages() {
       }
     };
   });
-  const getRoutes = routes => {
-    return routes.map((prop, key) => {
+  const getRoutes = routes =>
+    routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
@@ -35,11 +35,9 @@ function Pages() {
             key={key}
           />
         );
-      } else {
-        return null;
       }
+      return null;
     });
-  };
   return (
     <>
       <AuthNavbar />

@@ -99,10 +99,10 @@ function AdminNavbar() {
             </div>
             <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
               <span className="d-none d-md-block">
-                <img className="nav__logo" src={logo}></img>
+                <img className="nav__logo" src={logo} />
               </span>
               <span className="d-block d-md-none">
-                <image src={logo} alt=""></image>
+                <image src={logo} alt="" />
               </span>
             </NavbarBrand>
           </div>
@@ -148,7 +148,7 @@ function AdminNavbar() {
               </NavItem> */}
               <UncontrolledDropdown className="btn-rotate" nav>
                 <DropdownToggle
-                  aria-haspopup={true}
+                  aria-haspopup
                   caret
                   color="default"
                   data-toggle="dropdown"
