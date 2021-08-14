@@ -83,19 +83,17 @@ export const loginUser = async credentials => {
  * @param credentials  username , passowrd & type ('OFFICE_HOLDER | RENTER')
  */
 export const registerUser = async (credentials) => {
-  console.log("Auth",credentials);
+  console.log("Auth", credentials);
   console.log(API_AUTH_URL);
   try {
     await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
       method: 'POST',
-      mode: 'no-cors',    
       headers: {
         'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json, charset=utf8',
+        'Content-Type': 'application/json; charset=utf8',
       },
       body: JSON.stringify(credentials)
     });
-
     return Promise.resolve();
   } catch (error) {
     throw new Error('Not able to login');
