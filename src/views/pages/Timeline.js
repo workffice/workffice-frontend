@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 
 // reactstrap components
 import {
@@ -27,7 +27,7 @@ import {
   UncontrolledDropdown,
   Row,
   Col,
-} from "reactstrap";
+} from 'reactstrap';
 
 function Timeline() {
   return (
@@ -120,27 +120,23 @@ function Timeline() {
                             className="btn-round"
                             color="info"
                             data-toggle="dropdown"
-                            type="button"
-                          >
+                            type="button">
                             <i className="nc-icon nc-settings-gear-65" />
                           </DropdownToggle>
                           <DropdownMenu persist>
                             <DropdownItem
                               href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
+                              onClick={e => e.preventDefault()}>
                               Action
                             </DropdownItem>
                             <DropdownItem
                               href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
+                              onClick={e => e.preventDefault()}>
                               Another action
                             </DropdownItem>
                             <DropdownItem
                               href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
+                              onClick={e => e.preventDefault()}>
                               Something else here
                             </DropdownItem>
                           </DropdownMenu>

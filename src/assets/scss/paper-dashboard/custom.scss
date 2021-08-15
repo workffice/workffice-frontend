@@ -2,6 +2,9 @@
   width: 6%;
   height: auto;
   -webkit-animation: rotate-center 2s ease-in-out infinite both;
+
+  // Footer
+
   animation: rotate-center 2s ease-in-out infinite both;
   @-webkit-keyframes rotate-center {
     0% {
@@ -25,6 +28,7 @@
   }
 }
 
+// Auth Recovery Password
 .recovery-password-user {
   -webkit-animation: shadow-drop-center 4s ease-out infinite both;
   animation: shadow-drop-center 4s ease-out infinite both;
@@ -48,4 +52,38 @@
       box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
     }
   }
+}
+
+// Admin Navbar
+.nav__logo {
+  display: flex;
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+.custom__avatar {
+  box-sizing: border-box;
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+}
+
+.fix__navlink {
+  padding: 0px !important;
+}
+
+// OFFICE BRANCH
+
+.office-branch-card-image {
+  width: 100%;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 8px 56px -30px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 8px 56px -30px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 8px 56px -30px rgba(0, 0, 0, 0.75);
+}
+
+.office-branch-card-title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
 }

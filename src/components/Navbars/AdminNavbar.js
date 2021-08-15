@@ -18,7 +18,6 @@ import React from 'react';
 import classnames from 'classnames';
 import { useLocation } from 'react-router-dom';
 import {
-  Button,
   Collapse,
   DropdownToggle,
   DropdownMenu,
@@ -31,13 +30,14 @@ import {
   InputGroup,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
   Nav,
   Container,
 } from 'reactstrap';
+import logo from '../../assets/img/Recurso 4.png';
+// import avatar from '../../assets/img/faces/erik-lucatero-2.jpg';
+// import {Avatar} from '../Avatar/Avatar';
 
-function AdminNavbar(props) {
+function AdminNavbar() {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [color, setColor] = React.useState('navbar-transparent');
@@ -84,16 +84,6 @@ function AdminNavbar(props) {
         expand="lg">
         <Container fluid>
           <div className="navbar-wrapper">
-            <div className="navbar-minimize">
-              <Button
-                className="btn-icon btn-round"
-                color="default"
-                id="minimizeSidebar"
-                onClick={props.handleMiniClick}>
-                <i className="nc-icon nc-minimal-right text-center visible-on-sidebar-mini" />
-                <i className="nc-icon nc-minimal-left text-center visible-on-sidebar-regular" />
-              </Button>
-            </div>
             <div
               className={classnames('navbar-toggle', {
                 toggled: sidebarOpen,
@@ -109,9 +99,11 @@ function AdminNavbar(props) {
             </div>
             <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
               <span className="d-none d-md-block">
-                Paper Dashboard PRO React
+                <img className="nav__logo" src={logo}></img>
               </span>
-              <span className="d-block d-md-none">PD PRO React</span>
+              <span className="d-block d-md-none">
+                <image src={logo} alt=""></image>
+              </span>
             </NavbarBrand>
           </div>
           <button
@@ -142,17 +134,18 @@ function AdminNavbar(props) {
               </InputGroup>
             </Form>
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
-                  className="btn-magnify"
+                  className="btn-magnify fix__navlink"
                   href="#pablo"
                   onClick={e => e.preventDefault()}>
-                  <i className="nc-icon nc-layout-11" />
+
+                  <Avatar img={avatar}></Avatar>
                   <p>
-                    <span className="d-lg-none d-md-block">Stats</span>
+                    <span className="d-lg-none d-md-block">Perfil</span>
                   </p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <UncontrolledDropdown className="btn-rotate" nav>
                 <DropdownToggle
                   aria-haspopup={true}
@@ -161,9 +154,9 @@ function AdminNavbar(props) {
                   data-toggle="dropdown"
                   id="navbarDropdownMenuLink"
                   nav>
-                  <i className="nc-icon nc-bell-55" />
+                  <i className="nc-icon nc-settings-gear-65" />
                   <p>
-                    <span className="d-lg-none d-md-block">Some Actions</span>
+                    <span className="d-lg-none d-md-block">Oficinas</span>
                   </p>
                 </DropdownToggle>
                 <DropdownMenu
@@ -171,27 +164,25 @@ function AdminNavbar(props) {
                   aria-labelledby="navbarDropdownMenuLink"
                   right>
                   <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Action
+                    Sucursales
                   </DropdownItem>
                   <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Another action
+                    Oficinas
                   </DropdownItem>
                   <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Something else here
+                    Noticias
+                  </DropdownItem>
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                    Reportes
+                  </DropdownItem>
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                    Perfil
+                  </DropdownItem>
+                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                    Cerrar Sesión
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <NavItem>
-                <NavLink
-                  className="btn-rotate"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}>
-                  <i className="nc-icon nc-settings-gear-65" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Account</span>
-                  </p>
-                </NavLink>
-              </NavItem>
             </Nav>
           </Collapse>
         </Container>

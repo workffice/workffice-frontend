@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 
 // reactstrap components
 import {
@@ -29,7 +29,7 @@ import {
   Input,
   Row,
   Col,
-} from "reactstrap";
+} from 'reactstrap';
 
 function UserProfile() {
   return (
@@ -41,16 +41,16 @@ function UserProfile() {
               <div className="image">
                 <img
                   alt="..."
-                  src={require("assets/img/bg/damir-bosnjak.jpg").default}
+                  src={require('assets/img/bg/damir-bosnjak.jpg').default}
                 />
               </div>
               <CardBody>
                 <div className="author">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  <a href="#pablo" onClick={e => e.preventDefault()}>
                     <img
                       alt="..."
                       className="avatar border-gray"
-                      src={require("assets/img/mike.jpg").default}
+                      src={require('assets/img/mike.jpg').default}
                     />
                     <h5 className="title">Chet Faker</h5>
                   </a>
@@ -101,7 +101,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("assets/img/faces/ayo-ogunseinde-2.jpg")
+                              require('assets/img/faces/ayo-ogunseinde-2.jpg')
                                 .default
                             }
                           />
@@ -118,8 +118,7 @@ function UserProfile() {
                           className="btn-round btn-icon"
                           color="success"
                           outline
-                          size="sm"
-                        >
+                          size="sm">
                           <i className="fa fa-envelope" />
                         </Button>
                       </Col>
@@ -133,7 +132,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("assets/img/faces/joe-gardner-2.jpg")
+                              require('assets/img/faces/joe-gardner-2.jpg')
                                 .default
                             }
                           />
@@ -150,8 +149,7 @@ function UserProfile() {
                           className="btn-round btn-icon"
                           color="success"
                           outline
-                          size="sm"
-                        >
+                          size="sm">
                           <i className="fa fa-envelope" />
                         </Button>
                       </Col>
@@ -165,7 +163,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("assets/img/faces/clem-onojeghuo-2.jpg")
+                              require('assets/img/faces/clem-onojeghuo-2.jpg')
                                 .default
                             }
                           />
@@ -182,8 +180,7 @@ function UserProfile() {
                           className="btn-round btn-icon"
                           color="success"
                           outline
-                          size="sm"
-                        >
+                          size="sm">
                           <i className="fa fa-envelope" />
                         </Button>
                       </Col>

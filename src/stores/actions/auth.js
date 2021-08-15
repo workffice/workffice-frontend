@@ -13,72 +13,72 @@ export const RECOVER_PASSWORD_START = 'RECOVER_PASSWORD_START';
 export const RECOVER_PASSWORD_SUCCESSFULL = 'RECOVER_PASSWORD_SUCCESSFULL';
 export const RECOVER_PASSWORD_FAILED = 'RECOVER_PASSWORD_FAILED';
 
-export const createStart = (data) => ({
+export const createStart = data => ({
   type: CREATE_START,
   payload: data,
 });
 
-export const createPending = (data) => ({
+export const createPending = data => ({
   type: CREATE_PENDING,
   payload: data,
 });
 
-export const createfailed = (data) => ({
+export const createfailed = data => ({
   type: CREATE_FAILED,
   payload: data,
 });
 
-export const loginStart = (data) => ({
+export const loginStart = data => ({
   type: LOGIN_START,
   payload: data,
 });
 
-export const loginSuccesfull = (token) => ({
+export const loginSuccesfull = token => ({
   type: LOGIN_SUCCESSFULL,
   payload: token,
 });
 
-export const loginFailed = (error) => ({
+export const loginFailed = error => ({
   type: LOGIN_FAILED,
   payload: error,
 });
 
-export const logoutStart = (payload) => ({
+export const logoutStart = payload => ({
   type: LOG_OUT_START,
   payload,
 });
 
-export const logout = (payload) => ({
+export const logout = payload => ({
   type: LOG_OUT_FINISH,
   payload,
 });
 
-export const changePasswordStart = (data) => ({
+export const changePasswordStart = data => ({
   type: CHANGE_PASSWORD_START,
   payload: data,
 });
 
-export const changePasswordSuccesfull = (token) => ({
+export const changePasswordSuccesfull = token => ({
   type: CHANGE_PASSWORD_SUCCESSFULL,
   payload: token,
 });
 
-export const changePasswordFailed = (error) => ({
+export const changePasswordFailed = error => ({
   type: CHANGE_PASSWORD_FAILED,
   payload: error,
 });
 
-export const recoverPasswordStart = (data) => ({
+export const recoverPasswordStart = data => ({
   type: RECOVER_PASSWORD_START,
   payload: data,
 });
 
-export const recoverPasswordSuccesfull = (data) => ({
+export const recoverPasswordSuccesfull = data => ({
   type: RECOVER_PASSWORD_SUCCESSFULL,
   payload: data,
 });
 
-export const recoverPasswordFailed = (error) => ({
+export const recoverPasswordFailed = error => ({
   type: RECOVER_PASSWORD_FAILED,
   payload: error,
 });

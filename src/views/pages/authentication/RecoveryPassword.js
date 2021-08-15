@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 
 // reactstrap components
 import {
@@ -28,13 +28,13 @@ import {
   Input,
   Container,
   Col,
-} from "reactstrap";
+} from 'reactstrap';
 
 function LockScreen() {
   React.useEffect(() => {
-    document.body.classList.toggle("lock-page");
+    document.body.classList.toggle('lock-page');
     return function cleanup() {
-      document.body.classList.toggle("lock-page");
+      document.body.classList.toggle('lock-page');
     };
   });
   return (
@@ -46,17 +46,13 @@ function LockScreen() {
               <img
                 alt="..."
                 className="recovery-password-user"
-                src={require("../../assets/img/Recurso 5.png").default}
+                src={require('../../../assets/img/Recurso 5.png').default}
               />
             </CardHeader>
             <CardBody>
               <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
               <FormGroup>
-                <Input
-                  placeholder="Email..."
-                  type="email"
-                  autoComplete="off"
-                />
+                <Input placeholder="Email..." type="email" autoComplete="off" />
               </FormGroup>
             </CardBody>
             <CardFooter>
@@ -64,8 +60,7 @@ function LockScreen() {
                 className="btn-round mb-3"
                 color="warning"
                 href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
+                onClick={e => e.preventDefault()}>
                 Recuperar
               </Button>
             </CardFooter>
@@ -75,8 +70,9 @@ function LockScreen() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${require("../../assets/img/bg/luke-chesser.jpg").default
-            })`,
+          backgroundImage: `url(${
+            require('../../../assets/img/bg/luke-chesser.jpg').default
+          })`,
         }}
       />
     </div>
