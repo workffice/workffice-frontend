@@ -16,6 +16,8 @@ export const userLogin = (credentials) => async (dispatch) => {
   } catch (error) {
     dispatch(setError(error ? error : 'Usuario o password incorrectos.'));
   } finally {
-    dispatch(setIsLoading(false));
+    setTimeout(() => {
+      dispatch(setIsLoading(false));
+    }, 2000);
   }
 };

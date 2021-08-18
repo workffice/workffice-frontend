@@ -13,13 +13,12 @@ const isLoadingReducer = (state = false, { type, payload }) => {
   return currentState;
 };
 
-const setErrorReducer = (state = { show: false }, { type, payload }) => {
+const setErrorReducer = (state = false, { type, payload }) => {
   let currentState = state;
 
   if (type === SET_ERROR) {
     currentState = {
       message: payload.error,
-      show: true,
     };
   }
   return currentState;
