@@ -1,22 +1,22 @@
-import Login from './views/pages/authentication/Login';
-import Register from './views/pages/authentication/Register';
 import RecoveryPassword from './views/pages/authentication/RecoveryPassword';
 import { Dashboard } from './views/pages/backoffice/Dashboard';
 import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
+import { LoginContainer } from './containers/LoginContainer';
+import { RegisterContainer } from './containers/RegisterContainer';
 
 const routes = [
   {
     path: '/login',
     name: 'Login',
     mini: 'L',
-    component: Login,
+    component: LoginContainer,
     layout: '/auth',
   },
   {
     path: '/register',
     name: 'Register',
     mini: 'R',
-    component: Register,
+    component: RegisterContainer,
     layout: '/auth',
   },
   {

@@ -7,7 +7,7 @@ import AdminNavbar from '../components/Navbars/AdminNavbar';
 // import Footer from '../components/Footer/Footer';
 import { routes } from './admin.routes.js';
 
-var ps;
+let ps;
 
 export const AdminLayout = props => {
   const location = useLocation();
@@ -31,8 +31,8 @@ export const AdminLayout = props => {
     document.scrollingElement.scrollTop = 0;
     mainPanel.current.scrollTop = 0;
   }, [location]);
-  const getRoutes = routes => {
-    return routes.map((prop, key) => {
+  const getRoutes = routes =>
+    routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
@@ -48,7 +48,6 @@ export const AdminLayout = props => {
         return null;
       }
     });
-  };
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} />

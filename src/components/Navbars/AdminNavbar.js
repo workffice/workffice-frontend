@@ -99,10 +99,10 @@ function AdminNavbar() {
             </div>
             <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
               <span className="d-none d-md-block">
-                <img className="nav__logo" src={logo}></img>
+                <img className="nav__logo" src={logo} />
               </span>
               <span className="d-block d-md-none">
-                <image src={logo} alt=""></image>
+                <img src={logo} alt="" />
               </span>
             </NavbarBrand>
           </div>
@@ -125,7 +125,7 @@ function AdminNavbar() {
             isOpen={collapseOpen}>
             <Form>
               <InputGroup className="no-border">
-                <Input defaultValue="" placeholder="Search..." type="text" />
+                <Input defaultValue="" placeholder="Búscar..." type="text" />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <i className="nc-icon nc-zoom-split" />
@@ -148,13 +148,13 @@ function AdminNavbar() {
               </NavItem> */}
               <UncontrolledDropdown className="btn-rotate" nav>
                 <DropdownToggle
-                  aria-haspopup={true}
+                  aria-haspopup
                   caret
                   color="default"
                   data-toggle="dropdown"
                   id="navbarDropdownMenuLink"
                   nav>
-                  <i className="nc-icon nc-settings-gear-65" />
+                  <i id="settings" className="nc-icon nc-settings-gear-65" />
                   <p>
                     <span className="d-lg-none d-md-block">Oficinas</span>
                   </p>

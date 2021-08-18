@@ -1,14 +1,35 @@
-import { applyMiddleware, createStore } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { loginReducer } from './reducers/auth/loginReducer';
+import { registerReducer } from './reducers/auth/registerReducer';
+import { LOADING, SET_ERROR } from './actions';
 
-import rootSaga from './sagas';
+const isLoadingReducer = (state = false, { type, payload }) => {
+  let currentState = state;
 
-const sagaMiddleware = createSagaMiddleware();
+  if (type === LOADING) {
+    currentState = payload;
+  }
+  return currentState;
+};
 
-const store = createStore(applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootSaga);
+const setErrorReducer = (state = { show: false }, { type, payload }) => {
+  let currentState = state;
 
-const getState = () => store.getState();
+  if (type === SET_ERROR) {
+    currentState = {
+      message: payload.error,
+      show: true,
+    };
+  }
+  return currentState;
+};
 
-export { getState };
-export default store;
+export const reducers = routes =>
+  combineReducers({
+    router: connectRouter(routes),
+    login: loginReducer,
+    register: registerReducer,
+    isLoading: isLoadingReducer,
+    error: setErrorReducer,
+  });

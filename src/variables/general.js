@@ -71,10 +71,10 @@ const dataForReactTable = {
 // // // data for populating the calendar in Calendar view
 // #############################
 
-var today = new Date();
-var y = today.getFullYear();
-var m = today.getMonth();
-var d = today.getDate();
+const today = new Date();
+const y = today.getFullYear();
+const m = today.getMonth();
+const d = today.getDate();
 
 const events = [
   {
@@ -137,17 +137,42 @@ const ro_flag = require('../assets/img/flags/RO.png').default;
 const br_flag = require('../assets/img/flags/BR.png').default;
 
 const table_data = [
-  { flag: us_flag, country: 'USA', count: '2.920', percentage: '53.23%' },
-  { flag: de_flag, country: 'Germany', count: '1.300', percentage: '20.43%' },
-  { flag: au_flag, country: 'Australia', count: '760', percentage: '10.35%' },
+  {
+    flag: us_flag,
+    country: 'USA',
+    count: '2.920',
+    percentage: '53.23%',
+  },
+  {
+    flag: de_flag,
+    country: 'Germany',
+    count: '1.300',
+    percentage: '20.43%',
+  },
+  {
+    flag: au_flag,
+    country: 'Australia',
+    count: '760',
+    percentage: '10.35%',
+  },
   {
     flag: gb_flag,
     country: 'United Kingdom',
     count: '690',
     percentage: '7.87%',
   },
-  { flag: ro_flag, country: 'Romania', count: '600', percentage: '5.94%' },
-  { flag: br_flag, country: 'Brasil', count: '550', percentage: '4.34%' },
+  {
+    flag: ro_flag,
+    country: 'Romania',
+    count: '600',
+    percentage: '5.94%',
+  },
+  {
+    flag: br_flag,
+    country: 'Brasil',
+    count: '550',
+    percentage: '4.34%',
+  },
 ];
 
 export { dataForReactTable, events, table_data };

@@ -5,7 +5,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Form,
   Input,
   InputGroupAddon,
@@ -18,18 +17,16 @@ import {
 } from 'reactstrap';
 
 import { useFormik } from 'formik';
+// import { useHistory } from 'react-router-dom';
 
-function Login() {
+function Login(props) {
+  // const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.password) {
       errors.password = 'Required';
     } else if (values.password.length < 8) {
       errors.password = 'Must be 8 characters or more';
-    }
-
-    if (!values.userType) {
-      errors.userType = 'Required';
     }
 
     if (!values.email) {
@@ -47,11 +44,11 @@ function Login() {
     initialValues: {
       email: '',
       password: '',
-      userType: '',
     },
     validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: credentials => {
+      props.onLogin(credentials);
+      // history.push('/admin/office-branch');
     },
   });
 
@@ -66,7 +63,7 @@ function Login() {
       <Container>
         <Row>
           <Col className="ml-auto mr-auto" lg="4" md="6">
-            {/*LOGIN FORM */}
+            {/* LOGIN FORM */}
             <Form onSubmit={formik.handleSubmit}>
               <Card className="card-login">
                 <CardHeader>
@@ -91,6 +88,7 @@ function Login() {
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
                       />
+
                     </InputGroup>
                     {formik.errors.email && formik.touched.email ? (
                       <div className="error">{formik.errors.email}</div>
@@ -118,17 +116,15 @@ function Login() {
                       <div className="error">{formik.errors.password}</div>
                     ) : null}
                   </FormGroup>
-                  <br />
-                </CardBody>
-                <CardFooter>
                   <Button
                     block
-                    className="btn-round mb-3"
+                    className="btn-round"
                     color="success"
-                    type="submit">
+                    type="submit"
+                    >
                     Iniciar Sesión
                   </Button>
-                </CardFooter>
+                </CardBody>
               </Card>
             </Form>
           </Col>
@@ -137,9 +133,8 @@ function Login() {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${
-            require('../../../assets/img/bg/office1.jpg').default
-          })`,
+          backgroundImage: `url(${require('../../../assets/img/bg/office1.jpg').default
+            })`,
         }}
       />
     </div>

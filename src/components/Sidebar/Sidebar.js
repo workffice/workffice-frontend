@@ -173,7 +173,7 @@ function Sidebar(props) {
               aria-expanded={openAvatar}
               onClick={() => setOpenAvatar(!openAvatar)}>
               <span>
-                Chiche Arano
+                Usuario Test
                 <b className="caret" />
               </span>
             </a>
