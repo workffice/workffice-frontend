@@ -56,23 +56,24 @@ export const authenticatedRequest = async options => {
  * Login an user and store its token data in LS
  * @param credentials  username & passowrd
  */
-export const loginUser = async credentials => {
+export const loginUser = async (credentials) => {
   const userToken = getUserToken();
   if (userToken && isUserLoggedin(userToken) === 'OK') {
+
     return Promise.resolve(userToken);
   }
   try {
     const rawAccessToken = await sdkNoAuthRequest(
-      `${API_AUTHENTICATIONS_URL}`,
+      `${API_AUTHENTICATIONS_URL}/`,
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json; charset=utf8',
         },
-        body: credentials,
+        body: JSON.stringify(credentials)
       }
     );
-
     return Promise.resolve(storeAccessToken(rawAccessToken));
   } catch {
     throw new Error('Not able to login');
@@ -83,8 +84,6 @@ export const loginUser = async credentials => {
  * @param credentials  username , passowrd & type ('OFFICE_HOLDER | RENTER')
  */
 export const registerUser = async (credentials) => {
-  console.log("Auth", credentials);
-  console.log(API_AUTH_URL);
   try {
     await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
       method: 'POST',
@@ -92,7 +91,7 @@ export const registerUser = async (credentials) => {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json; charset=utf8',
       },
-      body: JSON.stringify(credentials)
+      body: JSON.parse(credentials)
     });
     return Promise.resolve();
   } catch (error) {

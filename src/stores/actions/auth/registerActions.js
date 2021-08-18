@@ -9,7 +9,6 @@ export const fetchRegister = credentials => ({
 });
 
 export const register = (credentials) => async (dispatch) => {
-  console.log("ACTION", credentials);
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchRegister(await registerAPI(credentials)));

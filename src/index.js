@@ -24,7 +24,6 @@ const Init = () => {
           <Redirect to="/auth/login" />
         </Switch>
       </BrowserRouter>
-      ,
     </Provider>
   );
 };

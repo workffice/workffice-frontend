@@ -17,8 +17,10 @@ import {
 } from 'reactstrap';
 
 import { useFormik } from 'formik';
+// import { useHistory } from 'react-router-dom';
 
 function Login(props) {
+  // const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -46,6 +48,7 @@ function Login(props) {
     validate,
     onSubmit: credentials => {
       props.onLogin(credentials);
+      // history.push('/admin/office-branch');
     },
   });
 
@@ -85,10 +88,11 @@ function Login(props) {
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
                       />
-                      {formik.errors.email && formik.touched.email ? (
-                        <div className="error">{formik.errors.email}</div>
-                      ) : null}
+
                     </InputGroup>
+                    {formik.errors.email && formik.touched.email ? (
+                      <div className="error">{formik.errors.email}</div>
+                    ) : null}
                   </FormGroup>
                   <FormGroup
                     className={formik.errors.password ? 'has-danger' : ''}>
@@ -107,16 +111,17 @@ function Login(props) {
                         value={formik.values.password}
                         autoComplete="off"
                       />
-                      {formik.errors.password && formik.touched.password ? (
-                        <div className="error">{formik.errors.password}</div>
-                      ) : null}
                     </InputGroup>
+                    {formik.errors.password && formik.touched.password ? (
+                      <div className="error">{formik.errors.password}</div>
+                    ) : null}
                   </FormGroup>
                   <Button
                     block
                     className="btn-round"
                     color="success"
-                    type="submit">
+                    type="submit"
+                    >
                     Iniciar Sesión
                   </Button>
                 </CardBody>
@@ -128,9 +133,8 @@ function Login(props) {
       <div
         className="full-page-background"
         style={{
-          backgroundImage: `url(${
-            require('../../../assets/img/bg/office1.jpg').default
-          })`,
+          backgroundImage: `url(${require('../../../assets/img/bg/office1.jpg').default
+            })`,
         }}
       />
     </div>

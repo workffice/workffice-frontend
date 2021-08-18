@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import {
   Button,
@@ -14,12 +14,10 @@ import {
   InputGroupText,
   InputGroup,
 } from 'reactstrap';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export const RegisterForm = props => {
-  // const history = useHistory();
-  const [userCredentials, setUserCredentials] = useState(undefined);
-
+  const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -28,7 +26,7 @@ export const RegisterForm = props => {
       errors.password = 'Must be 8 characters or more';
     }
     if (!values.type) {
-      errors.type = 'Required';
+      errors.type = 'Required'; 
     }
     if (!values.email) {
       errors.email = 'Required';
@@ -42,16 +40,14 @@ export const RegisterForm = props => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'admin@mail.com',
-      password: '123456789',
-      type: 'OFFICE_HOLDER',
+      email: '',
+      password: '',
+      type: '',
     },
     validate,
     onSubmit: async values => {
-      setUserCredentials(values);
-      console.info("UserCredential",userCredentials);
-      await props.onRegister(userCredentials);
-      // history.push('/');
+      props.onRegister(values);
+      history.push('/auth/confirmation-account');
     },
   });
   return (
@@ -122,9 +118,15 @@ export const RegisterForm = props => {
               id="select"
               onChange={formik.handleChange}
               value={formik.values.type}>
+              <option value={null}>Tipo de cuenta</option>
               <option value="RENTER">Usuario Cliente</option>
               <option value="OFFICE_HOLDER">Propietario de oficinas</option>
             </Input>
+            {formik.errors.type &&
+              formik.touched.type &&
+              formik.validateOnChange.type ? (
+              <div className="error">{formik.errors.type}</div>
+            ) : null}
           </FormGroup>
         </CardBody>
         <CardFooter>

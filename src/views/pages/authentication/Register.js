@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { RegisterInfo } from '../../../components/Register/RegisterInfo';
 import { RegisterForm } from '../../../components/Register/RegisterForm';
 
+
 function Register(props) {
   const { onRegister } = props;
   return (

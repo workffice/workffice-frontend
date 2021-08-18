@@ -13,12 +13,12 @@ const sdkRequest = async (
   options
   //errorHandler?: () => void, add error handler
 ) => {
-  console.info('SDKREQUEST  ', options);
   let response;
   try {
     response = await (options ? fetch(requestUrl, options) : fetch(requestUrl));
 
     const result = await response.json();
+    
     if (!response.ok) {
       return Promise.reject(result);
     }
