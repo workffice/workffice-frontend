@@ -8,5 +8,5 @@ export const setIsLoading = isLoading => ({
 
 export const setError = error => ({
   type: SET_ERROR,
-  payload: { error, shouldShow: true },
+  payload: { error },
 });
