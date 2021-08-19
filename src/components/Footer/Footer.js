@@ -28,7 +28,11 @@ function Footer(props) {
           <div className="credits ml-auto">
             <span className="copyright">
               &copy; {1900 + new Date().getYear()}, made with{' '}
-              <img className="animated-icon" src={logo}></img>by Workffice
+              <img 
+                className="animated-icon" 
+                src={logo}
+                style={{width: 20}}
+              ></img> {' '}by Workffice
             </span>
             {/* <i className="fa fa-heart heart" /> */}
           </div>

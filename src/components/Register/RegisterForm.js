@@ -21,19 +21,19 @@ export const RegisterForm = props => {
   const validate = values => {
     const errors = {};
     if (!values.password) {
-      errors.password = 'Required';
+      errors.password = 'Requerido.';
     } else if (values.password.length < 8) {
-      errors.password = 'Must be 8 characters or more';
+      errors.password = 'Debe tener 8 caracteres o más.';
     }
     if (!values.type) {
-      errors.type = 'Required'; 
+      errors.type = 'Requerido.'; 
     }
     if (!values.email) {
-      errors.email = 'Required';
+      errors.email = 'Requerido.';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = 'Invalid email address';
+      errors.email = 'Dirección de email inválida.';
     }
     return errors;
   };
