@@ -9,7 +9,6 @@ export const fetchLogin = (credentials) => ({
 });
 
 export const userLogin = (credentials) => async (dispatch) => {
-  console.log("userlogin",credentials);
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchLogin(await loginAPI(credentials)));

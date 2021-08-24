@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  // Alert,
   Button,
   Card,
   CardHeader,
@@ -17,10 +18,10 @@ import {
 } from 'reactstrap';
 
 import { useFormik } from 'formik';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login(props) {
-  // const history = useHistory();
+  const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -46,9 +47,14 @@ function Login(props) {
       password: '',
     },
     validate,
-    onSubmit: credentials => {
-      props.onLogin(credentials);
-      // history.push('/admin/office-branch');
+    onSubmit: async credentials => {
+      try {
+        await props.onLogin(credentials);
+        history.push('/admin/office-branch');
+      } catch (error) {
+        console.error(error);
+      }
+
     },
   });
 
@@ -64,10 +70,19 @@ function Login(props) {
         <Row>
           <Col className="ml-auto mr-auto" lg="4" md="6">
             {/* LOGIN FORM */}
+
             <Form onSubmit={formik.handleSubmit}>
               <Card className="card-login">
                 <CardHeader>
                   <CardHeader>
+                    {/* {
+                      <Alert
+                        isOpen={props.error!==null}
+                        color="danger"
+                      >
+                        <span>Usuario o contraseña incorrectos.</span>
+                      </Alert>
+                    } */}
                     <h3 className="header text-center">Login</h3>
                   </CardHeader>
                 </CardHeader>
@@ -121,7 +136,7 @@ function Login(props) {
                     className="btn-round"
                     color="success"
                     type="submit"
-                    >
+                  >
                     Iniciar Sesión
                   </Button>
                 </CardBody>

@@ -2,8 +2,6 @@ export const AUTH_TOKEN = 'AUTH_TOKEN';
 // const DEFAULT_TIME = 1000 * 60 * 60;
 
 export const storeAccessToken = (data) => {
-  console.info("DATA", data.data.token);
-  // console.info("DATA2", data2);
   // const accessToken = {
   //   token
   //   refreshToken: access_token.refresh_token,
@@ -37,7 +35,7 @@ export const writeToLocalStorage = (data, key) => {
 export const readFromLocalStorage = key => {
   if (window && window.localStorage) {
     const result = localStorage.getItem(key);
-    return result ? JSON.parse(result).data : undefined;
+    return result ? JSON.parse(result) : null;
   }
   throw new Error('No window object detected');
 };

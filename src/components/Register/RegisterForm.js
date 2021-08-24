@@ -14,10 +14,10 @@ import {
   InputGroupText,
   InputGroup,
 } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 export const RegisterForm = props => {
-  const history = useHistory();
+  // const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -47,7 +47,7 @@ export const RegisterForm = props => {
     validate,
     onSubmit: async values => {
       props.onRegister(values);
-      history.push('/auth/confirmation-account');
+      // history.push('/auth/confirmation-account');
     },
   });
   return (

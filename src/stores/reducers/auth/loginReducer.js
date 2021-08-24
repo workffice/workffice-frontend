@@ -6,9 +6,8 @@ const initialState = [];
 export const loginReducer = (state = initialState, { type, payload }) => {
   let currentState = state;
   if (type === FETCH_LOGIN) {
-    console.log(payload);
     return currentState = payload;
-  }else{
+  } else {
     return currentState;
   }
 };
