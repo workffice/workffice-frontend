@@ -1,9 +1,7 @@
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 // const DEFAULT_TIME = 1000 * 60 * 60;
 
-export const storeAccessToken = (data) => {
-  console.info("DATA", data.data.token);
-  // console.info("DATA2", data2);
+export const storeAccessToken = async (data) => {
   // const accessToken = {
   //   token
   //   refreshToken: access_token.refresh_token,
@@ -13,8 +11,8 @@ export const storeAccessToken = (data) => {
   //   browserTime: new Date().getTime(),
   //   expiresIn: access_token['.expires_in'] * 1000 - 5000, // almost 15 min but without 5'' to check keep it working.
   // };
-  writeToLocalStorage(data.data.token, AUTH_TOKEN);
-  return data.token;
+  await writeToLocalStorage(data.data.token, AUTH_TOKEN);
+  return data.data.token;
 };
 
 /**
@@ -22,22 +20,23 @@ export const storeAccessToken = (data) => {
  * @param data object data to be stored
  * @param key
  */
-export const writeToLocalStorage = (data, key) => {
+export const writeToLocalStorage = async (data, key) => {
   if (window && window.localStorage) {
     // const lsItem = {
     //   data,
     //   added: new Date(),
     // expiresIn: expiresIn || DEFAULT_TIME,
     // };
-    return localStorage.setItem(key, JSON.stringify(data));
+    await localStorage.setItem(key, JSON.stringify(data));
+    return;
   }
   throw new Error('No window object detected');
 };
 
 export const readFromLocalStorage = key => {
-  if (window && window.localStorage) {
+  if (window.localStorage) {
     const result = localStorage.getItem(key);
-    return result ? JSON.parse(result).data : undefined;
+    return result ? JSON.parse(result) : null;
   }
   throw new Error('No window object detected');
 };

@@ -58,8 +58,7 @@ export const authenticatedRequest = async options => {
  */
 export const loginUser = async (credentials) => {
   const userToken = getUserToken();
-  if (userToken && isUserLoggedin(userToken) === 'OK') {
-
+  if (userToken && isUserLoggedin(userToken) === true) {
     return Promise.resolve(userToken);
   }
   try {
@@ -74,7 +73,7 @@ export const loginUser = async (credentials) => {
         body: JSON.stringify(credentials)
       }
     );
-    return Promise.resolve(storeAccessToken(rawAccessToken));
+    return Promise.resolve(await storeAccessToken(rawAccessToken));
   } catch {
     throw new Error('Not able to login');
   }
@@ -91,7 +90,7 @@ export const registerUser = async (credentials) => {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json; charset=utf8',
       },
-      body: JSON.parse(credentials)
+      body: JSON.stringify(credentials)
     });
     return Promise.resolve();
   } catch (error) {
