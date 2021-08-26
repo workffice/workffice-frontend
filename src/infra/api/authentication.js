@@ -73,7 +73,7 @@ export const loginUser = async (credentials) => {
         body: JSON.stringify(credentials)
       }
     );
-    return Promise.resolve(storeAccessToken(rawAccessToken));
+    return Promise.resolve(await storeAccessToken(rawAccessToken));
   } catch {
     throw new Error('Not able to login');
   }

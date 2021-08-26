@@ -6,7 +6,7 @@ import { Switch, Route } from 'react-router';
 import { ProtectedRoute } from '../routes/ProtectedRoute';
 import { Redirect } from 'react-router-dom';
 import AdminLayout from '../../layouts/Admin'
-import AuthLayout from '../../layouts/Auth'
+import { AuthLayout } from '../../layouts/Auth'
 
 export const Routes = (props) => (
     <ConnectedRouter history={props.history}>

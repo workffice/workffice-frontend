@@ -5,7 +5,9 @@ import { ConfirmationForm } from '../../components/ConfirmationAccount/Confirmat
 export const ConfirmationAccount = () => (
   <div className="login-page">
     <Container>
-      <Row>
+      <Row 
+        style={{textAlign: 'center'}}
+      >
         <Col className="ml-auto mr-auto" lg="4" md="6">
           <ConfirmationForm />
         </Col>

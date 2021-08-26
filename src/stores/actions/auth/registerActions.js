@@ -5,18 +5,19 @@ export const FETCH_REGISTER = 'FETCH_REGISTER';
 
 export const fetchRegister = credentials => ({
   type: FETCH_REGISTER,
-  payload: credentials,
+  payload: credentials ? credentials : null,
 });
 
 export const register = (credentials) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
-    dispatch(fetchRegister(await registerAPI(credentials)));
+    await dispatch(fetchRegister(await registerAPI(credentials)));
+    setTimeout(() => {
+      dispatch(setIsLoading(false));
+    }, 2000);
   } catch (error) {
-    dispatch(
+    await dispatch(
       setError(error ? error : 'No ha sido posible realizar el registro')
     );
-  } finally {
-    dispatch(setIsLoading(false));
-  }
+  } 
 };
