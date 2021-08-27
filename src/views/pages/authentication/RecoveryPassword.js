@@ -40,7 +40,7 @@ export const RecoveryPassword = (props) => {
     onSubmit: async values => {
       await props.onResetPassword(values);
       setTimeout(() => {
-        history.push('auth/confirmation-account');
+        history.push('/auth/confirmation-recovery');
       }, 1200);
     }
   })
