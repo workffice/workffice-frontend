@@ -1,8 +1,9 @@
-import RecoveryPassword from './views/pages/authentication/RecoveryPassword';
+
 import { Dashboard } from './views/pages/backoffice/Dashboard';
 import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
 import { LoginContainer } from './containers/LoginContainer';
 import { RegisterContainer } from './containers/RegisterContainer';
+import { RecoveryPasswordContainer } from './containers/RecoveryPasswordContainer';
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
     path: '/recovery-password',
     name: 'RecoveryPassword',
     mini: 'LS',
-    component: RecoveryPassword,
+    component: RecoveryPasswordContainer,
     layout: '/auth',
   },
   {
