@@ -1,5 +1,10 @@
 import { authenticatedRequest } from './authentication';
 
+export const headersPost = {
+  'Accept': 'application/json, text/plain, */*',
+  'Content-Type': 'application/json; charset=utf8',
+};
+
 /**
  * Generic request handler
  *

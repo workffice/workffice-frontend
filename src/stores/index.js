@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router';
 import { loginReducer } from './reducers/auth/loginReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { LOADING, SET_ERROR } from './actions';
+import { resetReducer } from './reducers/auth/resetPasswordReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -27,6 +28,7 @@ export const reducers = routes =>
   combineReducers({
     router: connectRouter(routes),
     login: loginReducer,
+    reset: resetReducer,
     register: registerReducer,
     isLoading: isLoadingReducer,
     error: setErrorReducer,

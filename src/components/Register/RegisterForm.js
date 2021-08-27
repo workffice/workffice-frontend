@@ -16,7 +16,6 @@ import {
   InputGroup,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import { Loading } from '../Loading/Loading';
 
 export const RegisterForm = props => {
   const history = useHistory();
@@ -49,13 +48,12 @@ export const RegisterForm = props => {
     validate,
     onSubmit: async values => {
       await props.onRegister(values);
-      history.push('/auth/confirmation-account');
+      setTimeout(() => {
+        history.push('/auth/confirmation-account');
+      }, 1200);
     },
   });
   return (
-
-    props.loading ? <Loading />
-      :
       <Form className="form" onSubmit={formik.handleSubmit}>
         <Card className="card-signup text-center">
           <CardHeader>
@@ -74,7 +72,7 @@ export const RegisterForm = props => {
               className={
                 formik.errors.email && formik.touched.email
                   ? 'has-danger'
-                  : 'has-success'
+                   : 'has-success'
               }>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">

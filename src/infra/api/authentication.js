@@ -4,7 +4,7 @@ import {
 } from '../../environments/environment';
 import { getUserToken, isUserLoggedin } from '../../utils';
 import { storeAccessToken } from './localStorage';
-import { sdkNoAuthRequest } from './index';
+import { headersPost, sdkNoAuthRequest } from './index';
 
 const authRequestOkAction = (userToken, options) =>
   Promise.resolve({
@@ -86,10 +86,7 @@ export const registerUser = async (credentials) => {
   try {
     await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json; charset=utf8',
-      },
+      headers: headersPost,
       body: JSON.stringify(credentials)
     });
     return Promise.resolve();
@@ -97,3 +94,16 @@ export const registerUser = async (credentials) => {
     throw new Error('Not able to login');
   }
 };
+
+export const recoveryPassword = async (userEmail) => {
+  try {
+    await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(userEmail)
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred')
+  }
+}
