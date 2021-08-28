@@ -109,9 +109,9 @@ export const recoveryPassword = async (userEmail) => {
   }
 }
 
-export const resetUserPass = async password => {
+export const resetUserPass = async (token, password) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(password)
@@ -120,5 +120,16 @@ export const resetUserPass = async password => {
   } catch (error) {
     throw new Error('Unexpected error has been ocurred');
   }
+}
 
+export const confirmation = async (token)=>{
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}`, {
+      method: 'POST',
+      headers: headersPost
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred');
+  }
 }
