@@ -1,6 +1,7 @@
 import {
   API_AUTHENTICATIONS_URL,
   API_AUTH_URL,
+  API_CONFIRMATION_TOKEN_URL,
 } from '../../environments/environment';
 import { getUserToken, isUserLoggedin } from '../../utils';
 import { storeAccessToken } from './localStorage';
@@ -104,6 +105,20 @@ export const recoveryPassword = async (userEmail) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw new Error('Unexpected error has been ocurred')
+    throw new Error('Unexpected error has been ocurred');
   }
+}
+
+export const resetUserPass = async password => {
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(password)
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred');
+  }
+
 }
