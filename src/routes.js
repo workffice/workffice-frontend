@@ -7,6 +7,7 @@ import { RecoveryPasswordContainer } from './containers/RecoveryPasswordContaine
 import { ConfirmationRecovery } from './views/pages/authentication/ConfirmationRecovery';
 import { ResetPasswordContainer } from './containers/ResetPasswordContainer';
 import { ConfirmationPassword } from './views/pages/authentication/ConfirmationPassword';
+import { Confirmation } from './views/pages/authentication/Confirmation';
 
 const routes = [
   {
@@ -56,6 +57,13 @@ const routes = [
     name: 'ConfirmationPasswordContainer',
     mini: 'LS',
     component: ConfirmationPassword,
+    layout: '/auth',
+  },
+  {
+    path: '/confirmation',
+    name: 'Confirmation',
+    mini: 'LS',
+    component: Confirmation,
     layout: '/auth',
   },
   // ADMIN ROUTES
