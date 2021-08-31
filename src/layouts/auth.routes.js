@@ -1,7 +1,7 @@
 import { LoginContainer } from "../containers/LoginContainer";
 import { RegisterContainer } from "../containers/RegisterContainer";
-import { RecoveryPassword } from "../containers/RecoveryPassword";
 import { ConfirmationAccount } from "../views/pages/ConfirmationAccount";
+import { RecoveryPasswordContainer } from "../containers/RecoveryPasswordContainer";
 
 
 export const routes = [
@@ -23,7 +23,7 @@ export const routes = [
       path: '/recovery-password',
       name: 'RecoveryPassword',
       mini: 'LS',
-      component: RecoveryPassword,
+      component: RecoveryPasswordContainer,
       layout: '/auth',
     },
     {

@@ -1,8 +1,13 @@
-import RecoveryPassword from './views/pages/authentication/RecoveryPassword';
+
 import { Dashboard } from './views/pages/backoffice/Dashboard';
 import { ConfirmationAccount } from './views/pages/ConfirmationAccount';
 import { LoginContainer } from './containers/LoginContainer';
 import { RegisterContainer } from './containers/RegisterContainer';
+import { RecoveryPasswordContainer } from './containers/RecoveryPasswordContainer';
+import { ConfirmationRecovery } from './views/pages/authentication/ConfirmationRecovery';
+import { ResetPasswordContainer } from './containers/ResetPasswordContainer';
+import { ConfirmationPassword } from './views/pages/authentication/ConfirmationPassword';
+import { Confirmation } from './views/pages/authentication/Confirmation';
 
 const routes = [
   {
@@ -23,7 +28,7 @@ const routes = [
     path: '/recovery-password',
     name: 'RecoveryPassword',
     mini: 'LS',
-    component: RecoveryPassword,
+    component: RecoveryPasswordContainer,
     layout: '/auth',
   },
   {
@@ -33,7 +38,34 @@ const routes = [
     component: ConfirmationAccount,
     layout: '/auth',
   },
-
+  {
+    path: '/confirmation-recovery',
+    name: 'ConfirmationRecoveryPassword',
+    mini: 'LS',
+    component: ConfirmationRecovery,
+    layout: '/auth',
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPasswordContainer',
+    mini: 'LS',
+    component: ResetPasswordContainer,
+    layout: '/auth',
+  },
+  {
+    path: '/confirmation-password',
+    name: 'ConfirmationPasswordContainer',
+    mini: 'LS',
+    component: ConfirmationPassword,
+    layout: '/auth',
+  },
+  {
+    path: '/confirmation',
+    name: 'Confirmation',
+    mini: 'LS',
+    component: Confirmation,
+    layout: '/auth',
+  },
   // ADMIN ROUTES
   {
     path: '/dashboard',

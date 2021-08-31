@@ -1,36 +1,50 @@
-/*!
 
-=========================================================
-* Paper Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
-
-// reactstrap components
+import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import {
+  Alert,
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
+  Form,
   FormGroup,
   Input,
   Container,
   Col,
 } from 'reactstrap';
+import { Loading } from '../../../components/Loading/Loading';
 
-function LockScreen() {
+export const RecoveryPassword = (props) => {
+  const history = useHistory();
+  const { loading, error } = props;
+  const validate = values => {
+    const errors = {};
+    if (!values.userEmail) {
+      errors.userEmail = 'Requerido.';
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.userEmail)
+    ) {
+      errors.userEmail = 'Dirección de email inválida.';
+    }
+    return errors;
+  }
+  const formik = useFormik({
+    initialValues: {
+      userEmail: 'workffice@robot-mail.com'
+    },
+    validate,
+    onSubmit: async values => {
+      await props.onResetPassword(values);
+      setTimeout(() => {
+        history.push('/auth/confirmation-recovery');
+      }, 1200);
+    }
+  })
+
   React.useEffect(() => {
     document.body.classList.toggle('lock-page');
     return function cleanup() {
@@ -41,42 +55,73 @@ function LockScreen() {
     <div className="lock-page">
       <Container>
         <Col className="ml-auto mr-auto" lg="4" md="6">
-          <Card className="card-lock text-center">
-            <CardHeader>
-              <img
-                alt="..."
-                className="recovery-password-user"
-                src={require('../../../assets/img/Recurso 5.png').default}
-              />
-            </CardHeader>
-            <CardBody>
-              <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
-              <FormGroup>
-                <Input placeholder="Email..." type="email" autoComplete="off" />
-              </FormGroup>
-            </CardBody>
-            <CardFooter>
-              <Button
-                className="btn-round mb-3"
-                color="warning"
-                href="#pablo"
-                onClick={e => e.preventDefault()}>
-                Recuperar
-              </Button>
-            </CardFooter>
-          </Card>
+          {
+            loading ? <Loading /> : (
+              <Form className='form' onSubmit={formik.handleSubmit}>
+                <Card className="card-lock text-center">
+                  <CardHeader>
+                    <img
+                      alt="..."
+                      className="recovery-password-user"
+                      src={require('../../../assets/img/Recurso 5.png').default}
+                    />
+                  </CardHeader>
+                  <CardBody>
+                    {
+                      <Alert
+                        isOpen={error !== null}
+                        color="danger"
+                      >
+                        <span>{error}</span>
+                      </Alert>
+                    }
+                    <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
+                    <FormGroup
+                      className={
+                        formik.errors.userEmail && formik.touched.userEmail
+                          ? 'has-danger'
+                          : 'has-success'
+                      }>
+                      <Input
+                        name='userEmail'
+                        placeholder="Email..."
+                        type="email"
+                        autoComplete="off"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userEmail}
+                      />
+                      {formik.errors.userEmail &&
+                        formik.touched.userEmail &&
+                        formik.validateOnChange.userEmail ? (
+                        <div className="error">{formik.errors.userEmail}</div>
+                      ) : null}
+                    </FormGroup>
+                  </CardBody>
+                  <CardFooter>
+                    <Button
+                      className="btn-round mb-3"
+                      color="warning"
+                      type="submit"
+                      disabled={formik.isSubmitting}>
+                      Recuperar
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </Form>
+            )
+          }
+
         </Col>
       </Container>
       <div
-        className="full-page-background"
+        className={props.loading ? 'background-loading' : 'full-page-background'}
         style={{
-          backgroundImage: `url(${
-            require('../../../assets/img/bg/luke-chesser.jpg').default
-          })`,
+          backgroundImage: `url(${require('../../../assets/img/bg/luke-chesser.jpg').default
+            })`,
         }}
       />
     </div>
   );
 }
 
-export default LockScreen;

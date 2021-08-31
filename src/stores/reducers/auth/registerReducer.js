@@ -1,6 +1,6 @@
 import { FETCH_REGISTER } from '../../actions/auth/registerActions';
 
-const initialState = [];
+const initialState = null;
 
 export const registerReducer = (state = initialState, { type, payload }) => {
   let currentState = state;

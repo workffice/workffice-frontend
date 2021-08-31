@@ -10,7 +10,7 @@ import routes from '../routes.js';
 
 let ps;
 
-function Pages() {
+export const AuthLayout = () => {
   const fullPages = React.useRef();
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
@@ -51,5 +51,3 @@ function Pages() {
     </>
   );
 }
-
-export default Pages;

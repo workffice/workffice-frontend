@@ -1,10 +1,11 @@
 import {
   API_AUTHENTICATIONS_URL,
   API_AUTH_URL,
+  API_CONFIRMATION_TOKEN_URL,
 } from '../../environments/environment';
 import { getUserToken, isUserLoggedin } from '../../utils';
 import { storeAccessToken } from './localStorage';
-import { sdkNoAuthRequest } from './index';
+import { headersPost, sdkNoAuthRequest } from './index';
 
 const authRequestOkAction = (userToken, options) =>
   Promise.resolve({
@@ -58,8 +59,7 @@ export const authenticatedRequest = async options => {
  */
 export const loginUser = async (credentials) => {
   const userToken = getUserToken();
-  if (userToken && isUserLoggedin(userToken) === 'OK') {
-
+  if (userToken && isUserLoggedin(userToken) === true) {
     return Promise.resolve(userToken);
   }
   try {
@@ -74,7 +74,7 @@ export const loginUser = async (credentials) => {
         body: JSON.stringify(credentials)
       }
     );
-    return Promise.resolve(storeAccessToken(rawAccessToken));
+    return Promise.resolve(await storeAccessToken(rawAccessToken));
   } catch {
     throw new Error('Not able to login');
   }
@@ -87,14 +87,49 @@ export const registerUser = async (credentials) => {
   try {
     await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json; charset=utf8',
-      },
-      body: JSON.parse(credentials)
+      headers: headersPost,
+      body: JSON.stringify(credentials)
     });
     return Promise.resolve();
   } catch (error) {
     throw new Error('Not able to login');
   }
 };
+
+export const recoveryPassword = async (userEmail) => {
+  try {
+    await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(userEmail)
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred');
+  }
+}
+
+export const resetUserPass = async (token, password) => {
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(password)
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred');
+  }
+}
+
+export const confirmation = async (token)=>{
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}`, {
+      method: 'POST',
+      headers: headersPost
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw new Error('Unexpected error has been ocurred');
+  }
+}

@@ -11,12 +11,12 @@ export const getUserToken = () => readFromLocalStorage(AUTH_TOKEN);
 
 export const isSessionValid = () => {
   const authType = isUserLoggedin(getUserToken());
-  return authType === 'OK';
+  return authType;
 };
 
 export const isUserLoggedin = authData => {
   if (!authData) {
-    return 'INVALID';
+    return false;
   }
-  return 'OK';
+  return true;
 };

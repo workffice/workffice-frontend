@@ -13,7 +13,7 @@ export const routes = [
     path: '/offices',
     name: 'Offices',
     //   component: Office,
-    layout: '/auth',
+    layout: '/admin',
   },
   {
     path: '/colaborators',

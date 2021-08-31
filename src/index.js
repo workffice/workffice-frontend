@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { getHistory } from './infra/react-router/getHistory';
 import { buildStore } from './infra/init/store';
 import { reducers } from './stores';
-import AuthLayout from './layouts/Auth.js';
-import AdminLayout from './layouts/Admin.js';
-
+import { Routes } from './infra/init/routes';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import './assets/scss/paper-dashboard.scss?v=1.3.0';
@@ -28,6 +25,7 @@ const Init = () => {
           <Redirect to="/auth/login" />
         </Switch>
       </BrowserRouter>
+      <Routes history={history} />
     </Provider>
   );
 };

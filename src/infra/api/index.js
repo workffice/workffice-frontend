@@ -1,5 +1,10 @@
 import { authenticatedRequest } from './authentication';
 
+export const headersPost = {
+  'Accept': 'application/json, text/plain, */*',
+  'Content-Type': 'application/json; charset=utf8',
+};
+
 /**
  * Generic request handler
  *
@@ -18,7 +23,6 @@ const sdkRequest = async (
     response = await (options ? fetch(requestUrl, options) : fetch(requestUrl));
 
     const result = await response.json();
-    
     if (!response.ok) {
       return Promise.reject(result);
     }
