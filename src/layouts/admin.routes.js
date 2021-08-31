@@ -1,3 +1,5 @@
+import { ColaboratorScreen } from '../components/colaborator/ColaboratorScreen';
+import { NewColaborator } from '../components/colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 
 export const routes = [
@@ -13,4 +15,16 @@ export const routes = [
     //   component: Office,
     layout: '/auth',
   },
+  {
+    path: '/colaborators',
+    name: 'Colaboradores',
+      component: ColaboratorScreen,
+    layout: '/admin',
+  },
+  {
+    path: '/newColaborator',
+    name: 'Nuevo colaborador',
+      component: NewColaborator,
+    layout: '/admin',
+  }
 ];

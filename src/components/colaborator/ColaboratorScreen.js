@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
-import { OfficeBranchCard } from './OfficeBranchCard';
+import { ColaboratorCard } from './ColaboratorCard';
 
-export const OfficeBranch = () => (
+export const ColaboratorScreen = () => (
   <div className="content">
     <Row style={{ display: 'grid', paddingTop: 40 }}>
-      <Col xs="6" md="6" lg="12" xg="12">
+      <Col xs="12" md="12" lg="12" xg="12">
         <h1>
-          Gestionar <small color="red">sucursales</small>
+          Gestionar <small color="red">Colaboradores</small>
         </h1>
         <hr />
       </Col>
     </Row>
-    <Row>
+    <Row style={{justifyContent:'center'}}>
       <Col
         xs="6"
         md="6"
@@ -21,28 +21,24 @@ export const OfficeBranch = () => (
         xg="12"
         style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Button className="btn-round" color="primary" size="medium" >
-          <Link to="/admin/colaborators" style={{color: 'white', textDecoration: 'none'}}>
+          <Link to='/admin/newColaborator' style={{color: 'white', textDecoration: 'none'}}>
             {' '}
             <i className="fa fa-plus" />
-            {' '}Colaborador
+            {' '} Nuevo Colaborador
           </Link>
-        </Button>
-        <Button className="btn-round" color="primary">
-          {' '}
-          <i className="fa fa-plus" /> Nueva Sucursal
         </Button>
       </Col>
     </Row>
 
-    <Row>
+    <Row style={{justifyContent:'center'}}>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeBranchCard />
+        <ColaboratorCard />
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeBranchCard />
+        <ColaboratorCard />
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeBranchCard />
+        <ColaboratorCard />
       </Col>
     </Row>
   </div>
