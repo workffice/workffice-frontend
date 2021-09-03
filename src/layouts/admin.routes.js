@@ -1,30 +1,58 @@
-import { ColaboratorScreen } from '../components/colaborator/ColaboratorScreen';
-import { NewColaborator } from '../components/colaborator/NewColaborator';
+import { Colaborators } from '../components/Colaborator/Colaborators';
+import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 
 export const routes = [
   {
-    path: '/office-branch',
+    collapse: true,
     name: 'Sucursales',
-    component: OfficeBranch,
-    layout: '/admin',
+    icon: 'fa fa-building',
+    state: 'officebranchsCollapse',
+    views: [
+      {
+        path: '/office-branch',
+        name: 'Sucursales',
+        mini: 'S',
+        component: OfficeBranch,
+        layout: '/admin',
+      },
+    ]
   },
   {
-    path: '/offices',
-    name: 'Offices',
-    //   component: Office,
-    layout: '/admin',
+    collapse: true,
+    name: 'Oficinas',
+    icon: 'fa fa-laptop',
+    state: 'officesCollapse',
+    views: [
+      {
+        path: '/offices',
+        name: 'Oficinas',
+        mini: 'O',
+        //   component: Office,
+        layout: '/admin',
+      },
+    ]
   },
   {
-    path: '/colaborators',
+    collapse: true,
     name: 'Colaboradores',
-      component: ColaboratorScreen,
-    layout: '/admin',
-  },
-  {
-    path: '/newColaborator',
-    name: 'Nuevo colaborador',
-      component: NewColaborator,
-    layout: '/admin',
+    icon: 'fa fa-users',
+    state: 'collaboratorsCollapse',
+    views: [
+      {
+        path: '/colaborators',
+        name: 'Colaboradores',
+        mini: 'C',
+        component: Colaborators,
+        layout: '/admin',
+      },
+      {
+        path: '/new-colaborator',
+        name: 'Nuevo colaborador',
+        mini: 'NC',
+        component: NewColaborator,
+        layout: '/admin',
+      }
+    ]
   }
 ];
