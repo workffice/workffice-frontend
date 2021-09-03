@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 import { ColaboratorCard } from './ColaboratorCard';
 
-export const ColaboratorScreen = () => (
+export const Colaborators = () => (
   <div className="content">
     <Row style={{ display: 'grid', paddingTop: 40 }}>
       <Col xs="12" md="12" lg="12" xg="12">
@@ -21,7 +21,7 @@ export const ColaboratorScreen = () => (
         xg="12"
         style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Button className="btn-round" color="primary" size="medium" >
-          <Link to='/admin/newColaborator' style={{color: 'white', textDecoration: 'none'}}>
+          <Link to='/admin/new-colaborator' style={{color: 'white', textDecoration: 'none'}}>
             {' '}
             <i className="fa fa-plus" />
             {' '} Nuevo Colaborador

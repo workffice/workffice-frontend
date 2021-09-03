@@ -4,13 +4,16 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import PerfectScrollbar from 'perfect-scrollbar';
 import Sidebar from '../components/Sidebar/Sidebar.js';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
-// import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer/Footer';
+import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 
 let ps;
 
 export const AdminLayout = props => {
   const location = useLocation();
+  const [backgroundColor, setBackgroundColor] = React.useState("black");
+  const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
@@ -48,13 +51,33 @@ export const AdminLayout = props => {
         return null;
       }
     });
+    const handleActiveClick = (color) => {
+      setActiveColor(color);
+    };
+    const handleBgClick = (color) => {
+      setBackgroundColor(color);
+    };
   return (
     <div className="wrapper">
-      <Sidebar {...props} routes={routes} />
+      <Sidebar {...props} routes={routes} bgColor={backgroundColor}
+        activeColor={activeColor} />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
         <Switch>{getRoutes(routes)}</Switch>
+        {
+          // we don't want the Footer to be rendered on full screen maps page
+          props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
+            <Footer />
+          )
+        }
       </div>
+      <FixedPlugin
+        bgColor={backgroundColor}
+        activeColor={activeColor}
+        handleActiveClick={handleActiveClick}
+        handleBgClick={handleBgClick}
+        
+      />
     </div>
   );
 };
