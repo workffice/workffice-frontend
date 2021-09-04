@@ -60,10 +60,10 @@ const routes = [
     layout: '/auth',
   },
   {
-    path: '/confirmation',
+    path: '/confirmation:token',
     name: 'Confirmation',
     mini: 'LS',
-    component: Confirmation,
+    children: Confirmation,
     layout: '/auth',
   },
   // ADMIN ROUTES

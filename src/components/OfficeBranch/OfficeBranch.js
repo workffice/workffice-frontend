@@ -21,15 +21,18 @@ export const OfficeBranch = () => (
         xg="12"
         style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Button className="btn-round" color="primary" size="medium" >
-          <Link to="/admin/colaborators" style={{color: 'white', textDecoration: 'none'}}>
+          <Link to="/admin/colaborators" style={{ color: 'white', textDecoration: 'none' }}>
             {' '}
             <i className="fa fa-plus" />
             {' '}Colaborador
           </Link>
         </Button>
         <Button className="btn-round" color="primary">
-          {' '}
-          <i className="fa fa-plus" /> Nueva Sucursal
+          <Link to="/admin/new-office-branch" style={{ color: 'white', textDecoration: 'none' }}>
+
+            {' '}
+            <i className="fa fa-plus" /> Nueva Sucursal
+          </Link>
         </Button>
       </Col>
     </Row>

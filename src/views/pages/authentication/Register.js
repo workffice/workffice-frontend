@@ -4,10 +4,16 @@ import { RegisterInfo } from '../../../components/Register/RegisterInfo';
 import { RegisterForm } from '../../../components/Register/RegisterForm';
 import { Loading } from '../../../components/Loading/Loading';
 
+import { useDispatch } from 'react-redux';
+import { HIDE_ERROR } from '../../../stores/actions';
 
 function Register(props) {
   const { loading, error } = props;
   const { onRegister } = props;
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch({ type: HIDE_ERROR });
+  }, []);
   return (
     <div className="register-page">
       <Container>

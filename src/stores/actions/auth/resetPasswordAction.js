@@ -15,9 +15,7 @@ export const resetPassword = (password) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         await dispatch(fetchReset(await resetUserPass(password)));
-        setTimeout(() => {
-            dispatch(setIsLoading(false));
-        }, 1200);
+        dispatch(setIsLoading(false));
     } catch (error) {
         dispatch(setError(error ? error : 'Ha ocurrido un error, intente nuevamente'));
     }

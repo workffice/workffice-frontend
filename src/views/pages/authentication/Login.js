@@ -18,22 +18,26 @@ import {
 } from 'reactstrap';
 
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Loading } from '../../../components/Loading/Loading';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { HIDE_ERROR } from '../../../stores/actions';
 
 
 const Login = (props) => {
   const { loading, error } = props;
+  const dispatch = useDispatch()
   const history = useHistory();
-
   const validate = values => {
     const errors = {};
     if (!values.password) {
       errors.password = 'Requerido.';
-    } else if (values.password.length < 8) {
-      errors.password = 'La contraseña debe tener 8 caracteres o más.';
+    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
+      errors.password = 'La contraseña debe tener 8 caracteres o más, y \n almenos un caracter, un número y una mayuscula';
+    } else if (values.password.trim().length === 0) {
+      errors.password = 'La contraseña no puede tener solos espacios'
     }
-
     if (!values.email) {
       errors.email = 'Requerido.';
     } else if (
@@ -41,7 +45,6 @@ const Login = (props) => {
     ) {
       errors.email = 'Dirección de email inválida.';
     }
-
     return errors;
   };
 
@@ -52,16 +55,14 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
-      try {
-        await props.onLogin(credentials);
-        setTimeout(() => {
-          history.push('/admin/office-branch');
-        }, 1200);
-      } catch (error) {
-        throw new Error(error.message);
-      }
+      await props.onLogin(credentials);
+      history.push('/admin/office-branch');
     },
   });
+
+  React.useEffect(() => {
+    dispatch({ type: HIDE_ERROR });
+  },[]);
 
   React.useEffect(() => {
     document.body.classList.toggle('login-page');
@@ -69,6 +70,7 @@ const Login = (props) => {
       document.body.classList.toggle('login-page');
     };
   });
+
   return (
     <div className="login-page">
       <Container>
@@ -87,7 +89,7 @@ const Login = (props) => {
                           isOpen={error !== null}
                           color="danger"
                         >
-                          <span>Usuario o contraseña incorrectos.</span>
+                          {customizedErrorAuth(error)}
                         </Alert>
                       }
                       <h3 className="header text-center">Login</h3>

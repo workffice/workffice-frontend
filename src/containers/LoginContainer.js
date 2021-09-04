@@ -11,5 +11,5 @@ export const LoginContainer = () => {
   const onLogin = useCallback(credentials => {
     dispatch(userLogin(credentials));
   }, []);
-  return <Login onLogin={onLogin}  loading={loading} error={error} />;
+  return <Login onLogin={onLogin} loading={loading} error={error} />;
 };
