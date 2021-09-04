@@ -1,6 +1,7 @@
 import { Colaborators } from '../components/Colaborator/Colaborators';
 import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
+import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
 
 export const routes = [
   {
@@ -14,6 +15,13 @@ export const routes = [
         name: 'Sucursales',
         mini: 'S',
         component: OfficeBranch,
+        layout: '/admin',
+      },
+      {
+        path: '/new-office-branch',
+        name: 'Nueva Sucursal',
+        mini: 'NS',
+        component: CreateOfficeBranch,
         layout: '/admin',
       },
     ]

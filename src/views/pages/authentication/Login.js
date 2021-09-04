@@ -24,14 +24,17 @@ import { Loading } from '../../../components/Loading/Loading';
 
 const Login = (props) => {
   const { loading, error } = props;
+
   const history = useHistory();
 
   const validate = values => {
     const errors = {};
     if (!values.password) {
       errors.password = 'Requerido.';
-    } else if (values.password.length < 8) {
-      errors.password = 'La contraseña debe tener 8 caracteres o más.';
+    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
+      errors.password = 'La contraseña debe tener 8 caracteres o más, y \n almenos un caracter, un número y una mayuscula';
+    } else if (values.password.trim().length === 0) {
+      errors.password = 'La contraseña no puede tener solos espacios'
     }
 
     if (!values.email) {
@@ -52,14 +55,10 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
-      try {
-        await props.onLogin(credentials);
-        setTimeout(() => {
-          history.push('/admin/office-branch');
-        }, 1200);
-      } catch (error) {
-        throw new Error(error.message);
-      }
+      await props.onLogin(credentials);
+      setTimeout(() => {
+        history.push('/admin/office-branch');
+      }, 1200);
     },
   });
 

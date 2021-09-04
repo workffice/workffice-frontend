@@ -1,9 +1,15 @@
 
 import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
+import { useParams } from 'react-router-dom';
 import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
 
 export const Confirmation = () => {
+    const { token } = useParams();
+    console.log("token", token);
+    // useEffect(() => {
+
+    // })
     return (
         <div className="login-page">
             <Container>

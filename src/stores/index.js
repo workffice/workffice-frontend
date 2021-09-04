@@ -18,7 +18,7 @@ const setErrorReducer = (state = null, { type, payload }) => {
   let currentState = state;
   if (type === SET_ERROR) {
     currentState = {
-      message: payload.error ? payload.error : null,
+      message: payload ? payload : null,
     };
   }
   return currentState;
