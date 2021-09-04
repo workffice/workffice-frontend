@@ -75,8 +75,8 @@ export const loginUser = async (credentials) => {
       }
     );
     return Promise.resolve(await storeAccessToken(rawAccessToken));
-  } catch {
-    throw new Error('Not able to login');
+  } catch (error) {
+    throw error.errors[0].error;
   }
 };
 /**
@@ -92,7 +92,7 @@ export const registerUser = async (credentials) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw new Error('Not able to login');
+    throw error.errors[0].error;
   }
 };
 
@@ -105,7 +105,7 @@ export const recoveryPassword = async (userEmail) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw new Error('Unexpected error has been ocurred');
+    throw error.errors[0].error;
   }
 }
 
@@ -118,11 +118,11 @@ export const resetUserPass = async (token, password) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw new Error('Unexpected error has been ocurred');
+    throw error.errors[0].error;
   }
 }
 
-export const confirmation = async (token)=>{
+export const confirmation = async (token) => {
   try {
     await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}`, {
       method: 'POST',
@@ -130,6 +130,6 @@ export const confirmation = async (token)=>{
     });
     return Promise.resolve();
   } catch (error) {
-    throw new Error('Unexpected error has been ocurred');
+    throw error.errors[0].error;
   }
 }
