@@ -15,8 +15,7 @@ export const userLogin = (credentials) => async (dispatch) => {
   try {
     await dispatch(fetchLogin(await loginAPI(credentials)));
   } catch (error) {
-    console.log("action",error)
-    dispatch(setError(error ? error : 'Usuario o password incorrectos.'));
+    await dispatch(setError(error));
   } finally {
     dispatch(setIsLoading(false));
   }

@@ -12,9 +12,7 @@ export const recoveryPassword = (userEmail) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         await dispatch(await recoveryPasswordAPI(userEmail));
-        setTimeout(() => {
-            dispatch(setIsLoading(false))
-        }, 2000)
+        dispatch(setIsLoading(false))
     } catch (error) {
         dispatch(setError(error ? error : null));
     }

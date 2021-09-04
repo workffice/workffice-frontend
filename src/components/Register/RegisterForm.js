@@ -16,15 +16,20 @@ import {
   InputGroup,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
+import { customizedErrorAuth } from '../../infra/errorsAuth';
+
 
 export const RegisterForm = props => {
   const history = useHistory();
+
   const validate = values => {
     const errors = {};
     if (!values.password) {
       errors.password = '* Requerido.';
-    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
-      errors.password = '* La contraseña debe tener 8 caracteres o más, y \n almenos un caracter, un número y una mayúscula';
+    } else if (values.password.length < 8 && values.password.length > 10) {
+      errors.password = '* La contraseña debe tener 8 caracteres o más'
+    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/i.test(values.password)) {
+      errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 10 caracteres ';
     }
 
     if (!values.type) {
@@ -49,9 +54,7 @@ export const RegisterForm = props => {
     validate,
     onSubmit: async values => {
       await props.onRegister(values);
-      setTimeout(() => {
-        history.push('/auth/confirmation-account');
-      }, 1200);
+      props.error && history.push('/auth/confirmation-account');
     },
   });
   return (
@@ -63,7 +66,7 @@ export const RegisterForm = props => {
               isOpen={props.error !== null}
               color="danger"
             >
-              <span>El correo ya esta registrado.</span>
+              <span>{customizedErrorAuth(props.error)}</span>
             </Alert>
           }
           <CardTitle tag="h4">Creemos tu cuenta</CardTitle>
@@ -90,7 +93,8 @@ export const RegisterForm = props => {
                 value={formik.values.email}
               />
             </InputGroup>
-            {formik.errors.email && formik.touched.email ? (
+            {formik.errors.email &&
+              formik.touched.email ? (
               <div className="error">{formik.errors.email}</div>
             ) : null}
           </FormGroup>
@@ -115,10 +119,12 @@ export const RegisterForm = props => {
                 value={formik.values.password}
               />
             </InputGroup>
-            {formik.errors.password && formik.touched.password ? (
-              <div className="error">{formik.errors.password}</div>
-            ) : null}
-          </FormGroup>
+            {
+              formik.errors.password && formik.touched.password ? (
+                <div className="error">{formik.errors.password}</div>
+              ) : null
+            }
+          </FormGroup >
           <FormGroup>
             <Input
               type="select"
@@ -136,7 +142,7 @@ export const RegisterForm = props => {
               <div className="error">{formik.errors.type}</div>
             ) : null}
           </FormGroup>
-        </CardBody>
+        </CardBody >
         <CardFooter>
           <Button
             className="btn-round"
@@ -146,8 +152,8 @@ export const RegisterForm = props => {
             Crear cuenta
           </Button>
         </CardFooter>
-      </Card>
-    </Form>
+      </Card >
+    </Form >
 
   )
 };

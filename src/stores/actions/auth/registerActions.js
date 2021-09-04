@@ -12,12 +12,9 @@ export const register = (credentials) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
     await dispatch(fetchRegister(await registerAPI(credentials)));
-    setTimeout(() => {
-      dispatch(setIsLoading(false));
-    }, 2000);
   } catch (error) {
-    await dispatch(
-      setError(error ? error : 'No ha sido posible realizar el registro')
-    );
-  } 
+    await dispatch(setError(error ? error : 'No ha sido posible realizar el registro'));
+  } finally {
+    dispatch(setIsLoading(false));
+  }
 };

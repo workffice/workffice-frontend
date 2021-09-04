@@ -1,5 +1,6 @@
 export const LOADING = 'GENERAL_LOADING';
 export const SET_ERROR = 'SET_ERROR';
+export const HIDE_ERROR = "HIDE_ERROR";
 
 export const setIsLoading = isLoading => ({
   type: LOADING,
@@ -8,5 +9,12 @@ export const setIsLoading = isLoading => ({
 
 export const setError = error => ({
   type: SET_ERROR,
-  payload: error ? error : null ,
+  payload: error,
 });
+
+export const hideError = () => {
+  return {
+    type: HIDE_ERROR,
+    payload: null
+  }
+}
