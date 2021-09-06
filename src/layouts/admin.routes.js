@@ -2,7 +2,7 @@ import { Colaborators } from '../components/Colaborator/Colaborators';
 import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 import { NewOffice } from '../components/Offices/NewOffice';
-// import { OfficeComponent } from '../components/Offices/OfficeComponent';
+import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
 
 export const routes = [
@@ -38,7 +38,7 @@ export const routes = [
         path: '/offices',
         name: 'Oficinas',
         mini: 'O',
-        // component: OfficeComponent,
+        component: OfficesListComponent,
         layout: '/admin',
       },
       {
