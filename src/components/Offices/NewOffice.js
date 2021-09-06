@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, CardBody, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import ImageUpload from '../CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
-// import ImageUpload from 'components/CustomUpload/ImageUpload.js';
 
 export const NewOffice = () => (
   <div className="content">
@@ -130,7 +130,7 @@ export const NewOffice = () => (
                         <Row className='photos'>
                             <Col xs={12} sm={4} md={4}>
                                 <label for="photos" class="form-label">Fotos</label>
-                                {/* <ImageUpload /> */}
+                                <ImageUpload />
                             </Col>
                         </Row>
                         
