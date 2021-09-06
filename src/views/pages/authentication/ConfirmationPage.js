@@ -1,15 +1,15 @@
 
 import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
 
-export const Confirmation = () => {
-    const { token } = useParams();
-    console.log("token", token);
-    // useEffect(() => {
+export const ConfirmationPage = (props) => {
+    
+    const token = useLocation();
 
-    // })
+    console.log("token", token);
     return (
         <div className="login-page">
             <Container>
@@ -22,9 +22,9 @@ export const Confirmation = () => {
                 </Row>
             </Container>
             <div
-                className="full-page-background"
+                className={props.loading ? 'background-loading' : 'full-page-background'}
                 style={{
-                    backgroundImage: `url(${require('../../../assets/img/bg/markus-spiske-187777.jpg').default
+                    backgroundImage: `url(${require('../../../assets/img/bg/ana-bernardo.jpg').default
                         })`,
                 }}
             />

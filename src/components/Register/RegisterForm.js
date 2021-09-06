@@ -28,10 +28,9 @@ export const RegisterForm = props => {
       errors.password = '* Requerido.';
     } else if (values.password.length < 8 && values.password.length > 10) {
       errors.password = '* La contraseña debe tener 8 caracteres o más'
-    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/i.test(values.password)) {
-      errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 10 caracteres ';
+    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/i.test(values.password)) {
+      errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 16 caracteres ';
     }
-
     if (!values.type) {
       errors.type = '* Requerido.';
     }
