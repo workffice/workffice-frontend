@@ -72,7 +72,7 @@ export const ColaboratorCard = () => (
             >
               <option selected>Supervisor</option>
               <option value="Pendiente">Administrativo</option>
-            </select>
+          </select>
 
             <select class="form-select"
               style={{
