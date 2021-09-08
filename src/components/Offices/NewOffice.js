@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, CardBody, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import ImageUpload from '../CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
-// import ImageUpload from 'components/CustomUpload/ImageUpload.js';
 
 export const NewOffice = () => (
   <div className="content">
@@ -19,7 +19,7 @@ export const NewOffice = () => (
         <CardBody>
             <form>
                 <div className="form-row">
-                    <Col xs="12" md="12" lg="6" xg="6">
+                    <Col xs="12" md="12" lg="6" xg="6" style={{paddingLeft: 20, paddingRight: 20}}>
                         <div className='office-name'>
                             <label for="nameOffice" class="form-label">Nombre</label>
                             <Input type="text" placeholder="Ingrese el nombre de la oficina" />
@@ -77,9 +77,9 @@ export const NewOffice = () => (
                             <label for="number-of-tables" className="form-label">Cantidad de mesas</label>
                             <Input type="number" placeholder="Ingrese el número de mesas..." />
                         </div>
-
                     </Col>
-                    <Col xs="12" md="12" lg="6" xg="6">
+                    
+                    <Col xs="12" md="12" lg="6" xg="6" style={{paddingLeft: 20, paddingRight: 20}}>
                         <div className='price-hour'>
                             <label for="price-hour" className="form-label">Precio por hora</label>
                             <InputGroup>
@@ -130,19 +130,18 @@ export const NewOffice = () => (
                         <Row className='photos'>
                             <Col xs={12} sm={4} md={4}>
                                 <label for="photos" class="form-label">Fotos</label>
-                                {/* <ImageUpload /> */}
+                                <ImageUpload />
                             </Col>
                         </Row>
-                        
                     </Col>
                 </div>
                 <hr />
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                     <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Crear</button>
+                    <button type="submit" class="btn btn-primary mb-3" style={{ minWidth: 107}}>Crear</button>
                     </div>
                     <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3" style={{backgroundColor: '#EB5D60'}}>Cancelar</button>
+                    <button type="submit" class="btn btn-primary mb-3" style={{backgroundColor: '#EB5D60', minWidth: 107}}>Cancelar</button>
                     </div>
                 </div>
             </form>
