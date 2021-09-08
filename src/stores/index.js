@@ -4,6 +4,7 @@ import { loginReducer } from './reducers/auth/loginReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
+import { createCollaboratorReducer } from './reducers/auth/collaboratorReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -30,6 +31,7 @@ export const reducers = routes =>
     login: loginReducer,
     recovery: recoveryReducer,
     register: registerReducer,
+    createColaborator: createCollaboratorReducer,
     isLoading: isLoadingReducer,
     error: setErrorReducer,
   });

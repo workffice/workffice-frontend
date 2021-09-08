@@ -1,8 +1,8 @@
 import { Colaborators } from '../components/Colaborator/Colaborators';
-import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 import { NewOffice } from '../components/Offices/NewOffice';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
+import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
 
 export const routes = [
@@ -67,7 +67,7 @@ export const routes = [
         path: '/new-colaborator',
         name: 'Nuevo colaborador',
         mini: 'NC',
-        component: NewColaborator,
+        component: ColaboratorContainer,
         layout: '/admin',
       }
     ]
