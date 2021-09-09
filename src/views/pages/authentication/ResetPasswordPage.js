@@ -1,13 +1,20 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
 import { Loading } from '../../../components/Loading/Loading';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { HIDE_ERROR, SET_ERROR } from '../../../stores/actions';
+import { useDispatch } from 'react-redux';
 
 
 export const ResetPasswordPage = props => {
     const { loading, error } = props;
+    const dispatch = useDispatch()
+    let token = null;
     const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    token = query.get("token");
 
     const validate = values => {
         const errors = {};
@@ -25,12 +32,15 @@ export const ResetPasswordPage = props => {
         },
         validate,
         onSubmit: async values => {
-            await props.onResetPassword(values);
-            setTimeout(() => {
-                history.push('/auth/confirmation-password');
-            }, 1200);
+            await props.onResetPassword(token, values);
+            error.type !== SET_ERROR && history.push('/auth/confirmation-password');
         }
     });
+    React.useEffect(() => {
+        setTimeout(() => {
+            dispatch({ type: HIDE_ERROR });
+        }, 2500);
+    }, [error]);
     React.useEffect(() => {
         document.body.classList.toggle('login-page');
         return function cleanup() {
@@ -52,7 +62,7 @@ export const ResetPasswordPage = props => {
                                                     isOpen={error !== null}
                                                     color="danger"
                                                 >
-                                                    <span>Usuario o contraseña incorrectos.</span>
+                                                    {customizedErrorAuth(error)}
                                                 </Alert>
                                             }
                                             <h3>Por favor ingrese su contraseña</h3>

@@ -4,6 +4,8 @@ import { loginReducer } from './reducers/auth/loginReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
+import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
+import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -28,6 +30,8 @@ export const reducers = routes =>
   combineReducers({
     router: connectRouter(routes),
     login: loginReducer,
+    activateUser: activateAccountReducer,
+    activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
     register: registerReducer,
     isLoading: isLoadingReducer,

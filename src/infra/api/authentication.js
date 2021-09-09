@@ -98,6 +98,7 @@ export const registerUser = async (credentials) => {
 
 export const recoveryPassword = async (userEmail) => {
   try {
+    console.log(userEmail);
     await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
       method: 'POST',
       headers: headersPost,
@@ -105,13 +106,14 @@ export const recoveryPassword = async (userEmail) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw error.errors[0].error;
+    console.log("EERRROOORR", error);
+    throw error?.errors[0].error;
   }
 }
 
 export const resetUserPass = async (token, password) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(password)
@@ -122,11 +124,23 @@ export const resetUserPass = async (token, password) => {
   }
 }
 
-export const confirmation = async (token) => {
+export const activateUser = async (token) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}/`, {
       method: 'POST',
       headers: headersPost
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw error.errors[0].error;
+  }
+}
+export const activatePass = async (token, newPassword) => {
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(newPassword)
     });
     return Promise.resolve();
   } catch (error) {

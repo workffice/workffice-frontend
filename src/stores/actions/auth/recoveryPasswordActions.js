@@ -1,5 +1,5 @@
 import { setError, setIsLoading } from "..";
-import { recoveryPasswordAPI } from "../../../api/recoveryPassword";
+import { recoveryPasswordAPI } from '../../../api/recoveryPassword';
 
 export const FETCH_RECOVERY = 'FETCH_RECOVERY';
 
@@ -8,12 +8,16 @@ export const fetchRecovery = (userEmail) => ({
     payload: userEmail
 });
 
-export const recoveryPassword = (userEmail) => async (dispatch) => {
+export const recovery = (userEmail) => async (dispatch) => {
     dispatch(setIsLoading(true));
+
     try {
-        await dispatch(await recoveryPasswordAPI(userEmail));
-        dispatch(setIsLoading(false))
+        await dispatch(fetchRecovery(await recoveryPasswordAPI(userEmail)));
     } catch (error) {
-        dispatch(setError(error ? error : null));
+        await dispatch(setError(error ? error : 'Ocurrio un error'));
+    } finally {
+        await dispatch(setIsLoading(false));
     }
 }
+
+  

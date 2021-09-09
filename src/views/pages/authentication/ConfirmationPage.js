@@ -1,15 +1,26 @@
 
 import React from 'react'
+import { useLocation, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap'
-import { useLocation } from 'react-router-dom';
-
 import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
+import { confirmation } from '../../../stores/actions/auth/confirmationAccountActions';
+
 
 export const ConfirmationPage = (props) => {
-    
-    const token = useLocation();
+    let token = '';
+    const dispatch = useDispatch()
+    const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    token = query.get("token");
+    React.useEffect(() => {
+        dispatch(confirmation(token));
+        setTimeout(() => {
+            history.push('/auth/login');
+        }, 2000);
+    }, [token]);
 
-    console.log("token", token);
+
     return (
         <div className="login-page">
             <Container>
