@@ -20,8 +20,8 @@ import PropTypes from "prop-types";
 
 import { Button } from "reactstrap";
 
-import defaultImage from "assets/img/image_placeholder.jpg";
-import defaultAvatar from "assets/img/placeholder.jpg";
+import defaultImage from "../../assets/img/bg/image_placeholder.jpg";
+import defaultAvatar from "../../assets/img/bg/logoCirculo.svg";
 
 function ImageUpload(props) {
   const [fileState, setFileState] = React.useState(null);
@@ -41,12 +41,12 @@ function ImageUpload(props) {
       reader.readAsDataURL(file);
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // fileState is the file/image uploaded
-    // in this function you can save the image (fileState) on form submit
-    // you have to call it yourself
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // fileState is the file/image uploaded
+  //   // in this function you can save the image (fileState) on form submit
+  //   // you have to call it yourself
+  // };
   const handleClick = () => {
     fileInput.current.click();
   };

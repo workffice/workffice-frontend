@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col } from 'reactstrap';
 
 export const ColaboratorCard = () => (
   <>
@@ -55,57 +56,56 @@ export const ColaboratorCard = () => (
       <div className='card-footer'>
         <hr />
         <div className='button-container'>
-          <div className='row'>
-          <select class="form-select"
-              style={{
-                backgroundColor: 'white',
-                border: 'thin #E3E3E3',
-                borderBottom: 'solid #E3E3E3',
-                height: 35,
-                // borderRadius: 8,
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                borderWidth: 2, 
-              }}
-            >
-              <option selected>Supervisor</option>
-              <option value="Pendiente">Administrativo</option>
-          </select>
-
-            <select class="form-select"
-              style={{
-                backgroundColor: 'white',
-                border: 'thin #E3E3E3',
-                borderBottom: 'solid #E3E3E3',
-                height: 35,
-                // borderRadius: 8,
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                borderWidth: 2, 
-              }}
-            >
-              <option selected>Activo</option>
-              <option value="Pendiente">Pendiente</option>
-            </select>
-          </div>
-          <div className='row'>
-            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-6'>
+          <Col>
+            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
               <h5>
                 <br />
                 <small>Rol</small>
               </h5>
-            </div>
-            <div className='ml-auto col-sm-12 mr-auto col-12 col-md-12 col-lg-6'>
+            </div> 
+            <select class="form-select"
+                style={{
+                  backgroundColor: 'white',
+                  border: 'thin #E3E3E3',
+                  borderBottom: 'solid #E3E3E3',
+                  height: 35,
+                  // borderRadius: 8,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  borderWidth: 2, 
+                }}
+              >
+                <option selected>Supervisor</option>
+                <option value="Pendiente">Administrativo</option>
+            </select>           
+          </Col>
+          <Col>
+            <div className='ml-auto col-sm-12 mr-auto col-12 col-md-12 col-lg-12'>
               <h5>
                 <br />
                 <small>Estado</small>
               </h5>
-            </div>
-          </div>
+            </div> 
+            <select class="form-select"
+                style={{
+                  backgroundColor: 'white',
+                  border: 'thin #E3E3E3',
+                  borderBottom: 'solid #E3E3E3',
+                  height: 35,
+                  // borderRadius: 8,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  borderWidth: 2, 
+                }}
+              >
+                <option selected>Activo</option>
+                <option value="Pendiente">Pendiente</option>
+              </select>                         
+          </Col>
         </div>
       </div>
     </div>
