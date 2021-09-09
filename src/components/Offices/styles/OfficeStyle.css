@@ -70,3 +70,8 @@
 .button-container{
     margin-left: 10px;
 }
+
+button .link{
+    color: white;
+    text-decoration: 'none';
+}
