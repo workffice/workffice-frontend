@@ -2,6 +2,7 @@ import { Colaborators } from '../components/Colaborator/Colaborators';
 import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 import { NewOffice } from '../components/Offices/NewOffice';
+import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
@@ -54,6 +55,13 @@ export const routes = [
         name: 'Servicios y equipamiento',
         mini: 'SE',
         component: ServicesEquipment,
+        layout: '/admin',
+      },
+      {
+        path: '/office-detail',
+        // name: 'Detalle',
+        // mini: 'SE',
+        component: OfficeDetailComponent,
         layout: '/admin',
       },
     ]
