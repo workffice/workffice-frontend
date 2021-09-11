@@ -4,6 +4,7 @@ import { NewOffice } from '../components/Offices/NewOffice';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
+import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
 export const routes = [
   {
@@ -46,6 +47,13 @@ export const routes = [
         name: 'Nueva oficina',
         mini: 'NO',
         component: NewOffice,
+        layout: '/admin',
+      },
+      {
+        path: '/services-equipment',
+        name: 'Servicios y equipamiento',
+        mini: 'SE',
+        component: ServicesEquipment,
         layout: '/admin',
       },
     ]

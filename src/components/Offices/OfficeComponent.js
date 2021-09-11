@@ -8,10 +8,10 @@ export const OfficeComponent = () => (
     <Card>
       <CardBody>
         <img className="office-branch-card-image" src={image} />
-        <div className="office-branch-card-title" style={{ marginTop: 0 }}>
-          <h4>
+        <div className="office-branch-card-title" style={{ marginTop: 30 }}>
+          <h5 style={{marginBottom: 0}}>
             Oficina Elena
-          </h4>
+          </h5>
           <i className="fa fa-heart" style={{display:'flex', alignItems:'center'}}/>
         </div>
         <hr />
