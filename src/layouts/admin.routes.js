@@ -16,12 +16,12 @@ export const routes = [
       {
         path: '/office-branch',
         name: 'Sucursales',
-        mini: 'S',
+        mini: 'S',        
         component: OfficeBranch,
         layout: '/admin',
       },
       {
-        path: '/new-office-branch',
+        path: '/create-officebranch',
         name: 'Nueva Sucursal',
         mini: 'NS',
         component: CreateOfficeBranch,

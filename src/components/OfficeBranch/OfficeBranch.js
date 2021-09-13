@@ -28,7 +28,7 @@ export const OfficeBranch = () => (
           </Link>
         </Button>
         <Button className="btn-round" color="primary">
-          <Link to="/admin/new-office-branch" style={{ color: 'white', textDecoration: 'none' }}>
+          <Link to="/admin/create-officebranch" style={{ color: 'white', textDecoration: 'none' }}>
 
             {' '}
             <i className="fa fa-plus" /> Nueva Sucursal
