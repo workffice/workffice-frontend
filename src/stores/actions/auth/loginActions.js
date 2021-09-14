@@ -19,6 +19,6 @@ export const userLogin = (credentials) => async (dispatch) => {
     await dispatch(setError(error));
   }finally{
     await dispatch(getUserMe());
-    dispatch(setIsLoading(false));
+    await dispatch(setIsLoading(false));
   }
 };

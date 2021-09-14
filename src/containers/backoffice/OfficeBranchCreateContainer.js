@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOfficeBranch } from '../stores/actions/backoffice/officebranchActions';
-import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
+import { createOfficeBranch } from '../../stores/actions/backoffice/officebranchActions';
+import { CreateOfficeBranch } from '../../views/pages/backoffice/CreateOfficeBranch';
 
 export const OfficeBranchCreateContainer = () => {
     const loading = useSelector(state => state.isLoading);

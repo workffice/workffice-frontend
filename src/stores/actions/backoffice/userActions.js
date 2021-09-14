@@ -18,4 +18,5 @@ export const getUserMe = () => async (dispatch) => {
     } catch (error) {
         await dispatch(setError(error));
     }
+
 }

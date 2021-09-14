@@ -13,3 +13,5 @@ export const API_CONFIRMATION_TOKEN_URL = `${API_URL}${API_TOKENS}`;
 
 // BACKOFFICE
 export const API_OFFICE_HOLDERS = `${API_URL}${OFFICE_HOLDER}` // localhost:8080/api/office_holders
+
+export const API_OFFICE_BRANCHES = `${API_URL}/office_branches`;

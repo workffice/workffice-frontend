@@ -18,7 +18,7 @@ export const CreateOfficeBranch = (props) => {
             </Row>
             <Row>
                 <Col xs="12" md="6" lg="12" xg="12">
-                    {loading ? <Loading /> :
+                    {loading ? <Loading style={{display:'flex', justifyContent:'center'}}/> :
                         <OfficeBranchCreate create={props.onCreate} error={error} />
                     }
                 </Col>
