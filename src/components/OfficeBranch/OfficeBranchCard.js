@@ -9,7 +9,7 @@ export const OfficeBranchCard = (props) => (
         <img className="office-branch-card-image" src={image} />
         <div className="office-branch-card-title">
           <h5>
-            WHALE <small>{props.branch.name}</small>
+            <small>{props.branch.name}</small>
           </h5>
           <i className="fa fa-heart" />
         </div>

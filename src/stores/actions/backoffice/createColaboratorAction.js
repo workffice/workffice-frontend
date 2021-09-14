@@ -8,13 +8,13 @@ export const fetchCreateColaborator = credentials => ({
   payload: credentials ? credentials : null,
 });
 
-export const createColaborator = (credentials) => async (dispatch) => {
+export const createColaborator = (credentials, officeBranchId) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
-    await dispatch(fetchCreateColaborator(await createColaboratorApi(credentials)));
+    await dispatch(fetchCreateColaborator(await createColaboratorApi(credentials, officeBranchId)));
   } catch (error) {
     await dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
   } finally {
-    dispatch(setIsLoading(false));
+    await dispatch(setIsLoading(false));
   }
 };

@@ -6,8 +6,9 @@ import Sidebar from '../components/Sidebar/Sidebar.js';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
+import { officeBranchList } from '../stores/actions/backoffice/officebranchActions.js';
 
 let ps;
 
@@ -20,6 +21,10 @@ export const AdminLayout = props => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getUserMe());
+  },[]);
+  const userMe = useSelector(state => state.userMe)
+  React.useEffect(() => {
+    dispatch(officeBranchList(userMe.id));
   },[]);
 
   React.useEffect(() => {
