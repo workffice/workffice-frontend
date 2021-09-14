@@ -15,6 +15,6 @@ export const register = (credentials) => async (dispatch) => {
   } catch (error) {
     await dispatch(setError(error ? error : 'No ha sido posible realizar el registro'));
   } finally {
-    dispatch(setIsLoading(false));
+    await dispatch(setIsLoading(false));
   }
 };

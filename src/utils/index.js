@@ -18,5 +18,5 @@ export const isUserLoggedin = authData => {
   if (!authData) {
     return false;
   }
-  return true;
+  return 'OK';
 };
