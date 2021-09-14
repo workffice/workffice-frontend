@@ -12,7 +12,7 @@ const authRequestOkAction = (userToken, options) =>
     ...(options ? options : {}),
     headers: {
       ...options?.headers,
-      Authorization: `Bearer ${userToken.accessToken}`,
+      Authorization: `Bearer ${userToken}`,
     },
   });
 
@@ -49,7 +49,7 @@ const authRequestAction = {
 export const authenticatedRequest = async options => {
   const userToken = getUserToken();
   return (
-    authRequestAction[isUserLoggedin(userToken)] || authRequestAction.default
+    authRequestAction[isUserLoggedin(userToken)]
   )(userToken, options);
 };
 
@@ -59,7 +59,7 @@ export const authenticatedRequest = async options => {
  */
 export const loginUser = async (credentials) => {
   const userToken = getUserToken();
-  if (userToken && isUserLoggedin(userToken) === true) {
+  if (userToken && isUserLoggedin(userToken) === 'OK') {
     return Promise.resolve(userToken);
   }
   try {
@@ -104,8 +104,8 @@ export const recoveryPassword = async (userEmail) => {
       headers: headersPost,
       body: JSON.stringify(userEmail)
     });
-    console.log("RESPONSE",response);
-    response.then(()=>{
+    console.log("RESPONSE", response);
+    response.then(() => {
       return Promise.resolve(true);
     });
   } catch (error) {

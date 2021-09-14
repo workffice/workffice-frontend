@@ -3,7 +3,7 @@ import { NewColaborator } from '../components/Colaborator/NewColaborator';
 import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 import { NewOffice } from '../components/Offices/NewOffice';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
-import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
+import { OfficeBranchCreateContainer } from '../containers/OfficeBranchCreateContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
 export const routes = [
@@ -24,7 +24,7 @@ export const routes = [
         path: '/create-officebranch',
         name: 'Nueva Sucursal',
         mini: 'NS',
-        component: CreateOfficeBranch,
+        component: OfficeBranchCreateContainer,
         layout: '/admin',
       },
     ]

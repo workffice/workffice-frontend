@@ -6,6 +6,8 @@ import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
+import { userMeReducer } from './reducers/auth/backoffice/userReducer';
+import { officeBranchReducer } from './reducers/auth/backoffice/officeBranchReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -22,6 +24,8 @@ const setErrorReducer = (state = null, { type, payload }) => {
     currentState = payload ? payload : null;
   } else if (type === HIDE_ERROR) {
     currentState = payload ? payload : null;
+  }else{
+    currentState = null;
   }
   return currentState;
 };
@@ -30,6 +34,8 @@ export const reducers = routes =>
   combineReducers({
     router: connectRouter(routes),
     login: loginReducer,
+    userMe: userMeReducer,
+    officeBranch: officeBranchReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,

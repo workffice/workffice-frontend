@@ -11,10 +11,10 @@ export const fetchCreateOfficebranch = officeBranchData => {
     }
 };
 
-export const createOfficeBranch = (officeBranchData) => async (dispatch) => {
+export const createOfficeBranch = (officeBranchData, userId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData)));
+        await dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
     } catch (error) {
         await dispatch(setError(error));
     } finally {

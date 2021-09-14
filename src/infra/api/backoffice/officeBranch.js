@@ -1,32 +1,18 @@
-import { sdkAuthRequest } from ".."
-import { API_AUTH_URL, API_OFFICE_HOLDERS } from "../../../environments/environment"
-import { getUserToken } from "../../../utils"
+import { headersPost, sdkAuthRequest } from ".."
+import { API_OFFICE_HOLDERS } from "../../../environments/environment"
 
 
-export const createOfficeBranchInfra = async (officeBranchData) => {
-    const token = getUserToken();
-
-    const userMe = await sdkAuthRequest(
-        `${API_AUTH_URL}/me`,
-        {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json; charset=utf8',
-                'Authorization': 'Bearer ' + token,
-            }
-        }
-    )
-    return await sdkAuthRequest(
-        `${API_OFFICE_HOLDERS}/${userMe.id}/office_branches/`,
+export const createOfficeBranchInfra = async (officeBranchData, userId) => {
+    console.log("userId",userId);
+    const officeBranch = await sdkAuthRequest(
+        `${API_OFFICE_HOLDERS}/${userId}/office_branches/`,
         {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json; charset=utf8',
-                'Authorization': 'Bearer ' + token,
-            },
+            headers: headersPost,
             body: JSON.stringify(officeBranchData)
         }
-    )
+    );
+
+    console.log(officeBranch);
+    return officeBranch;
 }

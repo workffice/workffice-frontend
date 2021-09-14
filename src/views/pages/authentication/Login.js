@@ -25,6 +25,7 @@ import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { HIDE_ERROR } from '../../../stores/actions';
 
 
+
 const Login = (props) => {
   const { loading, error } = props;
   const dispatch = useDispatch()
@@ -55,8 +56,12 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
-      props.onLogin(credentials);
-      error === null && history.push('/admin/office-branch');
+
+      await props.onLogin(credentials);
+      setTimeout(() => {
+        history.push('/admin/office-branch');
+      }, 1000);
+
     },
   });
 

@@ -4,7 +4,7 @@ import { Loading } from '../../../components/Loading/Loading';
 import { OfficeBranchCreate } from '../../../components/OfficeBranch/OfficeBranchCreate';
 
 export const CreateOfficeBranch = (props) => {
-    const { onCreate, error, loading } = props;
+    const { error, loading } = props;
 
     return (
         <div className="content">
@@ -19,7 +19,7 @@ export const CreateOfficeBranch = (props) => {
             <Row>
                 <Col xs="12" md="6" lg="12" xg="12">
                     {loading ? <Loading /> :
-                        <OfficeBranchCreate onCreate={onCreate} error={error} />
+                        <OfficeBranchCreate create={props.onCreate} error={error} />
                     }
                 </Col>
             </Row>

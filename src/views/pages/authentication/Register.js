@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { Loading } from '../../../components/Loading/Loading';
-import { HIDE_ERROR, SET_ERROR } from '../../../stores/actions';
+import { HIDE_ERROR } from '../../../stores/actions';
 
 function Register(props) {
   const { loading, error } = props;
@@ -43,9 +43,10 @@ function Register(props) {
     },
     validate,
     onSubmit: async (values) => {
-      console.log(error)
       await onRegister(values);
-      error.type !== SET_ERROR  && history.push('/auth/confirmation-account');
+      setTimeout(() => {
+        history.push('/auth/confirmation-account');
+      }, 1000);
     },
   });
 

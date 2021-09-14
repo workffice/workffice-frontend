@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
 import { Loading } from '../../../components/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { HIDE_ERROR, SET_ERROR } from '../../../stores/actions';
+import { HIDE_ERROR } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -33,7 +33,9 @@ export const ResetPasswordPage = props => {
         validate,
         onSubmit: async values => {
             await props.onResetPassword(token, values);
-            error.type !== SET_ERROR && history.push('/auth/confirmation-password');
+            setTimeout(() => {
+                history.push('/auth/confirmation-password');
+            }, 1100);
         }
     });
     React.useEffect(() => {
