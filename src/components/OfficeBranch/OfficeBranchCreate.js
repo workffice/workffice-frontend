@@ -20,7 +20,7 @@ import {
 
 
 export const OfficeBranchCreate = (props) => {
-    const { error, create } = props;
+    const { error} = props;
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -62,7 +62,7 @@ export const OfficeBranchCreate = (props) => {
         validate,
         onSubmit: async (values) => {
             console.log(values);
-            create(values);
+            await props.create(values);
             setTimeout(() => {
                 history.push('/admin/office-branch');
             }, 1000);
@@ -157,11 +157,11 @@ export const OfficeBranchCreate = (props) => {
                             </Col>
                             <Col lg="6">
                                 <FormGroup className={formik.errors.phone ? 'has-danger' : ''}>
-                                    <Label htmlFor="phone" className="label-form"> Código postal </Label>
+                                    <Label htmlFor="phone" className="label-form"> Teléfono de contacto </Label>
                                     <Input
                                         type="text"
                                         name="phone"
-                                        placeholder="Teléfono.."
+                                        placeholder="Ingrese el teléfono"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.phone} />

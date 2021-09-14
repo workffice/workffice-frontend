@@ -8,6 +8,7 @@ import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 import { userMeReducer } from './reducers/auth/backoffice/userReducer';
 import { officeBranchReducer } from './reducers/auth/backoffice/officeBranchReducer';
+import { createCollaboratorReducer } from './reducers/auth/collaboratorReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -40,6 +41,7 @@ export const reducers = routes =>
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
     register: registerReducer,
+    createColaborator: createCollaboratorReducer,
     isLoading: isLoadingReducer,
     error: setErrorReducer,
   });

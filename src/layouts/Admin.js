@@ -6,14 +6,22 @@ import Sidebar from '../components/Sidebar/Sidebar.js';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
+import { useDispatch } from 'react-redux';
+import { getUserMe } from '../stores/actions/backoffice/userActions.js';
 
 let ps;
 
 export const AdminLayout = props => {
+
   const location = useLocation();
   const [backgroundColor, setBackgroundColor] = React.useState("black");
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getUserMe());
+  },[]);
+
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on';

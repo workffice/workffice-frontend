@@ -1,9 +1,7 @@
-import { headersPost, sdkAuthRequest } from ".."
+import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from ".."
 import { API_OFFICE_HOLDERS } from "../../../environments/environment"
 
-
 export const createOfficeBranchInfra = async (officeBranchData, userId) => {
-    console.log("userId",userId);
     const officeBranch = await sdkAuthRequest(
         `${API_OFFICE_HOLDERS}/${userId}/office_branches/`,
         {
@@ -12,7 +10,16 @@ export const createOfficeBranchInfra = async (officeBranchData, userId) => {
             body: JSON.stringify(officeBranchData)
         }
     );
+    return officeBranch.data;
+}
 
-    console.log(officeBranch);
-    return officeBranch;
+export const getOfficeBranchesInfra = async (userId) => {
+    const officesBranches = await sdkNoAuthRequest(
+        `${API_OFFICE_HOLDERS}/${userId}/office_branches/`,
+        {
+            method: 'GET',
+            headers: headerGet
+        }
+    )
+    return officesBranches;
 }

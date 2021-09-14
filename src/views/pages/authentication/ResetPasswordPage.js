@@ -19,12 +19,14 @@ export const ResetPasswordPage = props => {
     const validate = values => {
         const errors = {};
         if (!values.password) {
-            errors.password = 'Requerido.';
-        } else if (values.password.length < 8) {
-            errors.password = 'La contraseña debe tener 8 caracteres o más.';
+          errors.password = '* Requerido.';
+        } else if (values.password.length < 8 && values.password.length > 10) {
+          errors.password = '* La contraseña debe tener 8 caracteres o más'
+        } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/i.test(values.password)) {
+          errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 16 caracteres ';
         }
         return errors;
-    };
+      };
 
     const formik = useFormik({
         initialValues: {
