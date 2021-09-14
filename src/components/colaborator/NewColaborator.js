@@ -22,7 +22,8 @@ export const NewColaborator = (props) => {
       email: '',
     },
     validate,
-    onSubmit: async (credentials) => {
+    onSubmit: async (credentials) => {      
+      console.log('credentials: ', credentials);
       await props.onCreateColaborator(credentials);
     }
   })
