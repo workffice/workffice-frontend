@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Card, CardBody, Input, InputGroup, InputGroupAddon, InputGroupText, Button } from 'reactstrap';
+import { Row, Col, Card, CardBody, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import ImageUpload from '../CustomUpload/ImageUpload';
+import image from '../../assets/img/bg/rawpixel-com.jpg';
 import './styles/OfficeStyle.css';
+import { ServEquipTarget } from '../ServicesEquip/ServEquipTarget';
 
 export const OfficeDetailComponent = () => (
     <div className="content">
@@ -21,9 +22,33 @@ export const OfficeDetailComponent = () => (
                     <form>
                         <div className="form-row">
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                <div className='office-name'>
-                                    <label for="nameOffice" class="form-label">Nombre</label>
-                                    <Input type="text" placeholder="Ingrese el nombre de la oficina" />
+                                <div className='form-row' style={{ width: '100%' }}>
+                                    <div className="imageContainer" style={{ width: '70%', marginRight: 'auto', marginLeft: 'auto' }}>
+                                        <img className="office-branch-card-image" src={image} />
+                                    </div>
+                                </div>
+
+                                <div className="office-branch-card-title" style={{ marginTop: 30 }}>
+                                    <h1 style={{ marginBottom: 0, color: '#EB5D60' }}>
+                                        Oficina Elena
+                                    </h1>
+                                    <i className="fa fa-heart" style={{ display: 'flex', alignItems: 'center', fontSize: 20 }} />
+                                </div>
+                                <hr style={{ borderWidth: 2, borderBlockColor: '#133148', marginTop: 3 }} />
+
+                                <div className='services'>
+                                    <row className='row-label-services'>
+                                        <label for="services" class="form-label">Servicios</label>
+                                    </row>
+                                    <row>
+                                        <ServEquipTarget name='Buffete'/>
+                                    </row>
+                                </div>
+
+                                <div className='equipment'>
+                                    <row className='row-label-equipment'>
+                                        <label for="equipment" class="form-label">Equipamiento</label>
+                                    </row>
                                 </div>
 
                                 <div className='sucursal'>
@@ -89,47 +114,6 @@ export const OfficeDetailComponent = () => (
                                         </InputGroupAddon>
                                         <Input type="number" placeholder="Ingrese el precio por hora" />
                                     </InputGroup>
-                                </div>
-
-                                <div className='services'>
-                                    <row className='row-label-services'>
-                                        <label for="services" class="form-label">Servicios</label>
-                                    </row>
-                                    <row className='row-form-select'>
-                                        <select class="form-select">
-                                            <option>Seleccione los servicios...</option>
-                                            <option value="serv-1">Cafetería</option>
-                                            <option value="serv-2">Wifi</option>
-                                        </select>
-                                        <div className='button-container'>
-                                            {/* <button type="submit" class="btn btn-primary" id='servicesButton'>Crear</button> */}
-                                            <Link to="/admin/services-equipment">
-                                                <Button className='btn btn-primary' id='servicesButton'>
-                                                    Crear
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </row>
-                                </div>
-
-                                <div className='equipment'>
-                                    <row className='row-label-equipment'>
-                                        <label for="equipment" class="form-label">Equipamiento</label>
-                                    </row>
-                                    <row className='row-form-select'>
-                                        <select class="form-select">
-                                            <option>Seleccione el equipamiento...</option>
-                                            <option value="equ-1">Cafetería</option>
-                                            <option value="equ-2">Wifi</option>
-                                        </select>
-                                        <div className='button-container'>
-                                            <Link to="/admin/services-equipment">
-                                                <Button className='btn btn-primary' id='equipmentButton'>
-                                                    Crear
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </row>
                                 </div>
 
                                 <div className='description'>
