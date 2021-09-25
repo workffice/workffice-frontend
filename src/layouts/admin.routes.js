@@ -1,5 +1,6 @@
 import { Colaborators } from '../components/Colaborator/Colaborators';
 import { NewOffice } from '../components/Offices/NewOffice';
+import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
@@ -55,6 +56,13 @@ export const routes = [
         name: 'Servicios y equipamiento',
         mini: 'SE',
         component: ServicesEquipment,
+        layout: '/admin',
+      },
+      {
+        path: '/office-detail',
+        // name: 'Detalle',
+        // mini: 'SE',
+        component: OfficeDetailComponent,
         layout: '/admin',
       },
     ]

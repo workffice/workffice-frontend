@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { OfficeComponent } from './OfficeComponent';
 
-export const OfficesListComponent = () => (  
+export const OfficesListComponent = () => (
   <div className="content">
     <Row style={{ display: 'grid', paddingTop: 40 }}>
       <Col xs="12" md="6" lg="12" xg="12">
@@ -29,15 +29,21 @@ export const OfficesListComponent = () => (
       </Col>
     </Row>
 
-    <Row style={{justifyContent:'center'}}>
+    <Row style={{ justifyContent: 'center' }}>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeComponent />
+        <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
+          <OfficeComponent />
+        </Link>
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeComponent />
+        <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
+          <OfficeComponent />
+        </Link>
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
-        <OfficeComponent />
+        <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
+          <OfficeComponent />
+        </Link>
       </Col>
     </Row>
   </div>
