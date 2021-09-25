@@ -47,7 +47,7 @@ export const OfficeDetailComponent = (props) => {
                                         <Row xs="12" md="12" lg="6" xg="6" style={{display: 'flex', justifyContent: 'center'}}>
                                             <ServEquipTarget name='Buffete'/>
                                             <ServEquipTarget name='Internet'/>
-                                            <ServEquipTarget name='Estacionamiento'/>
+                                            {/* <ServEquipTarget name='Estacionamiento'/> */}
                                         </Row>
                                     </div>
     
