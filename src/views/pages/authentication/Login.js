@@ -25,6 +25,7 @@ import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { HIDE_ERROR } from '../../../stores/actions';
 
 
+
 const Login = (props) => {
   const { loading, error } = props;
   const dispatch = useDispatch()
@@ -55,14 +56,14 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
+
       await props.onLogin(credentials);
-      history.push('/admin/office-branch');
+      setTimeout(() => {
+        history.push('/admin/office-branch');
+      }, 1000);
+
     },
   });
-
-  React.useEffect(() => {
-    dispatch({ type: HIDE_ERROR });
-  },[]);
 
   React.useEffect(() => {
     document.body.classList.toggle('login-page');
@@ -70,6 +71,12 @@ const Login = (props) => {
       document.body.classList.toggle('login-page');
     };
   });
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      dispatch({ type: HIDE_ERROR });
+    }, 3000);
+  }, []);
 
   return (
     <div className="login-page">
@@ -88,6 +95,8 @@ const Login = (props) => {
                         <Alert
                           isOpen={error !== null}
                           color="danger"
+                          fade={true}
+                        // transition={{ ...Fade.defaultProps, unmountOnExit: true }}
                         >
                           {customizedErrorAuth(error)}
                         </Alert>
@@ -164,7 +173,7 @@ const Login = (props) => {
             })`,
         }}
       />
-    </div>
+    </div >
   );
 }
 

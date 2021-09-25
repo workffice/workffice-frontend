@@ -12,7 +12,7 @@ const authRequestOkAction = (userToken, options) =>
     ...(options ? options : {}),
     headers: {
       ...options?.headers,
-      Authorization: `Bearer ${userToken.accessToken}`,
+      Authorization: `Bearer ${userToken}`,
     },
   });
 
@@ -49,7 +49,7 @@ const authRequestAction = {
 export const authenticatedRequest = async options => {
   const userToken = getUserToken();
   return (
-    authRequestAction[isUserLoggedin(userToken)] || authRequestAction.default
+    authRequestAction[isUserLoggedin(userToken)]
   )(userToken, options);
 };
 
@@ -59,7 +59,7 @@ export const authenticatedRequest = async options => {
  */
 export const loginUser = async (credentials) => {
   const userToken = getUserToken();
-  if (userToken && isUserLoggedin(userToken) === true) {
+  if (userToken && isUserLoggedin(userToken) === 'OK') {
     return Promise.resolve(userToken);
   }
   try {
@@ -98,20 +98,25 @@ export const registerUser = async (credentials) => {
 
 export const recoveryPassword = async (userEmail) => {
   try {
-    await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
+    console.log(userEmail);
+    const response = await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(userEmail)
     });
-    return Promise.resolve();
+    console.log("RESPONSE", response);
+    response.then(() => {
+      return Promise.resolve(true);
+    });
   } catch (error) {
-    throw error.errors[0].error;
+    console.log("EERRROOORR", error);
+    throw error?.errors[0].error;
   }
 }
 
 export const resetUserPass = async (token, password) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(password)
@@ -122,11 +127,23 @@ export const resetUserPass = async (token, password) => {
   }
 }
 
-export const confirmation = async (token) => {
+export const activateUser = async (token) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}/`, {
       method: 'POST',
       headers: headersPost
+    });
+    return Promise.resolve();
+  } catch (error) {
+    throw error.errors[0].error;
+  }
+}
+export const activatePass = async (token, newPassword) => {
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
+      method: 'POST',
+      headers: headersPost,
+      body: JSON.stringify(newPassword)
     });
     return Promise.resolve();
   } catch (error) {

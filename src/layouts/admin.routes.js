@@ -1,10 +1,11 @@
 import { Colaborators } from '../components/Colaborator/Colaborators';
-import { NewColaborator } from '../components/Colaborator/NewColaborator';
-import { OfficeBranch } from '../components/OfficeBranch/OfficeBranch';
 import { NewOffice } from '../components/Offices/NewOffice';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
-import { CreateOfficeBranch } from '../views/pages/backoffice/CreateOfficeBranch';
+import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
+import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
+
+import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
 export const routes = [
@@ -17,15 +18,15 @@ export const routes = [
       {
         path: '/office-branch',
         name: 'Sucursales',
-        mini: 'S',
-        component: OfficeBranch,
+        mini: 'S',        
+        component: OfficeBranchContainer,
         layout: '/admin',
       },
       {
-        path: '/new-office-branch',
+        path: '/create-officebranch',
         name: 'Nueva Sucursal',
         mini: 'NS',
-        component: CreateOfficeBranch,
+        component: OfficeBranchCreateContainer,
         layout: '/admin',
       },
     ]
@@ -83,7 +84,7 @@ export const routes = [
         path: '/new-colaborator',
         name: 'Nuevo colaborador',
         mini: 'NC',
-        component: NewColaborator,
+        component: ColaboratorContainer,
         layout: '/admin',
       }
     ]

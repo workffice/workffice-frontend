@@ -1,23 +1,32 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
 import { Loading } from '../../../components/Loading/Loading';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { HIDE_ERROR } from '../../../stores/actions';
+import { useDispatch } from 'react-redux';
 
 
 export const ResetPasswordPage = props => {
     const { loading, error } = props;
+    const dispatch = useDispatch()
+    let token = null;
     const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    token = query.get("token");
 
     const validate = values => {
         const errors = {};
         if (!values.password) {
-            errors.password = 'Requerido.';
-        } else if (values.password.length < 8) {
-            errors.password = 'La contraseña debe tener 8 caracteres o más.';
+          errors.password = '* Requerido.';
+        } else if (values.password.length < 8 && values.password.length > 10) {
+          errors.password = '* La contraseña debe tener 8 caracteres o más'
+        } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/i.test(values.password)) {
+          errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 16 caracteres ';
         }
         return errors;
-    };
+      };
 
     const formik = useFormik({
         initialValues: {
@@ -25,12 +34,17 @@ export const ResetPasswordPage = props => {
         },
         validate,
         onSubmit: async values => {
-            await props.onResetPassword(values);
+            await props.onResetPassword(token, values);
             setTimeout(() => {
                 history.push('/auth/confirmation-password');
-            }, 1200);
+            }, 1100);
         }
     });
+    React.useEffect(() => {
+        setTimeout(() => {
+            dispatch({ type: HIDE_ERROR });
+        }, 2500);
+    }, [error]);
     React.useEffect(() => {
         document.body.classList.toggle('login-page');
         return function cleanup() {
@@ -52,7 +66,7 @@ export const ResetPasswordPage = props => {
                                                     isOpen={error !== null}
                                                     color="danger"
                                                 >
-                                                    <span>Usuario o contraseña incorrectos.</span>
+                                                    {customizedErrorAuth(error)}
                                                 </Alert>
                                             }
                                             <h3>Por favor ingrese su contraseña</h3>

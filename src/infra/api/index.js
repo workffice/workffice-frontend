@@ -5,6 +5,11 @@ export const headersPost = {
   'Content-Type': 'application/json; charset=utf8',
 };
 
+export const headerGet = {
+  'Accept': 'application/json, text/plain, */*',
+  'Content-Type': 'application/json; charset=utf8',
+};
+
 /**
  * Generic request handler
  *

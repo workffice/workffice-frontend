@@ -7,8 +7,8 @@ export const ResetPasswordContainer = () => {
     const loading = useSelector(state => state.isLoading);
     const error = useSelector(state => state.error);
     const dispatch = useDispatch();
-    const onResetPassword = useCallback(password => {
-        dispatch(resetPassword(password));
+    const onResetPassword = useCallback((token, password) => {
+        dispatch(resetPassword(token, password));
     }, [])
     return <ResetPasswordPage onResetPassword={onResetPassword} loading={loading} error={error} />
 }

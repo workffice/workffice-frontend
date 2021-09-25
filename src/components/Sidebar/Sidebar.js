@@ -5,6 +5,7 @@ import { Nav, Collapse } from "reactstrap";
 import PerfectScrollbar from "perfect-scrollbar";
 
 import avatar from "../../assets/img/faces/erik-lucatero-2.jpg"
+// import avatar from "../../assets/img/faces/menem.png"
 import logo from "../../assets/img/Recurso 4.png";
 
 var ps;
@@ -139,7 +140,7 @@ function Sidebar(props) {
     >
       <div className="logo">
         <a
-          href="https://www.creative-tim.com"
+          href=""
           className="simple-text logo-mini"
         >
           <div className="logo-img">
@@ -147,7 +148,7 @@ function Sidebar(props) {
           </div>
         </a>
         <a
-          href="https://www.creative-tim.com"
+          href=""
           className="simple-text logo-normal"
         >
           Workffice
@@ -167,7 +168,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                Adalberto Román
+                Marcio Jimenez.  
                 <b className="caret" />
               </span>
             </a>
