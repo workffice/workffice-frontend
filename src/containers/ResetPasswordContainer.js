@@ -6,9 +6,10 @@ import { ResetPasswordPage } from '../views/pages/authentication/ResetPasswordPa
 export const ResetPasswordContainer = () => {
     const loading = useSelector(state => state.isLoading);
     const error = useSelector(state => state.error);
+    const resetPass = useSelector(state => state.resetPaswword);
     const dispatch = useDispatch();
     const onResetPassword = useCallback((token, password) => {
         dispatch(resetPassword(token, password));
-    }, [])
-    return <ResetPasswordPage onResetPassword={onResetPassword} loading={loading} error={error} />
+    }, [dispatch])
+    return <ResetPasswordPage onResetPassword={onResetPassword} resetPassword={resetPass} loading={loading} error={error} />
 }

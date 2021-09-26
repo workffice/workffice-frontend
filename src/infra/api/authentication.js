@@ -115,12 +115,12 @@ export const recoveryPassword = async (userEmail) => {
 
 export const resetUserPass = async (token, password) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
+    const result = await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/password_resets/${token}/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(password)
     });
-    return Promise.resolve();
+    return Promise.resolve(result);
   } catch (error) {
     return Promise.reject(new Error(error.errors[0].error));
   }

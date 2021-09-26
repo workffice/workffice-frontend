@@ -43,8 +43,8 @@ function Register(props) {
     validate,
     onSubmit: async (values) => {
       Promise.resolve(props.onRegister(values)).then(() => {
-        props.register && history.push('/auth/confirmation-account');
         formik.resetForm();
+        props.register!==null && history.push('/auth/confirmation-account');
       }
       );
     },

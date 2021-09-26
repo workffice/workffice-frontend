@@ -34,16 +34,17 @@ export const ResetPasswordPage = props => {
         },
         validate,
         onSubmit: async values => {
-            await props.onResetPassword(token, values);
-            setTimeout(() => {
-                history.push('/auth/confirmation-password');
-            }, 1100);
+            Promise.resolve(await props.onResetPassword(token, values)).then(() => {
+                props.resetPassword !== null && history.push('/auth/confirmation-password');
+            });
         }
     });
     React.useEffect(() => {
-        setTimeout(() => {
-            dispatch({ type: HIDE_ERROR });
-        }, 2500);
+        if (error.show) {
+            setTimeout(() => {
+                dispatch({ type: HIDE_ERROR });
+            }, 2500);
+        }
     }, [error]);
     React.useEffect(() => {
         document.body.classList.toggle('login-page');
@@ -52,7 +53,7 @@ export const ResetPasswordPage = props => {
         };
     });
 
-    
+
     return (
         <div className='login-page'>
             <Container>

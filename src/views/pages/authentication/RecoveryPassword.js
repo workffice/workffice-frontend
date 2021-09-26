@@ -17,9 +17,13 @@ import {
   Col,
 } from 'reactstrap';
 import { Loading } from '../../../components/Loading/Loading';
+import { HIDE_ERROR } from '../../../stores/actions';
+import { useDispatch } from 'react-redux';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
 
 export const RecoveryPassword = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch()
   const { loading, error } = props;
   const validate = values => {
     const errors = {};
@@ -38,10 +42,10 @@ export const RecoveryPassword = (props) => {
     },
     validate,
     onSubmit: async values => {
-      await props.onResetPassword(values);
-      setTimeout(() => {
+      Promise.resolve(await props.onResetPassword(values)).then(() => {
+        dispatch({ type: HIDE_ERROR });
         history.push('/auth/confirmation-recovery');
-      }, 1200);
+      });
     }
   })
 
@@ -72,7 +76,7 @@ export const RecoveryPassword = (props) => {
                         isOpen={error.show}
                         color="danger"
                       >
-                        <span>{error.message}</span>
+                        {customizedErrorAuth(error.message)}
                       </Alert>
                     }
                     <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>

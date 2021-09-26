@@ -14,11 +14,10 @@ export const fetchReset = password => {
 export const resetPassword = (token, password) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchReset(await resetUserPass(token, password)));
+        dispatch(fetchReset(await resetUserPass(token, password)));
     } catch (error) {
-        dispatch(setError(error ? error : 'Ha ocurrido un error, intente nuevamente'));
+        dispatch(setError(error));
     } finally {
-        await dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
     }
-
 }
