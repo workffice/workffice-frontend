@@ -29,7 +29,7 @@ export const ServEquipComponent = ({ title, typeName, elements }) => {
         <div className='content'>
             <Row>
                 <Form className='formContainer' onSubmit={formik.handleSubmit}>
-                    <Card className='cardContainer'>
+                    <Card className='cardContainer' style={{width: '80%', marginRight: '10%', marginLeft: '10%'}}>
                         <CardBody>
                             <div className='elementsTitleContainer'>
                                 <h2>{title}</h2>
@@ -46,6 +46,7 @@ export const ServEquipComponent = ({ title, typeName, elements }) => {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.elementSelected}
+                                            placeholder={`Seleccione el tipo de ${typeName}`}
                                         >
                                             <option className='value-select' defaultValue>{`Seleccione el tipo de ${typeName}`}</option>
                                             {itemSelector}
