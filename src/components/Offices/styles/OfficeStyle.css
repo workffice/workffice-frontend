@@ -75,3 +75,17 @@ button .link{
     color: white;
     text-decoration: 'none';
 }
+
+.infoDetail {
+    font-size: 17px;
+    color: #EB5D60;
+}
+
+.form-label-description {
+    color: #133148;
+    font-size: 18px;
+}
+
+.react-select {
+    width: '80%';
+}

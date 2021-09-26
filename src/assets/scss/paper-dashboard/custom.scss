@@ -61,9 +61,9 @@
   width: 50%;
 }
 
-#settings {
-  color: $primary-color !important;
-}
+// #settings {
+//   color: $primary-color !important;
+// }
 
 .custom__avatar {
   box-sizing: border-box;
@@ -206,4 +206,25 @@
   font-weight: bold !important;
 }
 
+//Services and equipment target
+.containTarget {
+  background-color: #34B18A;
+  width: 150px;
+  border-radius: 10px;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.containTarget label {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
 
