@@ -1,4 +1,5 @@
-import { FETCH_ME } from "../../../actions/backoffice/userActions";
+import { FETCH_ME } from "../../actions/backoffice/userActions";
+
 
 const initialState = null;
 

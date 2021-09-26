@@ -50,7 +50,7 @@ export const NewColaborator = (props) => {
           <Card style={{ width: '100%' }}>
             <CardHeader>
               {
-                formik.errors && <Alert isOpen={error !== null} color="danger">{error}</Alert>
+                formik.errors && <Alert isOpen={error.show} color="danger">{error}</Alert>
               }
             </CardHeader>
             <CardBody>

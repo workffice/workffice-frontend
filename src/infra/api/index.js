@@ -21,7 +21,6 @@ export const headerGet = {
 const sdkRequest = async (
   requestUrl,
   options
-  //errorHandler?: () => void, add error handler
 ) => {
   let response;
   try {
@@ -33,7 +32,7 @@ const sdkRequest = async (
     }
     return result;
   } catch {
-    throw new Error('Server Error');
+    return Promise.reject(new Error('API Error'));
   }
 };
 

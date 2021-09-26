@@ -11,10 +11,10 @@ export const fetchRegister = credentials => ({
 export const register = (credentials) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
-    await dispatch(fetchRegister(await registerAPI(credentials)));
+    dispatch(fetchRegister(await registerAPI(credentials)));
   } catch (error) {
-    await dispatch(setError(error ? error : 'No ha sido posible realizar el registro'));
+     dispatch(setError(error));
   } finally {
-    await dispatch(setIsLoading(false));
+    dispatch(setIsLoading(false));
   }
 };

@@ -4,8 +4,8 @@ import { OfficeDetailComponent } from '../components/Offices/OfficeDetailCompone
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
-
 import { ColaboratorContainer } from '../containers/ColaboratorContainer';
+import { EditOfficeBranch } from '../views/pages/backoffice/EditOfficeBranch';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
 export const routes = [
@@ -18,8 +18,15 @@ export const routes = [
       {
         path: '/office-branch',
         name: 'Sucursales',
-        mini: 'S',        
+        mini: 'S',
         component: OfficeBranchContainer,
+        layout: '/admin',
+      },
+      {
+        path: '/office-branch:id',
+        name: 'Editar Sucursal',
+        mini: 'S',
+        component: EditOfficeBranch,
         layout: '/admin',
       },
       {

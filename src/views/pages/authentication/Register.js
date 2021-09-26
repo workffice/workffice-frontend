@@ -3,34 +3,33 @@ import { useFormik } from 'formik';
 import { Container, Row, Col, Form, Card, CardHeader, CardBody, Alert, CardTitle, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, CardFooter, Button } from 'reactstrap';
 import { RegisterInfo } from '../../../components/Register/RegisterInfo';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { Loading } from '../../../components/Loading/Loading';
+import { useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../../../stores/actions';
 
 function Register(props) {
   const { loading, error } = props;
-  const { onRegister } = props;
   const history = useHistory();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const validate = values => {
     const errors = {};
     if (!values.password) {
-      errors.password = '* Requerido.';
-    } else if (values.password.length < 8 && values.password.length > 10) {
-      errors.password = '* La contraseña debe tener 8 caracteres o más'
-    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/i.test(values.password)) {
-      errors.password = '* La contraseña debe contener almenos un caracter, un número, una mayúscula y menos de 16 caracteres ';
-    }
-    if (!values.type) {
-      errors.type = '* Requerido.';
+      errors.password = 'Requerido.';
+    } else if (! /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
+      errors.password = 'La contraseña debe tener 8 caracteres o más, y \n almenos un caracter, un número y una mayuscula';
+    } else if (values.password.trim().length === 0) {
+      errors.password = 'La contraseña no puede tener solos espacios'
     }
     if (!values.email) {
-      errors.email = '* Requerido.';
+      errors.email = 'Requerido.';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
       errors.email = 'Dirección de email inválida.';
+    }
+    if (!values.type) {
+      errors.type = '* Requerido.';
     }
     return errors;
   };
@@ -43,18 +42,21 @@ function Register(props) {
     },
     validate,
     onSubmit: async (values) => {
-      await onRegister(values);
-      setTimeout(() => {
-        history.push('/auth/confirmation-account');
-      }, 1000);
+      Promise.resolve(props.onRegister(values)).then(() => {
+        formik.resetForm();
+        props.register!==null && history.push('/auth/confirmation-account');
+      }
+      );
     },
   });
 
-
   React.useEffect(() => {
-    setTimeout(() => {
-      dispatch({ type: HIDE_ERROR });
-    }, 2500);
+
+    if (error.show) {
+      setTimeout(() => {
+        dispatch({ type: HIDE_ERROR });
+      }, 2500);
+    }
   }, [error]);
 
   return (
@@ -79,11 +81,11 @@ function Register(props) {
                   <CardHeader>
                     {
                       <Alert
-                        isOpen={error !== null}
+                        isOpen={error.show}
                         color="danger"
                         fade={true}
                       >
-                        <span>{customizedErrorAuth(error)}</span>
+                        {customizedErrorAuth(error.message)}
                       </Alert>
                     }
                     <CardTitle tag="h4">Creemos tu cuenta</CardTitle>
@@ -91,7 +93,7 @@ function Register(props) {
                   <CardBody>
                     <FormGroup
                       className={
-                        formik.errors.email && formik.touched.email
+                        formik.errors.email
                           ? 'has-danger'
                           : 'has-success'
                       }>
@@ -103,7 +105,7 @@ function Register(props) {
                         </InputGroupAddon>
                         <Input
                           name="email"
-                          placeholder="Email.."
+                          placeholder="Correo.."
                           type="email"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
@@ -153,9 +155,9 @@ function Register(props) {
                         <option value="RENTER">Usuario Cliente</option>
                         <option value="OFFICE_HOLDER">Propietario de oficinas</option>
                       </Input>
-                      {formik.errors.type &&
+                      {(formik.errors.type &&
                         formik.touched.type &&
-                        formik.validateOnChange.type ? (
+                        formik.validateOnChange.type) ? (
                         <div className="error">{formik.errors.type}</div>
                       ) : null}
                     </FormGroup>
@@ -165,7 +167,7 @@ function Register(props) {
                       className="btn-round"
                       color="info"
                       type="submit"
-                      disabled={formik.isSubmitting}>
+                    >
                       Crear cuenta
                     </Button>
                   </CardFooter>

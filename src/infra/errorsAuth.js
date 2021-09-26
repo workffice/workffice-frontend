@@ -24,6 +24,6 @@ export const customizedErrorAuth = (type) => {
         case TOKEN_ALREADY_USED:
             return TOKEN_ALREADY_USED_RESPONSE
         default:
-            return null
+            return 'OBJETO'
     }
 }

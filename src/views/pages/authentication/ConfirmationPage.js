@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap'
 import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
 import { confirmation } from '../../../stores/actions/auth/confirmationAccountActions';
+import { HIDE_ERROR } from '../../../stores/actions';
 
 
 export const ConfirmationPage = (props) => {
@@ -15,11 +16,11 @@ export const ConfirmationPage = (props) => {
     token = query.get("token");
     React.useEffect(() => {
         dispatch(confirmation(token));
-        setTimeout(() => {
-            history.push('/auth/login');
-        }, 2000);
+        history.push('/auth/login');
     }, [token]);
-
+    React.useEffect(() => {
+        dispatch({ type: HIDE_ERROR });
+    }, [props.error])
 
     return (
         <div className="login-page">

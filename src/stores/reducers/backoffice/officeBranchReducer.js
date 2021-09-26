@@ -1,4 +1,4 @@
-import { FETCH_CREATE_OFFICEBRANCH, FETCH_OFFICEBRANCHES_LIST } from "../../../actions/backoffice/officebranchActions";
+import { FETCH_CREATE_OFFICEBRANCH, FETCH_OFFICEBRANCHES_LIST } from "../../actions/backoffice/officebranchActions";
 
 const initialState = null;
 

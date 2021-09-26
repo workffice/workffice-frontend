@@ -6,7 +6,7 @@ export const loginReducer = (state = initialState, { type, payload }) => {
   let currentState = state;
   switch (type) {
     case FETCH_LOGIN:
-      return currentState = payload;  
+      return currentState = payload;
     default:
       return currentState;
   }
