@@ -6,27 +6,30 @@ import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
-import { userMeReducer } from './reducers/auth/backoffice/userReducer';
-import { officeBranchReducer } from './reducers/auth/backoffice/officeBranchReducer';
 import { createCollaboratorReducer } from './reducers/auth/collaboratorReducer';
+import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
+import { userMeReducer } from './reducers/backoffice/userReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
-
   if (type === LOADING) {
     currentState = payload;
   }
   return currentState;
 };
 
-const setErrorReducer = (state = null, { type, payload }) => {
+const setErrorReducer = (state = { meesage: null, show: false }, { type, payload }) => {
   let currentState = state;
   if (type === SET_ERROR) {
-    currentState = payload ? payload : null;
+    currentState = {
+      message: payload.message ? payload.message : null,
+      show: true
+    };
   } else if (type === HIDE_ERROR) {
-    currentState = payload ? payload : null;
-  }else{
-    currentState = null;
+    currentState = currentState = {
+      message: payload ? payload : null,
+      show: false
+    };
   }
   return currentState;
 };

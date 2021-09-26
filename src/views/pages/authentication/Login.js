@@ -18,18 +18,17 @@ import {
 } from 'reactstrap';
 
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Loading } from '../../../components/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../../../stores/actions';
-
 
 
 const Login = (props) => {
   const { loading, error } = props;
-  const dispatch = useDispatch()
   const history = useHistory();
+  const dispatch = useDispatch()
   const validate = values => {
     const errors = {};
     if (!values.password) {
@@ -56,14 +55,18 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
-
-      await props.onLogin(credentials);
-      setTimeout(() => {
-        history.push('/admin/office-branch');
-      }, 1000);
-
-    },
+      await props.onLogin(credentials)
+      history.push('/admin/office-branch')
+    }
   });
+
+  React.useEffect(() => {
+    if (error.show) {
+      setTimeout(() => {
+        dispatch({ type: HIDE_ERROR })
+      }, 2500);
+    }
+  }, [error]);
 
   React.useEffect(() => {
     document.body.classList.toggle('login-page');
@@ -71,12 +74,6 @@ const Login = (props) => {
       document.body.classList.toggle('login-page');
     };
   });
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      dispatch({ type: HIDE_ERROR });
-    }, 3000);
-  }, []);
 
   return (
     <div className="login-page">
@@ -93,12 +90,12 @@ const Login = (props) => {
                     <CardHeader>
                       {
                         <Alert
-                          isOpen={error !== null}
+                          isOpen={error.show}
                           color="danger"
                           fade={true}
                         // transition={{ ...Fade.defaultProps, unmountOnExit: true }}
                         >
-                          {customizedErrorAuth(error)}
+                          {customizedErrorAuth(error.message)}
                         </Alert>
                       }
                       <h3 className="header text-center">Login</h3>
@@ -114,7 +111,7 @@ const Login = (props) => {
                           </InputGroupAddon>
                           <Input
                             name="email"
-                            placeholder="Email.."
+                            placeholder="Correo.."
                             type="email"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}

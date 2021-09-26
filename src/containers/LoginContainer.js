@@ -8,8 +8,8 @@ export const LoginContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
   const dispatch = useDispatch();
-  const onLogin = useCallback(credentials => {
-    dispatch(userLogin(credentials));
-  }, []);
+  const onLogin = useCallback(async credentials => {
+    await dispatch(userLogin(credentials));
+  }, [dispatch]);
   return <Login onLogin={onLogin} loading={loading} error={error} />;
 };

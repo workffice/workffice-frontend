@@ -69,10 +69,10 @@ export const RecoveryPassword = (props) => {
                   <CardBody>
                     {
                       <Alert
-                        isOpen={error !== null}
+                        isOpen={error.show}
                         color="danger"
                       >
-                        <span>{error}</span>
+                        <span>{error.message}</span>
                       </Alert>
                     }
                     <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>

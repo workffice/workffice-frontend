@@ -1,16 +1,13 @@
 import { registerUser, activateUser, activatePass } from '../infra/api/authentication';
 
 export const registerAPI = async credentials => {
-  const credential = await registerUser(credentials);
-  return credential;
+  return Promise.resolve(registerUser(credentials));
 };
 
 export const activateUserAPI = async (confirmationToken) => {
-  const userActivated = await activateUser(confirmationToken);
-  return userActivated;
+  return Promise.resolve(activateUser(confirmationToken));
 }
 
 export const activatePasswordAPI = async (confirmationToken, newPassword) => {
-  const userActivated = await activatePass(confirmationToken, newPassword);
-  return userActivated;
+  return Promise.resolve(activatePass(confirmationToken, newPassword));
 }

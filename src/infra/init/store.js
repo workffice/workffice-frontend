@@ -11,7 +11,7 @@ export const buildStore = (reducers, history, middlewares = []) =>
     composeWithDevTools(
       applyMiddleware(
         thunk,
-        createLogger({ collapsed: true }),
+        createLogger({ collapsed: true, trace: true }),
         routerMiddleware(history),
         ...middlewares
       )

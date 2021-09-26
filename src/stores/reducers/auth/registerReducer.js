@@ -4,8 +4,10 @@ const initialState = null;
 
 export const registerReducer = (state = initialState, { type, payload }) => {
   let currentState = state;
-  if (type === FETCH_REGISTER) {
-    currentState = payload;
+  switch (type) {
+    case FETCH_REGISTER:
+      return currentState = payload;
+    default:
+      return currentState;
   }
-  return currentState;
 };

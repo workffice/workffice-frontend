@@ -62,6 +62,7 @@ export const loginUser = async (credentials) => {
   if (userToken && isUserLoggedin(userToken) === 'OK') {
     return Promise.resolve(userToken);
   }
+
   try {
     const rawAccessToken = await sdkNoAuthRequest(
       `${API_AUTHENTICATIONS_URL}/`,
@@ -74,9 +75,10 @@ export const loginUser = async (credentials) => {
         body: JSON.stringify(credentials)
       }
     );
-    return Promise.resolve(await storeAccessToken(rawAccessToken));
+
+    return Promise.resolve(storeAccessToken(rawAccessToken));
   } catch (error) {
-    throw error.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 };
 /**
@@ -85,32 +87,29 @@ export const loginUser = async (credentials) => {
  */
 export const registerUser = async (credentials) => {
   try {
-    await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
+    const response = await sdkNoAuthRequest(`${API_AUTH_URL}/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(credentials)
     });
-    return Promise.resolve();
+    return Promise.resolve(response);
   } catch (error) {
-    throw error.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 };
 
 export const recoveryPassword = async (userEmail) => {
   try {
-    console.log(userEmail);
     const response = await sdkNoAuthRequest(`${API_AUTH_URL}/password_reset_requests/`, {
       method: 'POST',
       headers: headersPost,
       body: JSON.stringify(userEmail)
     });
-    console.log("RESPONSE", response);
     response.then(() => {
       return Promise.resolve(true);
     });
   } catch (error) {
-    console.log("EERRROOORR", error);
-    throw error?.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 }
 
@@ -123,7 +122,7 @@ export const resetUserPass = async (token, password) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw error.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 }
 
@@ -135,7 +134,7 @@ export const activateUser = async (token) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw error.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 }
 export const activatePass = async (token, newPassword) => {
@@ -147,6 +146,6 @@ export const activatePass = async (token, newPassword) => {
     });
     return Promise.resolve();
   } catch (error) {
-    throw error.errors[0].error;
+    return Promise.reject(new Error(error.errors[0].error));
   }
 }

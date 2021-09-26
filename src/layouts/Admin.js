@@ -21,11 +21,13 @@ export const AdminLayout = props => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getUserMe());
-  },[]);
-  const userMe = useSelector(state => state.userMe)
+  }, []);
+  const user = useSelector(state => state.userMe);
   React.useEffect(() => {
-    dispatch(officeBranchList(userMe.id));
-  },[]);
+    if (user !== null) {
+      dispatch(officeBranchList(user.id));
+    }
+  }, [user])
 
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {

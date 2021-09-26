@@ -19,8 +19,8 @@ import {
 // import ImageUpload from '../CustomUpload/ImageUpload';
 
 
-export const OfficeBranchCreate = (props) => {
-    const { error } = props;
+export const OfficeBranchEdit = (props) => {
+    const { error, officeBranch } = props;
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -49,20 +49,10 @@ export const OfficeBranchCreate = (props) => {
     };
 
     const formik = useFormik({
-        initialValues: {
-            name: "",
-            description: "",
-            phone: "",
-            imagesUrls: ["image2.com"],
-            province: "",
-            city: "",
-            street: "",
-            postalCode: ""
-        },
+        initialValues: { ...officeBranch },
         validate,
         onSubmit: async (values) => {
-            console.log(values);
-            await props.create(values);
+            await props.edit(values);
             setTimeout(() => {
                 history.push('/admin/office-branch');
             }, 1000);
@@ -203,8 +193,6 @@ export const OfficeBranchCreate = (props) => {
                                 </Button>
                             </Col>
                         </Row>
-
-
                     </CardBody >
                 </Card >
             </Form>

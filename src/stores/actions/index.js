@@ -12,9 +12,9 @@ export const setError = error => ({
   payload: error,
 });
 
-export const hideError = () => {
-  return {
+export const hideError = () => (
+  {
     type: HIDE_ERROR,
     payload: null
   }
-}
+);
