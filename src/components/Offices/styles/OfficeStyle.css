@@ -85,3 +85,7 @@ button .link{
     color: #133148;
     font-size: 18px;
 }
+
+.react-select {
+    width: '80%';
+}
