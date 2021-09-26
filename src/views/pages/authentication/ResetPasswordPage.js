@@ -36,6 +36,7 @@ export const ResetPasswordPage = props => {
         onSubmit: async values => {
             Promise.resolve(await props.onResetPassword(token, values)).then(() => {
                 props.resetPassword !== null && history.push('/auth/confirmation-password');
+                dispatch({type:HIDE_ERROR});
             });
         }
     });

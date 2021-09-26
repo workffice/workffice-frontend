@@ -47,7 +47,11 @@ export const RecoveryPassword = (props) => {
         history.push('/auth/confirmation-recovery');
       });
     }
-  })
+  });
+
+  React.useEffect(() => {
+    dispatch({ type: HIDE_ERROR });
+  }, [])
 
   React.useEffect(() => {
     document.body.classList.toggle('lock-page');
