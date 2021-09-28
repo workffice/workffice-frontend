@@ -4,7 +4,6 @@ import { OfficeBranchEdit } from '../../../components/OfficeBranch/OfficeBranchE
 
 export const EditOfficeBranch = (props) => {
     const { error, loading, officeBranch } = props;
-    
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -18,7 +17,7 @@ export const EditOfficeBranch = (props) => {
             <Row>
                 <Col xs="12" md="6" lg="12" xg="12">
 
-                    <OfficeBranchEdit edit={props.onEdit} officeBranch={officeBranch} error={error} loading={loading} />
+                    <OfficeBranchEdit edit={props.edit} officeBranch={officeBranch} error={error} loading={loading} />
 
                 </Col>
             </Row>

@@ -53,10 +53,10 @@ export const fetchEditOfficebranch = officeBranchData => {
     }
 };
 
-export const editOfficeBranch = (officeBranchData, userId) => async (dispatch) => {
+export const editOfficeBranch = (userId, officeBranchData) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        dispatch(fetchCreateOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
+        dispatch(fetchEditOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
     } catch (error) {
         dispatch(setError(error));
     } finally {
