@@ -10,6 +10,7 @@ import { createCollaboratorReducer } from './reducers/auth/collaboratorReducer';
 import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
+import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -40,6 +41,7 @@ export const reducers = routes =>
     router: connectRouter(routes),
     login: loginReducer,
     userMe: userMeReducer,
+    officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,

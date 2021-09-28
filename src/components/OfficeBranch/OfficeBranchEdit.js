@@ -20,7 +20,9 @@ import {
 
 
 export const OfficeBranchEdit = (props) => {
-    const { error, officeBranch } = props;
+    const { error } = props;
+    const { data } = props.officeBranch;
+    console.log(data);
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -49,7 +51,15 @@ export const OfficeBranchEdit = (props) => {
     };
 
     const formik = useFormik({
-        initialValues: { ...officeBranch },
+        initialValues: {
+            name: data.name,
+            description: data.description,
+            phone: data.phone,
+            province: data.location.province,
+            city: data.location.city,
+            street: data.location.street,
+            postalCode: data.location.postalCode
+        },
         validate,
         onSubmit: async (values) => {
             await props.edit(values);
@@ -66,8 +76,8 @@ export const OfficeBranchEdit = (props) => {
                     <CardHeader>
                         {
                             <Alert
-                                isOpen={error.show}
                                 color="danger"
+                                isOpen={error.show}
                                 fade={true}
                             >
                                 {'Ocurrió un error. Intente nuevamente'}
