@@ -7,8 +7,24 @@ import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBran
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
+import UserProfile from '../views/pages/backoffice/UserProfile';
 
 export const routes = [
+  {
+    collapse: true,
+    name: 'Perfil',
+    icon: 'fa fa-user',
+    state: 'profileCollapse',
+    views: [
+      {
+        path: '/user-profile',
+        name: 'Perfil Usuario',
+        mini: 'PU',
+        component: UserProfile,
+        layout: '/admin',
+      },
+    ]
+  },
   {
     collapse: true,
     name: 'Sucursales',

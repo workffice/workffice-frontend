@@ -76,7 +76,7 @@ export const OfficeBranchEdit = (props) => {
                 postalCode: values.zipCode
             }
 
-            Promise.resolve(props.edit(officeBranch.id, values)).then(() => {
+            Promise.resolve(props.edit(officeBranch.id, officeBranchPayload)).then(() => {
                 officeBranchEdit !== null && history.push('/admin/office-branch');
             }
             );
