@@ -11,7 +11,6 @@ export const OfficeBranchContainer = () => {
     const loadBranches = useCallback(async (userId) => {
         await dispatch(officeBranchList(userId));
       }, []);
-    const branches = useSelector(state => state.officeBranch);
-    console.log(branches);
+    const branches = useSelector(state => state.officeBranches);
     return <OfficeBranch loadBranches={loadBranches} branches={branches} userMe={userMe} loading={loading} error={error} />;
 };

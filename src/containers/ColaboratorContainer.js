@@ -7,7 +7,7 @@ import { createColaborator } from '../stores/actions/backoffice/createColaborato
 export const ColaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
-  const officeBranches = useSelector(state => state.officeBranch);
+  const officeBranches = useSelector(state => state.officeBranches);
   const dispatch = useDispatch();
   const onCreateColaborator = useCallback((colaboratorData, officeBranchId) => {
     dispatch(createColaborator(colaboratorData, officeBranchId));

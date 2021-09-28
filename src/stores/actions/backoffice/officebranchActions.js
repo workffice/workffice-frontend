@@ -1,9 +1,11 @@
 import { setError, setIsLoading } from "..";
-import { createOfficeBranchAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
+import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
 
 
 export const FETCH_CREATE_OFFICEBRANCH = 'FETCH_CREATE_OFFICEBRANCH';
+export const FETCH_EDIT_OFFICEBRANCH = 'FETCH_EDIT_OFFICEBRANCH';
 export const FETCH_OFFICEBRANCHES_LIST = 'FETCH_OFFICEBRANCHES_LIST';
+export const FETCH_OFFICEBRANCH_ID = 'FETCH_OFFICEBRANCH_ID';
 
 export const fetchCreateOfficebranch = officeBranchData => {
     return {
@@ -15,17 +17,17 @@ export const fetchCreateOfficebranch = officeBranchData => {
 export const createOfficeBranch = (officeBranchData, userId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
+        dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
     } catch (error) {
-        await dispatch(setError(error));
+        dispatch(setError(error));
     } finally {
-        await dispatch(officeBranchList(userId));
+        dispatch(officeBranchList(userId));
         dispatch(setIsLoading(false));
     }
 
 }
+
 export const fetchOfficeBranchesList = userId => {
-    console.log("hola", userId)
     return {
         type: FETCH_OFFICEBRANCHES_LIST,
         payload: userId
@@ -35,11 +37,49 @@ export const fetchOfficeBranchesList = userId => {
 export const officeBranchList = (userId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
+        dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
     } catch (error) {
-        await dispatch(setError(error));
+        dispatch(setError(error));
     } finally {
         dispatch(setIsLoading(false));
     }
 
 }
+
+export const fetchEditOfficebranch = officeBranchData => {
+    return {
+        type: FETCH_EDIT_OFFICEBRANCH,
+        payload: officeBranchData
+    }
+};
+
+export const editOfficeBranch = (officeBranchData, userId) => async (dispatch) => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(fetchCreateOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
+    } catch (error) {
+        dispatch(setError(error));
+    } finally {
+        dispatch(officeBranchList(userId));
+        dispatch(setIsLoading(false));
+    }
+}
+export const fetchOfficebranchId = officeBranch => {
+    return {
+        type: FETCH_OFFICEBRANCH_ID,
+        payload: officeBranch
+    }
+};
+
+export const getOfficeBranchId = (id) => async (dispatch) => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(id)));
+    } catch (error) {
+        dispatch(setError(error));
+    } finally {
+        dispatch(setIsLoading(false));
+    }
+}
+
+
