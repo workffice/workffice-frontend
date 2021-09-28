@@ -66,6 +66,16 @@ export const OfficeBranchEdit = (props) => {
         },
         validate,
         onSubmit: async (values) => {
+            const officeBranchPayload = {
+                name: values.name,
+                description: values.description,
+                phone: values.phone,
+                province: values.province,
+                city: values.city,
+                street: values.street,
+                postalCode: values.zipCode
+            }
+
             Promise.resolve(props.edit(officeBranch.id, values)).then(() => {
                 officeBranchEdit !== null && history.push('/admin/office-branch');
             }

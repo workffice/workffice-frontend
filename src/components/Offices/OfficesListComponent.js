@@ -32,17 +32,17 @@ export const OfficesListComponent = () => (
     <Row style={{ justifyContent: 'center' }}>
       <Col xs="10" md="4" lg="4" xg="4">
         <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
-          <OfficeComponent />
+          <OfficeComponent officeName="Oficina Elena" officeType="Privada" price={500} officeBranch="Whale" />
         </Link>
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
         <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
-          <OfficeComponent />
+          <OfficeComponent officeName="Oficina Elena" officeType="Privada" price={500} officeBranch="Whale"/>
         </Link>
       </Col>
       <Col xs="10" md="4" lg="4" xg="4">
         <Link to="/admin/office-detail" style={{ textDecoration: 'none' }}>
-          <OfficeComponent />
+          <OfficeComponent officeName="Oficina Elena" officeType="Privada" price={500} officeBranch="Whale"/>
         </Link>
       </Col>
     </Row>
