@@ -15,15 +15,19 @@ import {
     CardHeader,
     Alert,
 } from 'reactstrap';
+import { HIDE_ERROR } from '../../stores/actions';
+import { useDispatch, useSelector } from 'react-redux';
 // import { customizedErrorAuth } from '../../infra/errorsAuth';
 // import ImageUpload from '../CustomUpload/ImageUpload';
 
 
 export const OfficeBranchEdit = (props) => {
-    const { error } = props;
-    const { data } = props.officeBranch;
-    console.log(data);
+    const { error, officeBranch } = props;
+    const { location } = officeBranch;
+    const { province, city, street, zipCode } = location;
     const history = useHistory();
+    const dispatch = useDispatch();
+    const officeBranchEdit = useSelector(state => state.officeBranch);
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -52,23 +56,32 @@ export const OfficeBranchEdit = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: data.name,
-            description: data.description,
-            phone: data.phone,
-            province: data.location.province,
-            city: data.location.city,
-            street: data.location.street,
-            postalCode: data.location.postalCode
+            name: officeBranch.name,
+            description: officeBranch.description,
+            phone: officeBranch.phone,
+            province: province,
+            city: city,
+            street: street,
+            postalCode: zipCode
         },
         validate,
         onSubmit: async (values) => {
-            await props.edit(values);
-            setTimeout(() => {
-                history.push('/admin/office-branch');
-            }, 1000);
-
+            Promise.resolve(props.edit(officeBranch.id, values)).then(() => {
+                officeBranchEdit !== null && history.push('/admin/office-branch');
+            }
+            );
         },
     });
+
+    React.useEffect(() => {
+
+        if (error.show) {
+            setTimeout(() => {
+                dispatch({ type: HIDE_ERROR });
+            }, 2500);
+        }
+    }, [error]);
+
     return (
         <Container>
             <Form onSubmit={formik.handleSubmit}>
@@ -80,7 +93,7 @@ export const OfficeBranchEdit = (props) => {
                                 isOpen={error.show}
                                 fade={true}
                             >
-                                {'Ocurrió un error. Intente nuevamente'}
+                                {error.message}
                             </Alert>
                         }
                     </CardHeader>
@@ -199,7 +212,7 @@ export const OfficeBranchEdit = (props) => {
                                     color="primary"
                                     type="submit"
                                     disabled={formik.isSubmitting}>
-                                    Crear Sucursal
+                                    Guardar
                                 </Button>
                             </Col>
                         </Row>
