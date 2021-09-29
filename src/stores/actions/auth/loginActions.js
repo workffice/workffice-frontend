@@ -1,5 +1,6 @@
 import { setError, setIsLoading } from '..';
 import { loginAPI } from '../../../api/login';
+import { getUserMe } from '../backoffice/userActions';
 // import { getUserMe } from '../backoffice/userActions';
 
 export const FETCH_LOGIN = 'FETCH_LOGIN';
@@ -19,5 +20,6 @@ export const userLogin = (credentials) => async (dispatch) => {
     dispatch(setError(error));
   } finally {
     dispatch(setIsLoading(false));
+    dispatch(getUserMe());
   }
 };

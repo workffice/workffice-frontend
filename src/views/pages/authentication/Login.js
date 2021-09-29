@@ -55,8 +55,8 @@ const Login = (props) => {
     },
     validate,
     onSubmit: async (credentials) => {
-      await props.onLogin(credentials)
-      history.push('/admin/office-branch')
+      await props.onLogin(credentials);
+      history.push("/office-branch/select");
     }
   });
 

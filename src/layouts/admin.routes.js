@@ -4,7 +4,7 @@ import { OfficeDetailComponent } from '../components/Offices/OfficeDetailCompone
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
-import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
+// import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import UserProfile from '../views/pages/backoffice/UserProfile';
@@ -15,6 +15,7 @@ export const routes = [
     name: 'Perfil',
     icon: 'fa fa-user',
     state: 'profileCollapse',
+    visibility: true,
     views: [
       {
         path: '/user-profile',
@@ -22,6 +23,7 @@ export const routes = [
         mini: 'PU',
         component: UserProfile,
         layout: '/admin',
+        visibility: true
       },
     ]
   },
@@ -29,21 +31,16 @@ export const routes = [
     collapse: true,
     name: 'Sucursales',
     icon: 'fa fa-building',
-    state: 'officebranchsCollapse',
+    state: 'officebranchCollapse',
+    visibility: true,
     views: [
       {
         path: '/office-branch',
-        name: 'Sucursales',
+        name: 'Ver sucursales',
         mini: 'S',
         component: OfficeBranchContainer,
         layout: '/admin',
-      },
-      {
-        path: '/office-branch/:id',
-        name: 'Editar Sucursal',
-        mini: 'S',
-        component: OfficeBranchEditContainer,
-        layout: '/admin',
+        visibility: false
       },
       {
         path: '/create-officebranch',
@@ -51,6 +48,15 @@ export const routes = [
         mini: 'NS',
         component: OfficeBranchCreateContainer,
         layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/select',
+        name: 'Cambiar Sucursal',
+        mini: 'NS',
+        component: OfficeBranchCreateContainer,
+        layout: '/office-branch',
+        visibility: true
       },
     ]
   },
@@ -59,6 +65,7 @@ export const routes = [
     name: 'Oficinas',
     icon: 'fa fa-laptop',
     state: 'officesCollapse',
+    visibility: true,
     views: [
       {
         path: '/offices',
@@ -66,6 +73,7 @@ export const routes = [
         mini: 'O',
         component: OfficesListComponent,
         layout: '/admin',
+        visibility: true
       },
       {
         path: '/new-office',
@@ -73,6 +81,7 @@ export const routes = [
         mini: 'NO',
         component: NewOffice,
         layout: '/admin',
+        visibility: true
       },
       {
         path: '/services-equipment',
@@ -80,6 +89,7 @@ export const routes = [
         mini: 'SE',
         component: ServicesEquipment,
         layout: '/admin',
+        visibility: true
       },
       {
         path: '/office-detail',
@@ -87,6 +97,7 @@ export const routes = [
         // mini: 'SE',
         component: OfficeDetailComponent,
         layout: '/admin',
+        visibility: true
       },
     ]
   },
@@ -95,6 +106,7 @@ export const routes = [
     name: 'Colaboradores',
     icon: 'fa fa-users',
     state: 'collaboratorsCollapse',
+    visibility: true,
     views: [
       {
         path: '/colaborators',
@@ -102,6 +114,7 @@ export const routes = [
         mini: 'C',
         component: Colaborators,
         layout: '/admin',
+        visibility: true
       },
       {
         path: '/new-colaborator',
@@ -109,6 +122,7 @@ export const routes = [
         mini: 'NC',
         component: ColaboratorContainer,
         layout: '/admin',
+        visibility: true
       }
     ]
   }
