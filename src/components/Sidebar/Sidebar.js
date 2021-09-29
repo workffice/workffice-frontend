@@ -19,7 +19,7 @@ function Sidebar(props) {
   const getCollapseStates = (routes) => {
     let initialState = {};
     routes.map((prop) => {
-      if (prop.collapse) {
+      if (prop.collapse && prop.visibility) {
         initialState = {
           [prop.state]: getCollapseInitialState(prop.views),
           ...getCollapseStates(prop.views),
@@ -49,7 +49,7 @@ function Sidebar(props) {
       if (prop.redirect) {
         return null;
       }
-      if (prop.collapse) {
+      if (prop.collapse && prop.visibility) {
         var st = {};
         st[prop["state"]] = !collapseStates[prop.state];
         return (
@@ -91,7 +91,7 @@ function Sidebar(props) {
         );
       }
       return (
-        <li className={activeRoute(prop.layout + prop.path)} key={key}>
+        prop.visibility && <li className={activeRoute(prop.layout + prop.path)} key={key}>
           <NavLink to={prop.layout + prop.path} activeClassName="">
             {prop.icon !== undefined ? (
               <>
@@ -168,7 +168,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                Marcio Jimenez.  
+                Marcio Jimenez.
                 <b className="caret" />
               </span>
             </a>
@@ -180,7 +180,7 @@ function Sidebar(props) {
                     <span className="sidebar-normal">My Profile</span>
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="/admin/user-profile" activeClassName="">
                     <span className="sidebar-mini-icon">EP</span>
                     <span className="sidebar-normal">Edit Profile</span>
@@ -191,7 +191,7 @@ function Sidebar(props) {
                     <span className="sidebar-mini-icon">S</span>
                     <span className="sidebar-normal">Settings</span>
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </Collapse>
           </div>

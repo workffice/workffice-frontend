@@ -50,6 +50,7 @@ export const AdminLayout = props => {
   }, [location]);
   const getRoutes = routes =>
     routes.map((prop, key) => {
+      console.log(prop);
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
