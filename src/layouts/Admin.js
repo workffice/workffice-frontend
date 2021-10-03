@@ -28,6 +28,16 @@ export const AdminLayout = props => {
       dispatch(officeBranchList(user.id));
     }
   }, [user])
+  React.useEffect(() => {
+    if (user !== null) {
+      dispatch(officeBranchList(user.id));
+    }
+  }, [user])
+  React.useEffect(() => {
+    if (user !== null) {
+      dispatch(officeBranchList(user.id));
+    }
+  }, [user])
 
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {

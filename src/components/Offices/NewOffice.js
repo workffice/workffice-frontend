@@ -109,7 +109,7 @@ export const NewOffice = (props) => {
                                 <Alert
                                     isOpen={!!error}
                                     color="danger"
-                                    fade={true}
+                                    fade={false}
                                 >
                                     {'Ocurrió un error. Intente nuevamente'}
                                 </Alert>
