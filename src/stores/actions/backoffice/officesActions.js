@@ -1,5 +1,5 @@
 import { setError, setIsLoading } from "..";
-import { getOfficesAPI } from "../../../api/backoffice/offices";
+import { createOfficeAPI, getOfficesAPI } from "../../../api/backoffice/offices";
 
 
 export const FETCH_OFFICES = 'FETCH_OFFICES';
