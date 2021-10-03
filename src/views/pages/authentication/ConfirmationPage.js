@@ -15,12 +15,13 @@ export const ConfirmationPage = (props) => {
     const query = new URLSearchParams(useLocation().search);
     token = query.get("token");
     React.useEffect(() => {
+        dispatch({ type: HIDE_ERROR });
+    }, [props.error]);
+
+    React.useEffect(() => {
         dispatch(confirmation(token));
         history.push('/auth/login');
     }, [token]);
-    React.useEffect(() => {
-        dispatch({ type: HIDE_ERROR });
-    }, [props.error])
 
     return (
         <div className="login-page">

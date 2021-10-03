@@ -1,11 +1,10 @@
-import { OfficeBranchSelect } from "../views/pages/backoffice/OfficeBranchSelect";
-
+import { OfficeBranchSelectContainer } from "../containers/backoffice/OfficeBranchSelectContainer";
 
 export const routes = [
     {
         path: '/select',
         name: 'Select',
-        component: OfficeBranchSelect,
+        component: OfficeBranchSelectContainer,
         layout: '/office-branch',
     }
 ];

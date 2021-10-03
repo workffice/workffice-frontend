@@ -20,7 +20,7 @@ const isLoadingReducer = (state = false, { type, payload }) => {
   return currentState;
 };
 
-const setErrorReducer = (state = { meesage: null, show: false }, { type, payload }) => {
+const setErrorReducer = (state = { message: null, show: false }, { type, payload }) => {
   let currentState = state;
   if (type === SET_ERROR) {
     currentState = {

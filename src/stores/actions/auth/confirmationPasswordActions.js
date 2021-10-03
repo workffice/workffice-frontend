@@ -14,9 +14,9 @@ export const fetchConfirmationPassword = (confirmationToken) => {
 export const confirmationPassword = (confirmationToken, newPassword) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchConfirmationPassword(await activatePasswordAPI(confirmationToken, newPassword)));
+        dispatch(fetchConfirmationPassword(await activatePasswordAPI(confirmationToken, newPassword)));
     } catch (error) {
-        await dispatch(setError(error));
+        dispatch(setError(error));
     } finally {
         dispatch(setIsLoading(false));
     }

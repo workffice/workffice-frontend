@@ -14,9 +14,9 @@ export const fetchConfirmationAccount = (confirmationToken) => {
 export const confirmation = (confirmationToken) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchConfirmationAccount(await activateUserAPI(confirmationToken)));
+        dispatch(fetchConfirmationAccount(await activateUserAPI(confirmationToken)));
     } catch (error) {
-        await dispatch(setError(error));
+        dispatch(setError(error));
     } finally {
         dispatch(setIsLoading(false));
     }

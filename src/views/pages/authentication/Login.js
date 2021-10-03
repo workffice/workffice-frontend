@@ -56,7 +56,7 @@ const Login = (props) => {
     validate,
     onSubmit: async (credentials) => {
       await props.onLogin(credentials);
-      history.push("/office-branch/select");
+      error.message === null && history.push("/office-branch/select");
     }
   });
 
@@ -90,9 +90,9 @@ const Login = (props) => {
                     <CardHeader>
                       {
                         <Alert
-                          isOpen={error.show}
+                          isOpen={error.show && error.message!==null}
                           color="danger"
-                          fade={true}
+                          fade={false}
                         // transition={{ ...Fade.defaultProps, unmountOnExit: true }}
                         >
                           {customizedErrorAuth(error.message)}
