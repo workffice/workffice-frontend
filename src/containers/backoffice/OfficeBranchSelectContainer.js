@@ -9,7 +9,7 @@ export const OfficeBranchSelectContainer = () => {
     const dispatch = useDispatch();
     const selectOfficeBranch = useCallback(async (officeBranchId) => {
         await dispatch(getOfficeBranchId(officeBranchId));
-    }, []);
+    }, [dispatch]);
     const branches = useSelector(state => state.officeBranches);
     return <OfficeBranchSelect selectOfficeBranch={selectOfficeBranch} branches={branches} loading={loading} error={error} />;
 };
