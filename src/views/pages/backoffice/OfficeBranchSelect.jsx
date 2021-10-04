@@ -1,13 +1,11 @@
 
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
 import { EmptyOfficeBranch } from '../../../components/OfficeBranch/EmptyOfficeBranch'
 import { OfficeBranchCardSelect } from '../../../components/OfficeBranch/OfficeBranchCardSelect'
 
 export const OfficeBranchSelect = (props) => {
-    const officeBranches = useSelector(state => state.officeBranches)
     return (
         <div className="login-page">
             <Container style={{
@@ -31,8 +29,8 @@ export const OfficeBranchSelect = (props) => {
                     </Col>
                     <Col className="ml-auto mr-auto" xg="12" lg="12" md="12" style={{ display: "flex", flexWrap: "wrap" }}>
                         {
-                            officeBranches
-                                ? officeBranches.data.map(branch => <><Col xs="10" md="4" lg="4" xg="4"> <OfficeBranchCardSelect key={branch.id} branch={branch} select={props.selectOfficeBranch} /> </Col></>)
+                            props.branches
+                                ? props.branches.data.map(branch => <><Col xs="10" md="4" lg="4" xg="4"> <OfficeBranchCardSelect key={branch.id} branch={branch} select={props.selectOfficeBranch} /> </Col></>)
                                 : <EmptyOfficeBranch />
                         }
                     </Col>

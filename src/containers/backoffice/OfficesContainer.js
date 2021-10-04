@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { OfficesListComponent } from '../../components/Offices/OfficesListComponent';
-import { fetchOfficesList } from '../../stores/actions/backoffice/officesActions';
+
 
 
 export const OfficesContainer = () => {
@@ -9,9 +9,6 @@ export const OfficesContainer = () => {
     const error = useSelector(state => state.error);
     const userMe = useSelector(state => state.userMe)
     const branch = useSelector(state => state.officeBranch);
-    const dispatch = useDispatch();
-    const offices = React.useEffect(()=>{
-        dispatch(fetchOfficesList())
-    },[])
+    const offices = useSelector(state => state.offices)
     return <OfficesListComponent offices={offices} branch={branch} userMe={userMe} loading={loading} error={error} />;
 };
