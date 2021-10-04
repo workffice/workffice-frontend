@@ -6,8 +6,6 @@ import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
   const { offices, branch } = props;
-  console.log(offices);
-  console.log(branch);
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
