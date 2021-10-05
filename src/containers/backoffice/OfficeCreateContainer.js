@@ -10,9 +10,10 @@ export const OfficeCreateContainer = () => {
     const error = useSelector(state => state.error);
     const loading = useSelector(state => state.loading);
     const officeBranch = useSelector(state => state.officeBranch);
+    const branch = useSelector(state => state.officeBranch)
     const onCreate = useCallback((office) => {
         dispatch(createOffice(officeBranch.id, office))
     }, []);
 
-    return <NewOffice crete={onCreate} error={error} loading={loading} />
+    return <NewOffice crete={onCreate} branch={branch} error={error} loading={loading} />
 }

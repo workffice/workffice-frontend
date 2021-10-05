@@ -35,7 +35,7 @@ export const OfficesListComponent = (props) => {
       <Row style={{ justifyContent: 'center' }}>
         {offices ? props.offices.data.map((office) => {
           return <Col xs="10" md="4" lg="4" xg="4">
-            <OfficeComponent office={office} officeBranch={props.branch.data} />
+            <OfficeComponent office={office} officeBranch={branch.data} />
           </Col>
         }) : <EmptyComponent />
 

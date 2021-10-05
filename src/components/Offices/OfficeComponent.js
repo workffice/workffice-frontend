@@ -28,7 +28,7 @@ export const OfficeComponent = (props) => {
 
           <div className='text'>
             <label className="form-label">
-              Precio p/hora: <small>{`Desde $${price}`}</small>
+              Precio p/hora:  <small>{`$ ${price}`}</small>
             </label>
           </div>
 
