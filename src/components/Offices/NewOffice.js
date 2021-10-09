@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
     Row,
@@ -19,10 +20,13 @@ import {
     Alert,
     Container
 } from 'reactstrap';
+import { HIDE_ERROR } from '../../stores/actions';
 import ImageUpload from '../CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
 export const NewOffice = (props) => {
+    const history = useHistory();
+    const dispatch = useDispatch()
     const { error } = props;
     const validate = values => {
         const errors = {};
@@ -59,28 +63,27 @@ export const NewOffice = (props) => {
         // if (!values.photo) {
         //     errors.photo = 'Requerido.';
         // }
-        console.log("errors", errors)
         return errors;
     };
 
     const [multipleSelectServ, setMultipleSelectServ] = useState(null);
     const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
-    
-    const [officePrivacy, setPrivacy] = useState(null);
-    
-    const [enabledOffice, setEnabledOffice] = useState(true)
+
+    const [officePrivacy, setPrivacy] = useState({ value: "SHARED", label: "Compartida" });
+
+    const [enabledOffice, setEnabledOffice] = useState({ value: "1", label: "Disponible" })
     const [enabledDays, setEnabledDays] = useState(null)
-    
+
 
     const formik = useFormik({
         initialValues: {
             name: "",
             sucursal: props.branch.data.id,
-            officePrivacy: null,
+            officePrivacy: officePrivacy && officePrivacy.value,
             capacity: 0,
-            enabledOffice: null,
+            enabledOffice: enabledOffice && enabledOffice.value,
             enabledDays: null,
-            tables: 0,
+            tablesQuantity: 0,
             price: 0,
             multipleSelectServ: null,
             multipleSelectEqu: null,
@@ -89,12 +92,27 @@ export const NewOffice = (props) => {
         },
         validate,
         onSubmit: async (values) => {
-            const office = {privacy: officePrivacy.value, ...values }
-
-            console.log('office: ', office);
-
+            console.log(values)
+            const office = { privacy: officePrivacy.value, ...values }
+            props.create(office);
         },
     });
+
+
+    React.useEffect(() => {
+        if (props.office !== null) {
+            history.push('/admin/offices');
+        }
+    }, [props.office]);
+
+    React.useEffect(() => {
+        if (error.show) {
+            setTimeout(() => {
+                dispatch({ type: HIDE_ERROR });
+            }, 2500);
+        }
+    }, [error]);
+
 
     return (
         <div className="content">
@@ -145,18 +163,13 @@ export const NewOffice = (props) => {
                                             name="officePrivacy"
                                             value={officePrivacy}
                                             onChange={value =>
-                                                setPrivacy(value )}
+                                                setPrivacy(value)}
                                             onBlur={formik.handleBlur}
                                             options={[
-                                                {
-                                                    value: "",
-                                                    label: "Tipo de oficina",
-                                                    isDisabled: true
-                                                },
                                                 { value: "PRIVATE", label: "Privada" },
                                                 { value: "SHARED", label: "Compartida" }
                                             ]}
-                                            
+
                                         />
                                     </FormGroup>
 
@@ -183,13 +196,8 @@ export const NewOffice = (props) => {
                                             onBlur={formik.handleBlur}
                                             onChange={value => setEnabledOffice(value)}
                                             options={[
-                                                {
-                                                    value: "",
-                                                    label: "Seleccione disponibilidad",
-                                                    isDisabled: true
-                                                },
-                                                { value: "2", label: "Disponible" },
-                                                { value: "3", label: "No disponible" }
+                                                { value: "1", label: "Disponible" },
+                                                { value: "0", label: "No disponible" }
                                             ]}
                                             placeholder="Seleccione disponibilidad"
                                         />
@@ -227,16 +235,28 @@ export const NewOffice = (props) => {
                                         )
                                     }
 
-                                    <FormGroup className={formik.errors.tables ? 'has-danger' : ''}>
-                                        <Label htmlFor="tables" className="label-form">Cantidad de mesas</Label>
+                                    <FormGroup className={formik.errors.tablesQuantity ? 'has-danger' : ''}>
+                                        <Label htmlFor="tablesQuantity" className="label-form">Cantidad de mesas</Label>
                                         <Input
                                             type="number"
                                             placeholder="Ingrese el número de mesas..."
-                                            name="tables"
+                                            name="tablesQuantity"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             min={1}
-                                            value={formik.values.tables}
+                                            value={formik.values.tablesQuantity}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup className={formik.errors.capacityPerTable ? 'has-danger' : ''}>
+                                        <Label htmlFor="tablesQuantity" className="label-form">Cantidad de personas por mesa</Label>
+                                        <Input
+                                            type="number"
+                                            placeholder="Ingrese el número de personas por mesas"
+                                            name="capacityPerTable"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            min={1}
+                                            value={formik.values.capacityPerTable}
                                         />
                                     </FormGroup>
                                 </Col>
