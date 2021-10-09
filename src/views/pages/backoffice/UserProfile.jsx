@@ -55,13 +55,13 @@ export const UserProfile = () => {
                                 <Row>
                                     <Col className="ml-auto" lg="4" md="6" xs="6">
                                         <h5>
-                                            3 <br />
+                                            4 <br />
                                             <small>Sucursales</small>
                                         </h5>
                                     </Col>
                                     <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
                                         <h5>
-                                            4 <br />
+                                            3 <br />
                                             <small>Oficinas</small>
                                         </h5>
                                     </Col>
@@ -97,7 +97,7 @@ export const UserProfile = () => {
                                         <Col md="7" xs="7">
                                             Colaborador 1 <br />
                                             <span className="text-muted">
-                                                <small>Desconcetado</small>
+                                                <small>Desconectado</small>
                                             </span>
                                         </Col>
                                         <Col className="text-right" md="3" xs="3">

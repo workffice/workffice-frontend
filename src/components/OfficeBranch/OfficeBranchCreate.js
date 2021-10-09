@@ -78,7 +78,7 @@ export const OfficeBranchCreate = (props) => {
                             <Alert
                                 isOpen={error.show}
                                 color="danger"
-                                fade={true}
+                                fade={false}
                             >
                                 {'Ocurrió un error. Intente nuevamente'}
                             </Alert>

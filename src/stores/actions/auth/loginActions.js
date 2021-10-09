@@ -1,6 +1,5 @@
 import { setError, setIsLoading } from '..';
 import { loginAPI } from '../../../api/login';
-// import { getUserMe } from '../backoffice/userActions';
 
 export const FETCH_LOGIN = 'FETCH_LOGIN';
 

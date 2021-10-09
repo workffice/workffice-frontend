@@ -101,7 +101,7 @@ export const OfficeBranchEdit = (props) => {
                             <Alert
                                 color="danger"
                                 isOpen={error.show}
-                                fade={true}
+                                fade={false}
                             >
                                 {error.message}
                             </Alert>

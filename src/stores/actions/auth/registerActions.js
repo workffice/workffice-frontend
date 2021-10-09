@@ -13,7 +13,7 @@ export const register = (credentials) => async (dispatch) => {
   try {
     dispatch(fetchRegister(await registerAPI(credentials)));
   } catch (error) {
-     dispatch(setError(error));
+    dispatch(setError(error));
   } finally {
     dispatch(setIsLoading(false));
   }

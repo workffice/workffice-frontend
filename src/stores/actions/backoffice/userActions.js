@@ -14,9 +14,9 @@ export const fetchMe = (userMe) => {
 export const getUserMe = () => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchMe(await userMeAPI()));
+        dispatch(fetchMe(await userMeAPI()));
     } catch (error) {
-        await dispatch(setError(error));
+        dispatch(setError(error));
     }
 
 }

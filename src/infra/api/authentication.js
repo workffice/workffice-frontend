@@ -132,8 +132,9 @@ export const activateUser = async (token) => {
       method: 'POST',
       headers: headersPost
     });
-    return Promise.resolve();
+    return Promise.resolve(true);
   } catch (error) {
+    console.log("ERROR", error)
     return Promise.reject(new Error(error.errors[0].error));
   }
 }
@@ -144,7 +145,7 @@ export const activatePass = async (token, newPassword) => {
       headers: headersPost,
       body: JSON.stringify(newPassword)
     });
-    return Promise.resolve();
+    return Promise.resolve(true);
   } catch (error) {
     return Promise.reject(new Error(error.errors[0].error));
   }

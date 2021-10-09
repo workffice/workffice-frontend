@@ -21,7 +21,6 @@ export const createOfficeBranch = (officeBranchData, userId) => async (dispatch)
     } catch (error) {
         dispatch(setError(error));
     } finally {
-        dispatch(officeBranchList(userId));
         dispatch(setIsLoading(false));
     }
 
@@ -59,8 +58,7 @@ export const editOfficeBranch = (userId, officeBranchData) => async (dispatch) =
         dispatch(fetchEditOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
     } catch (error) {
         dispatch(setError(error));
-    } finally {
-        dispatch(officeBranchList(userId));
+    } finally {    
         dispatch(setIsLoading(false));
     }
 }

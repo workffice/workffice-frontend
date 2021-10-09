@@ -10,6 +10,7 @@ import { HIDE_ERROR } from '../../../stores/actions';
 
 function Register(props) {
   const { loading, error } = props;
+
   const history = useHistory();
   const dispatch = useDispatch();
   const validate = values => {
@@ -41,17 +42,18 @@ function Register(props) {
       type: '',
     },
     validate,
-    onSubmit: async (values) => {
-      Promise.resolve(props.onRegister(values)).then(() => {
-        formik.resetForm();
-        props.register!==null && history.push('/auth/confirmation-account');
-      }
-      );
+    onSubmit: (values) => {
+      props.onRegister(values)
     },
   });
 
   React.useEffect(() => {
+    if (props.register !== null) {
+      history.push('/auth/confirmation-account')
+    }
+  }, [props.register]);
 
+  React.useEffect(() => {
     if (error.show) {
       setTimeout(() => {
         dispatch({ type: HIDE_ERROR });
@@ -83,7 +85,7 @@ function Register(props) {
                       <Alert
                         isOpen={error.show}
                         color="danger"
-                        fade={true}
+                        fade={false}
                       >
                         {customizedErrorAuth(error.message)}
                       </Alert>

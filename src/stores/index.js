@@ -11,6 +11,8 @@ import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
+import { officeReducer } from './reducers/backoffice/officeReducer';
+import { officesReducer } from './reducers/backoffice/officesReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -20,7 +22,7 @@ const isLoadingReducer = (state = false, { type, payload }) => {
   return currentState;
 };
 
-const setErrorReducer = (state = { meesage: null, show: false }, { type, payload }) => {
+const setErrorReducer = (state = { message: null, show: false }, { type, payload }) => {
   let currentState = state;
   if (type === SET_ERROR) {
     currentState = {
@@ -43,6 +45,8 @@ export const reducers = routes =>
     userMe: userMeReducer,
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
+    office: officeReducer,
+    offices: officesReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
