@@ -2,6 +2,7 @@ import { Colaborators } from '../components/Colaborator/Colaborators';
 import { NewOffice } from '../components/Offices/NewOffice';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
+import { NewRol } from '../components/Rol/NewRol';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
@@ -110,6 +111,21 @@ export const routes = [
         component: ColaboratorContainer,
         layout: '/admin',
       }
+    ]
+  },
+  {
+    collapse: true,
+    name: 'Configuraciones',
+    icon: 'fa fa-cog',
+    state: 'configurationCollapse',
+    views: [
+      {
+        path: '/new-rol',
+        name: 'Nuevo Rol',
+        mini: 'NR',
+        component: NewRol,
+        layout: '/admin',
+      },
     ]
   }
 ];
