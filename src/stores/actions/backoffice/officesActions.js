@@ -37,6 +37,7 @@ export const createOffice = (officeBranchId, office) => async (dispatch) => {
     } catch (error) {
         dispatch(setError(error));
     } finally {
+        dispatch(fetchOfficesList(officeBranchId))
         dispatch(setIsLoading(false));
     }
 }
