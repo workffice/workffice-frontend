@@ -19,9 +19,16 @@ import {
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
 import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
 
-export const UserProfile = () => {
+export const UserProfile = props => {
+    const {
+        address,
+        bio,
+        email,
+        lastname,
+        name,
+    } = props.userMe || {}
+    console.log(address, bio, email, lastname, name)
     return (
-
         <div className="content">
             <Row style={{ paddingTop: 30 }}>
                 <Col md="4">
@@ -40,14 +47,10 @@ export const UserProfile = () => {
                                         className="avatar border-gray"
                                         src={avatar}
                                     />
-                                    <h5 className="title">Marcio Jimenez</h5>
+                                    <h5 className="title">{name || "N/A"}</h5>
                                 </a>
-                                <p className="description">@marcioJimenezOficinas</p>
                             </div>
-                            <p className="description text-center">
-                                "Trabajamos para brindarte un ambiente <br />
-                                confortable y calido <br />para que realices tu trabajo"
-                            </p>
+                            <p className="description text-center">{bio}</p>
                         </CardBody>
                         <CardFooter>
                             <hr />
@@ -126,7 +129,7 @@ export const UserProfile = () => {
                                             </div>
                                         </Col>
                                         <Col md="7" xs="7">
-                                        Colaborador 2 <br />
+                                            Colaborador 2 <br />
                                             <span className="text-success">
                                                 <small>Disponible</small>
                                             </span>
@@ -157,7 +160,7 @@ export const UserProfile = () => {
                                             </div>
                                         </Col>
                                         <Col className="col-ms-7" xs="7">
-                                         Colaborador 3<br />
+                                            Colaborador 3<br />
                                             <span className="text-danger">
                                                 <small>Suspendido</small>
                                             </span>
@@ -188,31 +191,10 @@ export const UserProfile = () => {
                                 <Row>
                                     <Col className="pr-1" md="4">
                                         <FormGroup>
-                                            <label>Company (disabled)</label>
-                                            <Input
-                                                defaultValue="Marcio Jimenez Oficinas."
-                                                disabled
-                                                placeholder="Marcio Jimenez Oficinas"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="px-1" md="4">
-                                        <FormGroup>
-                                            <label>Usuario</label>
-                                            <Input
-                                                defaultValue="marciojimenez"
-                                                placeholder="marciojimenez"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="pl-1" md="4">
-                                        <FormGroup>
                                             <label htmlFor="exampleInputEmail1">
                                                 Email
                                             </label>
-                                            <Input placeholder="wokfficeholder@getnada.com" type="email" />
+                                            <Input type="email" disabled defaultValue={email}/>
                                         </FormGroup>
                                     </Col>
                                 </Row>
@@ -221,7 +203,7 @@ export const UserProfile = () => {
                                         <FormGroup>
                                             <label>Nombre</label>
                                             <Input
-                                                defaultValue="Marcio"
+                                                defaultValue={name}
                                                 placeholder="Marcio"
                                                 type="text"
                                             />
@@ -231,7 +213,7 @@ export const UserProfile = () => {
                                         <FormGroup>
                                             <label>Apellido</label>
                                             <Input
-                                                defaultValue="Jimenez"
+                                                defaultValue={lastname}
                                                 placeholder="Jimenez"
                                                 type="text"
                                             />
@@ -243,38 +225,10 @@ export const UserProfile = () => {
                                         <FormGroup>
                                             <label>Domicilio</label>
                                             <Input
-                                                defaultValue="Mendoza, Ciudad, Suipacha 1265"
+                                                defaultValue={address}
                                                 placeholder="Mendoza, Ciudad, Suipacha 1265"
                                                 type="text"
                                             />
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className="pr-1" md="4">
-                                        <FormGroup>
-                                            <label>Ciudad</label>
-                                            <Input
-                                                defaultValue="Mendoza, Ciudad"
-                                                placeholder="Mendoza, Ciudad"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="px-1" md="4">
-                                        <FormGroup>
-                                            <label>País</label>
-                                            <Input
-                                                defaultValue="Argentina"
-                                                placeholder="Argentina"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="pl-1" md="4">
-                                        <FormGroup>
-                                            <label>Código postal</label>
-                                            <Input placeholder="5500" type="number" />
                                         </FormGroup>
                                     </Col>
                                 </Row>
