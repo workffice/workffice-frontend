@@ -1,6 +1,8 @@
 import { Colaborators } from '../components/Colaborator/Colaborators';
+import { NewMembership } from '../components/Membership/NewMembership';
 
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { MembershipContainer } from '../containers/backoffice/MembershipContainer';
 // import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
@@ -127,5 +129,30 @@ export const routes = [
         visibility: true
       }
     ]
-  }
+  },
+  {
+    collapse: true,
+    name: 'Configuración',
+    icon: 'fa fa-users',
+    state: 'collaboratorsCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/membership',
+        name: 'Membresías',
+        mini: 'NM',
+        component: MembershipContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/new-membership',
+        name: 'Nueva membresía',
+        mini: 'NM',
+        component: NewMembership,
+        layout: '/admin',
+        visibility: true
+      },
+    ]
+  },
 ];
