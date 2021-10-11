@@ -1,5 +1,3 @@
-import { Collaborators } from '../components/Colaborator/Collaborators';
-
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 // import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
@@ -7,7 +5,7 @@ import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBran
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 // import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
-import { CollaboratorContainer } from '../containers/CollaboratorContainer';
+import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import {UserProfileContainer} from '../containers/UserProfileContainer';
 
@@ -114,7 +112,7 @@ export const routes = [
         path: '/collaborators',
         name: 'Colaboradores',
         mini: 'C',
-        component: Collaborators,
+        component: CollaboratorListContainer,
         layout: '/admin',
         visibility: true
       },

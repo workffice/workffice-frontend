@@ -16,7 +16,6 @@ export const getMe = async () => {
 }
 
 export const updateUser = async (userId, userData) => {
-    // debugger; // eslint-disable-line no-debugger
     try {
         const userUpdated = await sdkAuthRequest(`${API_AUTH_URL}/${userId}/`,
             {
