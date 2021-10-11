@@ -21,7 +21,7 @@ import {
     Container
 } from 'reactstrap';
 import { HIDE_ERROR } from '../../stores/actions';
-import ImageUpload from '../CustomUpload/ImageUpload';
+import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
 export const NewOffice = (props) => {

@@ -20,8 +20,8 @@ import PropTypes from "prop-types";
 
 import { Button } from "reactstrap";
 
-import defaultImage from "../../assets/img/bg/image_placeholder.jpg";
-import defaultAvatar from "../../assets/img/bg/logoCirculo.svg";
+import defaultImage from "../../../assets/img/bg/image_placeholder.jpg";
+import defaultAvatar from "../../../assets/img/bg/logoCirculo.svg";
 
 function ImageUpload(props) {
   const [fileState, setFileState] = React.useState(null);

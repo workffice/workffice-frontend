@@ -16,7 +16,7 @@ import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
 import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
 import { UserUpdate } from "../../../components/User/UserUpdate";
 import CollaboratorRow from "./CollaboratorRow";
-import { EmptyComponent } from "../../../components/Empty/EmptyComponent";
+import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
 
 export const UserProfile = props => {
     React.useEffect(() => {
