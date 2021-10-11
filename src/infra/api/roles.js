@@ -12,3 +12,15 @@ export const fetchRoles = async officeBranchId => {
         return error.errors[0].error;
     }
 }
+
+export const fetchRolesFromCollaborator = async collaboratorId => {
+    try {
+        const roles = await sdkAuthRequest(`http://localhost:8080/api/collaborators/${collaboratorId}/roles/`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return {[collaboratorId]: roles.data};
+    } catch (error) {
+        return error.errors[0].error;
+    }
+}

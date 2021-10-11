@@ -11,8 +11,14 @@ export const Collaborators = props => {
   React.useEffect(() => {
     props.loadOfficeBranchRoles(props.officeBranch.id);
   }, [])
+  
+  const {
+    collaborators,
+    collaboratorRoles,
+    officeBranchRoles,
+    loadCollaboratorRoles,
+  } = props
 
-  const { collaborators, officeBranchRoles } = props
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -42,10 +48,15 @@ export const Collaborators = props => {
 
       <Row style={{ justifyContent: 'center' }}>
         {collaborators ? props.collaborators.map(collaborator => {
-          return <Col xs="10" md="4" lg="4" xg="4">
-            <CollaboratorCard key={collaborator.id} {...collaborator} officeBranchRoles={officeBranchRoles}/>
+          return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
+            <CollaboratorCard
+              {...collaborator}
+              officeBranchRoles={officeBranchRoles}
+              loadCollaboratorRoles={loadCollaboratorRoles}
+              collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
+            />
           </Col>
-        }) : <EmptyComponent/>}
+        }) : <EmptyComponent />}
       </Row>
     </div>
   )

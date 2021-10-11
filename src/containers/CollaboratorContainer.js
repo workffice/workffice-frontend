@@ -6,7 +6,7 @@ import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
 import { createColaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 import { readFromLocalStorage } from '../infra/api/localStorage';
-import { rolesList } from '../stores/actions/backoffice/rolesAction';
+import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -31,11 +31,17 @@ export const CollaboratorListContainer = () => {
     await dispatch(rolesList(officeBranchId));
   }, []);
   const officeBranch = useSelector(() => readFromLocalStorage("officeBranch"));
+  const loadCollaboratorRoles = useCallback(async collaboratorId => {
+    await dispatch(collaboratorRolesList(collaboratorId));
+  }, {});
+  const collaboratorRoles = useSelector(state => state.collaboratorRoles);
   return <Collaborators
     officeBranch={officeBranch}
     loadCollaborators={loadCollaborators}
     officeBranchRoles={officeBranchRoles}
     loadOfficeBranchRoles={loadOfficeBranchRoles}
     collaborators={collaborators}
+    loadCollaboratorRoles={loadCollaboratorRoles}
+    collaboratorRoles={collaboratorRoles}
   />
 }

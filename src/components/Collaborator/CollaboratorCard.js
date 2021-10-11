@@ -3,14 +3,19 @@ import { Col } from 'reactstrap';
 import { EmptyComponent } from '../Empty/EmptyComponent';
 
 export const CollaboratorCard = props => {
+  React.useEffect(() => {
+    props.loadCollaboratorRoles(props.id);
+  }, [])
+
   const {
     name,
     email,
     status,
-    officeBranchRoles
+    officeBranchRoles,
+    collaboratorRoles,
   } = props
 
-  console.log(props)
+  console.log(collaboratorRoles)
   const getStatus = (status) => {
     switch (status) {
       case "PENDING": return "PENDIENTE"
@@ -25,17 +30,17 @@ export const CollaboratorCard = props => {
           <img alt='...' src='https://demos.creative-tim.com/paper-dashboard-pro-react/static/media/damir-bosnjak.efcaca50.jpg' />
         </div>
         <div>
-          <td
+          <div
             className='td-actions text-right'
             style={{
               alignItems: 'flex-end',
               display: 'flex',
               justifyContent: 'flex-end',
             }}>
-            <button type='button' id='tooltip570363224' title class="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
+            <button type='button' id='tooltip570363224' title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
               <i className='nc-icon nc-simple-remove'></i>
             </button>
-          </td>
+          </div>
         </div>
       </div>
       <div className='card-body' style={{ minHeight: 100 }}>
