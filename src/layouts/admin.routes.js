@@ -1,15 +1,12 @@
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-// import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
-import { NewRol } from '../components/Rol/NewRol';
-// import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
-// import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
+import { NewRoleContainer } from '../containers/backoffice/RoleContainer'
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import {UserProfileContainer} from '../containers/UserProfileContainer';
+import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { RolListComponent } from '../components/Rol/RolListComponent';
@@ -150,7 +147,7 @@ export const routes = [
         path: '/new-rol',
         name: 'Nuevo Rol',
         mini: 'NR',
-        component: NewRol,
+        component: NewRoleContainer,
         layout: '/admin',
       },
       {
