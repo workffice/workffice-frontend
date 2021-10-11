@@ -12,6 +12,7 @@ import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import {UserProfileContainer} from '../containers/UserProfileContainer';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
+import { RolListComponent } from '../components/Rol/RolListComponent';
 
 export const routes = [
   {
@@ -138,17 +139,24 @@ export const routes = [
     visibility: true,
     views: [
       {
+        path: '/roles',
+        name: 'Gestionar Roles',
+        mini: 'GR',
+        component: RolListComponent,
+        layout: '/admin',
+        visibility: true,
+      },
+      {
         path: '/new-rol',
         name: 'Nuevo Rol',
         mini: 'NR',
         component: NewRol,
         layout: '/admin',
-        visibility: true,
       },
       {
         path: '/membership',
-        name: 'Membresías',
-        mini: 'NM',
+        name: 'Gestionar membresías',
+        mini: 'GM',
         component: MembershipListComponent,
         layout: '/admin',
         visibility: true
@@ -159,7 +167,6 @@ export const routes = [
         mini: 'NM',
         component: NewMembership,
         layout: '/admin',
-        // visibility: true
       },
     ]
   }

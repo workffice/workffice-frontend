@@ -5,7 +5,9 @@ import './styles/OfficeComponent.css';
 export const MembershipComponent = (props) => {
 
   const { membership } = props;
-  const { name, description, price } = membership;
+  const { name, description, price, active} = membership;
+
+  const isActive = active === true;
 
   return (
     <>
@@ -15,7 +17,11 @@ export const MembershipComponent = (props) => {
             <h5 style={{ marginBottom: 0 }}>
               {name}
             </h5>
-            <i className="fa fa-check" style={{ display: 'flex', alignItems: 'center' }} />
+            {
+              isActive 
+                ? <label style={{ display: 'flex', alignItems: 'center' }}>activo</label>
+                : <label style={{ display: 'flex', alignItems: 'center' }}>Inactivo</label>
+            }
           </div>
           <hr />
           <div className='text'>

@@ -10,25 +10,29 @@ export const MembershipListComponent = () => {
   const membership1 = {
     name: "Membresía 1",
     description: "Descripción 1",
-    price: 56
+    price: 56,
+    active: true,
   };
 
   const membership2 = {
     name: "Membresía 2",
     description: "Descripción 2",
-    price: 100
+    price: 100,
+    active: false,
   };
 
   const membership3 = {
     name: "Membresía 3",
     description: "Descripción 3",
-    price: 500
+    price: 500,
+    active: true,
   };
 
   const membership4 = {
     name: "Membresía 4",
     description: "Descripción 4",
-    price: 230
+    price: 230,
+    active: false,
   };
 
   return (
