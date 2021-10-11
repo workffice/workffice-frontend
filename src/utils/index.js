@@ -7,7 +7,7 @@ export const getOneErrors = errors => {
   return errors;
 };
 
-export const getUserToken = () => readFromLocalStorage(AUTH_TOKEN);
+export const getUserToken = () => readFromLocalStorage(AUTH_TOKEN).accessToken;
 
 export const isSessionValid = () => {
   const authType = isUserLoggedin(getUserToken());

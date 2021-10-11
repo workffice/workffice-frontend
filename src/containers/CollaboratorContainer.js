@@ -26,5 +26,8 @@ export const CollaboratorListContainer = () => {
     const collaborators = useSelector(state => {
       return state.collaborators
     });
-  return <Collaborators loadCollaborators={loadCollaborators} collaborators={collaborators}></Collaborators>
+    const officeBranch = useSelector(state => {
+      return state.officeBranch
+    });
+  return <Collaborators officeBranch={officeBranch} loadCollaborators={loadCollaborators} collaborators={collaborators}></Collaborators>
 }

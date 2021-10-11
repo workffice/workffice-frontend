@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
+import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { EmptyComponent } from '../Empty/EmptyComponent';
 import { ColaboratorCard } from './ColaboratorCard';
 
 export const Collaborators = props => {
   React.useEffect(() => {
-    props.loadCollaborators("ec994b9b-f595-408f-b1ef-ba9c30bde717");
+    props.loadCollaborators(readFromLocalStorage('officeBranch').id);
   }, [])
 
   const { collaborators } = props
@@ -40,7 +41,7 @@ export const Collaborators = props => {
       <Row style={{ justifyContent: 'center' }}>
         {collaborators ? props.collaborators.map(collaborator => {
           return <Col xs="10" md="4" lg="4" xg="4">
-            <ColaboratorCard {...collaborator}/>
+            <ColaboratorCard key={collaborator.id} {...collaborator}/>
           </Col>
         }) : <EmptyComponent/>}
       </Row>
