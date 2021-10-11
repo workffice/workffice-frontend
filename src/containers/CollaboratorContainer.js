@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Collaborators } from '../components/Collaborator/Collaborators';
-import { NewCollaborator } from '../components/Colaborator/NewCollaborator';
+import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
 import { createColaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 import { readFromLocalStorage } from '../infra/api/localStorage';
