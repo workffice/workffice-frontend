@@ -1,4 +1,8 @@
-import { fetchRoles, fetchRolesFromCollaborator } from "../../infra/api/roles"
+import { createRole, fetchRoles, fetchRolesFromCollaborator } from "../../infra/api/roles"
+
+export const createRoleApi = async (officeBranchId, roleBody) => {
+  return Promise.resolve(createRole(officeBranchId, roleBody))
+}
 
 export const fetchRolesApi = async officeBranchId => {
   return Promise.resolve(fetchRoles(officeBranchId))
