@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NewRole } from '../../components/Role/NewRol';
+import { NewRole } from '../../components/Role/NewRole';
 import { RoleListComponent } from '../../components/Role/RoleListComponent';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { createRole, rolesList } from '../../stores/actions/backoffice/rolesAction';
