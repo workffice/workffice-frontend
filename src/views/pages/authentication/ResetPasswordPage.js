@@ -2,7 +2,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { useHistory, useLocation } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { HIDE_ERROR } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';

@@ -33,7 +33,7 @@ import {
   Nav,
   Container,
 } from 'reactstrap';
-import logo from '../../assets/img/Recurso 4.png';
+import logo from '../../../assets/img/Recurso 4.png';
 // import avatar from '../../assets/img/faces/erik-lucatero-2.jpg';
 // import {Avatar} from '../Avatar/Avatar';
 

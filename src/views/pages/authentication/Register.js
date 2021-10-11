@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Card, CardHeader, CardBody, Alert, CardTitle
 import { RegisterInfo } from '../../../components/Register/RegisterInfo';
 import { useHistory } from 'react-router-dom';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../../../stores/actions';
 

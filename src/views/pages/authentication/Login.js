@@ -19,7 +19,7 @@ import {
 
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../../../stores/actions';
