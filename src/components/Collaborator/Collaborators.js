@@ -11,12 +11,13 @@ export const Collaborators = props => {
   React.useEffect(() => {
     props.loadOfficeBranchRoles(props.officeBranch.id);
   }, [])
-  
+
   const {
     collaborators,
     collaboratorRoles,
     officeBranchRoles,
     loadCollaboratorRoles,
+    onUpdate,
   } = props
 
   return (
@@ -54,6 +55,7 @@ export const Collaborators = props => {
               officeBranchRoles={officeBranchRoles}
               loadCollaboratorRoles={loadCollaboratorRoles}
               collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
+              updateCollaborator={onUpdate}
             />
           </Col>
         }) : <EmptyComponent />}
