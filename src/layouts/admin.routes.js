@@ -10,6 +10,8 @@ import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { RolListComponent } from '../components/Rol/RolListComponent';
+import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
+import { NewNotice } from '../components/Notice/NewNotice';
 
 export const routes = [
   {
@@ -163,6 +165,21 @@ export const routes = [
         name: 'Nueva membresía',
         mini: 'NM',
         component: NewMembership,
+        layout: '/admin',
+      },
+      {
+        path: '/notice',
+        name: 'Gestionar noticias',
+        mini: 'GN',
+        component: NoticeListComponent,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/new-notice',
+        name: 'Nueva noticia',
+        mini: 'NN',
+        component: NewNotice,
         layout: '/admin',
       },
     ]
