@@ -1,5 +1,5 @@
 import { setError, setIsLoading } from "..";
-import { fetchCollaboratorsApi } from "../../../api/collaborator";
+import { fetchCollaboratorsApi } from "../../../api/backoffice/collaborator";
 
 export const FETCH_COLLABORATORS = 'FETCH_COLLABORATORS';
 

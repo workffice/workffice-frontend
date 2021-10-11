@@ -1,13 +1,16 @@
 import React from 'react';
 import { Col } from 'reactstrap';
+import { EmptyComponent } from '../Empty/EmptyComponent';
 
 export const CollaboratorCard = props => {
   const {
     name,
     email,
-    status
+    status,
+    officeBranchRoles
   } = props
 
+  console.log(props)
   const getStatus = (status) => {
     switch (status) {
       case "PENDING": return "PENDIENTE"
@@ -79,23 +82,9 @@ export const CollaboratorCard = props => {
                 <small>Rol</small>
               </h5>
             </div>
-            <select class="form-select"
-              style={{
-                backgroundColor: 'white',
-                border: 'thin #E3E3E3',
-                borderBottom: 'solid #E3E3E3',
-                height: 35,
-                // borderRadius: 8,
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                borderWidth: 2,
-              }}
-            >
-              <option selected>Supervisor</option>
-              <option value="Pendiente">Administrativo</option>
-            </select>
+            {officeBranchRoles ?
+              officeBranchRoles.map(role => <p key={role.id}>{role.name}</p>)
+              : <EmptyComponent />}
           </Col>
         </div>
       </div>

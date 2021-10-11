@@ -1,5 +1,5 @@
 
-import { createColaborator as createCollaborator, fetchCollaborators } from "../infra/api/collaborator";
+import { createColaborator as createCollaborator, fetchCollaborators } from "../../infra/api/collaborator";
 
 export const createCollaboratorApi = async (credentials, officeBranchId) => {
   return Promise.resolve(createCollaborator(credentials, officeBranchId));

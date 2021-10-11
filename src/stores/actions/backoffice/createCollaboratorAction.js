@@ -1,5 +1,5 @@
 import { setError, setIsLoading } from '..';
-import { createCollaboratorApi } from '../../../api/collaborator';
+import { createCollaboratorApi } from '../../../api/backoffice/collaborator';
 
 export const FETCH_CREATE_COLABORATOR = 'FETCH_CREATE_COLABORATOR';
 
