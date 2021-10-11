@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import { Collaborators } from '../components/Colaborator/Collaborators';
 import { NewCollaborator } from '../components/Colaborator/NewCollaborator';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
-import { createColaborator } from '../stores/actions/backoffice/createColaboratorAction';
+import { createColaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
   const officeBranches = useSelector(state => state.officeBranches);
   const dispatch = useDispatch();
-  const onCreateColaborator = useCallback((colaboratorData, officeBranchId) => {
-    dispatch(createColaborator(colaboratorData, officeBranchId));
+  const onCreateColaborator = useCallback((collaboratorData, officeBranchId) => {
+    dispatch(createColaborator(collaboratorData, officeBranchId));
   }, []);
   return <NewCollaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
 };

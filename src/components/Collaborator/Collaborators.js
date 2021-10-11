@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { EmptyComponent } from '../Empty/EmptyComponent';
-import { ColaboratorCard } from './ColaboratorCard';
+import { CollaboratorCard } from './CollaboratorCard';
 
 export const Collaborators = props => {
   React.useEffect(() => {
@@ -29,7 +29,7 @@ export const Collaborators = props => {
           xg="12"
           style={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Button className="btn-round" color="primary" size="medium" >
-            <Link to='/admin/new-colaborator' style={{ color: 'white', textDecoration: 'none' }}>
+            <Link to='/admin/new-collaborator' style={{ color: 'white', textDecoration: 'none' }}>
               {' '}
               <i className="fa fa-plus" />
               {' '} Nuevo Colaborador
@@ -41,7 +41,7 @@ export const Collaborators = props => {
       <Row style={{ justifyContent: 'center' }}>
         {collaborators ? props.collaborators.map(collaborator => {
           return <Col xs="10" md="4" lg="4" xg="4">
-            <ColaboratorCard key={collaborator.id} {...collaborator}/>
+            <CollaboratorCard key={collaborator.id} {...collaborator}/>
           </Col>
         }) : <EmptyComponent/>}
       </Row>
