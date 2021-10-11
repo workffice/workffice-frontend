@@ -28,7 +28,7 @@ export const RolComponent = (props) => {
             resource && resource.map((resource) =>
               <div className='text'>
                 <label className="form-label">
-                {`${resource.name}: `} <small>{`${resource.label}`}</small>
+                {`${resource.name}: `} <small style={{fontSize: 15}}>{`${resource.label}`}</small>
                 </label>
               </div>
             )
