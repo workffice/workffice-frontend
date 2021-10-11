@@ -20,9 +20,9 @@ export const fetchCollaborators = async officeBranchId => {
       method: 'GET',
       headers: headerGet,
     });
-    return collaborators.data;
+    return Promise.resolve(collaborators.data);
   } catch (error) {
-    return error.errors[0].error;
+    return Promise.reject(error.errors[0].error);
   }
 }
 
