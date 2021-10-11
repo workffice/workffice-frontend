@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 import { ColaboratorCard } from './ColaboratorCard';
 
-export const Colaborators = () => (
+export const Collaborators = () => (
   <div className="content">
     <Row style={{ display: 'grid', paddingTop: 40 }}>
       <Col xs="12" md="12" lg="12" xg="12">

@@ -1,4 +1,4 @@
-import { Colaborators } from '../components/Colaborator/Colaborators';
+import { Collaborators } from '../components/Colaborator/Collaborators';
 
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 // import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
@@ -7,7 +7,7 @@ import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBran
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 // import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
-import { ColaboratorContainer } from '../containers/ColaboratorContainer';
+import { CollaboratorContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import {UserProfileContainer} from '../containers/UserProfileContainer';
 
@@ -111,18 +111,18 @@ export const routes = [
     visibility: true,
     views: [
       {
-        path: '/colaborators',
+        path: '/collaborators',
         name: 'Colaboradores',
         mini: 'C',
-        component: Colaborators,
+        component: Collaborators,
         layout: '/admin',
         visibility: true
       },
       {
-        path: '/new-colaborator',
+        path: '/new-collaborator',
         name: 'Nuevo colaborador',
         mini: 'NC',
-        component: ColaboratorContainer,
+        component: CollaboratorContainer,
         layout: '/admin',
         visibility: true
       }

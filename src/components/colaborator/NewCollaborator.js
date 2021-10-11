@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Row, Col, Card, CardBody, Form, CardHeader, Alert } from 'reactstrap';
 
-export const NewColaborator = (props) => {
+export const NewCollaborator = (props) => {
   const { officeBranches } = props;
   const { error } = props;
   const history = useHistory();
@@ -29,7 +29,7 @@ export const NewColaborator = (props) => {
     onSubmit: async (credentials) => {
       console.log('credentials: ', credentials);
       await props.onCreateColaborator(credentials, officeBranches.data[0].id);
-      history.push('/admin/colaborators')
+      history.push('/admin/collaborators')
     }
   })
 

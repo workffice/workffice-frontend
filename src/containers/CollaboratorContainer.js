@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NewColaborator } from '../components/Colaborator/NewColaborator';
+import { NewCollaborator } from '../components/Colaborator/NewCollaborator';
 import { createColaborator } from '../stores/actions/backoffice/createColaboratorAction';
 
-export const ColaboratorContainer = () => {
+export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
   const officeBranches = useSelector(state => state.officeBranches);
@@ -12,5 +12,5 @@ export const ColaboratorContainer = () => {
   const onCreateColaborator = useCallback((colaboratorData, officeBranchId) => {
     dispatch(createColaborator(colaboratorData, officeBranchId));
   }, []);
-  return <NewColaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
+  return <NewCollaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
 };
