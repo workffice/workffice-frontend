@@ -9,11 +9,13 @@ export const CollaboratorCard = props => {
   }, [])
 
   const {
+    id,
     name,
     email,
     status,
     officeBranchRoles,
     collaboratorRoles,
+    updateCollaborator,
   } = props
 
   const getStatus = (status) => {
@@ -30,8 +32,13 @@ export const CollaboratorCard = props => {
         return { value: role.id, label: role.name }
       }) : [],
     },
-    onSubmit: async (values) => {
-      console.log(values)
+    onSubmit: async ({roles}) => {
+      console.log(roles)
+      const roleIds = roles.map(role => role.value)
+      updateCollaborator(id, {
+        name: name,
+        roleIds: roleIds,
+      })
     },
   });
   return (<>

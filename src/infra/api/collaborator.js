@@ -1,5 +1,5 @@
 import { headerGet, headersPost, sdkAuthRequest } from ".";
-import { API_OFFICE_BRANCHES } from "../../environments/environment";
+import { API_OFFICE_BRANCHES, API_URL } from "../../environments/environment";
 
 export const createColaborator = async (credentials, officeBranchId) => {
   try {
@@ -23,5 +23,19 @@ export const fetchCollaborators = async officeBranchId => {
     return collaborators.data;
   } catch (error) {
     return error.errors[0].error;
+  }
+}
+
+
+export const updateCollaborator = async (collaboratorId, collaboratorBody) => {
+  try {
+    const response = await sdkAuthRequest(`${API_URL}/collaborators/${collaboratorId}/`, {
+      method: 'PUT',
+      headers: headersPost,
+      body: JSON.stringify(collaboratorBody),
+    });
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error.errors[0].error);
   }
 }

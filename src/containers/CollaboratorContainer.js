@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
-import { createColaborator } from '../stores/actions/backoffice/createCollaboratorAction';
+import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 import { readFromLocalStorage } from '../infra/api/localStorage';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
 
@@ -35,6 +35,9 @@ export const CollaboratorListContainer = () => {
     await dispatch(collaboratorRolesList(collaboratorId));
   }, [dispatch]);
   const collaboratorRoles = useSelector(state => state.collaboratorRoles);
+  const onUpdate = useCallback(async (collaboratorId, collaboratorBody) => {
+    await dispatch(updateCollaborator(collaboratorId, collaboratorBody));
+  }, [dispatch]);
   return <Collaborators
     officeBranch={officeBranch}
     loadCollaborators={loadCollaborators}
@@ -43,5 +46,6 @@ export const CollaboratorListContainer = () => {
     collaborators={collaborators}
     loadCollaboratorRoles={loadCollaboratorRoles}
     collaboratorRoles={collaboratorRoles}
+    onUpdate={onUpdate}
   />
 }
