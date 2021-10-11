@@ -9,7 +9,7 @@ import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 // import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { ColaboratorContainer } from '../containers/ColaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import UserProfile from '../views/pages/backoffice/UserProfile';
+import {UserProfileContainer} from '../containers/UserProfileContainer';
 
 export const routes = [
   {
@@ -23,7 +23,7 @@ export const routes = [
         path: '/user-profile',
         name: 'Perfil Usuario',
         mini: 'PU',
-        component: UserProfile,
+        component: UserProfileContainer,
         layout: '/admin',
         visibility: true
       },
