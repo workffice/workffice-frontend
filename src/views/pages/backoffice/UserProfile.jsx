@@ -3,7 +3,6 @@ import React from "react";
 
 // reactstrap components
 import {
-    Button,
     Card,
     CardHeader,
     CardBody,
@@ -16,8 +15,14 @@ import {
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
 import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
 import { UserUpdate } from "../../../components/User/UserUpdate";
+import CollaboratorRow from "./CollaboratorRow";
+import { EmptyComponent } from "../../../components/Empty/EmptyComponent";
 
 export const UserProfile = props => {
+    React.useEffect(() => {
+        console.log(props.officeBranch.id)
+        props.loadCollaborators(props.officeBranch.id);
+    }, [])
     const { name, bio } = props.userMe || {}
     return (
         <div className="content">
@@ -75,99 +80,9 @@ export const UserProfile = props => {
                         </CardHeader>
                         <CardBody>
                             <ul className="list-unstyled team-members">
-                                <li>
-                                    <Row>
-                                        <Col md="2" xs="2">
-                                            <div className="avatar">
-                                                <img
-                                                    alt="..."
-                                                    className="img-circle img-no-padding img-responsive"
-                                                    src={
-                                                        avatar
-                                                    }
-                                                />
-                                            </div>
-                                        </Col>
-                                        <Col md="7" xs="7">
-                                            Colaborador 1 <br />
-                                            <span className="text-muted">
-                                                <small>Desconectado</small>
-                                            </span>
-                                        </Col>
-                                        <Col className="text-right" md="3" xs="3">
-                                            <Button
-                                                className="btn-round btn-icon"
-                                                color="success"
-                                                outline
-                                                size="sm"
-                                            >
-                                                <i className="fa fa-envelope" />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </li>
-                                <li>
-                                    <Row>
-                                        <Col md="2" xs="2">
-                                            <div className="avatar">
-                                                <img
-                                                    alt="..."
-                                                    className="img-circle img-no-padding img-responsive"
-                                                    src={
-                                                        avatar
-                                                    }
-                                                />
-                                            </div>
-                                        </Col>
-                                        <Col md="7" xs="7">
-                                            Colaborador 2 <br />
-                                            <span className="text-success">
-                                                <small>Disponible</small>
-                                            </span>
-                                        </Col>
-                                        <Col className="text-right" md="3" xs="3">
-                                            <Button
-                                                className="btn-round btn-icon"
-                                                color="success"
-                                                outline
-                                                size="sm"
-                                            >
-                                                <i className="fa fa-envelope" />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </li>
-                                <li>
-                                    <Row>
-                                        <Col md="2" xs="2">
-                                            <div className="avatar">
-                                                <img
-                                                    alt="..."
-                                                    className="img-circle img-no-padding img-responsive"
-                                                    src={
-                                                        avatar
-                                                    }
-                                                />
-                                            </div>
-                                        </Col>
-                                        <Col className="col-ms-7" xs="7">
-                                            Colaborador 3<br />
-                                            <span className="text-danger">
-                                                <small>Suspendido</small>
-                                            </span>
-                                        </Col>
-                                        <Col className="text-right" md="3" xs="3">
-                                            <Button
-                                                className="btn-round btn-icon"
-                                                color="danger"
-                                                outline
-                                                size="sm"
-                                            >
-                                                <i className="fa fa-envelope" />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </li>
+                                {props.collaborators ? props.collaborators.map(collaborator => {
+                                    return <CollaboratorRow {...collaborator} />
+                                }) : <EmptyComponent />}
                             </ul>
                         </CardBody>
                     </Card>
