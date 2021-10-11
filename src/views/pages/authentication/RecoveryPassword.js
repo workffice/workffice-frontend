@@ -16,7 +16,7 @@ import {
   Container,
   Col,
 } from 'reactstrap';
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { HIDE_ERROR } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';

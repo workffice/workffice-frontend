@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 
 import PerfectScrollbar from 'perfect-scrollbar';
 import Sidebar from '../components/Sidebar/Sidebar.js';
-import AdminNavbar from '../components/Navbars/AdminNavbar';
+import AdminNavbar from '../components/Common/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';

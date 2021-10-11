@@ -9,7 +9,7 @@ import {
   Nav,
   Container,
 } from 'reactstrap';
-import logo from '../../assets/img/Recurso 6.png';
+import logo from '../../../assets/img/Recurso 6.png';
 
 // reactstrap components
 
