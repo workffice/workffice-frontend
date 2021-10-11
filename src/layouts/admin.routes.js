@@ -10,6 +10,8 @@ import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import {UserProfileContainer} from '../containers/UserProfileContainer';
+import { NewMembership } from '../components/Membership/NewMembership';
+import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 
 export const routes = [
   {
@@ -142,6 +144,22 @@ export const routes = [
         component: NewRol,
         layout: '/admin',
         visibility: true,
+      },
+      {
+        path: '/membership',
+        name: 'Membresías',
+        mini: 'NM',
+        component: MembershipListComponent,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/new-membership',
+        name: 'Nueva membresía',
+        mini: 'NM',
+        component: NewMembership,
+        layout: '/admin',
+        // visibility: true
       },
     ]
   }
