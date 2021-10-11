@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Collaborators } from '../components/Colaborator/Collaborators';
+import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Colaborator/NewCollaborator';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
 import { createColaborator } from '../stores/actions/backoffice/createCollaboratorAction';
+import { readFromLocalStorage } from '../infra/api/localStorage';
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -26,8 +27,6 @@ export const CollaboratorListContainer = () => {
     const collaborators = useSelector(state => {
       return state.collaborators
     });
-    const officeBranch = useSelector(state => {
-      return state.officeBranch
-    });
+    const officeBranch = useSelector(() => readFromLocalStorage("officeBranch"));
   return <Collaborators officeBranch={officeBranch} loadCollaborators={loadCollaborators} collaborators={collaborators}></Collaborators>
 }

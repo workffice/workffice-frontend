@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
-import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { EmptyComponent } from '../Empty/EmptyComponent';
 import { CollaboratorCard } from './CollaboratorCard';
 
 export const Collaborators = props => {
   React.useEffect(() => {
-    props.loadCollaborators(readFromLocalStorage('officeBranch').id);
+    props.loadCollaborators(props.officeBranch.id);
   }, [])
 
   const { collaborators } = props
