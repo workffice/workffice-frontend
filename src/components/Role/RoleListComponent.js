@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { RoleComponent } from './RoleComponent';
-import { EmptyComponent } from '../Empty/EmptyComponent';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 
 export const RoleListComponent = props => {
 

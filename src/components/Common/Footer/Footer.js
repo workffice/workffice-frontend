@@ -19,7 +19,7 @@ import React from 'react';
 import { Container, Row } from 'reactstrap';
 // used for making the prop types of this component
 import PropTypes from 'prop-types';
-import logo from '../../assets/img/logo3.svg';
+import logo from '../../../assets/img/logo3.svg';
 function Footer(props) {
   return (
     <footer className={'footer' + (props.default ? ' footer-default' : '')}>

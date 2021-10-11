@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/img/logo3.svg';
+import logo from '../../../assets/img/logo3.svg';
 
 export const Loading = () => {
     return (
