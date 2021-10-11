@@ -1,5 +1,5 @@
-import { headerGet, headersPost, sdkAuthRequest } from ".";
-import { API_OFFICE_BRANCHES, API_URL } from "../../environments/environment";
+import { headerGet, headersPost, sdkAuthRequest } from "..";
+import { API_OFFICE_BRANCHES, API_URL } from "../../../environments/environment";
 
 export const createRole = async (officeBranchId, roleBody) => {
     try {

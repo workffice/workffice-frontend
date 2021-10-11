@@ -1,5 +1,5 @@
-import { headerGet, headersPost, sdkAuthRequest } from ".";
-import { API_OFFICE_BRANCHES, API_URL } from "../../environments/environment";
+import { headerGet, headersPost, sdkAuthRequest } from "..";
+import { API_OFFICE_BRANCHES, API_URL } from "../../../environments/environment";
 
 export const createColaborator = async (credentials, officeBranchId) => {
   try {
@@ -25,7 +25,6 @@ export const fetchCollaborators = async officeBranchId => {
     return error.errors[0].error;
   }
 }
-
 
 export const updateCollaborator = async (collaboratorId, collaboratorBody) => {
   try {
