@@ -9,25 +9,16 @@ import {
     CardBody,
     CardFooter,
     CardTitle,
-    FormGroup,
-    Form,
-    Input,
     Row,
     Col,
 } from "reactstrap";
 
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
 import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
+import { UserUpdate } from "../../../components/User/UserUpdate";
 
 export const UserProfile = props => {
-    const {
-        address,
-        bio,
-        email,
-        lastname,
-        name,
-    } = props.userMe || {}
-    console.log(address, bio, email, lastname, name)
+    const { name, bio } = props.userMe || {}
     return (
         <div className="content">
             <Row style={{ paddingTop: 30 }}>
@@ -182,74 +173,7 @@ export const UserProfile = props => {
                     </Card>
                 </Col>
                 <Col md="8">
-                    <Card>
-                        <CardHeader>
-                            <h5 className="title">Editar Perfil</h5>
-                        </CardHeader>
-                        <CardBody>
-                            <Form>
-                                <Row>
-                                    <Col className="pr-1" md="4">
-                                        <FormGroup>
-                                            <label htmlFor="exampleInputEmail1">
-                                                Email
-                                            </label>
-                                            <Input type="email" disabled defaultValue={email}/>
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className="pr-1" md="6">
-                                        <FormGroup>
-                                            <label>Nombre</label>
-                                            <Input
-                                                defaultValue={name}
-                                                placeholder="Marcio"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="pl-1" md="6">
-                                        <FormGroup>
-                                            <label>Apellido</label>
-                                            <Input
-                                                defaultValue={lastname}
-                                                placeholder="Jimenez"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col md="12">
-                                        <FormGroup>
-                                            <label>Domicilio</label>
-                                            <Input
-                                                defaultValue={address}
-                                                placeholder="Mendoza, Ciudad, Suipacha 1265"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-                                {/* <Row>
-                                    <Col md="12">
-                                        <FormGroup>
-                                            <label>About Me</label>
-                                            <Input
-                                                className="textarea"
-                                                type="textarea"
-                                                cols="80"
-                                                rows="4"
-                                                defaultValue="Oh so, your weak rhyme You doubt I'll bother,
-                          reading into it"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                </Row> */}
-                            </Form>
-                        </CardBody>
-                    </Card>
+                    <UserUpdate update={props.onUpdate} {...props.userMe}></UserUpdate>
                 </Col>
             </Row>
         </div>
