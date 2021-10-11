@@ -16,12 +16,11 @@ export const rolesReducer = (state = initialState, { type, payload }) => {
 const collaboratorRolesInitialState = {}
 
 export const collaboratorRolesReducer = (state = collaboratorRolesInitialState, { type, payload }) => {
-
-    let currentState = state;
     switch (type) {
-        case FETCH_COLLABORATOR_ROLES:
-            return {...currentState.collaboratorRoles, ...payload};
+        case FETCH_COLLABORATOR_ROLES: {
+            return { ...state, ...payload };
+        }
         default:
-            return currentState;
+            return state;
     }
 }

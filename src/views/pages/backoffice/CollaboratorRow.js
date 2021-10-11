@@ -11,7 +11,7 @@ export const CollaboratorRow = props => {
     const getButtonColor = () => {
         switch (status) {
             case "PENDING": return "warning"
-            case "ACTIVE": return "sucess"
+            case "ACTIVE": return "success"
             case "INACTIVE": return "danger"
         }
     }

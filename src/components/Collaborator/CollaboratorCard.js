@@ -84,7 +84,18 @@ export const CollaboratorCard = props => {
             <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
               <h5>
                 <br />
-                <small>Rol</small>
+                <small>Roles actuales</small>
+              </h5>
+            </div>
+            {collaboratorRoles ?
+              collaboratorRoles.map(role => <p key={role.id}>{role.name}</p>)
+              : <EmptyComponent />}
+          </Col>
+          <Col>
+            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
+              <h5>
+                <br />
+                <small>Roles de la sucursal</small>
               </h5>
             </div>
             {officeBranchRoles ?
