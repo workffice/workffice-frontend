@@ -20,7 +20,6 @@ import { EmptyComponent } from "../../../components/Empty/EmptyComponent";
 
 export const UserProfile = props => {
     React.useEffect(() => {
-        console.log(props.officeBranch.id)
         props.loadCollaborators(props.officeBranch.id);
     }, [])
     const { name, bio } = props.userMe || {}

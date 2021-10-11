@@ -15,7 +15,6 @@ export const CollaboratorCard = props => {
     collaboratorRoles,
   } = props
 
-  console.log(collaboratorRoles)
   const getStatus = (status) => {
     switch (status) {
       case "PENDING": return "PENDIENTE"
