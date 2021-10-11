@@ -20,7 +20,6 @@ export const AdminLayout = props => {
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
   const user = useSelector(state => state.userMe);
-  // const officeBranch = useSelector(state => state.officeBranch ? state.officeBranch.data : readFromLocalStorage("officeBranch"))
   React.useEffect(() => {
     dispatch(getUserMe());
   }, []);
@@ -29,11 +28,6 @@ export const AdminLayout = props => {
       dispatch(officeBranchList(user.id));
     }
   }, [user])
-  // React.useEffect(() => {
-  //   if (officeBranch !== null && officeBranchList !== undefined) {      
-  //     dispatch(fetchOfficesList(officeBranch.id));
-  //   }
-  // }, [officeBranch])
 
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {

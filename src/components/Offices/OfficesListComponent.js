@@ -6,8 +6,7 @@ import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
   React.useEffect(() => {
-    if (!props.offices)
-      props.loadOffices(props.branch.id);
+    props.loadOffices(props.branch.id);
   }, [])
   const { offices, branch } = props;
   return (

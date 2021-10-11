@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col } from 'reactstrap';
 
-export const ColaboratorCard = props => {
+export const CollaboratorCard = props => {
   const {
     name,
     email,
