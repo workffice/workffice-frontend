@@ -23,7 +23,6 @@ export const updateUser = async (userId, userData) => {
                 headers: headersPost,
                 body: JSON.stringify(userData),
             });
-        console.log(userUpdated)
         return Promise.resolve(userUpdated)
     } catch (error) {
         return Promise.reject(new Error(error.errors[0].error));

@@ -20,7 +20,6 @@ import { EmptyComponent } from "../../../components/Empty/EmptyComponent";
 
 export const UserProfile = props => {
     React.useEffect(() => {
-        console.log(props.officeBranch.id)
         props.loadCollaborators(props.officeBranch.id);
     }, [])
     const { name, bio } = props.userMe || {}
@@ -81,7 +80,7 @@ export const UserProfile = props => {
                         <CardBody>
                             <ul className="list-unstyled team-members">
                                 {props.collaborators ? props.collaborators.map(collaborator => {
-                                    return <CollaboratorRow {...collaborator} />
+                                    return <CollaboratorRow key={collaborator.id} {...collaborator} />
                                 }) : <EmptyComponent />}
                             </ul>
                         </CardBody>
