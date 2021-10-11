@@ -34,7 +34,7 @@ export const MembershipListComponent = () => {
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
-        <Col xs="12" md="6" lg="6" xg="6">
+        <Col xs="12" md="12" lg="12" xg="12">
           <h1>
             Gestionar <small color="red">membresías</small>
           </h1>

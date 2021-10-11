@@ -61,7 +61,7 @@ export const NewMembership = () => {
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values)
+            console.log('values: ', values)
             // props.create(membership);
         },
     });
@@ -214,25 +214,27 @@ export const NewMembership = () => {
                                 </Col>
                             </Row>
 
-                            <Row>
-                                <Col style={{ display: 'flex', justifyContent: 'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <div className="col-auto">
                                     <Button
-                                        className="btn-round"
-                                        color="primary"
                                         type="submit"
-                                        disabled={formik.isSubmitting}>
-                                        Crear membresía
+                                        className="btn btn-primary mb-3"
+                                        color="primary"
+                                        style={{ minWidth: 107 }}
+                                    >
+                                        Crear
                                     </Button>
+                                </div>
+                                <div className="col-auto">
                                     <Button
                                         type="reset"
-                                        className="btn-round"
-                                        color="danger"
+                                        className="btn btn-primary mb-3"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >
                                         Cancelar
                                     </Button>
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                         </CardBody>
                     </Card>
                 </Form>
