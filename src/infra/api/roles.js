@@ -1,5 +1,18 @@
-import { headerGet, sdkAuthRequest } from ".";
+import { headerGet, headersPost, sdkAuthRequest } from ".";
 import { API_OFFICE_BRANCHES, API_URL } from "../../environments/environment";
+
+export const createRole = async (officeBranchId, roleBody) => {
+    try {
+        const response = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/roles/`, {
+            method: 'POST',
+            headers: headersPost,
+            body: JSON.stringify(roleBody)
+        });
+        return Promise.resolve(response);
+    } catch (error) {
+        return Promise.reject(error.errors[0].error);
+    }
+}
 
 export const fetchRoles = async officeBranchId => {
     try {

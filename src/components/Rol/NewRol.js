@@ -4,7 +4,7 @@ import { Alert, Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input,
 import Select from 'react-select';
 
 
-export const NewRol = (props) => {
+export const NewRole = (props) => {
     const { error } = props;
 
     const validate = values => {
@@ -51,9 +51,9 @@ export const NewRol = (props) => {
                 { resource: "ROLE", access: roleRoleAccess.value },
                 { resource: "MEMBERSHIP", access: membershipRoleAccess.value },
             ].filter(permission => permission.access !== null && permission.access !== undefined && permission.access !== '')
-            console.log({
+            props.createRole({
                 name: roleName,
-                permissions: permissions
+                permissions: permissions,
             })
         },
     });

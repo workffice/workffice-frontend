@@ -1,9 +1,29 @@
 import { setError, setIsLoading } from "..";
-import { fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
+import { createRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
 
+export const CREATE_ROLE = 'CREATE_ROLE';
 export const FETCH_ROLES = 'FETCH_ROLES';
 export const FETCH_COLLABORATOR_ROLES = 'FETCH_COLLABORATOR_ROLES';
 
+
+export const createRoleAction = response => {
+    return {
+        type: CREATE_ROLE,
+        payload: response
+    }
+};
+
+export const createRole = (officeBranchId, roleBody) => async dispatch => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(createRoleAction(await createRoleApi(officeBranchId, roleBody)));
+    } catch (error) {
+        dispatch(setError(error));
+    } finally {
+        dispatch(setIsLoading(false));
+    }
+
+}
 
 export const fetchRolesList = roles => {
     return {
