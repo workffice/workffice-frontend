@@ -31,7 +31,6 @@ export const UserUpdate = (props) => {
             bio: bio,
         },
         onSubmit: async (values) => {
-            console.log(values);
             await props.update(values);
         },
     });
@@ -98,7 +97,7 @@ export const UserUpdate = (props) => {
                     <Row>
                         <Col md="12">
                             <FormGroup>
-                                <label htmlFor="bio">Descripcion</label>
+                                <label htmlFor="bio">Descripción</label>
                                 <Input
                                     value={formik.values.bio}
                                     placeholder={bio}

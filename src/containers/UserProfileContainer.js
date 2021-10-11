@@ -6,7 +6,6 @@ import UserProfile from '../views/pages/backoffice/UserProfile';
 export const UserProfileContainer = () => {
     const userMe = useSelector(state => state.userMe)
     const dispatch = useDispatch()
-    console.log(userMe)
     const onUpdate = useCallback((id, userData) => {
         dispatch(updateUser(id, userData));
     }, []);
