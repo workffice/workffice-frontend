@@ -1,5 +1,6 @@
 import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from ".."
 import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment"
+import { writeToLocalStorage } from "../localStorage";
 
 export const createOfficeBranchInfra = async (officeBranchData, userId) => {
     try {
@@ -52,14 +53,15 @@ export const getOfficeBranchesInfra = async (userId) => {
 }
 export const getOfficeBranchInfra = async (officeBranchId) => {
     try {
-        const officesBranch = await sdkNoAuthRequest(
+        const officeBranch = await sdkNoAuthRequest(
             `${API_OFFICE_BRANCHES}/${officeBranchId}/`,
             {
                 method: 'GET',
                 headers: headerGet
             }
         )
-        return Promise.resolve(officesBranch);
+        writeToLocalStorage(officeBranch.data, "officeBranch")
+        return Promise.resolve(officeBranch);
     } catch (error) {
         return Promise.reject(new Error(error.errors[0].error));
     }

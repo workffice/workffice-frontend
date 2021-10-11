@@ -36,7 +36,7 @@ export const writeToLocalStorage = (data, key) => {
 export const readFromLocalStorage = key => {
   if (window.localStorage) {
     const result = localStorage.getItem(key);
-    return result ? (JSON.parse(result)).accessToken : undefined;
+    return result ? (JSON.parse(result)) : undefined;
   }
   throw new Error('No window object detected');
 };
