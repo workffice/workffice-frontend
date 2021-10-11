@@ -1,4 +1,4 @@
-import { headersPost, sdkAuthRequest } from ".";
+import { headerGet, headersPost, sdkAuthRequest } from ".";
 import { API_OFFICE_BRANCHES } from "../../environments/environment";
 
 export const createColaborator = async (credentials, officeBranchId) => {
@@ -13,3 +13,15 @@ export const createColaborator = async (credentials, officeBranchId) => {
     return Promise.reject(error.errors[0].error);
   }
 };
+
+export const fetchCollaborators = async officeBranchId => {
+  try {
+    const collaborators = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/collaborators/`, {
+      method: 'GET',
+      headers: headerGet,
+    });
+    return collaborators.data;
+  } catch (error) {
+    return error.errors[0].error;
+  }
+}

@@ -78,7 +78,7 @@ export const NewOffice = (props) => {
     const formik = useFormik({
         initialValues: {
             name: "",
-            sucursal: props.branch.data.id,
+            sucursal: props.branch.id,
             officePrivacy: officePrivacy && officePrivacy.value,
             capacity: 0,
             enabledOffice: enabledOffice && enabledOffice.value,

@@ -1,4 +1,4 @@
-import { FETCH_CREATE_COLABORATOR } from '../../actions/backoffice/createColaboratorAction';
+import { FETCH_CREATE_COLABORATOR } from '../../actions/backoffice/createCollaboratorAction';
 
 const initialState = null;
 
