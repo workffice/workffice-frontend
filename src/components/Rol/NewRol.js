@@ -7,21 +7,15 @@ import Select from 'react-select';
 export const NewRol = (props) => {
     const { error } = props;
 
-    // const [rolName, setRolName] = useState("");
-    const [report, setReport] = useState(null);
-    const [office, setOffice] = useState(null);
-    const [collaborator, setCollaborator] = useState(null);
-    const [rol, setRol] = useState(null);
-    const [membership, setMembership] = useState(null);
+    const [data, setData] = useState({});
 
-    const onReset = () => {
-        console.log('ENTRO AL RESET');
-        setReport(null);
-        setOffice(null);
-        setCollaborator(null);
-        setRol(null);
-        setMembership(null);
-    }
+    const setValue = (name, value) => {
+        console.log('data: ', data);
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     const validate = values => {
         const errors = {};
@@ -33,14 +27,13 @@ export const NewRol = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            rolName: " ",
-            selectOption: '',
+            rolName: "",
         },
         validate,
-        onSubmit: async (credentials) => {
-            const values = [report, office, collaborator, rol, membership];
-            console.log('credentials: ', values);
-            console.log('credentials: ', credentials);
+        onSubmit: async (values) => {
+            const newRolName = {...values};
+            console.log('rol: ', newRolName);
+            console.log('data: ', data);
         },
     });
 
@@ -106,8 +99,7 @@ export const NewRol = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="report"
-                                            value={report}
-                                            onChange={value => setReport(value)}
+                                            onChange={value => setValue('report', value)}
                                             onBlur={formik.handleBlur}
                                             options={options}
                                             placeholder="Seleccione un permiso"
@@ -121,8 +113,7 @@ export const NewRol = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="office"
-                                            value={office}
-                                            onChange={value => setOffice(value)}
+                                            onChange={value => setValue('office', value)}
                                             onBlur={formik.handleBlur}
                                             options={options}
                                             placeholder="Seleccione un permiso"
@@ -136,8 +127,7 @@ export const NewRol = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="collaborator"
-                                            value={collaborator}
-                                            onChange={value => setCollaborator(value)}
+                                            onChange={value => setValue('collaborator', value)}
                                             onBlur={formik.handleBlur}
                                             options={options}
                                             placeholder="Seleccione un permiso"
@@ -151,8 +141,7 @@ export const NewRol = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="rol"
-                                            value={rol}
-                                            onChange={value => setRol(value)}
+                                            onChange={value => setValue('rol', value)}
                                             options={options}
                                             placeholder="Seleccione un permiso"
                                             styles={{ width: '80%' }}
@@ -165,8 +154,7 @@ export const NewRol = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="membership"
-                                            value={membership}
-                                            onChange={value => setMembership(value)}
+                                            onChange={value => setValue('membership', value)}
                                             onBlur={formik.handleBlur}
                                             options={options}
                                             placeholder="Seleccione un permiso"
@@ -190,7 +178,6 @@ export const NewRol = (props) => {
                                 <div className="col-auto">
                                     <Button
                                         type="reset"
-                                        onClick={onReset}
                                         className="btn btn-primary mb-3"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >

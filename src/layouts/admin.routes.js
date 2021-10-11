@@ -135,6 +135,7 @@ export const routes = [
     name: 'Configuraciones',
     icon: 'fa fa-cog',
     state: 'configurationCollapse',
+    visibility: true,
     views: [
       {
         path: '/new-rol',
@@ -142,6 +143,7 @@ export const routes = [
         mini: 'NR',
         component: NewRol,
         layout: '/admin',
+        visibility: true,
       },
     ]
   }
