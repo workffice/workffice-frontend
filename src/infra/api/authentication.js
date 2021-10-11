@@ -134,7 +134,6 @@ export const activateUser = async (token) => {
     });
     return Promise.resolve(true);
   } catch (error) {
-    console.log("ERROR", error)
     return Promise.reject(new Error(error.errors[0].error));
   }
 }

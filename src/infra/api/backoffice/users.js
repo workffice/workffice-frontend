@@ -8,9 +8,9 @@ export const getMe = async () => {
                 method: 'GET',
                 headers: headerGet
             });
-        return userData.data;
+        return Promise.resolve(userData.data);
     } catch (error) {
-        throw error.errors[0].error;
+        throw Promise.reject(error.errors[0].error);
     }
 
 }
