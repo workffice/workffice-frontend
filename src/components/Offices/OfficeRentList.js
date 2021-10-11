@@ -1,7 +1,9 @@
 import React from 'react'
 import { Card, CardBody } from 'reactstrap'
-
-export const OfficeRentList = () => {
+import image from '../../assets/img/bg/rawpixel-com.jpg';
+export const OfficeRentList = (props) => {
+    const { office, officeBranch } = props;
+    const { name, privacy, price } = office;
     return (
         <>
             <Card>

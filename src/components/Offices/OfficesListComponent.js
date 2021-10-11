@@ -6,6 +6,7 @@ import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
   React.useEffect(() => {
+    if(props.branch !== undefined)
     props.loadOffices(props.branch.id);
   }, [])
   const { offices, branch } = props;

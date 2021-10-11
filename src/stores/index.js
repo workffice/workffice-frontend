@@ -51,6 +51,7 @@ export const reducers = routes =>
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
     office: officeReducer,
+    offices: officesFoundReducer,
     officesFound: officesFoundReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,

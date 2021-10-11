@@ -13,8 +13,8 @@ export const OfficesContainer = () => {
     const branch = useSelector(state => state.officeBranch ? state.officeBranch.data : readFromLocalStorage("officeBranch"));
     const dispatch = useDispatch();
     const loadOffices = useCallback(async (officeBranchId) => {
-        await dispatch(fetchOfficesList(officeBranchId));
-      }, []);
+        dispatch(await fetchOfficesList(officeBranchId));
+      }, [dispatch]);
     const offices = useSelector(state => state.offices)
     return <OfficesListComponent loadOffices={loadOffices} offices={offices} branch={branch} userMe={userMe} loading={loading} error={error} />;
 };

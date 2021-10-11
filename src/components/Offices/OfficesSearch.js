@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import { Button, Col, Form, Input, Row } from 'reactstrap';
-import { OfficeRentList } from './OfficeRentList';
+// import { OfficeRentList } from './OfficeRentList';
 
 export const OfficesSearch = (props) => {
     const [filters, setFilters] = useState([])
@@ -55,10 +55,8 @@ export const OfficesSearch = (props) => {
             </Row>
             <Row>
                 <Col>
-                {
-                    
-                }
-                    <OfficeRentList office={office}/>
+                
+                    {/* <OfficeRentList office={props.office}/> */}
                 </Col>
             </Row>
         </div >
