@@ -24,16 +24,16 @@ export const CollaboratorListContainer = () => {
   const dispatch = useDispatch();
   const loadCollaborators = useCallback(async (officeBranchId) => {
     await dispatch(collaboratorsList(officeBranchId));
-  }, []);
+  }, [dispatch]);
   const collaborators = useSelector(state => state.collaborators);
   const officeBranchRoles = useSelector(state => state.roles);
   const loadOfficeBranchRoles = useCallback(async (officeBranchId) => {
     await dispatch(rolesList(officeBranchId));
-  }, []);
+  }, [dispatch]);
   const officeBranch = useSelector(() => readFromLocalStorage("officeBranch"));
   const loadCollaboratorRoles = useCallback(async collaboratorId => {
     await dispatch(collaboratorRolesList(collaboratorId));
-  }, {});
+  }, [dispatch]);
   const collaboratorRoles = useSelector(state => state.collaboratorRoles);
   return <Collaborators
     officeBranch={officeBranch}

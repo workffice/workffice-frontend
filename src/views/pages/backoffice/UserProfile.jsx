@@ -80,7 +80,7 @@ export const UserProfile = props => {
                         <CardBody>
                             <ul className="list-unstyled team-members">
                                 {props.collaborators ? props.collaborators.map(collaborator => {
-                                    return <CollaboratorRow {...collaborator} />
+                                    return <CollaboratorRow key={collaborator.id} {...collaborator} />
                                 }) : <EmptyComponent />}
                             </ul>
                         </CardBody>

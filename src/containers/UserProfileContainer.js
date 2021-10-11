@@ -11,13 +11,13 @@ export const UserProfileContainer = () => {
     const branch = useSelector(() => readFromLocalStorage("officeBranch"));
     const loadCollaborators = useCallback(async officeBranchId => {
         await dispatch(collaboratorsList(officeBranchId))
-    }, [])
+    }, [dispatch])
     const collaborators = useSelector(state => {
         return state.collaborators
     });
     const onUpdate = useCallback((id, userData) => {
         dispatch(updateUser(id, userData));
-    }, []);
+    }, [dispatch]);
 
     return <UserProfile
         officeBranch={branch}
