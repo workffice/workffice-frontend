@@ -84,6 +84,7 @@ export const NewOffice = (props) => {
             enabledOffice: enabledOffice && enabledOffice.value,
             enabledDays: null,
             tablesQuantity: 0,
+            capacityPerTablex: 0,
             price: 0,
             multipleSelectServ: null,
             multipleSelectEqu: null,
