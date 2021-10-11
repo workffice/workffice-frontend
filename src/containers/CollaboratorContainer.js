@@ -15,7 +15,7 @@ export const CollaboratorContainer = () => {
   const dispatch = useDispatch();
   const onCreateColaborator = useCallback((collaboratorData, officeBranchId) => {
     dispatch(createColaborator(collaboratorData, officeBranchId));
-  }, []);
+  }, [dispatch]);
   return <NewCollaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
 };
 

@@ -1,6 +1,7 @@
+import { useFormik } from 'formik';
 import React from 'react';
-import { Col } from 'reactstrap';
-import { EmptyComponent } from '../Empty/EmptyComponent';
+import Select from 'react-select';
+import { Button, Col, Form, FormGroup } from 'reactstrap';
 
 export const CollaboratorCard = props => {
   React.useEffect(() => {
@@ -22,6 +23,17 @@ export const CollaboratorCard = props => {
       case "INACTIVE": return "INACTIVO"
     }
   }
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      roles: collaboratorRoles ? collaboratorRoles.map(role => {
+        return { value: role.id, label: role.name }
+      }) : [],
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+    },
+  });
   return (<>
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
@@ -67,7 +79,7 @@ export const CollaboratorCard = props => {
               </div>
             </div>
           </a>
-          <a href='#alguien' style={{ textDecoration: 'none' }}>
+          <a href='#' style={{ textDecoration: 'none' }}>
             <h5>{name}</h5>
           </a>
           <p className='description'>{email}</p>
@@ -77,31 +89,29 @@ export const CollaboratorCard = props => {
         <Col>
           <p className='description'>{getStatus(status)}</p>
         </Col>
-        <hr />
-        <div className='button-container'>
-          <Col>
-            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
-              <h5>
-                <br />
-                <small>Roles actuales</small>
-              </h5>
-            </div>
-            {collaboratorRoles ?
-              collaboratorRoles.map(role => <p key={role.id}>{role.name}</p>)
-              : <EmptyComponent />}
-          </Col>
-          <Col>
-            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
-              <h5>
-                <br />
-                <small>Roles de la sucursal</small>
-              </h5>
-            </div>
-            {officeBranchRoles ?
-              officeBranchRoles.map(role => <p key={role.id}>{role.name}</p>)
-              : <EmptyComponent />}
-          </Col>
-        </div>
+        <Col>
+          <Form onSubmit={formik.handleSubmit}>
+            <FormGroup className='button-container'>
+              <label htmlFor="roles">Roles</label>
+              <Select
+                className="react-select"
+                classNamePrefix="react-select"
+                id="roles"
+                name="roles"
+                placeholder="Roles"
+                closeMenuOnSelect={false}
+                isMulti
+                value={formik.values.roles}
+                onChange={value => formik.setFieldValue("roles", value)}
+                onBlur={formik.handleBlur}
+                options={officeBranchRoles ? officeBranchRoles.map(role => {
+                  return { value: role.id, label: role.name }
+                }) : []}
+              />
+            </FormGroup>
+            <Button className="btn-success" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
+          </Form>
+        </Col>
       </div>
     </div>
   </>)
