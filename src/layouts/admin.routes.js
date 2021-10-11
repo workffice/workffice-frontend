@@ -1,5 +1,7 @@
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 // import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
+import { NewRol } from '../components/Rol/NewRol';
+// import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
@@ -124,6 +126,23 @@ export const routes = [
         layout: '/admin',
         visibility: true
       }
+    ]
+  },
+  {
+    collapse: true,
+    name: 'Configuraciones',
+    icon: 'fa fa-cog',
+    state: 'configurationCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/new-rol',
+        name: 'Nuevo Rol',
+        mini: 'NR',
+        component: NewRol,
+        layout: '/admin',
+        visibility: true,
+      },
     ]
   }
 ];
