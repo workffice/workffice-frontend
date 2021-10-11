@@ -25,7 +25,7 @@ export const OfficeBranch = (props) => {
           xg="12"
           style={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Button className="btn-round" color="primary" size="medium" >
-            <Link to="/admin/colaborators" style={{ color: 'white', textDecoration: 'none' }}>
+            <Link to="/admin/collaborators" style={{ color: 'white', textDecoration: 'none' }}>
               {' '}
               <i className="fa fa-plus" />
               {' '}Colaborador

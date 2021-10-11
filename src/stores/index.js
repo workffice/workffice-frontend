@@ -13,6 +13,7 @@ import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
 import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesReducer } from './reducers/backoffice/officesReducer';
+import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -43,6 +44,7 @@ export const reducers = routes =>
     router: connectRouter(routes),
     login: loginReducer,
     userMe: userMeReducer,
+    collaborators: collaboratorsReducer,
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
     office: officeReducer,

@@ -1,8 +1,21 @@
 import React from 'react';
 import { Col } from 'reactstrap';
 
-export const ColaboratorCard = () => (
-  <>
+export const ColaboratorCard = props => {
+  const {
+    name,
+    email,
+    status
+  } = props
+
+  const getStatus = (status) => {
+    switch (status) {
+      case "PENDING": return "PENDIENTE"
+      case "ACTIVE": return "ACTIVO"
+      case "INACTIVE": return "INACTIVO"
+    }
+  }
+  return (<>
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
         <div className='image' id='image' style={{ position: 'absolute' }}>
@@ -48,12 +61,15 @@ export const ColaboratorCard = () => (
             </div>
           </a>
           <a href='#alguien' style={{ textDecoration: 'none' }}>
-            <h5>Colaborador 1</h5>
+            <h5>{name}</h5>
           </a>
-          <p className='description'>colab1@gmail.com</p>
+          <p className='description'>{email}</p>
         </div>
       </div>
       <div className='card-footer'>
+        <Col>
+          <p className='description'>{getStatus(status)}</p>
+        </Col>
         <hr />
         <div className='button-container'>
           <Col>
@@ -62,52 +78,27 @@ export const ColaboratorCard = () => (
                 <br />
                 <small>Rol</small>
               </h5>
-            </div> 
+            </div>
             <select class="form-select"
-                style={{
-                  backgroundColor: 'white',
-                  border: 'thin #E3E3E3',
-                  borderBottom: 'solid #E3E3E3',
-                  height: 35,
-                  // borderRadius: 8,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  borderWidth: 2, 
-                }}
-              >
-                <option selected>Supervisor</option>
-                <option value="Pendiente">Administrativo</option>
-            </select>           
-          </Col>
-          <Col>
-            <div className='ml-auto col-sm-12 mr-auto col-12 col-md-12 col-lg-12'>
-              <h5>
-                <br />
-                <small>Estado</small>
-              </h5>
-            </div> 
-            <select class="form-select"
-                style={{
-                  backgroundColor: 'white',
-                  border: 'thin #E3E3E3',
-                  borderBottom: 'solid #E3E3E3',
-                  height: 35,
-                  // borderRadius: 8,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  borderWidth: 2, 
-                }}
-              >
-                <option selected>Activo</option>
-                <option value="Pendiente">Pendiente</option>
-              </select>                         
+              style={{
+                backgroundColor: 'white',
+                border: 'thin #E3E3E3',
+                borderBottom: 'solid #E3E3E3',
+                height: 35,
+                // borderRadius: 8,
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                borderWidth: 2,
+              }}
+            >
+              <option selected>Supervisor</option>
+              <option value="Pendiente">Administrativo</option>
+            </select>
           </Col>
         </div>
       </div>
     </div>
-  </>
-);
+  </>)
+};
