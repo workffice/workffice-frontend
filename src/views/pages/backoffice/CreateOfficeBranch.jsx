@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap';
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { OfficeBranchCreate } from '../../../components/OfficeBranch/OfficeBranchCreate';
 
 export const CreateOfficeBranch = (props) => {

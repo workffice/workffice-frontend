@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
+import { RoleComponent } from './RoleComponent';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
-import { OfficeComponent } from './OfficeComponent';
 
-export const OfficesListComponent = (props) => {
+export const RoleListComponent = props => {
+
   React.useEffect(() => {
-    props.loadOffices(props.branch.id);
-  }, [])
-  const { offices, branch } = props;
+    props.fetchRoles(), []
+  })
+  const { roles } = props
+
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
-        <Col xs="12" md="6" lg="12" xg="12">
+        <Col xs="12" md="12" lg="12" xg="12">
           <h1>
-            Gestionar <small color="red">oficinas</small>
+            Gestionar <small color="red">roles</small>
           </h1>
           <hr />
         </Col>
@@ -27,23 +29,20 @@ export const OfficesListComponent = (props) => {
           xg="12"
           style={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Button className="btn-round" color="primary">
-            <Link to="/admin/new-office" style={{ color: 'white', textDecoration: 'none' }}>
+            <Link to="/admin/new-rol" style={{ color: 'white', textDecoration: 'none' }}>
               {' '}
-              <i className="fa fa-plus" /> Nueva Oficina
+              <i className="fa fa-plus" /> Nuevo rol
             </Link>
           </Button>
         </Col>
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
-        {offices ? props.offices.data.map((office) => {
-          return <Col xs="10" md="4" lg="4" xg="4">
-            <OfficeComponent office={office} officeBranch={branch} />
+        {roles ? roles.map((role) => {
+          return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
+            <RoleComponent {...role} />
           </Col>
-        }) : <EmptyComponent />
-
-        }
-
+        }) : <EmptyComponent />}
       </Row>
     </div >
   );
