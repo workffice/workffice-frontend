@@ -9,9 +9,9 @@ import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
-import { RolListComponent } from '../components/Rol/RolListComponent';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { NewNotice } from '../components/Notice/NewNotice';
+import { RolesListContainer } from '../containers/backoffice/RoleContainer';
 
 export const routes = [
   {
@@ -141,7 +141,7 @@ export const routes = [
         path: '/roles',
         name: 'Gestionar Roles',
         mini: 'GR',
-        component: RolListComponent,
+        component: RolesListContainer,
         layout: '/admin',
         visibility: true,
       },

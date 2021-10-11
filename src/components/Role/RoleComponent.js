@@ -2,33 +2,29 @@ import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import './styles/RolComponent.css';
 
-export const RolComponent = (props) => {
-
-  const { rol } = props;
-  const { rolName, resource, active } = rol;
-
-  const isActive = active === true;
-
+export const RoleComponent = ({name, permissions}) => {
+  const getAccessLabel = access => {
+    switch(access) {
+      case "WRITE": return "LECTURA / ESCRITURA"
+      case "READ": return "LECTURA"
+    }
+  }
+  
   return (
     <>
       <Card style={{ marginRight: '5%' }}>
         <CardBody>
           <div className="office-branch-card-title">
             <h5 style={{ marginBottom: 0 }}>
-              {rolName}
+              {name}
             </h5>
-            {
-              isActive 
-                ? <label style={{ display: 'flex', alignItems: 'center' }}>activo</label>
-                : <label style={{ display: 'flex', alignItems: 'center' }}>Inactivo</label>
-            }
           </div>
           <hr />
           {
-            resource && resource.map((resource) =>
+            permissions && permissions.map((permission) =>
               <div className='text'>
                 <label className="form-label">
-                {`${resource.name}: `} <small>{`${resource.label}`}</small>
+                {permission.resource} : <small>{getAccessLabel(permission.access)}</small>
                 </label>
               </div>
             )
