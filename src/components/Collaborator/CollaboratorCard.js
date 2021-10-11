@@ -1,13 +1,21 @@
 import React from 'react';
 import { Col } from 'reactstrap';
+import { EmptyComponent } from '../Empty/EmptyComponent';
 
 export const CollaboratorCard = props => {
+  React.useEffect(() => {
+    props.loadCollaboratorRoles(props.id);
+  }, [])
+
   const {
     name,
     email,
-    status
+    status,
+    officeBranchRoles,
+    collaboratorRoles,
   } = props
 
+  console.log(collaboratorRoles)
   const getStatus = (status) => {
     switch (status) {
       case "PENDING": return "PENDIENTE"
@@ -22,17 +30,17 @@ export const CollaboratorCard = props => {
           <img alt='...' src='https://demos.creative-tim.com/paper-dashboard-pro-react/static/media/damir-bosnjak.efcaca50.jpg' />
         </div>
         <div>
-          <td
+          <div
             className='td-actions text-right'
             style={{
               alignItems: 'flex-end',
               display: 'flex',
               justifyContent: 'flex-end',
             }}>
-            <button type='button' id='tooltip570363224' title class="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
+            <button type='button' id='tooltip570363224' title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
               <i className='nc-icon nc-simple-remove'></i>
             </button>
-          </td>
+          </div>
         </div>
       </div>
       <div className='card-body' style={{ minHeight: 100 }}>
@@ -76,26 +84,23 @@ export const CollaboratorCard = props => {
             <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
               <h5>
                 <br />
-                <small>Rol</small>
+                <small>Roles actuales</small>
               </h5>
             </div>
-            <select class="form-select"
-              style={{
-                backgroundColor: 'white',
-                border: 'thin #E3E3E3',
-                borderBottom: 'solid #E3E3E3',
-                height: 35,
-                // borderRadius: 8,
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                borderWidth: 2,
-              }}
-            >
-              <option selected>Supervisor</option>
-              <option value="Pendiente">Administrativo</option>
-            </select>
+            {collaboratorRoles ?
+              collaboratorRoles.map(role => <p key={role.id}>{role.name}</p>)
+              : <EmptyComponent />}
+          </Col>
+          <Col>
+            <div className='ml-auto col-sm-12 col-12 col-md-12 col-lg-12'>
+              <h5>
+                <br />
+                <small>Roles de la sucursal</small>
+              </h5>
+            </div>
+            {officeBranchRoles ?
+              officeBranchRoles.map(role => <p key={role.id}>{role.name}</p>)
+              : <EmptyComponent />}
           </Col>
         </div>
       </div>
