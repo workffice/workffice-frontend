@@ -1,8 +1,8 @@
 
 import { createColaborator as createCollaborator, fetchCollaborators, updateCollaborator } from "../../infra/api/backoffice/collaborator";
 
-export const createCollaboratorApi = async (credentials, officeBranchId) => {
-  return Promise.resolve(createCollaborator(credentials, officeBranchId));
+export const createCollaboratorApi = async (officeBranchId, collaboratorBody) => {
+  return Promise.resolve(createCollaborator(officeBranchId, collaboratorBody));
 };
 
 

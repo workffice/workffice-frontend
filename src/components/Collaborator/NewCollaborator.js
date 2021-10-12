@@ -1,34 +1,44 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Row, Col, Card, CardBody, Form, CardHeader, Alert } from 'reactstrap';
+import Select from 'react-select';
+import { Row, Col, Card, CardBody, Form, CardHeader, Alert, FormGroup } from 'reactstrap';
 
-export const NewCollaborator = (props) => {
-  const { officeBranches } = props;
-  const { error } = props;
+export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
+  React.useEffect(() => {
+    loadOfficeBranchRoles()
+  }, [])
   const history = useHistory();
   const validate = values => {
     const errors = {};
-    if (!values.email) {
-      errors.email = 'Requerido.';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = 'Dirección de email inválida.';
+    if (!values.collaboratorName) {
+      errors.name = "Requerido"
     }
+    if (!values.collaboratorEmail) {
+      errors.email = 'Requerido'
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.collaboratorEmail)
+    ) {
+      errors.email = 'Dirección de email inválida.'
+    }
+    if (values.roles.length == 0)
+      errors.roles = 'Debe elegir al menos un rol'
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      roleIds: ["e486e009-a132-47cd-bb83-3c38d1c15ea9"]
+      collaboratorName: "",
+      collaboratorEmail: "",
+      roles: []
     },
     validate,
-    onSubmit: async (credentials) => {
-      console.log('credentials: ', credentials);
-      await props.onCreateColaborator(credentials, officeBranches.data[0].id);
+    onSubmit: async ({ collaboratorName, collaboratorEmail, roles }) => {
+      await createCollaborator({
+        email: collaboratorEmail,
+        name: collaboratorName,
+        roleIds: roles.map(role => role.value)
+      });
       history.push('/admin/collaborators')
     }
   })
@@ -54,11 +64,11 @@ export const NewCollaborator = (props) => {
               }
             </CardHeader>
             <CardBody>
-              <div class="office-branch-card-title colaborator" style={{ display: 'block', marginTop: 0 }}>
+              <div className="office-branch-card-title colaborator" style={{ display: 'block', marginTop: 0 }}>
                 <row>
-                  <div class="mb-3">
+                  <FormGroup className={formik.errors.name ? 'has-danger mb-3' : 'mb-3'}>
                     <label
-                      for="nameColaborator"
+                      for="collaboratorName"
                       class="form-label"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
@@ -66,46 +76,75 @@ export const NewCollaborator = (props) => {
                     </label>
                     <input
                       type="text"
-                      class="form-control"
-                      id="nameColaborator"
-                      name='name'
+                      className="form-control"
+                      id="collaboratorName"
+                      name='collaboratorName'
                       placeholder="Nombre del colaborador"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.name}
+                      value={formik.values.collaboratorName}
                     />
-                  </div>
-                  <div className={formik.errors.email ? 'has-danger mb-3' : 'mb-3'}>
+                    {formik.errors.name ? (
+                      <div className="error">{formik.errors.name}</div>
+                    ) : null}
+                  </FormGroup>
+                  <FormGroup className={formik.errors.email ? 'has-danger mb-3' : 'mb-3'}>
                     <label
-                      for="emailColaborator"
-                      class="form-label"
+                      for="collaboratorEmail"
+                      className="form-label"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
                       Email
                     </label>
                     <input
                       type="email"
-                      class="form-control"
-                      id="emailColaborator"
-                      name='email'
+                      className="form-control"
+                      id="collaboratorEmail"
+                      name='collaboratorEmail'
                       placeholder="nombre@ejemplo.com"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.email}
+                      value={formik.values.collaboratorEmail}
                     />
-                    {formik.errors.email && formik.touched.email ? (
+                    {formik.errors.email ? (
                       <div className="error">{formik.errors.email}</div>
                     ) : null}
-                  </div>
+                  </FormGroup>
+                  <FormGroup className={formik.errors.roles ? 'has-danger mb-3' : 'mb-3'}>
+                    <label
+                      className="form-label"
+                      style={{ fontSize: 20, color: '#081620' }}
+                      htmlFor="roles">
+                      Roles
+                    </label>
+                    <Select
+                      className="react-select"
+                      classNamePrefix="react-select"
+                      id="roles"
+                      name="roles"
+                      placeholder="Roles"
+                      closeMenuOnSelect={false}
+                      isMulti={true}
+                      value={formik.values.roles}
+                      onChange={value => formik.setFieldValue("roles", value)}
+                      onBlur={formik.handleBlur}
+                      options={officeBranchRoles ? officeBranchRoles.map(role => {
+                        return { value: role.id, label: role.name }
+                      }) : []}
+                    />
+                    {formik.errors.roles ? (
+                      <div className="error">{formik.errors.roles}</div>
+                    ) : <div></div>}
+                  </FormGroup>
                 </row>
               </div>
               <hr />
               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">Aceptar</button>
+                <div className="col-auto">
+                  <button type="submit" className="btn btn-primary mb-3">Aceptar</button>
                 </div>
-                <div class="col-auto">
-                  <button type="reset" class="btn btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</button>
+                <div className="col-auto">
+                  <button type="reset" className="btn btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</button>
                 </div>
               </div>
             </CardBody>
