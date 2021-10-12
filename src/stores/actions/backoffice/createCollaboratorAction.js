@@ -9,10 +9,10 @@ export const fetchCreateCollaborator = credentials => ({
   payload: credentials ? credentials : null,
 });
 
-export const createColaborator = (credentials, officeBranchId) => async (dispatch) => {
+export const createColaborator = (officeBranchId, collaboratorBody) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
-    dispatch(fetchCreateCollaborator(await createCollaboratorApi(credentials, officeBranchId)));
+    dispatch(fetchCreateCollaborator(await createCollaboratorApi(officeBranchId, collaboratorBody)));
   } catch (error) {
     dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
   } finally {

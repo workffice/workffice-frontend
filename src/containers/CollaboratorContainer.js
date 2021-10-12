@@ -11,12 +11,22 @@ import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/r
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
-  const officeBranches = useSelector(state => state.officeBranches);
+  const officeBranch = readFromLocalStorage("officeBranch");
   const dispatch = useDispatch();
-  const onCreateColaborator = useCallback((collaboratorData, officeBranchId) => {
-    dispatch(createColaborator(collaboratorData, officeBranchId));
+  const officeBranchRoles = useSelector(state => state.roles);
+  const loadOfficeBranchRoles = useCallback(async () => {
+    await dispatch(rolesList(officeBranch.id));
   }, [dispatch]);
-  return <NewCollaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
+  const onCreateColaborator = useCallback(collaboratorBody => {
+    dispatch(createColaborator(officeBranch.id, collaboratorBody));
+  }, [dispatch]);
+
+  return <NewCollaborator
+    createCollaborator={onCreateColaborator}
+    officeBranchRoles={officeBranchRoles}
+    loadOfficeBranchRoles={loadOfficeBranchRoles}
+    loading={loading}
+    error={error} />;
 };
 
 
