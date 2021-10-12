@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useHistory } from 'react-router';
 import Select from 'react-select';
-import { Row, Col, Card, CardBody, Form, CardHeader, Alert, FormGroup } from 'reactstrap';
+import { Row, Col, Card, CardBody, Form, CardHeader, FormGroup } from 'reactstrap';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
+import { Notification } from '../Common/Notification/Notification';
 
 export const NewCollaborator = ({ notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
@@ -24,7 +26,18 @@ export const NewCollaborator = ({ notification, hideNotification, officeBranchRo
       errors.roles = 'Debe elegir al menos un rol'
     return errors;
   };
-
+  React.useEffect(() => {
+    if (notification.show) {
+      if (notification.isSuccess)
+        setTimeout(() => {
+          history.push("/admin/collaborators")
+        }, 2000)
+      setTimeout(() => {
+        hideNotification()
+      }, 1500)
+    }
+  })
+  const history = useHistory()
   const formik = useFormik({
     initialValues: {
       collaboratorName: "",
@@ -57,25 +70,26 @@ export const NewCollaborator = ({ notification, hideNotification, officeBranchRo
         <Form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <Card style={{ width: '100%' }}>
             <CardHeader>
-              {
-                notification.show && notification.isError ?
-                  <Alert isOpen={notification.show} color="danger" onClick={hideNotification}>
-                    {getErrorMessage(notification.errorCode)}
-                    <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-                  </Alert>
-                  : <Alert isOpen={notification.show} color="success" onClick={hideNotification}>
-                    El colaborador se creo correctamente
-                    <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-                  </Alert>
-              }
+              <Notification
+                show={notification.show && notification.isError}
+                isError={true}
+                message={getErrorMessage(notification.errorCode)}
+                hideNotification={hideNotification}
+              />
+              <Notification
+                show={notification.show && notification.isSuccess}
+                message={"El colaborador se creo correctamente"}
+                hideNotification={hideNotification}
+              />
+
             </CardHeader>
             <CardBody>
               <div className="office-branch-card-title colaborator" style={{ display: 'block', marginTop: 0 }}>
                 <div>
                   <FormGroup className={formik.errors.name ? 'has-danger mb-3' : 'mb-3'}>
                     <label
-                      for="collaboratorName"
-                      class="form-label"
+                      htmlFor="collaboratorName"
+                      className="form-label"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
                       Nombre
@@ -96,7 +110,7 @@ export const NewCollaborator = ({ notification, hideNotification, officeBranchRo
                   </FormGroup>
                   <FormGroup className={formik.errors.email ? 'has-danger mb-3' : 'mb-3'}>
                     <label
-                      for="collaboratorEmail"
+                      htmlFor="collaboratorEmail"
                       className="form-label"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
