@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { useDispatch } from 'react-redux';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 
 function Register(props) {
   const { loading, error } = props;
@@ -56,7 +56,7 @@ function Register(props) {
   React.useEffect(() => {
     if (error.show) {
       setTimeout(() => {
-        dispatch({ type: HIDE_ERROR });
+        dispatch(hideNotification());
       }, 2500);
     }
   }, [error]);

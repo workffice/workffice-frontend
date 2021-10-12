@@ -15,7 +15,6 @@ import {
     CardHeader,
     Alert,
 } from 'reactstrap';
-import { HIDE_ERROR } from '../../stores/actions';
 import { useDispatch, useSelector } from 'react-redux';
 // import { customizedErrorAuth } from '../../infra/errorsAuth';
 // import ImageUpload from '../CustomUpload/ImageUpload';
@@ -87,7 +86,7 @@ export const OfficeBranchEdit = (props) => {
 
         if (error.show) {
             setTimeout(() => {
-                dispatch({ type: HIDE_ERROR });
+                dispatch(hideNotification());
             }, 2500);
         }
     }, [error]);

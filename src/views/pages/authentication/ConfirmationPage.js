@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap'
 import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
 import { confirmation } from '../../../stores/actions/auth/confirmationAccountActions';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 
 
 export const ConfirmationPage = (props) => {
@@ -15,7 +15,7 @@ export const ConfirmationPage = (props) => {
     const query = new URLSearchParams(useLocation().search);
     token = query.get("token");
     React.useEffect(() => {
-        dispatch({ type: HIDE_ERROR });
+        dispatch(hideNotification());
     }, [props.error]);
 
     React.useEffect(() => {

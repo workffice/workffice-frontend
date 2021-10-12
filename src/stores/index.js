@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { loginReducer } from './reducers/auth/loginReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
-import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
+import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
@@ -14,6 +14,7 @@ import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesReducer } from './reducers/backoffice/officesReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
+import { isError } from 'lodash-es';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -24,19 +25,37 @@ const isLoadingReducer = (state = false, { type, payload }) => {
 };
 
 
-const errorInitialState = {message: null, show: false, errorCode: null}
-const setErrorReducer = (state = errorInitialState, { type, payload }) => {
+const notificationInitialState = {
+  message: null,
+  isSuccess: false,
+  isError: false,
+  show: false,
+  errorCode: null,
+}
+const notificationReducer = (state = notificationInitialState, { type, payload }) => {
   switch(type) {
+    case SET_SUCCESS:
+      return  {
+        message: payload.message ? payload.message : null,
+        errorCode: null,
+        isSuccess: true,
+        isError: isError,
+        show: true,
+      }
     case SET_ERROR:
       return  {
         message: payload.message ? payload.message : null,
         errorCode: payload.error ? payload.error : null,
-        show: true
+        isSuccess: false,
+        isError: true,
+        show: true,
       }
-    case HIDE_ERROR:
+    case HIDE_NOTIFICATION:
       return {
         message: null,
         errorCode: null,
+        isSuccess: null,
+        isError: null,
         show: false
       }
     default:
@@ -62,5 +81,5 @@ export const reducers = routes =>
     register: registerReducer,
     resetPaswword: resetPasswordReducer,
     isLoading: isLoadingReducer,
-    error: setErrorReducer,
+    notification: notificationReducer,
   });

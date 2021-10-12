@@ -20,7 +20,7 @@ import {
     Alert,
     Container
 } from 'reactstrap';
-import { HIDE_ERROR } from '../../stores/actions';
+import { hideNotification } from '../../stores/actions';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
@@ -108,7 +108,7 @@ export const NewOffice = (props) => {
     React.useEffect(() => {
         if (error.show) {
             setTimeout(() => {
-                dispatch({ type: HIDE_ERROR });
+                dispatch(hideNotification());
             }, 2500);
         }
     }, [error]);

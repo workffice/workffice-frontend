@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -36,14 +36,14 @@ export const ResetPasswordPage = props => {
         onSubmit: async values => {
             Promise.resolve(await props.onResetPassword(token, values)).then(() => {
                 props.resetPassword !== null && history.push('/auth/confirmation-password');
-                dispatch({type:HIDE_ERROR});
+                dispatch(hideNotification());
             });
         }
     });
     React.useEffect(() => {
         if (error.show) {
             setTimeout(() => {
-                dispatch({ type: HIDE_ERROR });
+                dispatch(hideNotification());
             }, 2500);
         }
     }, [error]);

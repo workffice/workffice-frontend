@@ -17,7 +17,7 @@ import {
   Col,
 } from 'reactstrap';
 import { Loading } from '../../../components/Common/Loading/Loading';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 
@@ -43,14 +43,14 @@ export const RecoveryPassword = (props) => {
     validate,
     onSubmit: async values => {
       Promise.resolve(await props.onResetPassword(values)).then(() => {
-        dispatch({ type: HIDE_ERROR });
+        dispatch(hideNotification());
         history.push('/auth/confirmation-recovery');
       });
     }
   });
 
   React.useEffect(() => {
-    dispatch({ type: HIDE_ERROR });
+    dispatch(hideNotification());
   }, [])
 
   React.useEffect(() => {

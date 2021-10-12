@@ -22,7 +22,7 @@ import { useHistory } from 'react-router-dom';
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { useDispatch } from 'react-redux';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 
 
 const Login = (props) => {
@@ -63,7 +63,7 @@ const Login = (props) => {
   React.useEffect(() => {
     if (error.show) {
       setTimeout(() => {
-        dispatch({ type: HIDE_ERROR })
+        dispatch(hideNotification())
       }, 2500);
     }
   }, [error]);

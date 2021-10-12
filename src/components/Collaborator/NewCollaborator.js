@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { Row, Col, Card, CardBody, Form, CardHeader, Alert, FormGroup } from 'reactstrap';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
 
-export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
+export const NewCollaborator = ({ notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
     loadOfficeBranchRoles()
   }, [])
@@ -58,9 +58,15 @@ export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRole
           <Card style={{ width: '100%' }}>
             <CardHeader>
               {
-                error.show ?
-                <Alert isOpen={error.show} color="danger">{getErrorMessage(error.errorCode)}</Alert>
-                : <Alert color="success">El colaborador se creo correctamente</Alert>
+                notification.show && notification.isError ?
+                  <Alert isOpen={notification.show} color="danger" onClick={hideNotification}>
+                    {getErrorMessage(notification.errorCode)}
+                    <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+                  </Alert>
+                  : <Alert isOpen={notification.show} color="success" onClick={hideNotification}>
+                    El colaborador se creo correctamente
+                    <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+                  </Alert>
               }
             </CardHeader>
             <CardBody>
