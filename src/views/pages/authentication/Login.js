@@ -19,14 +19,14 @@ import {
 
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { Loading } from '../../../components/Loading/Loading';
+import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { useDispatch } from 'react-redux';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 
 
-const Login = (props) => {
-  const { loading, error } = props;
+const Login = props => {
+  const { loading, notification } = props
   const history = useHistory();
   const dispatch = useDispatch()
   const validate = values => {
@@ -56,17 +56,17 @@ const Login = (props) => {
     validate,
     onSubmit: async (credentials) => {
       await props.onLogin(credentials);
-      error.message === null && history.push("/office-branch/select");
+      history.push("/office-branch/select");
     }
   });
 
   React.useEffect(() => {
-    if (error.show) {
+    if (notification.show) {
       setTimeout(() => {
-        dispatch({ type: HIDE_ERROR })
+        dispatch(hideNotification())
       }, 2500);
     }
-  }, [error]);
+  }, [notification]);
 
   React.useEffect(() => {
     document.body.classList.toggle('login-page');
@@ -90,12 +90,11 @@ const Login = (props) => {
                     <CardHeader>
                       {
                         <Alert
-                          isOpen={error.show && error.message!==null}
+                          isOpen={notification.show && notification.isError}
                           color="danger"
                           fade={false}
-                        // transition={{ ...Fade.defaultProps, unmountOnExit: true }}
                         >
-                          {customizedErrorAuth(error.message)}
+                          {customizedErrorAuth(notification.errorCode)}
                         </Alert>
                       }
                       <h3 className="header text-center">Login</h3>

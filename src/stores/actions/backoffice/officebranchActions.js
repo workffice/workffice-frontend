@@ -1,4 +1,4 @@
-import { setError, setIsLoading } from "..";
+import { setError, setIsLoading, setSuccess } from "..";
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
 import { fetchOfficesList } from "./officesActions";
 
@@ -19,6 +19,7 @@ export const createOfficeBranch = (officeBranchData, userId) => async (dispatch)
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {

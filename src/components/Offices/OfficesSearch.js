@@ -1,14 +1,27 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import { Button, Col, Form, Input, Row } from 'reactstrap';
+import Select from 'react-select';
 // import { OfficeRentList } from './OfficeRentList';
 import { OfficeBranchCard } from '../OfficeBranch/OfficeBranchCard';
 
 export const OfficesSearch = (props) => {
     const { officeBranches } = props;
+    React.useEffect(() => {
+    }, []);
+    const typesOptions = [
+        {
+            value: "",
+            label: "Seleccione una opción",
+        },
+        { value: "PRIVATE", label: "Privada" },
+        { value: "SHARED", label: "Compartida" },
+    ];
+
     // let allOffices = [];
     // console.log(pagination);
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
             office_capacity_gt: '',
             office_capacity_lt: '',
@@ -16,10 +29,14 @@ export const OfficesSearch = (props) => {
             search: ''
         },
         onSubmit: async values => {
-            props.search(values)
+            const data = {
+                ...values,
+                office_type: values.office_type.value
+            }
+            console.log(data)
+            await props.search(data);
         }
     })
-
 
     return (
         <div className="content">
@@ -46,13 +63,19 @@ export const OfficesSearch = (props) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.search} placeholder="Nombre de sucursal..."></Input>
-                        <Input
-                            className="search-input"
-                            type="text"
-                            name='office_type'
-                            onChange={formik.handleChange}
+                        <Select
+                            className="react-select primary search-input"
+                            classNamePrefix="react-select"
+                            name="office_type"
+                            id="office_type"
+                            name="office_type"
+                            placeholder="Tipo de oficina"
+                            // value={formik.values.office_type}
+                            onChange={value => formik.setFieldValue("office_type", value)}
                             onBlur={formik.handleBlur}
-                            value={formik.values.office_type} placeholder="Tipo de oficinas"></Input>
+                            options={typesOptions}
+                            styles={{ width: '80%' }}
+                        />
                         <Input
                             className="search-input"
                             type="text"
@@ -89,7 +112,7 @@ export const OfficesSearch = (props) => {
                             return (
                                 <>
                                     <Col xs="10" md="4" lg="4" xg="4">
-                                        <OfficeBranchCard branch={officeBranch} />
+                                        <OfficeBranchCard key={officeBranch.id} branch={officeBranch} />
                                     </Col>
                                     {/* {officeBranch.offices.length > 0 && officeBranch.offices.map(office => allOffices.push(office))} */}
                                 </>

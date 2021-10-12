@@ -2,11 +2,10 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { loginReducer } from './reducers/auth/loginReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
-import { HIDE_ERROR, LOADING, SET_ERROR } from './actions';
+import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
-import { createCollaboratorReducer } from './reducers/auth/collaboratorReducer';
 import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
@@ -25,20 +24,43 @@ const isLoadingReducer = (state = false, { type, payload }) => {
   return currentState;
 };
 
-const setErrorReducer = (state = { message: null, show: false }, { type, payload }) => {
-  let currentState = state;
-  if (type === SET_ERROR) {
-    currentState = {
-      message: payload.message ? payload.message : null,
-      show: true
-    };
-  } else if (type === HIDE_ERROR) {
-    currentState = currentState = {
-      message: payload ? payload : null,
-      show: false
-    };
+
+const notificationInitialState = {
+  message: null,
+  isSuccess: false,
+  isError: false,
+  show: false,
+  errorCode: null,
+}
+const notificationReducer = (state = notificationInitialState, { type, payload }) => {
+  switch(type) {
+    case SET_SUCCESS:
+      return  {
+        message: payload.message ? payload.message : null,
+        errorCode: null,
+        isSuccess: true,
+        isError: false,
+        show: true,
+      }
+    case SET_ERROR:
+      return  {
+        message: payload.message ? payload.message : null,
+        errorCode: payload.error ? payload.error : null,
+        isSuccess: false,
+        isError: true,
+        show: true,
+      }
+    case HIDE_NOTIFICATION:
+      return {
+        message: null,
+        errorCode: null,
+        isSuccess: false,
+        isError: false,
+        show: false
+      }
+    default:
+      return state
   }
-  return currentState;
 };
 
 export const reducers = routes =>
@@ -59,7 +81,6 @@ export const reducers = routes =>
     recovery: recoveryReducer,
     register: registerReducer,
     resetPaswword: resetPasswordReducer,
-    createColaborator: createCollaboratorReducer,
     isLoading: isLoadingReducer,
-    error: setErrorReducer,
+    notification: notificationReducer,
   });

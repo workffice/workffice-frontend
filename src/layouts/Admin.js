@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 
 import PerfectScrollbar from 'perfect-scrollbar';
 import Sidebar from '../components/Sidebar/Sidebar.js';
-import AdminNavbar from '../components/Navbars/AdminNavbar';
+import AdminNavbar from '../components/Common/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +24,7 @@ export const AdminLayout = props => {
   React.useEffect(() => {
     dispatch(getUserMe());
   }, []);
+  const user= useSelector(state => state.userMe)
   React.useEffect(()=>{
     if(officeBranch !== null){
       dispatch(fetchOfficesList(officeBranch.data.id));
@@ -75,7 +76,7 @@ export const AdminLayout = props => {
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} bgColor={backgroundColor}
-        activeColor={activeColor} />
+        activeColor={activeColor} user={user}/>
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
         <Switch>{getRoutes(routes)}</Switch>

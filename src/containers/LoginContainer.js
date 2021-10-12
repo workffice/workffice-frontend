@@ -6,10 +6,10 @@ import Login from '../views/pages/authentication/Login';
 
 export const LoginContainer = () => {
   const loading = useSelector(state => state.isLoading);
-  const error = useSelector(state => state.error);
+  const notification = useSelector(state => state.notification);
   const dispatch = useDispatch();
   const onLogin = useCallback(async credentials => {
     await dispatch(userLogin(credentials));
   }, [dispatch]);
-  return <Login onLogin={onLogin} loading={loading} error={error} />;
+  return <Login onLogin={onLogin} loading={loading} notification={notification} />;
 };

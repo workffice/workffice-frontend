@@ -12,8 +12,8 @@ export const OfficesSearchContainer = () => {
     // const userMe = useSelector(state => state.userMe)
     const branch = useSelector(state => state.officeBranch);
     const officeBranches = useSelector(state => state.officesFound)
-    const search = useCallback((values)=>{
-        dispatch(searchAllOffices(values));
+    const search = useCallback(async (values) => {
+        dispatch(await searchAllOffices(values));
     });
     return <OfficesSearch search={search} branch={branch} officeBranches={officeBranches} loading={loading} error={error} />;
 };

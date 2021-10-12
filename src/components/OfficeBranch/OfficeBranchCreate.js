@@ -15,12 +15,9 @@ import {
     CardHeader,
     Alert,
 } from 'reactstrap';
-// import { customizedErrorAuth } from '../../infra/errorsAuth';
-// import ImageUpload from '../CustomUpload/ImageUpload';
 
 
-export const OfficeBranchCreate = (props) => {
-    const { error } = props;
+export const OfficeBranchCreate = ({ notification, create }) => {
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -61,8 +58,7 @@ export const OfficeBranchCreate = (props) => {
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values);
-            await props.create(values);
+            await create(values);
             setTimeout(() => {
                 history.push('/admin/office-branch');
             }, 1000);
@@ -76,7 +72,7 @@ export const OfficeBranchCreate = (props) => {
                     <CardHeader>
                         {
                             <Alert
-                                isOpen={error.show}
+                                isOpen={notification.show && notification.isError}
                                 color="danger"
                                 fade={false}
                             >

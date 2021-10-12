@@ -8,9 +8,9 @@ export const getMe = async () => {
                 method: 'GET',
                 headers: headerGet
             });
-        return userData.data;
+        return Promise.resolve(userData.data);
     } catch (error) {
-        throw error.errors[0].error;
+        throw Promise.reject(error.errors[0]);
     }
 
 }
@@ -23,10 +23,9 @@ export const updateUser = async (userId, userData) => {
                 headers: headersPost,
                 body: JSON.stringify(userData),
             });
-        console.log(userUpdated)
         return Promise.resolve(userUpdated)
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 
 }

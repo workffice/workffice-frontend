@@ -112,7 +112,14 @@ export const UserUpdate = (props) => {
                     <Row>
                         <Col md="12" className="pr-1">
                             <FormGroup>
-                                <Button md="12" type="submit" disabled={formik.isSubmitting}>Guardar</Button>
+                                <Button
+                                    md="12"
+                                    type="submit"
+                                    disabled={formik.isSubmitting}
+                                    className="btn btn-primary"
+                                >
+                                    Guardar
+                                </Button>
                             </FormGroup>
                         </Col>
                     </Row>

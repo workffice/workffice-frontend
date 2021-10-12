@@ -1,14 +1,19 @@
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-// import { OfficesListComponent } from '../components/Offices/OfficesListComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 // import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
+import { NewRoleContainer } from '../containers/backoffice/RoleContainer'
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import {UserProfileContainer} from '../containers/UserProfileContainer';
+import { UserProfileContainer } from '../containers/UserProfileContainer';
+import { NewMembership } from '../components/Membership/NewMembership';
+import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
+import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
+import { NewNotice } from '../components/Notice/NewNotice';
+import { RolesListContainer } from '../containers/backoffice/RoleContainer';
 
 export const routes = [
   {
@@ -144,4 +149,60 @@ export const routes = [
       }
     ]
   },
+
+  {
+    collapse: true,
+    name: 'Configuraciones',
+    icon: 'fa fa-cog',
+    state: 'configurationCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/roles',
+        name: 'Gestionar Roles',
+        mini: 'GR',
+        component: RolesListContainer,
+        layout: '/admin',
+        visibility: true,
+      },
+      {
+        path: '/new-rol',
+        name: 'Nuevo Rol',
+        mini: 'NR',
+        component: NewRoleContainer,
+        layout: '/admin',
+      },
+      {
+        path: '/membership',
+        name: 'Gestionar membresías',
+        mini: 'GM',
+        component: MembershipListComponent,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/new-membership',
+        name: 'Nueva membresía',
+        mini: 'NM',
+        component: NewMembership,
+        layout: '/admin',
+      },
+      {
+        path: '/notice',
+        name: 'Gestionar noticias',
+        mini: 'GN',
+        component: NoticeListComponent,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/new-notice',
+        name: 'Nueva noticia',
+        mini: 'NN',
+        component: NewNotice,
+        layout: '/admin',
+      },
+
+    ]
+  }
 ];

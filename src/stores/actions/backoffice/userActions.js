@@ -1,8 +1,9 @@
-import { setError, setIsLoading } from "..";
-import { userMeAPI } from "../../../api/backoffice/users";
+import { setError, setIsLoading, setSuccess } from "..";
+import { updateUserApi, userMeAPI } from "../../../api/backoffice/users";
 
 
 export const FETCH_ME = 'FETCH_ME';
+export const UPDATE_USER = "UPDATE_USER"
 
 export const fetchMe = (userMe) => {
     return {
@@ -20,3 +21,23 @@ export const getUserMe = () => async (dispatch) => {
     }
 
 }
+
+
+export const updateUserAction = () => {
+    return {
+        type: UPDATE_USER,
+        payload: null
+    }
+}
+
+export const updateUser = (userId, userBody) => async (dispatch) => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(updateUserAction(await updateUserApi(userId, userBody)));
+        dispatch(setSuccess())
+    } catch (error) {
+        dispatch(setError(error));
+    } finally {
+        dispatch(setIsLoading(false));
+    }
+};

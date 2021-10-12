@@ -2,8 +2,8 @@ import React from 'react';
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from 'perfect-scrollbar';
 import { Route, Switch } from 'react-router-dom';
-import AuthNavbar from '../components/Navbars/AuthNavbar.js';
-import Footer from '../components/Footer/Footer.js';
+import AuthNavbar from '../components/Common/Navbars/AuthNavbar.js';
+import Footer from '../components/Common/Footer/Footer.js';
 import { routes } from "./auth.routes";
 
 let ps;

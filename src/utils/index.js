@@ -9,7 +9,6 @@ export const getOneErrors = errors => {
 
 export const getUserToken = () => {
   return readFromLocalStorage(AUTH_TOKEN) ? readFromLocalStorage(AUTH_TOKEN).accessToken : readFromLocalStorage(AUTH_TOKEN);
-
 }
 
 export const isSessionValid = () => {

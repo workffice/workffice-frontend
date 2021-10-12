@@ -1,4 +1,4 @@
-import { setError, setIsLoading } from "..";
+import { setError, setIsLoading, setSuccess } from "..";
 import { resetUserPass } from "../../../infra/api/authentication";
 
 
@@ -15,6 +15,7 @@ export const resetPassword = (token, password) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchReset(await resetUserPass(token, password)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {

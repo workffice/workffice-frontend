@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
-import { EmptyComponent } from '../Empty/EmptyComponent';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
