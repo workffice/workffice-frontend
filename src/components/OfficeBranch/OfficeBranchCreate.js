@@ -13,11 +13,11 @@ import {
     Container,
     FormGroup,
     CardHeader,
-    Alert,
 } from 'reactstrap';
+import { Notification } from '../Common/Notification/Notification';
 
 
-export const OfficeBranchCreate = ({ notification, create }) => {
+export const OfficeBranchCreate = ({ hideNotification, notification, create }) => {
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -45,6 +45,13 @@ export const OfficeBranchCreate = ({ notification, create }) => {
         return errors;
     };
 
+    React.useEffect(() => {
+        if (notification.show) {
+          setTimeout(() => {
+            hideNotification()
+          }, 2500);
+        }
+      }, [notification]);
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -60,8 +67,8 @@ export const OfficeBranchCreate = ({ notification, create }) => {
         onSubmit: async (values) => {
             await create(values);
             setTimeout(() => {
-                history.push('/admin/office-branch');
-            }, 1000);
+                history.push('/office-branch/select')
+            }, 1500);
 
         },
     });
@@ -70,15 +77,17 @@ export const OfficeBranchCreate = ({ notification, create }) => {
             <Form onSubmit={formik.handleSubmit}>
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <CardHeader>
-                        {
-                            <Alert
-                                isOpen={notification.show && notification.isError}
-                                color="danger"
-                                fade={false}
-                            >
-                                {'Ocurrió un error. Intente nuevamente'}
-                            </Alert>
-                        }
+                        <Notification
+                            show={notification.show && notification.isError}
+                            message={'Ocurrió un error. Intente nuevamente'}
+                            hideNotification={hideNotification}
+                            isError={notification.isError}
+                        />
+                        <Notification
+                            show={notification.show && notification.isSuccess}
+                            message={"La sucursal se creo correctamente"}
+                            hideNotification={hideNotification}
+                        />
                     </CardHeader>
                     <CardBody>
 

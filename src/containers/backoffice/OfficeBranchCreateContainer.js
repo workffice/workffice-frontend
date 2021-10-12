@@ -2,14 +2,21 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOfficeBranch } from '../../stores/actions/backoffice/officebranchActions';
 import { CreateOfficeBranch } from '../../views/pages/backoffice/CreateOfficeBranch';
+import { hideNotification as hideNotificationAction } from '../../stores/actions'
 
 export const OfficeBranchCreateContainer = () => {
-    const loading = useSelector(state => state.isLoading);
-    const userId = useSelector(state=>state.userMe.id)
-    const notification = useSelector(state => state.notification);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.userMe)
+    const notification = useSelector(state => state.notification);
+    const hideNotification = useCallback(async () => {
+        await dispatch(hideNotificationAction())
+    }, [dispatch])
     const onCreate = useCallback(officeBranchData => {
-        dispatch(createOfficeBranch(officeBranchData, userId));
+        dispatch(createOfficeBranch(officeBranchData, user.id));
     }, []);
-    return <CreateOfficeBranch onCreate={onCreate} loading={loading} notification={notification} />;
+    return <CreateOfficeBranch
+        hideNotification={hideNotification}
+        onCreate={onCreate}
+        notification={notification}
+    />;
 };
