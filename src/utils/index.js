@@ -8,8 +8,8 @@ export const getOneErrors = errors => {
 };
 
 export const getUserToken = () => {
-  const key = readFromLocalStorage(AUTH_TOKEN);
-  return key ? key.accessToken : key;
+  return readFromLocalStorage(AUTH_TOKEN) ? readFromLocalStorage(AUTH_TOKEN).accessToken : readFromLocalStorage(AUTH_TOKEN);
+
 }
 
 export const isSessionValid = () => {

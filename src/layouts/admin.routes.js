@@ -129,14 +129,14 @@ export const routes = [
   },
   {
     collapse: true,
-    name: 'Búscar oficinas',
+    name: 'Búscar',
     icon: 'fa fa-search',
     state: 'officesSearchCollapse',
     visibility: true,
     views: [
       {
         path: '/search',
-        name: 'Oficinas',
+        name: 'Sucursales',
         mini: 'O',
         component: OfficesSearchContainer,
         layout: '/admin',

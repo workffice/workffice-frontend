@@ -10,10 +10,10 @@ export const OfficesSearchContainer = () => {
     const error = useSelector(state => state.error);
     const dispatch = useDispatch()
     // const userMe = useSelector(state => state.userMe)
-    // const branch = useSelector(state => state.officeBranch);
-    const offices = useSelector(state => state.officesFound)
+    const branch = useSelector(state => state.officeBranch);
+    const officeBranches = useSelector(state => state.officesFound)
     const search = useCallback((values)=>{
         dispatch(searchAllOffices(values));
     });
-    return <OfficesSearch search={search} offices={offices} loading={loading} error={error} />;
+    return <OfficesSearch search={search} branch={branch} officeBranches={officeBranches} loading={loading} error={error} />;
 };

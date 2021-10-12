@@ -15,6 +15,7 @@ import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
+import { officesReducer } from './reducers/backoffice/officesReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -51,7 +52,7 @@ export const reducers = routes =>
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
     office: officeReducer,
-    offices: officesFoundReducer,
+    offices: officesReducer,
     officesFound: officesFoundReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
