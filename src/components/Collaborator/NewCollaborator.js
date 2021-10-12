@@ -1,14 +1,13 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { useHistory } from 'react-router';
 import Select from 'react-select';
 import { Row, Col, Card, CardBody, Form, CardHeader, Alert, FormGroup } from 'reactstrap';
+import { getErrorMessage } from '../../utils/collaboratorTranslations';
 
 export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
     loadOfficeBranchRoles()
   }, [])
-  const history = useHistory();
   const validate = values => {
     const errors = {};
     if (!values.collaboratorName) {
@@ -39,7 +38,6 @@ export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRole
         name: collaboratorName,
         roleIds: roles.map(role => role.value)
       });
-      history.push('/admin/collaborators')
     }
   })
 
@@ -60,12 +58,12 @@ export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRole
           <Card style={{ width: '100%' }}>
             <CardHeader>
               {
-                formik.errors && <Alert isOpen={error.show} color="danger">{error}</Alert>
+                <Alert isOpen={error.show} color="danger">{getErrorMessage(error.errorCode)}</Alert>
               }
             </CardHeader>
             <CardBody>
               <div className="office-branch-card-title colaborator" style={{ display: 'block', marginTop: 0 }}>
-                <row>
+                <div>
                   <FormGroup className={formik.errors.name ? 'has-danger mb-3' : 'mb-3'}>
                     <label
                       for="collaboratorName"
@@ -136,7 +134,7 @@ export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRole
                       <div className="error">{formik.errors.roles}</div>
                     ) : <div></div>}
                   </FormGroup>
-                </row>
+                </div>
               </div>
               <hr />
               <div style={{ display: 'flex', justifyContent: 'center' }}>

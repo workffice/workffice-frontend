@@ -10,7 +10,7 @@ export const createColaborator = async (officeBranchId, collaboratorBody) => {
     });
     return Promise.resolve(newColaborator);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 };
 
