@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Alert } from 'reactstrap';
+import { getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { CollaboratorCard } from './CollaboratorCard';
 
@@ -13,6 +14,8 @@ export const Collaborators = props => {
   }, [])
 
   const {
+    error,
+    hideError,
     collaborators,
     collaboratorRoles,
     officeBranchRoles,
@@ -30,6 +33,17 @@ export const Collaborators = props => {
           <hr />
         </Col>
       </Row>
+      {
+        error.show ?
+          <Alert isOpen={error.show} color="danger">
+            {getErrorMessage(error.errorCode)}
+            <button type="button" class="close" aria-label="Close" onClick={hideError}><span aria-hidden="true">×</span></button>
+            </Alert>
+          : <Alert color="success">
+            El colaborador se actualizo correctamente
+            <button type="button" class="close" aria-label="Close" onClick={hideError}><span aria-hidden="true">×</span></button>
+            </Alert>
+      }
       <Row style={{ justifyContent: 'center' }}>
         <Col
           xs="6"

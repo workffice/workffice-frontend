@@ -7,10 +7,14 @@ import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAct
 import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 import { readFromLocalStorage } from '../infra/api/localStorage';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
+import { hideError as hideErrorAction} from '../stores/actions'
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
   const error = useSelector(state => state.error);
+  const hideError = useCallback(async () => {
+    await dispatch(hideErrorAction());
+  }, [dispatch]);
   const officeBranch = readFromLocalStorage("officeBranch");
   const dispatch = useDispatch();
   const officeBranchRoles = useSelector(state => state.roles);
@@ -26,12 +30,18 @@ export const CollaboratorContainer = () => {
     officeBranchRoles={officeBranchRoles}
     loadOfficeBranchRoles={loadOfficeBranchRoles}
     loading={loading}
-    error={error} />;
+    error={error}
+    hideError={hideError}
+    />;
 };
 
 
 export const CollaboratorListContainer = () => {
   const dispatch = useDispatch();
+  const error = useSelector(state => state.error);
+  const hideError = useCallback(async () => {
+    await dispatch(hideErrorAction());
+  }, [dispatch]);
   const loadCollaborators = useCallback(async (officeBranchId) => {
     await dispatch(collaboratorsList(officeBranchId));
   }, [dispatch]);
@@ -49,6 +59,8 @@ export const CollaboratorListContainer = () => {
     await dispatch(updateCollaborator(collaboratorId, collaboratorBody));
   }, [dispatch]);
   return <Collaborators
+    error={error}
+    hideError={hideError}
     officeBranch={officeBranch}
     loadCollaborators={loadCollaborators}
     officeBranchRoles={officeBranchRoles}

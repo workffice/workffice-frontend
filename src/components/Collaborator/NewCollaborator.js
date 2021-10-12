@@ -58,7 +58,9 @@ export const NewCollaborator = ({ error, officeBranchRoles, loadOfficeBranchRole
           <Card style={{ width: '100%' }}>
             <CardHeader>
               {
+                error.show ?
                 <Alert isOpen={error.show} color="danger">{getErrorMessage(error.errorCode)}</Alert>
+                : <Alert color="success">El colaborador se creo correctamente</Alert>
               }
             </CardHeader>
             <CardBody>

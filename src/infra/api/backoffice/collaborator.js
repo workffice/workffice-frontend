@@ -22,7 +22,7 @@ export const fetchCollaborators = async officeBranchId => {
     });
     return Promise.resolve(collaborators.data);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 }
 
@@ -35,6 +35,6 @@ export const updateCollaborator = async (collaboratorId, collaboratorBody) => {
     });
     return Promise.resolve(response);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 }
