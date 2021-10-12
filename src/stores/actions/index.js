@@ -15,7 +15,7 @@ export const setError = error => ({
 
 export const setSuccess = () => ({
   type: SET_SUCCESS,
-  payload: null,
+  payload: {},
 });
 
 export const hideNotification = () => ({

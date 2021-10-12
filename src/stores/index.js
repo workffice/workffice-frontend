@@ -14,7 +14,6 @@ import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesReducer } from './reducers/backoffice/officesReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
-import { isError } from 'lodash-es';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -39,7 +38,7 @@ const notificationReducer = (state = notificationInitialState, { type, payload }
         message: payload.message ? payload.message : null,
         errorCode: null,
         isSuccess: true,
-        isError: isError,
+        isError: false,
         show: true,
       }
     case SET_ERROR:

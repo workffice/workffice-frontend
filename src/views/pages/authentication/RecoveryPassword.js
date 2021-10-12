@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -22,7 +21,6 @@ import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 
 export const RecoveryPassword = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch()
   const { loading, notification } = props;
   const validate = values => {
@@ -38,15 +36,11 @@ export const RecoveryPassword = (props) => {
   }
   const formik = useFormik({
     initialValues: {
-      userEmail: 'workffice@robot-mail.com'
+      userEmail: ''
     },
     validate,
     onSubmit: async values => {
-      Promise.resolve(await props.onResetPassword(values)).then(() => {
-        dispatch(hideNotification());
-        if (notification.isSuccess)
-          history.push('/auth/confirmation-recovery');
-      });
+      props.onResetPassword(values)
     }
   });
 
@@ -76,14 +70,18 @@ export const RecoveryPassword = (props) => {
                     />
                   </CardHeader>
                   <CardBody>
-                    {
                       <Alert
                         isOpen={notification.show && notification.isError}
                         color="danger"
                       >
-                        {customizedErrorAuth(notification.message)}
+                        {customizedErrorAuth(notification.errorCode)}
                       </Alert>
-                    }
+                      <Alert
+                        isOpen={notification.show && notification.isSuccess}
+                        color="success"
+                      >
+                        Revisa tu correo
+                      </Alert>
                     <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
                     <FormGroup
                       className={
@@ -93,7 +91,7 @@ export const RecoveryPassword = (props) => {
                       }>
                       <Input
                         name='userEmail'
-                        placeholder="Email..."
+                        placeholder="workffice@robot-mail.com"
                         type="email"
                         autoComplete="off"
                         onChange={formik.handleChange}

@@ -105,11 +105,9 @@ export const recoveryPassword = async (userEmail) => {
       headers: headersPost,
       body: JSON.stringify(userEmail)
     });
-    response.then(() => {
-      return Promise.resolve(true);
-    });
+    return Promise.resolve(response);
   } catch (error) {
-    return Promise.reject(new Error(error.errors[0].error));
+    return Promise.reject(error.errors[0]);
   }
 }
 
@@ -122,7 +120,7 @@ export const resetUserPass = async (token, password) => {
     });
     return Promise.resolve(result);
   } catch (error) {
-    return Promise.reject(new Error(error.errors[0].error));
+    return Promise.reject(error.errors[0]);
   }
 }
 
