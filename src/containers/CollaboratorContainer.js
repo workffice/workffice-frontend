@@ -7,21 +7,41 @@ import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAct
 import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/createCollaboratorAction';
 import { readFromLocalStorage } from '../infra/api/localStorage';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
+import { hideNotification as hideNotificationAction } from '../stores/actions'
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
-  const error = useSelector(state => state.error);
-  const officeBranches = useSelector(state => state.officeBranches);
-  const dispatch = useDispatch();
-  const onCreateColaborator = useCallback((collaboratorData, officeBranchId) => {
-    dispatch(createColaborator(collaboratorData, officeBranchId));
+  const notification = useSelector(state => state.notification);
+  const hideNotification = useCallback(async () => {
+    await dispatch(hideNotificationAction());
   }, [dispatch]);
-  return <NewCollaborator onCreateColaborator={onCreateColaborator} officeBranches={officeBranches} loading={loading} error={error} />;
+  const officeBranch = readFromLocalStorage("officeBranch");
+  const dispatch = useDispatch();
+  const officeBranchRoles = useSelector(state => state.roles);
+  const loadOfficeBranchRoles = useCallback(async () => {
+    await dispatch(rolesList(officeBranch.id));
+  }, [dispatch]);
+  const onCreateColaborator = useCallback(collaboratorBody => {
+    dispatch(createColaborator(officeBranch.id, collaboratorBody));
+  }, [dispatch]);
+
+  return <NewCollaborator
+    createCollaborator={onCreateColaborator}
+    officeBranchRoles={officeBranchRoles}
+    loadOfficeBranchRoles={loadOfficeBranchRoles}
+    loading={loading}
+    notification={notification}
+    hideNotification={hideNotification}
+  />;
 };
 
 
 export const CollaboratorListContainer = () => {
   const dispatch = useDispatch();
+  const notification = useSelector(state => state.notification);
+  const hideNotification = useCallback(async () => {
+    await dispatch(hideNotificationAction());
+  }, [dispatch]);
   const loadCollaborators = useCallback(async (officeBranchId) => {
     await dispatch(collaboratorsList(officeBranchId));
   }, [dispatch]);
@@ -39,6 +59,8 @@ export const CollaboratorListContainer = () => {
     await dispatch(updateCollaborator(collaboratorId, collaboratorBody));
   }, [dispatch]);
   return <Collaborators
+    notification={notification}
+    hideNotification={hideNotification}
     officeBranch={officeBranch}
     loadCollaborators={loadCollaborators}
     officeBranchRoles={officeBranchRoles}

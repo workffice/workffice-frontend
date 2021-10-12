@@ -1,16 +1,16 @@
 import { headerGet, headersPost, sdkAuthRequest } from "..";
 import { API_OFFICE_BRANCHES, API_URL } from "../../../environments/environment";
 
-export const createColaborator = async (credentials, officeBranchId) => {
+export const createColaborator = async (officeBranchId, collaboratorBody) => {
   try {
     const newColaborator = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/collaborators/`, {
       method: 'POST',
       headers: headersPost,
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(collaboratorBody)
     });
     return Promise.resolve(newColaborator);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 };
 
@@ -22,7 +22,7 @@ export const fetchCollaborators = async officeBranchId => {
     });
     return Promise.resolve(collaborators.data);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 }
 
@@ -35,6 +35,6 @@ export const updateCollaborator = async (collaboratorId, collaboratorBody) => {
     });
     return Promise.resolve(response);
   } catch (error) {
-    return Promise.reject(error.errors[0].error);
+    return Promise.reject(error.errors[0]);
   }
 }

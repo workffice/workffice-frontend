@@ -3,8 +3,7 @@ import { Col, Row } from 'reactstrap';
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { OfficeBranchCreate } from '../../../components/OfficeBranch/OfficeBranchCreate';
 
-export const CreateOfficeBranch = (props) => {
-    const { error, loading } = props;
+export const CreateOfficeBranch = ({notification, loading, onCreate}) => {
 
     return (
         <div className="content">
@@ -19,7 +18,7 @@ export const CreateOfficeBranch = (props) => {
             <Row>
                 <Col xs="12" md="6" lg="12" xg="12">
                     {loading ? <Loading style={{display:'flex', justifyContent:'center'}}/> :
-                        <OfficeBranchCreate create={props.onCreate} error={error} />
+                        <OfficeBranchCreate create={onCreate} notification={notification} />
                     }
                 </Col>
             </Row>

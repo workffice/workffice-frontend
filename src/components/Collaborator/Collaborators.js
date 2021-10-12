@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Alert } from 'reactstrap';
+import { getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { CollaboratorCard } from './CollaboratorCard';
 
@@ -13,6 +14,8 @@ export const Collaborators = props => {
   }, [])
 
   const {
+    notification,
+    hideNotification,
     collaborators,
     collaboratorRoles,
     officeBranchRoles,
@@ -30,6 +33,15 @@ export const Collaborators = props => {
           <hr />
         </Col>
       </Row>
+      {notification.show && notification.isError ?
+      <Alert isOpen={notification.show} color="danger">
+        {getErrorMessage(notification.errorCode)}
+        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+      </Alert>
+      : <Alert isOpen={notification.show} color="success">
+        El colaborador se actualizo correctamente
+        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+      </Alert>}
       <Row style={{ justifyContent: 'center' }}>
         <Col
           xs="6"

@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
 import {
   Alert,
   Button,
@@ -17,14 +16,13 @@ import {
   Col,
 } from 'reactstrap';
 import { Loading } from '../../../components/Common/Loading/Loading';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 
 export const RecoveryPassword = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch()
-  const { loading, error } = props;
+  const { loading, notification } = props;
   const validate = values => {
     const errors = {};
     if (!values.userEmail) {
@@ -38,19 +36,16 @@ export const RecoveryPassword = (props) => {
   }
   const formik = useFormik({
     initialValues: {
-      userEmail: 'workffice@robot-mail.com'
+      userEmail: ''
     },
     validate,
     onSubmit: async values => {
-      Promise.resolve(await props.onResetPassword(values)).then(() => {
-        dispatch({ type: HIDE_ERROR });
-        history.push('/auth/confirmation-recovery');
-      });
+      props.onResetPassword(values)
     }
   });
 
   React.useEffect(() => {
-    dispatch({ type: HIDE_ERROR });
+    dispatch(hideNotification());
   }, [])
 
   React.useEffect(() => {
@@ -75,14 +70,18 @@ export const RecoveryPassword = (props) => {
                     />
                   </CardHeader>
                   <CardBody>
-                    {
                       <Alert
-                        isOpen={error.show}
+                        isOpen={notification.show && notification.isError}
                         color="danger"
                       >
-                        {customizedErrorAuth(error.message)}
+                        {customizedErrorAuth(notification.errorCode)}
                       </Alert>
-                    }
+                      <Alert
+                        isOpen={notification.show && notification.isSuccess}
+                        color="success"
+                      >
+                        Revisa tu correo
+                      </Alert>
                     <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
                     <FormGroup
                       className={
@@ -92,7 +91,7 @@ export const RecoveryPassword = (props) => {
                       }>
                       <Input
                         name='userEmail'
-                        placeholder="Email..."
+                        placeholder="workffice@robot-mail.com"
                         type="email"
                         autoComplete="off"
                         onChange={formik.handleChange}
@@ -132,4 +131,3 @@ export const RecoveryPassword = (props) => {
     </div>
   );
 }
-

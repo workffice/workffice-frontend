@@ -208,7 +208,7 @@
 
 //Services and equipment target
 .containTarget {
-  background-color: #34B18A;
+  background-color: #34b18a;
   width: 150px;
   border-radius: 10px;
   text-align: center;
@@ -228,3 +228,31 @@
   margin-bottom: 0px;
 }
 
+// Searchbar Office
+
+
+.search-form {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.search-input {
+  width: 90%;
+  height: 36px !important;
+  height: max-content;
+  border-radius: 15px;
+  margin-right: 8px;
+  
+}
+// .search-button {
+//   // position: absolute;
+//   font-size: 14px;
+//   color: #656;
+//   text-align: center;
+//   line-height: 4px;
+//   border-width: 0;
+//   -webkit-border-radius: 0px 15px 15px;
+//   -moz-border-radius: 0px 15px 15px 15px;
+//   border-radius: 15px 15px 15px 15px;
+//   cursor: pointer;
+// }

@@ -116,7 +116,7 @@ export const CollaboratorCard = props => {
                 }) : []}
               />
             </FormGroup>
-            <Button className="btn-success" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
+            <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
           </Form>
         </Col>
       </div>

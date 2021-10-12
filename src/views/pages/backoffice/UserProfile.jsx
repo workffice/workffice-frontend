@@ -10,6 +10,7 @@ import {
     CardTitle,
     Row,
     Col,
+    Alert,
 } from "reactstrap";
 
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
@@ -18,11 +19,13 @@ import { UserUpdate } from "../../../components/User/UserUpdate";
 import CollaboratorRow from "./CollaboratorRow";
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
 
+
 export const UserProfile = props => {
     React.useEffect(() => {
         props.loadCollaborators(props.officeBranch.id);
     }, [])
     const { name, bio } = props.userMe || {}
+    const { notification, hideNotification } = props
     return (
         <div className="content">
             <Row style={{ paddingTop: 30 }}>
@@ -87,6 +90,15 @@ export const UserProfile = props => {
                     </Card>
                 </Col>
                 <Col md="8">
+                    {notification.show && notification.isError ?
+                        <Alert isOpen={notification.show} color="danger">
+                            {notification.errorCode}
+                            <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+                        </Alert>
+                        : <Alert isOpen={notification.show} color="success">
+                            El usuario se actualizo correctamente
+                            <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+                        </Alert>}
                     <UserUpdate update={props.onUpdate} {...props.userMe}></UserUpdate>
                 </Col>
             </Row>

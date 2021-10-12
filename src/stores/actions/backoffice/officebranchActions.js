@@ -1,5 +1,6 @@
-import { setError, setIsLoading } from "..";
+import { setError, setIsLoading, setSuccess } from "..";
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
+import { fetchOfficesList } from "./officesActions";
 
 
 export const FETCH_CREATE_OFFICEBRANCH = 'FETCH_CREATE_OFFICEBRANCH';
@@ -18,6 +19,7 @@ export const createOfficeBranch = (officeBranchData, userId) => async (dispatch)
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {
@@ -72,10 +74,11 @@ export const fetchOfficebranchId = officeBranch => {
 export const getOfficeBranchId = (id) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(id)));
+        await dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(id)));
     } catch (error) {
         dispatch(setError(error));
     } finally {
+        await dispatch(fetchOfficesList(id));
         dispatch(setIsLoading(false));
     }
 }
