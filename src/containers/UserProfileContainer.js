@@ -7,19 +7,17 @@ import UserProfile from '../views/pages/backoffice/UserProfile';
 import { hideNotification as hideNotificationAction } from '../stores/actions'
 
 export const UserProfileContainer = () => {
+    const dispatch = useDispatch()
     const userMe = useSelector(state => state.userMe)
     const notification = useSelector(state => state.notification)
     const hideNotification = useCallback(async () => {
         await dispatch(hideNotificationAction())
     }, [dispatch])
-    const dispatch = useDispatch()
     const branch = useSelector(() => readFromLocalStorage("officeBranch"));
     const loadCollaborators = useCallback(async officeBranchId => {
         await dispatch(collaboratorsList(officeBranchId))
     }, [dispatch])
-    const collaborators = useSelector(state => {
-        return state.collaborators
-    });
+    const collaborators = useSelector(state => state.collaborators);
     const onUpdate = useCallback((id, userData) => {
         dispatch(updateUser(id, userData));
     }, [dispatch]);
