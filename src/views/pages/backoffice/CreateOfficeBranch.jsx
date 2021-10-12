@@ -1,9 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap';
-import { Loading } from '../../../components/Common/Loading/Loading';
 import { OfficeBranchCreate } from '../../../components/OfficeBranch/OfficeBranchCreate';
 
-export const CreateOfficeBranch = ({notification, loading, onCreate}) => {
+export const CreateOfficeBranch = ({ hideNotification, notification, onCreate }) => {
 
     return (
         <div className="content">
@@ -17,9 +16,7 @@ export const CreateOfficeBranch = ({notification, loading, onCreate}) => {
             </Row>
             <Row>
                 <Col xs="12" md="6" lg="12" xg="12">
-                    {loading ? <Loading style={{display:'flex', justifyContent:'center'}}/> :
-                        <OfficeBranchCreate create={onCreate} notification={notification} />
-                    }
+                    <OfficeBranchCreate create={onCreate} hideNotification={hideNotification} notification={notification} />
                 </Col>
             </Row>
         </div>
