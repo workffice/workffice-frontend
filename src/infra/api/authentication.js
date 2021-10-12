@@ -78,7 +78,7 @@ export const loginUser = async (credentials) => {
 
     return Promise.resolve(storeAccessToken(rawAccessToken));
   } catch (error) {
-    return Promise.reject(new Error(error.errors[0].error));
+    return Promise.reject(error.errors[0]);
   }
 };
 /**

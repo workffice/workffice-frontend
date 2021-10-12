@@ -56,7 +56,7 @@ const Login = props => {
     validate,
     onSubmit: async (credentials) => {
       await props.onLogin(credentials);
-      notification.isSuccess === null && history.push("/office-branch/select");
+      history.push("/office-branch/select");
     }
   });
 
@@ -93,9 +93,8 @@ const Login = props => {
                           isOpen={notification.show && notification.isError}
                           color="danger"
                           fade={false}
-                        // transition={{ ...Fade.defaultProps, unmountOnExit: true }}
                         >
-                          {customizedErrorAuth(notification.message)}
+                          {customizedErrorAuth(notification.errorCode)}
                         </Alert>
                       }
                       <h3 className="header text-center">Login</h3>

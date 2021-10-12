@@ -9,10 +9,10 @@ import { getUserMe } from '../../stores/actions/backoffice/userActions';
 
 export const OfficeCreateContainer = () => {
     const dispatch = useDispatch();
-    const error = useSelector(state => state.error);
-    React.useEffect(()=>{
+    const notification = useSelector(state => state.notification);
+    React.useEffect(() => {
         dispatch(getUserMe());
-    },[dispatch])
+    }, [dispatch])
     const loading = useSelector(state => state.loading);
     const branch = useSelector(() => readFromLocalStorage("officeBranch"));
     const office = useSelector(state => state.office);
@@ -20,5 +20,11 @@ export const OfficeCreateContainer = () => {
         dispatch(createOffice(branch.data.id, office))
     }, []);
 
-    return <NewOffice create={onCreate} office={office} branch={branch} error={error} loading={loading} />
+    return <NewOffice
+        create={onCreate}
+        office={office}
+        branch={branch}
+        notification={notification}
+        loading={loading}
+    />
 }

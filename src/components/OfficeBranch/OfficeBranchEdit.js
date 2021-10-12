@@ -16,12 +16,10 @@ import {
     Alert,
 } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-// import { customizedErrorAuth } from '../../infra/errorsAuth';
-// import ImageUpload from '../CustomUpload/ImageUpload';
 
 
 export const OfficeBranchEdit = (props) => {
-    const { error, officeBranch } = props;
+    const { notification, officeBranch } = props;
     const { location } = officeBranch;
     const { province, city, street, zipCode } = location;
     const history = useHistory();
@@ -84,12 +82,12 @@ export const OfficeBranchEdit = (props) => {
 
     React.useEffect(() => {
 
-        if (error.show) {
+        if (notification.show) {
             setTimeout(() => {
                 dispatch(hideNotification());
             }, 2500);
         }
-    }, [error]);
+    }, [notification]);
 
     return (
         <Container>
@@ -99,10 +97,10 @@ export const OfficeBranchEdit = (props) => {
                         {
                             <Alert
                                 color="danger"
-                                isOpen={error.show}
+                                isOpen={notification.show && notification.isError}
                                 fade={false}
                             >
-                                {error.message}
+                                {notification.errorCode}
                             </Alert>
                         }
                     </CardHeader>

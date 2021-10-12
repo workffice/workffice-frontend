@@ -14,7 +14,7 @@ export const createOfficeBranchInfra = async (officeBranchData, userId) => {
         );
         return Promise.resolve(officeBranch.data);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 
 }
@@ -31,7 +31,7 @@ export const editOfficeBranchInfra = async (officeBranchData, officeBranchId) =>
         );
         return Promise.resolve(officeBranch.data);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 
 }
@@ -63,7 +63,7 @@ export const getOfficeBranchInfra = async (officeBranchId) => {
         writeToLocalStorage(officeBranch.data, "officeBranch")
         return Promise.resolve(officeBranch);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 
 }

@@ -5,11 +5,10 @@ import { OfficeBranchSelect } from '../../views/pages/backoffice/OfficeBranchSel
 
 export const OfficeBranchSelectContainer = () => {
     const loading = useSelector(state => state.isLoading);
-    const error = useSelector(state => state.error);
     const dispatch = useDispatch();
     const selectOfficeBranch = useCallback(async (officeBranchId) => {
         await dispatch(getOfficeBranchId(officeBranchId));
     }, [dispatch]);
     const branches = useSelector(state => state.officeBranches);
-    return <OfficeBranchSelect selectOfficeBranch={selectOfficeBranch} branches={branches} loading={loading} error={error} />;
+    return <OfficeBranchSelect selectOfficeBranch={selectOfficeBranch} branches={branches} loading={loading} />;
 };
