@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { useDispatch } from 'react-redux';
-import { HIDE_ERROR } from '../../../stores/actions';
+import { hideNotification } from '../../../stores/actions';
 
 function Register(props) {
-  const { loading, error } = props;
+  const { loading, notification } = props;
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -54,12 +54,12 @@ function Register(props) {
   }, [props.register]);
 
   React.useEffect(() => {
-    if (error.show) {
+    if (notification.show) {
       setTimeout(() => {
-        dispatch({ type: HIDE_ERROR });
+        dispatch(hideNotification());
       }, 2500);
     }
-  }, [error]);
+  }, [notification]);
 
   return (
     <div className="register-page">
@@ -83,11 +83,11 @@ function Register(props) {
                   <CardHeader>
                     {
                       <Alert
-                        isOpen={error.show}
+                        isOpen={notification.show && notification.isError}
                         color="danger"
                         fade={false}
                       >
-                        {customizedErrorAuth(error.message)}
+                        {customizedErrorAuth(notification.message)}
                       </Alert>
                     }
                     <CardTitle tag="h4">Creemos tu cuenta</CardTitle>

@@ -20,14 +20,14 @@ import {
     Alert,
     Container
 } from 'reactstrap';
-import { HIDE_ERROR } from '../../stores/actions';
+import { hideNotification } from '../../stores/actions';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
 export const NewOffice = (props) => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const { error } = props;
+    const { notification } = props;
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -106,12 +106,12 @@ export const NewOffice = (props) => {
     }, [props.office]);
 
     React.useEffect(() => {
-        if (error.show) {
+        if (notification.show) {
             setTimeout(() => {
-                dispatch({ type: HIDE_ERROR });
+                dispatch(hideNotification());
             }, 2500);
         }
-    }, [error]);
+    }, [notification]);
 
 
     return (
@@ -131,7 +131,7 @@ export const NewOffice = (props) => {
                         <CardHeader>
                             {
                                 <Alert
-                                    isOpen={error.show}
+                                    isOpen={notification.show && notification.isError}
                                     color="danger"
                                     fade={false}
                                 >

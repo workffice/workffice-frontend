@@ -1,12 +1,12 @@
 import { setError, setIsLoading } from '..';
 import { createCollaboratorApi, updateCollaboratorApi } from '../../../api/backoffice/collaborator';
 
-export const FETCH_CREATE_COLABORATOR = 'FETCH_CREATE_COLABORATOR';
+export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
 export const UPDATE_COLABORATOR = 'UPDATE_COLABORATOR';
 
-export const fetchCreateCollaborator = credentials => ({
-  type: FETCH_CREATE_COLABORATOR,
-  payload: credentials ? credentials : null,
+export const fetchCreateCollaborator = response => ({
+  type: CREATE_COLABORATOR,
+  payload: response,
 });
 
 export const createColaborator = (officeBranchId, collaboratorBody) => async (dispatch) => {
@@ -14,6 +14,7 @@ export const createColaborator = (officeBranchId, collaboratorBody) => async (di
   try {
     dispatch(fetchCreateCollaborator(await createCollaboratorApi(officeBranchId, collaboratorBody)));
   } catch (error) {
+    console.log(error)
     dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
   } finally {
     dispatch(setIsLoading(false));
