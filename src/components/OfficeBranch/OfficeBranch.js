@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Alert } from 'reactstrap';
 import { OfficeBranchCard } from './OfficeBranchCard';
 
-export const OfficeBranch = ({ userMe, loadBranches, branches }) => {
+export const OfficeBranch = ({ notification, hideNotification, userMe, loadBranches, branches }) => {
   React.useEffect(() => {
     !!userMe && loadBranches(userMe.id);
   }, [])
@@ -40,7 +40,10 @@ export const OfficeBranch = ({ userMe, loadBranches, branches }) => {
           </Button>
         </Col>
       </Row>
-
+      <Alert isOpen={notification.show && notification.isSuccess} color="success">
+        La sucursal se creo correctamente
+        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+      </Alert>
       <Row>
         {
           branches && branches.map(branch => <>

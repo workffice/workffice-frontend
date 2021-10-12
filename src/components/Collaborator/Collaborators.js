@@ -36,11 +36,11 @@ export const Collaborators = props => {
       {notification.show && notification.isError ?
       <Alert isOpen={notification.show} color="danger">
         {getErrorMessage(notification.errorCode)}
-        <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
       </Alert>
       : <Alert isOpen={notification.show} color="success">
         El colaborador se actualizo correctamente
-        <button type="button" class="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
+        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
       </Alert>}
       <Row style={{ justifyContent: 'center' }}>
         <Col

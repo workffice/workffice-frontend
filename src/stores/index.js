@@ -53,8 +53,8 @@ const notificationReducer = (state = notificationInitialState, { type, payload }
       return {
         message: null,
         errorCode: null,
-        isSuccess: null,
-        isError: null,
+        isSuccess: false,
+        isError: false,
         show: false
       }
     default:

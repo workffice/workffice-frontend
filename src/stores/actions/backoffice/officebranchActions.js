@@ -18,6 +18,7 @@ export const createOfficeBranch = (officeBranchData, userId) => async (dispatch)
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {
@@ -37,7 +38,6 @@ export const officeBranchList = (userId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
-        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {
