@@ -24,7 +24,7 @@ import { customizedErrorAuth } from '../../../infra/errorsAuth';
 export const RecoveryPassword = (props) => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const { loading, error } = props;
+  const { loading, notification } = props;
   const validate = values => {
     const errors = {};
     if (!values.userEmail) {
@@ -44,7 +44,8 @@ export const RecoveryPassword = (props) => {
     onSubmit: async values => {
       Promise.resolve(await props.onResetPassword(values)).then(() => {
         dispatch(hideNotification());
-        history.push('/auth/confirmation-recovery');
+        if (notification.isSuccess)
+          history.push('/auth/confirmation-recovery');
       });
     }
   });
@@ -77,10 +78,10 @@ export const RecoveryPassword = (props) => {
                   <CardBody>
                     {
                       <Alert
-                        isOpen={error.show}
+                        isOpen={notification.show && notification.isError}
                         color="danger"
                       >
-                        {customizedErrorAuth(error.message)}
+                        {customizedErrorAuth(notification.message)}
                       </Alert>
                     }
                     <CardTitle tag="h5">Por favor ingresa tu correo</CardTitle>
@@ -132,4 +133,3 @@ export const RecoveryPassword = (props) => {
     </div>
   );
 }
-
