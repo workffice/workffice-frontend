@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 import { OfficeBranchCard } from './OfficeBranchCard';
 
-export const OfficeBranch = (props) => {
+export const OfficeBranch = ({ userMe, loadBranches, branches }) => {
   React.useEffect(() => {
-    !!props.userMe && props.loadBranches(props.userMe.id);
+    !!userMe && loadBranches(userMe.id);
   }, [])
   return (
     <div className="content">
@@ -43,7 +43,11 @@ export const OfficeBranch = (props) => {
 
       <Row>
         {
-          props.branches && props.branches.data.map(branch => <><Col xs="10" md="4" lg="4" xg="4"> <OfficeBranchCard key={branch.id} branch={branch} /> </Col></>)
+          branches && branches.map(branch => <>
+            <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
+              <OfficeBranchCard key={branch.id} branch={branch} />
+            </Col>
+          </>)
         }
 
       </Row>

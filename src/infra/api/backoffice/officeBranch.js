@@ -45,9 +45,9 @@ export const getOfficeBranchesInfra = async (userId) => {
                 headers: headerGet
             }
         )
-        return Promise.resolve(officesBranches);
+        return Promise.resolve(officesBranches.data)
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 
 }

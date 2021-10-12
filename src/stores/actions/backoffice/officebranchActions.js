@@ -1,4 +1,4 @@
-import { setError, setIsLoading } from "..";
+import { setError, setIsLoading, setSuccess } from "..";
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
 
 
@@ -37,6 +37,7 @@ export const officeBranchList = (userId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {
