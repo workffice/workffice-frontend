@@ -5,9 +5,6 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
-  React.useEffect(() => {
-    props.loadOffices(props.branch.id);
-  }, [])
   const { offices, branch } = props;
   return (
     <div className="content">

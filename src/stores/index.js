@@ -11,9 +11,10 @@ import { userMeReducer } from './reducers/backoffice/userReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
 import { officeReducer } from './reducers/backoffice/officeReducer';
-import { officesReducer } from './reducers/backoffice/officesReducer';
+import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
+import { officesReducer } from './reducers/backoffice/officesReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -74,6 +75,7 @@ export const reducers = routes =>
     officeBranch: officeBranchReducer,
     office: officeReducer,
     offices: officesReducer,
+    officesFound: officesFoundReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,

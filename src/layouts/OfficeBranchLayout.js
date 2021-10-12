@@ -20,7 +20,7 @@ export const OfficeBranchLayout = () => {
         if (user !== null) {
             await dispatch(officeBranchList(user.id));
         }
-    }, [user])
+    }, [user]);
 
     const fullPages = React.useRef();
     React.useEffect(() => {

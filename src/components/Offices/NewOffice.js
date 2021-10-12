@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
     Row,
@@ -66,8 +66,8 @@ export const NewOffice = (props) => {
         return errors;
     };
 
-    const [multipleSelectServ, setMultipleSelectServ] = useState(null);
-    const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
+    // const [multipleSelectServ, setMultipleSelectServ] = useState(null);
+    // const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
 
     const [officePrivacy, setPrivacy] = useState({ value: "SHARED", label: "Compartida" });
 
@@ -84,6 +84,7 @@ export const NewOffice = (props) => {
             enabledOffice: enabledOffice && enabledOffice.value,
             enabledDays: null,
             tablesQuantity: 0,
+            capacityPerTablex: 0,
             price: 0,
             multipleSelectServ: null,
             multipleSelectEqu: null,
@@ -280,7 +281,7 @@ export const NewOffice = (props) => {
                                         </InputGroup>
                                     </FormGroup>
 
-                                    <FormGroup className={formik.errors.multipleSelectServ ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
+                                    {/* <FormGroup className={formik.errors.multipleSelectServ ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
                                         <Row className='row-label-services'>
                                             <Label htmlFor="multipleSelectServ" className="label-form">Servicios</Label>
 
@@ -369,7 +370,7 @@ export const NewOffice = (props) => {
                                                 </div>
                                             </div>
                                         </Row>
-                                    </FormGroup>
+                                    </FormGroup> */}
 
                                     <FormGroup className={formik.errors.description ? 'has-danger' : ''}>
                                         <Label htmlFor="description" className="label-form">Descripción</Label>

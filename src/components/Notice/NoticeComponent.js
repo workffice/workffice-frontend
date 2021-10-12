@@ -19,8 +19,8 @@ export const NoticeComponent = (props) => {
             </h5>
             {
               isActive 
-                ? <label style={{ display: 'flex', alignItems: 'center' }}>activo</label>
-                : <label style={{ display: 'flex', alignItems: 'center' }}>Inactivo</label>
+                ? <label style={{ display: 'flex', alignItems: 'center', color:"#34b18a"}}>Activo</label>
+                : <label style={{ display: 'flex', alignItems: 'center', color:"#eb5d60" }}>Inactivo</label>
             }
           </div>
           <hr />

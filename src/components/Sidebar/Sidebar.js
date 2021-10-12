@@ -70,7 +70,7 @@ function Sidebar(props) {
                 <>
                   <i className={prop.icon} />
                   <p>
-                    {prop.name}
+                    {prop.name} 
                     <b className="caret" />
                   </p>
                 </>
@@ -168,7 +168,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                {props.user ? props.user.name || "N/A" : "N/A"}
+                {props.user ? props.user.name +' '+ props.user.lastname || "N/A" : "N/A"}
                 <b className="caret" />
               </span>
             </a>

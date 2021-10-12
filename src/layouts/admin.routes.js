@@ -3,6 +3,8 @@ import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchCont
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
+import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
+// import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { NewRoleContainer } from '../containers/backoffice/RoleContainer'
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
@@ -132,6 +134,24 @@ export const routes = [
   },
   {
     collapse: true,
+    name: 'Búscar',
+    icon: 'fa fa-search',
+    state: 'officesSearchCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/search',
+        name: 'Sucursales',
+        mini: 'O',
+        component: OfficesSearchContainer,
+        layout: '/admin',
+        visibility: true
+      }
+    ]
+  },
+
+  {
+    collapse: true,
     name: 'Configuraciones',
     icon: 'fa fa-cog',
     state: 'configurationCollapse',
@@ -182,6 +202,7 @@ export const routes = [
         component: NewNotice,
         layout: '/admin',
       },
+
     ]
   }
 ];
