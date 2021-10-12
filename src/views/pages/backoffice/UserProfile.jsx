@@ -20,12 +20,25 @@ import CollaboratorRow from "./CollaboratorRow";
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
 
 
-export const UserProfile = props => {
+export const UserProfile = ({
+    userMe,
+    onUpdate,
+    collaborators,
+    notification,
+    hideNotification,
+    loadCollaborators,
+    officeBranch
+}) => {
     React.useEffect(() => {
-        props.loadCollaborators(props.officeBranch.id);
+        loadCollaborators(officeBranch.id);
     }, [])
-    const { name, bio } = props.userMe || {}
-    const { notification, hideNotification } = props
+    const { name, bio } = userMe || {}
+    React.useEffect(() => {
+        if (notification.show)
+            setTimeout(() => {
+                hideNotification()
+            }, 1500)
+    })
     return (
         <div className="content">
             <Row style={{ paddingTop: 30 }}>
@@ -82,7 +95,7 @@ export const UserProfile = props => {
                         </CardHeader>
                         <CardBody>
                             <ul className="list-unstyled team-members">
-                                {props.collaborators ? props.collaborators.map(collaborator => {
+                                {collaborators ? collaborators.map(collaborator => {
                                     return <CollaboratorRow key={collaborator.id} {...collaborator} />
                                 }) : <EmptyComponent />}
                             </ul>
@@ -99,7 +112,7 @@ export const UserProfile = props => {
                             El usuario se actualizo correctamente
                             <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
                         </Alert>}
-                    <UserUpdate update={props.onUpdate} {...props.userMe}></UserUpdate>
+                    <UserUpdate update={onUpdate} {...userMe}></UserUpdate>
                 </Col>
             </Row>
         </div>

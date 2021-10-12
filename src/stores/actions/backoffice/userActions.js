@@ -35,6 +35,7 @@ export const updateUser = (userId, userBody) => async (dispatch) => {
     try {
         dispatch(updateUserAction(await updateUserApi(userId, userBody)));
         dispatch(setSuccess())
+        dispatch(fetchMe(await userMeAPI()));
     } catch (error) {
         dispatch(setError(error));
     } finally {
