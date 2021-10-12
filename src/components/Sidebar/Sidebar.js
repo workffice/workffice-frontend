@@ -168,7 +168,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                Marcio Jimenez.
+                {props.user ? props.user.name || "N/A" : "N/A"}
                 <b className="caret" />
               </span>
             </a>
@@ -177,21 +177,15 @@ function Sidebar(props) {
                 <li>
                   <NavLink to="/admin/user-profile" activeClassName="">
                     <span className="sidebar-mini-icon">MP</span>
-                    <span className="sidebar-normal">My Profile</span>
-                  </NavLink>
-                </li>
-                {/* <li>
-                  <NavLink to="/admin/user-profile" activeClassName="">
-                    <span className="sidebar-mini-icon">EP</span>
-                    <span className="sidebar-normal">Edit Profile</span>
+                    <span className="sidebar-normal">Mi perfil</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/admin/user-profile" activeClassName="">
-                    <span className="sidebar-mini-icon">S</span>
-                    <span className="sidebar-normal">Settings</span>
+                  <NavLink to="/#" activeClassName="">
+                    <span className="sidebar-mini-icon">CS</span>
+                    <span className="sidebar-normal">Cerrar sesion</span>
                   </NavLink>
-                </li> */}
+                </li>
               </ul>
             </Collapse>
           </div>

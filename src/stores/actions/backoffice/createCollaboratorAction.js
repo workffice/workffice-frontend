@@ -1,4 +1,4 @@
-import { setError, setIsLoading } from '..';
+import { setError, setIsLoading, setSuccess } from '..';
 import { createCollaboratorApi, updateCollaboratorApi } from '../../../api/backoffice/collaborator';
 
 export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
@@ -30,6 +30,7 @@ export const updateCollaborator = (collaboratorId, collaboratorBody) => async (d
   dispatch(setIsLoading(true));
   try {
     dispatch(updateCollaboratorAction(await updateCollaboratorApi(collaboratorId, collaboratorBody)));
+    dispatch(setSuccess())
   } catch (error) {
     dispatch(setError(error ? error : 'No ha sido posible actualizar el colaborador'));
   } finally {

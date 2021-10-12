@@ -75,7 +75,7 @@ export const AdminLayout = props => {
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} bgColor={backgroundColor}
-        activeColor={activeColor} />
+        activeColor={activeColor} user={user}/>
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
         <Switch>{getRoutes(routes)}</Switch>
