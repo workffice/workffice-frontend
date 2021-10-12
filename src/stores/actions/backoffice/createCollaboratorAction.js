@@ -1,5 +1,6 @@
 import { setError, setIsLoading, setSuccess } from '..';
-import { createCollaboratorApi, updateCollaboratorApi } from '../../../api/backoffice/collaborator';
+import { createCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../api/backoffice/collaborator';
+import { fetchCollaboratorsList } from './collaboratorsAction';
 
 export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
 export const UPDATE_COLABORATOR = 'UPDATE_COLABORATOR';
@@ -13,9 +14,12 @@ export const createColaborator = (officeBranchId, collaboratorBody) => async (di
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchCreateCollaborator(await createCollaboratorApi(officeBranchId, collaboratorBody)));
+    dispatch(setSuccess())
+    dispatch(fetchCollaboratorsList(await fetchCollaboratorsApi(officeBranchId)))
+    return Promise.resolve("")
   } catch (error) {
-    console.log(error)
     dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
+    return Promise.reject("")
   } finally {
     dispatch(setIsLoading(false));
   }

@@ -60,7 +60,7 @@ export const Collaborators = props => {
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
-        {collaborators ? props.collaborators.map(collaborator => {
+        {collaborators && collaborators.length !==0 ? props.collaborators.map(collaborator => {
           return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
             <CollaboratorCard
               {...collaborator}
