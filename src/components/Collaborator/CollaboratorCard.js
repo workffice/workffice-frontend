@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import Select from 'react-select';
 import { Button, Col, Form, FormGroup } from 'reactstrap';
+import { getStatus } from '../../utils/collaboratorTranslations';
 
 export const CollaboratorCard = props => {
   React.useEffect(() => {
@@ -18,13 +19,6 @@ export const CollaboratorCard = props => {
     updateCollaborator,
   } = props
 
-  const getStatus = (status) => {
-    switch (status) {
-      case "PENDING": return "PENDIENTE"
-      case "ACTIVE": return "ACTIVO"
-      case "INACTIVE": return "INACTIVO"
-    }
-  }
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -33,7 +27,6 @@ export const CollaboratorCard = props => {
       }) : [],
     },
     onSubmit: async ({roles}) => {
-      console.log(roles)
       const roleIds = roles.map(role => role.value)
       updateCollaborator(id, {
         name: name,

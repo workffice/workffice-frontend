@@ -1,4 +1,10 @@
-import { createOfficeBranchInfra, editOfficeBranchInfra, getOfficeBranchesInfra, getOfficeBranchInfra } from "../../infra/api/backoffice/officeBranch";
+import {
+    createOfficeBranchInfra,
+    editOfficeBranchInfra,
+    getOfficeBranchesFromCollaborator,
+    getOfficeBranchesInfra,
+    getOfficeBranchInfra,
+} from "../../infra/api/backoffice/officeBranch";
 
 
 export const createOfficeBranchAPI = (officeBranchData, userId) => {
@@ -11,7 +17,10 @@ export const editOfficeBranchAPI = (officeBranchData, userId) => {
 
 export const officeBranchListAPI = (userId) => {
     return Promise.resolve(getOfficeBranchesInfra(userId));
+}
 
+export const officeBranchListFromCollaboratorAPI = collaboratorEmail => {
+    return Promise.resolve(getOfficeBranchesFromCollaborator(collaboratorEmail));
 }
 
 export const getOfficeBranchIdAPI = (officeBranchId) => {

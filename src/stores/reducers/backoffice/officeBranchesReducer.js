@@ -1,16 +1,27 @@
-import { FETCH_CREATE_OFFICEBRANCH, FETCH_OFFICEBRANCHES_LIST} from "../../actions/backoffice/officebranchActions";
+import {
+    FETCH_COLLABORATOR_OFFICE_BRANCHES,
+    CREATE_OFFICE_BRANCH,
+    FETCH_OFFICEBRANCHES_LIST
+} from "../../actions/backoffice/officebranchActions";
+import {includes} from 'lodash'
 
-const initialState = null;
+const initialState = [];
 
 export const officeBranchesReducer = (state = initialState, { type, payload }) => {
-    let currentState = state;
     switch (type) {
-        case FETCH_CREATE_OFFICEBRANCH:
-            return currentState;
+        case CREATE_OFFICE_BRANCH:
+            return state
         case FETCH_OFFICEBRANCHES_LIST:
-            return currentState = payload;
+            return [...payload]
+        case FETCH_COLLABORATOR_OFFICE_BRANCHES: {
+            const officeBranchIds = payload.map(officeBranch => officeBranch.id)
+            return [
+                ...state.filter(officeBranch => !includes(officeBranchIds, officeBranch.id)),
+                ...payload
+            ]
+        }
         default:
-            return currentState;
+            return state
     }
 }
 

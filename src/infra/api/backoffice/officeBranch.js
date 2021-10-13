@@ -33,7 +33,6 @@ export const editOfficeBranchInfra = async (officeBranchData, officeBranchId) =>
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }
-
 }
 
 export const getOfficeBranchesInfra = async (userId) => {
@@ -49,8 +48,23 @@ export const getOfficeBranchesInfra = async (userId) => {
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }
-
 }
+
+export const getOfficeBranchesFromCollaborator = async collaboratorEmail => {
+    try {
+        const officesBranches = await sdkAuthRequest(
+            `${API_OFFICE_BRANCHES}/?collaborator_email=${collaboratorEmail}`,
+            {
+                method: 'GET',
+                headers: headerGet
+            }
+        )
+        return Promise.resolve(officesBranches.data)
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
 export const getOfficeBranchInfra = async (officeBranchId) => {
     try {
         const officeBranch = await sdkNoAuthRequest(

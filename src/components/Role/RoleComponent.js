@@ -1,3 +1,4 @@
+import { uniqueId } from 'lodash-es';
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import { getAccessLabel, getResourceLabel } from '../../utils/rolesTranslation';
@@ -16,7 +17,7 @@ export const RoleComponent = ({name, permissions}) => {
           <hr />
           {
             permissions && permissions.map((permission) =>
-              <div className='text'>
+              <div key={uniqueId()} className='text'>
                 <label className="form-label">
                 {getResourceLabel(permission.resource)} : <small>{getAccessLabel(permission.access)}</small>
                 </label>

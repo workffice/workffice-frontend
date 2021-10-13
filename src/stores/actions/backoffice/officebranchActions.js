@@ -1,16 +1,17 @@
 import { setError, setIsLoading, setSuccess } from "..";
-import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI } from "../../../api/backoffice/officeBranch";
+import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../api/backoffice/officeBranch";
 import { fetchOfficesList } from "./officesActions";
 
 
-export const FETCH_CREATE_OFFICEBRANCH = 'FETCH_CREATE_OFFICEBRANCH';
+export const CREATE_OFFICE_BRANCH = 'FETCH_CREATE_OFFICEBRANCH';
 export const FETCH_EDIT_OFFICEBRANCH = 'FETCH_EDIT_OFFICEBRANCH';
 export const FETCH_OFFICEBRANCHES_LIST = 'FETCH_OFFICEBRANCHES_LIST';
 export const FETCH_OFFICEBRANCH_ID = 'FETCH_OFFICEBRANCH_ID';
+export const FETCH_COLLABORATOR_OFFICE_BRANCHES = 'FETCH_COLLABORATOR_OFFICE_BRANCHES';
 
 export const fetchCreateOfficebranch = officeBranchData => {
     return {
-        type: FETCH_CREATE_OFFICEBRANCH,
+        type: CREATE_OFFICE_BRANCH,
         payload: officeBranchData
     }
 };
@@ -47,6 +48,21 @@ export const officeBranchList = (userId) => async (dispatch) => {
 
 }
 
+export const fetchCollaboratorOfficeBranches = officeBranches => {
+    return {
+        type: FETCH_COLLABORATOR_OFFICE_BRANCHES,
+        payload: officeBranches
+    }
+};
+
+export const collaboratorOfficeBranchList = collaboratorEmail => async (dispatch) => {
+    try {
+        dispatch(fetchCollaboratorOfficeBranches(await officeBranchListFromCollaboratorAPI(collaboratorEmail)));
+    } catch (error) {
+        dispatch(setError(error));
+    }
+}
+
 export const fetchEditOfficebranch = officeBranchData => {
     return {
         type: FETCH_EDIT_OFFICEBRANCH,
@@ -60,7 +76,7 @@ export const editOfficeBranch = (userId, officeBranchData) => async (dispatch) =
         dispatch(fetchEditOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
     } catch (error) {
         dispatch(setError(error));
-    } finally {    
+    } finally {
         dispatch(setIsLoading(false));
     }
 }

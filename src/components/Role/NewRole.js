@@ -1,12 +1,37 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Alert, Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Form,
+    FormGroup,
+    Input,
+    Label,
+    Row
+} from 'reactstrap';
 import Select from 'react-select';
+import { Notification } from '../Common/Notification/Notification'
+import { getErrorMessage } from '../../utils/rolesTranslation';
+import { useHistory } from 'react-router';
 
 
 export const NewRole = (props) => {
-    const { error } = props;
-
+    const { notification, hideNotification } = props;
+    const history = useHistory()
+    React.useEffect(() => {
+        if (notification.show) {
+            if (notification.isSuccess)
+                setTimeout(() => {
+                    history.push("/admin/roles")
+                }, 2000)
+            setTimeout(() => {
+                hideNotification()
+            }, 1500)
+        }
+    })
     const validate = values => {
         const errors = {};
         if (!values.roleName) {
@@ -83,15 +108,17 @@ export const NewRole = (props) => {
                 <Form onSubmit={formik.handleSubmit} style={{ width: '80%', marginLeft: '10%', marginRight: '10%' }}>
                     <Card>
                         <CardHeader>
-                            {
-                                <Alert
-                                    isOpen={!!error}
-                                    color="danger"
-                                    fade={true}
-                                >
-                                    {'Ocurrió un error. Intente nuevamente'}
-                                </Alert>
-                            }
+                            <Notification
+                                show={notification.show && notification.isError}
+                                isError={true}
+                                message={getErrorMessage(notification.errorCode)}
+                                hideNotification={hideNotification}
+                            />
+                            <Notification
+                                show={notification.show && notification.isSuccess}
+                                message="El rol se creo correctamente"
+                                hideNotification={hideNotification}
+                            />
                         </CardHeader>
                         <CardBody>
                             <div className="form-row">

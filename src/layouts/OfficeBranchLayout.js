@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { routes } from "./office-branch.routes";
 import { getUserMe } from '../stores/actions/backoffice/userActions';
-import { officeBranchList } from '../stores/actions/backoffice/officebranchActions';
+import { collaboratorOfficeBranchList, officeBranchList } from '../stores/actions/backoffice/officebranchActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 let ps;
@@ -19,6 +19,7 @@ export const OfficeBranchLayout = () => {
     React.useEffect(async () => {
         if (user !== null) {
             await dispatch(officeBranchList(user.id));
+            await dispatch(collaboratorOfficeBranchList(user.email));
         }
     }, [user]);
 

@@ -30,11 +30,11 @@ export const OfficeBranchSelect = (props) => {
                     <Col className="ml-auto mr-auto" xg="12" lg="12" md="12" style={{ display: "flex", flexWrap: "wrap" }}>
                         {
                             props.branches
-                                ? props.branches.map(branch => <div key={branch.id}>
-                                    <Col xs="10" md="4" lg="4" xg="4">
+                                ? props.branches.map(branch =>
+                                    <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
                                         <OfficeBranchCardSelect key={branch.id} branch={branch} select={props.selectOfficeBranch} />
                                     </Col>
-                                </div>)
+                                )
                                 : <EmptyOfficeBranch />
                         }
                     </Col>
@@ -46,7 +46,7 @@ export const OfficeBranchSelect = (props) => {
             </Container>
 
             <div
-                className={props.loading ? 'background-loading' : 'full-page-background'}
+                className='full-page-background'
                 style={{
                     background: '#34b18a',
                 }}

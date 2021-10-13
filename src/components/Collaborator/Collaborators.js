@@ -1,27 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button, Alert } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
 
-export const Collaborators = props => {
+export const Collaborators = ({
+  notification,
+  hideNotification,
+  collaborators,
+  collaboratorRoles,
+  officeBranchRoles,
+  loadCollaborators,
+  loadCollaboratorRoles,
+  loadOfficeBranchRoles,
+  onUpdate,
+  officeBranch,
+}) => {
+
   React.useEffect(() => {
-    props.loadCollaborators(props.officeBranch.id);
+    loadCollaborators(officeBranch.id);
   }, [])
   React.useEffect(() => {
-    props.loadOfficeBranchRoles(props.officeBranch.id);
+    loadOfficeBranchRoles(officeBranch.id);
   }, [])
 
-  const {
-    notification,
-    hideNotification,
-    collaborators,
-    collaboratorRoles,
-    officeBranchRoles,
-    loadCollaboratorRoles,
-    onUpdate,
-  } = props
+  React.useEffect(() => {
+    if (notification.show)
+      setTimeout(() => {
+        hideNotification()
+      }, 1500)
+  })
 
   return (
     <div className="content">
@@ -33,15 +43,17 @@ export const Collaborators = props => {
           <hr />
         </Col>
       </Row>
-      {notification.show && notification.isError ?
-      <Alert isOpen={notification.show} color="danger">
-        {getErrorMessage(notification.errorCode)}
-        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-      </Alert>
-      : <Alert isOpen={notification.show} color="success">
-        El colaborador se actualizo correctamente
-        <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-      </Alert>}
+      <Notification
+        show={notification.show && notification.isError}
+        isError={true}
+        message={getErrorMessage(notification.errorCode)}
+        hideNotification={hideNotification}
+      />
+      <Notification
+        show={notification.show && notification.isSuccess}
+        message="El colaborador se actualizo correctamente"
+        hideNotification={hideNotification}
+      />
       <Row style={{ justifyContent: 'center' }}>
         <Col
           xs="6"
@@ -58,9 +70,8 @@ export const Collaborators = props => {
           </Button>
         </Col>
       </Row>
-
       <Row style={{ justifyContent: 'center' }}>
-        {collaborators ? props.collaborators.map(collaborator => {
+        {collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
           return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
             <CollaboratorCard
               {...collaborator}

@@ -7,11 +7,19 @@ export const getAccessLabel = access => {
 }
 
 export const getResourceLabel = resource => {
-  switch(resource) {
+  switch (resource) {
     case "OFFICE": return "Oficina"
     case "MEMBERSHIP": return "Membresia"
     case "ROLE": return "Rol"
     case "COLLABORATOR": return "Colaborador"
     default: return "N/A"
+  }
+}
+
+export const getErrorMessage = error => {
+  switch (error) {
+    case "OFFICE_BRANCH_FORBIDDEN": return "No tienes acceso para crear roles"
+    case "OFFICE_BRANCH_FORBIDDEN_READ": return "No tienes acceso para ver los roles de esta sucursal"
+    default: return "Oops algo salio mal, vuelva a intentarlo"
   }
 }
