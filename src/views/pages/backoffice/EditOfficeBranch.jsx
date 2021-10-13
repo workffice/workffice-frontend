@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Row } from 'reactstrap';
 import { OfficeBranchEdit } from '../../../components/OfficeBranch/OfficeBranchEdit';
 
-export const EditOfficeBranch = ({ edit, notification, loading, officeBranch }) => {
+export const EditOfficeBranch = ({ hideNotification, edit, notification, loading, officeBranch }) => {
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -20,6 +20,7 @@ export const EditOfficeBranch = ({ edit, notification, loading, officeBranch }) 
                         officeBranch={officeBranch}
                         notification={notification}
                         loading={loading}
+                        hideNotification={hideNotification}
                     />
                 </Col>
             </Row>

@@ -15,15 +15,14 @@ import {
     CardHeader,
     Alert,
 } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export const OfficeBranchEdit = (props) => {
-    const { notification, officeBranch } = props;
+    const { hideNotification, notification, officeBranch } = props;
     const { location } = officeBranch;
     const { province, city, street, zipCode } = location;
     const history = useHistory();
-    const dispatch = useDispatch();
     const officeBranchEdit = useSelector(state => state.officeBranch);
     const validate = values => {
         const errors = {};
@@ -45,8 +44,8 @@ export const OfficeBranchEdit = (props) => {
         if (!values.street) {
             errors.street = 'Requerido.';
         }
-        if (!values.postalCode) {
-            errors.postalCode = 'Requerido.';
+        if (!values.zipCode) {
+            errors.zipCode = 'Requerido.';
         }
         return errors;
     };
@@ -59,7 +58,7 @@ export const OfficeBranchEdit = (props) => {
             province: province,
             city: city,
             street: street,
-            postalCode: zipCode
+            zipCode: zipCode
         },
         validate,
         onSubmit: async (values) => {
@@ -70,7 +69,7 @@ export const OfficeBranchEdit = (props) => {
                 province: values.province,
                 city: values.city,
                 street: values.street,
-                postalCode: values.zipCode
+                zipCode: values.zipCode
             }
 
             Promise.resolve(props.edit(officeBranch.id, officeBranchPayload)).then(() => {
@@ -81,10 +80,9 @@ export const OfficeBranchEdit = (props) => {
     });
 
     React.useEffect(() => {
-
         if (notification.show) {
             setTimeout(() => {
-                dispatch(hideNotification());
+                hideNotification()
             }, 2500);
         }
     }, [notification]);
@@ -160,17 +158,17 @@ export const OfficeBranchEdit = (props) => {
                                         <div className="error">{formik.errors.street}</div>
                                     ) : null}
                                 </FormGroup>
-                                <FormGroup className={formik.errors.postalCode ? 'has-danger' : ''}>
-                                    <Label htmlFor="postalCode" className="label-form"> Código postal </Label>
+                                <FormGroup className={formik.errors.zipCode ? 'has-danger' : ''}>
+                                    <Label htmlFor="zipCode" className="label-form"> Código postal </Label>
                                     <Input
                                         type="text"
-                                        name="postalCode"
+                                        name="zipCode"
                                         placeholder="Código Postal.."
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.postalCode} />
-                                    {formik.errors.postalCode && formik.touched.postalCode ? (
-                                        <div className="error">{formik.errors.postalCode}</div>
+                                        value={formik.values.zipCode} />
+                                    {formik.errors.zipCode && formik.touched.zipCode ? (
+                                        <div className="error">{formik.errors.zipCode}</div>
                                     ) : null}
                                 </FormGroup>
 

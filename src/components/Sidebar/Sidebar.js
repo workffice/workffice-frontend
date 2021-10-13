@@ -141,7 +141,7 @@ function Sidebar(props) {
         <p
           className="simple-text logo-normal"
         >
-          <span>Sucursal: {props.officeBranch ? props.officeBranch.data.name : ""}</span>
+          <span>Sucursal: {props.officeBranch ? props.officeBranch.name : ""}</span>
         </p>
       </div>
 

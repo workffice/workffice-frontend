@@ -1,20 +1,19 @@
+import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
+import { NewMembership } from '../components/Membership/NewMembership';
+import { NewNotice } from '../components/Notice/NewNotice';
+import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
+import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
+import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
-// import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
-import { NewRoleContainer } from '../containers/backoffice/RoleContainer'
+import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
-import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
-import { NewMembership } from '../components/Membership/NewMembership';
-import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
-import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
-import { NewNotice } from '../components/Notice/NewNotice';
-import { RolesListContainer } from '../containers/backoffice/RoleContainer';
-import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
+import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
 export const routes = [
   {
@@ -53,17 +52,24 @@ export const routes = [
         path: '/create-officebranch',
         name: 'Nueva Sucursal',
         mini: 'NS',
-        component: OfficeBranchCreateContainer,
         layout: '/admin',
-        visibility: false
+        visibility: true,
+        component: OfficeBranchCreateContainer,
+      },
+      {
+        path: '/edit-officebranch',
+        name: 'Editar Sucursal',
+        mini: 'ES',
+        layout: '/admin',
+        visibility: true,
+        component: OfficeBranchEditContainer,
       },
       {
         path: '/select',
         name: 'Cambiar Sucursal',
         mini: 'NS',
-        component: OfficeBranchCreateContainer,
         layout: '/office-branch',
-        visibility: true
+        visibility: true,
       },
     ]
   },
