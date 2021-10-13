@@ -6,23 +6,32 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
 
-export const Collaborators = props => {
+export const Collaborators = ({
+  notification,
+  hideNotification,
+  collaborators,
+  collaboratorRoles,
+  officeBranchRoles,
+  loadCollaborators,
+  loadCollaboratorRoles,
+  loadOfficeBranchRoles,
+  onUpdate,
+  officeBranch,
+}) => {
+
   React.useEffect(() => {
-    props.loadCollaborators(props.officeBranch.id);
+    loadCollaborators(officeBranch.id);
   }, [])
   React.useEffect(() => {
-    props.loadOfficeBranchRoles(props.officeBranch.id);
+    loadOfficeBranchRoles(officeBranch.id);
   }, [])
 
-  const {
-    notification,
-    hideNotification,
-    collaborators,
-    collaboratorRoles,
-    officeBranchRoles,
-    loadCollaboratorRoles,
-    onUpdate,
-  } = props
+  React.useEffect(() => {
+    if (notification.show)
+      setTimeout(() => {
+        hideNotification()
+      }, 1500)
+  })
 
   return (
     <div className="content">
@@ -38,6 +47,11 @@ export const Collaborators = props => {
         show={notification.show && notification.isError}
         isError={true}
         message={getErrorMessage(notification.errorCode)}
+        hideNotification={hideNotification}
+      />
+      <Notification
+        show={notification.show && notification.isSuccess}
+        message="El colaborador se actualizo correctamente"
         hideNotification={hideNotification}
       />
       <Row style={{ justifyContent: 'center' }}>
@@ -56,9 +70,8 @@ export const Collaborators = props => {
           </Button>
         </Col>
       </Row>
-
       <Row style={{ justifyContent: 'center' }}>
-        {collaborators && collaborators.length !== 0 ? props.collaborators.map(collaborator => {
+        {collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
           return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
             <CollaboratorCard
               {...collaborator}
