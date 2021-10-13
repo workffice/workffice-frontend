@@ -26,9 +26,18 @@ export const NewRoleContainer = () => {
 export const RolesListContainer = () => {
     const dispatch = useDispatch();
     const officeBranch = readFromLocalStorage("officeBranch")
+    const notification = useSelector(state => state.notification)
+    const hideNotification = useCallback(async () => {
+        await dispatch(hideNotificationAction())
+    }, [dispatch])
     const fetchRoles = useCallback(async () => {
         await dispatch(rolesList(officeBranch.id))
     }, [dispatch])
     const roles = useSelector(state => state.roles)
-    return <RoleListComponent fetchRoles={fetchRoles} roles={roles}></RoleListComponent>
+    return <RoleListComponent
+        fetchRoles={fetchRoles}
+        roles={roles}
+        notification={notification}
+        hideNotification={hideNotification}
+    />
 }
