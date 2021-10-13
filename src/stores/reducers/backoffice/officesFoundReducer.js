@@ -1,6 +1,6 @@
 import { SEARCH_OFFICES } from "../../actions/backoffice/officesFoundAction";
 
-const initialState = null;
+const initialState = {};
 
 export const officesFoundReducer = (state = initialState, { type, payload }) => {
 

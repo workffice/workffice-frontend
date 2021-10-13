@@ -4,10 +4,22 @@ import { Button, Col, Form, Input, Row } from 'reactstrap';
 import Select from 'react-select';
 import { OfficeBranchCard } from '../OfficeBranch/OfficeBranchCard';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Pagination } from '../Common/Pagination/Pagination';
+import { useLocation } from 'react-router';
+import { searchQueryBuilder } from '../../utils/searchQueryBuilder';
 
 export const OfficesSearch = (props) => {
+    const query = new URLSearchParams(useLocation().search);
     const { officeBranches } = props;
     React.useEffect(() => {
+        const data = {
+            officeCapacityGT: query.get("office_capacity_gt") || "",
+            officeCapacityLT: query.get("office_capacity_lt") || "",
+            officeType: query.get("office_type") || "",
+            officeBranchName: query.get("name") || "",
+            page: query.get("page") - 1 || 0,
+        }
+        props.search(data)
     }, []);
     const typesOptions = [
         {
@@ -21,15 +33,16 @@ export const OfficesSearch = (props) => {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            officeCapacityGT: '',
-            officeCapacityLT: '',
-            officeType: '',
-            officeBranchName: '',
+            officeCapacityGT: query.get("office_capacity_gt") || "",
+            officeCapacityLT: query.get("office_capacity_lt") || "",
+            officeType: query.get("office_type") || "",
+            officeBranchName: query.get("name") || "",
         },
         onSubmit: async values => {
             const data = {
                 ...values,
-                officeType: values.officeType.value
+                officeType: values.officeType.value,
+                page: query.get("page") - 1 || 0,
             }
             await props.search(data);
         }
@@ -90,7 +103,25 @@ export const OfficesSearch = (props) => {
                             Búscar
                         </Button>
                     </Form>
-
+                </Col>
+            </Row>
+            <Row>
+                <Col
+                    xs="12"
+                    md="12"
+                    lg="12"
+                    xg="12"
+                >
+                    <Pagination
+                        currentPage={officeBranches.pagination ? officeBranches.pagination.currentPage : 1}
+                        totalPages={officeBranches.pagination ? officeBranches.pagination.totalPages : 1}
+                        queryParams={searchQueryBuilder(
+                            {
+                                ...formik.values,
+                                officeType: formik.values.officeType.value,
+                            }
+                        )}
+                    />
                 </Col>
             </Row>
             <Row>
@@ -104,7 +135,7 @@ export const OfficesSearch = (props) => {
                     <h2>Sucursales</h2>
                     <hr />
                     <Row>
-                        {officeBranches !== null && officeBranches.length !== 0 ? officeBranches.map(officeBranch => {
+                        {officeBranches.data !== undefined && officeBranches.data.length !== 0 ? officeBranches.data.map(officeBranch => {
                             return (
                                 <Col key={officeBranch.id} xs="10" md="4" lg="4" xg="4">
                                     <OfficeBranchCard key={officeBranch.id} branch={officeBranch} />
