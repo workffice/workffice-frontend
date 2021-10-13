@@ -30,7 +30,7 @@ export const Collaborators = ({
     if (notification.show)
       setTimeout(() => {
         hideNotification()
-      }, 1500)
+      }, 2000)
   })
 
   return (
@@ -46,7 +46,7 @@ export const Collaborators = ({
       <Notification
         show={notification.show && notification.isError}
         isError={true}
-        message={getErrorMessage(notification.errorCode)}
+        message={getErrorMessage(notification.errorCode + "_READ")}
         hideNotification={hideNotification}
       />
       <Notification

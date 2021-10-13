@@ -10,7 +10,6 @@ import {
     CardTitle,
     Row,
     Col,
-    Alert,
 } from "reactstrap";
 
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
@@ -18,6 +17,8 @@ import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
 import { UserUpdate } from "../../../components/User/UserUpdate";
 import CollaboratorRow from "./CollaboratorRow";
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
+import { Notification } from "../../../components/Common/Notification/Notification";
+import { getErrorMessage } from "../../../utils/userTranslations";
 
 
 export const UserProfile = ({
@@ -37,7 +38,7 @@ export const UserProfile = ({
         if (notification.show)
             setTimeout(() => {
                 hideNotification()
-            }, 1500)
+            }, 2000)
     })
     return (
         <div className="content">
@@ -91,7 +92,7 @@ export const UserProfile = ({
                     </Card>
                     <Card>
                         <CardHeader>
-                            <CardTitle tag="h4">Equipo de trabajo</CardTitle>
+                            <CardTitle tag="h4">Colaboradores de {officeBranch.name}</CardTitle>
                         </CardHeader>
                         <CardBody>
                             <ul className="list-unstyled team-members">
@@ -103,15 +104,17 @@ export const UserProfile = ({
                     </Card>
                 </Col>
                 <Col md="8">
-                    {notification.show && notification.isError ?
-                        <Alert isOpen={notification.show} color="danger">
-                            {notification.errorCode}
-                            <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-                        </Alert>
-                        : <Alert isOpen={notification.show} color="success">
-                            El usuario se actualizo correctamente
-                            <button type="button" className="close" aria-label="Close" onClick={hideNotification}><span aria-hidden="true">×</span></button>
-                        </Alert>}
+                    <Notification
+                        show={notification.show && notification.isError}
+                        isError={true}
+                        message={getErrorMessage(notification.errorCode)}
+                        hideNotification={hideNotification}
+                    />
+                    <Notification
+                        show={notification.show && notification.isSuccess}
+                        message="El usuario se actualizo correctamente"
+                        hideNotification={hideNotification}
+                    />
                     <UserUpdate update={onUpdate} {...userMe}></UserUpdate>
                 </Col>
             </Row>

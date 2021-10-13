@@ -6,7 +6,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 
 import avatar from "../../assets/img/faces/erik-lucatero-2.jpg"
 // import avatar from "../../assets/img/faces/menem.png"
-import logo from "../../assets/img/Recurso 4.png";
 
 var ps;
 
@@ -70,7 +69,7 @@ function Sidebar(props) {
                 <>
                   <i className={prop.icon} />
                   <p>
-                    {prop.name} 
+                    {prop.name}
                     <b className="caret" />
                   </p>
                 </>
@@ -139,20 +138,11 @@ function Sidebar(props) {
       data-active-color={props.activeColor}
     >
       <div className="logo">
-        <a
-          href=""
-          className="simple-text logo-mini"
-        >
-          <div className="logo-img">
-            <img src={logo} alt="react-logo" />
-          </div>
-        </a>
-        <a
-          href=""
+        <p
           className="simple-text logo-normal"
         >
-          Workffice
-        </a>
+          <span>Sucursal: {props.officeBranch ? props.officeBranch.data.name : ""}</span>
+        </p>
       </div>
 
       <div className="sidebar-wrapper" ref={sidebar}>
@@ -168,7 +158,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                {props.user ? props.user.name +' '+ props.user.lastname || "N/A" : "N/A"}
+                {props.user ? props.user.name + ' ' + props.user.lastname || "N/A" : "N/A"}
                 <b className="caret" />
               </span>
             </a>
