@@ -46,7 +46,7 @@ export const OfficeBranchSelect = (props) => {
             </Container>
 
             <div
-                className={props.loading ? 'background-loading' : 'full-page-background'}
+                className='full-page-background'
                 style={{
                     background: '#34b18a',
                 }}

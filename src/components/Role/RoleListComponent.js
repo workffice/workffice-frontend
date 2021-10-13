@@ -4,12 +4,9 @@ import { Button, Col, Row } from 'reactstrap';
 import { RoleComponent } from './RoleComponent';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 
-export const RoleListComponent = props => {
+export const RoleListComponent = ({ roles, fetchRoles }) => {
 
-  React.useEffect(() => {
-    props.fetchRoles(), []
-  })
-  const { roles } = props
+  React.useEffect(() => { fetchRoles() }, [])
 
   return (
     <div className="content">
