@@ -10,7 +10,7 @@ export const createRole = async (officeBranchId, roleBody) => {
         });
         return Promise.resolve(response);
     } catch (error) {
-        return Promise.reject(error.errors[0].error);
+        return Promise.reject(error.errors[0]);
     }
 }
 
@@ -22,7 +22,7 @@ export const fetchRoles = async officeBranchId => {
         });
         return Promise.resolve(roles.data);
     } catch (error) {
-        return Promise.reject(error.errors[0].error);
+        return Promise.reject(error.errors[0]);
     }
 }
 
@@ -34,6 +34,6 @@ export const fetchRolesFromCollaborator = async collaboratorId => {
         });
         return Promise.resolve({ [collaboratorId]: roles.data });
     } catch (error) {
-        return Promise.reject(error.errors[0].error);
+        return Promise.reject(error.errors[0]);
     }
 }

@@ -1,4 +1,4 @@
-import { setError, setIsLoading } from "..";
+import { setError, setIsLoading, setSuccess } from "..";
 import { createRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
 
 export const CREATE_ROLE = 'CREATE_ROLE';
@@ -17,6 +17,7 @@ export const createRole = (officeBranchId, roleBody) => async dispatch => {
     dispatch(setIsLoading(true));
     try {
         dispatch(createRoleAction(await createRoleApi(officeBranchId, roleBody)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {
