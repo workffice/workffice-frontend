@@ -42,7 +42,7 @@ export const OfficesSearch = (props) => {
             const data = {
                 ...values,
                 officeType: values.officeType.value,
-                page: query.get("page") - 1 || 0,
+                page: 0,
             }
             await props.search(data);
         }
