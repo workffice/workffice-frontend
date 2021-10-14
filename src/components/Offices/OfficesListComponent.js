@@ -4,8 +4,7 @@ import { Button, Col, Row } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
-export const OfficesListComponent = (props) => {
-  const { offices, officeBranch, loadOffices } = props;
+export const OfficesListComponent = ({ offices, officeBranch, loadOffices }) => {
   React.useEffect(() => {
     loadOffices()
   }, [])

@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import Select from 'react-select';
-import { Button, Col, Form, FormGroup } from 'reactstrap';
+import { Badge, Button, Col, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
+import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import Forbidden from '../Common/Forbidden/Forbidden';
 
 export const CollaboratorCard = props => {
   React.useEffect(() => {
@@ -26,7 +28,7 @@ export const CollaboratorCard = props => {
         return { value: role.id, label: role.name }
       }) : [],
     },
-    onSubmit: async ({roles}) => {
+    onSubmit: async ({ roles }) => {
       const roleIds = roles.map(role => role.value)
       updateCollaborator(id, {
         name: name,
@@ -34,6 +36,15 @@ export const CollaboratorCard = props => {
       })
     },
   });
+
+  const getStatusColor = () => {
+    switch(status) {
+      case "PENDING": return "default"
+      case "ACTIVE": return "success"
+      case "INACTIVE": return "danger"
+    }
+  }
+
   return (<>
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
@@ -87,13 +98,14 @@ export const CollaboratorCard = props => {
       </div>
       <div className='card-footer'>
         <Col>
-          <p className='description'>{getStatus(status)}</p>
+          <Badge color={getStatusColor()}>{getStatus(status)}</Badge>
         </Col>
         <Col>
           <Form onSubmit={formik.handleSubmit}>
             <FormGroup className='button-container'>
               <label htmlFor="roles">Roles</label>
               <Select
+                disabled={true}
                 className="react-select"
                 classNamePrefix="react-select"
                 id="roles"
@@ -108,6 +120,7 @@ export const CollaboratorCard = props => {
                   return { value: role.id, label: role.name }
                 }) : []}
               />
+              <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
             </FormGroup>
             <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
           </Form>

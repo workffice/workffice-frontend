@@ -1,5 +1,6 @@
 import { setError, setIsLoading, setSuccess } from "..";
 import { createRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
+import { setForbiddenAccessAction, setSuccessAccess } from "../auth/permissionActions";
 
 export const CREATE_ROLE = 'CREATE_ROLE';
 export const FETCH_ROLES = 'FETCH_ROLES';
@@ -37,8 +38,10 @@ export const rolesList = (officeBranchId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchRolesList(await fetchRolesApi(officeBranchId)));
+        dispatch(setSuccessAccess('role'))
     } catch (error) {
-        dispatch(setError(error));
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction("role"));
     } finally {
         dispatch(setIsLoading(false));
     }
@@ -56,8 +59,10 @@ export const collaboratorRolesList = collaboratorId => async dispatch => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCollaboratorRolesList(await fetchRolesFromCollaboratorApi(collaboratorId)));
+        dispatch(setSuccessAccess('role'))
     } catch (error) {
-        dispatch(setError(error));
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction("role"));
     } finally {
         dispatch(setIsLoading(false));
     }
