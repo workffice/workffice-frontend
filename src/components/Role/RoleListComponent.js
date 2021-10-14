@@ -14,7 +14,7 @@ export const RoleListComponent = ({ notification, hideNotification, roles, fetch
     setTimeout(() => {
       if (notification.show)
         hideNotification()
-    }, 1500)
+    }, 2500)
   })
 
   return (
@@ -27,6 +27,12 @@ export const RoleListComponent = ({ notification, hideNotification, roles, fetch
           <hr />
         </Col>
       </Row>
+      <Notification
+        show={notification.show && notification.isError}
+        isError={true}
+        message={getErrorMessage(notification.errorCode + "_READ")}
+        hideNotification={hideNotification}
+      />
       <Row>
         <Col
           xs="6"
@@ -42,12 +48,6 @@ export const RoleListComponent = ({ notification, hideNotification, roles, fetch
           </Button>
         </Col>
       </Row>
-      <Notification
-        show={notification.show && notification.isError}
-        isError={true}
-        message={getErrorMessage(notification.errorCode + "_READ")}
-        hideNotification={hideNotification}
-      />
       <Row style={{ justifyContent: 'center' }}>
         {roles !== undefined && roles.length !== 0 ? roles.map((role) => {
           return <Col key={role.id} xs="10" md="4" lg="4" xg="4">

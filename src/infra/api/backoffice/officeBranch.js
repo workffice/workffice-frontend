@@ -75,7 +75,7 @@ export const getOfficeBranchInfra = async (officeBranchId) => {
             }
         )
         writeToLocalStorage(officeBranch.data, "officeBranch")
-        return Promise.resolve(officeBranch);
+        return Promise.resolve(officeBranch.data);
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }

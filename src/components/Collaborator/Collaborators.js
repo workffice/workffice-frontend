@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
-import { getErrorMessage } from '../../utils/collaboratorTranslations';
+import { ACCESS_TYPE_READ, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
@@ -30,7 +30,7 @@ export const Collaborators = ({
     if (notification.show)
       setTimeout(() => {
         hideNotification()
-      }, 1500)
+      }, 2000)
   })
 
   return (
@@ -46,7 +46,7 @@ export const Collaborators = ({
       <Notification
         show={notification.show && notification.isError}
         isError={true}
-        message={getErrorMessage(notification.errorCode)}
+        message={getErrorMessage(notification.errorCode, ACCESS_TYPE_READ)}
         hideNotification={hideNotification}
       />
       <Notification

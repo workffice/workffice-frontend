@@ -16,10 +16,8 @@ export const createColaborator = (officeBranchId, collaboratorBody) => async (di
     dispatch(fetchCreateCollaborator(await createCollaboratorApi(officeBranchId, collaboratorBody)));
     dispatch(setSuccess())
     dispatch(fetchCollaboratorsList(await fetchCollaboratorsApi(officeBranchId)))
-    return Promise.resolve("")
   } catch (error) {
     dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
-    return Promise.reject("")
   } finally {
     dispatch(setIsLoading(false));
   }

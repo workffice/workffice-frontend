@@ -1,18 +1,11 @@
-import React from 'react'
 import { useFormik } from 'formik';
+import React from 'react';
 import { useHistory } from 'react-router';
 import {
     Button,
     Card,
-    CardBody,
-    Form,
-    Input,
-    Label,
-    Col,
-    Row,
-    Container,
-    FormGroup,
-    CardHeader,
+    CardBody, CardHeader, Col, Container, Form, FormGroup, Input,
+    Label, Row
 } from 'reactstrap';
 import { Notification } from '../Common/Notification/Notification';
 
@@ -39,19 +32,23 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
         if (!values.street) {
             errors.street = 'Requerido.';
         }
-        if (!values.postalCode) {
-            errors.postalCode = 'Requerido.';
+        if (!values.zipCode) {
+            errors.zipCode = 'Requerido.';
         }
         return errors;
     };
 
     React.useEffect(() => {
         if (notification.show) {
-          setTimeout(() => {
-            hideNotification()
-          }, 2500);
+            if (notification.isSuccess)
+                setTimeout(() => {
+                    history.push('/office-branch/select')
+                }, 2500);
+            setTimeout(() => {
+                hideNotification()
+            }, 2000);
         }
-      }, [notification]);
+    }, [notification]);
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -61,15 +58,11 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
             province: "",
             city: "",
             street: "",
-            postalCode: ""
+            zipCode: ""
         },
         validate,
         onSubmit: async (values) => {
             await create(values);
-            setTimeout(() => {
-                history.push('/office-branch/select')
-            }, 1500);
-
         },
     });
     return (
@@ -145,17 +138,17 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
                                         <div className="error">{formik.errors.street}</div>
                                     ) : null}
                                 </FormGroup>
-                                <FormGroup className={formik.errors.postalCode ? 'has-danger' : ''}>
-                                    <Label htmlFor="postalCode" className="label-form"> Código postal </Label>
+                                <FormGroup className={formik.errors.zipCode ? 'has-danger' : ''}>
+                                    <Label htmlFor="zipCode" className="label-form"> Código postal </Label>
                                     <Input
                                         type="text"
-                                        name="postalCode"
+                                        name="zipCode"
                                         placeholder="Código Postal.."
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.postalCode} />
-                                    {formik.errors.postalCode && formik.touched.postalCode ? (
-                                        <div className="error">{formik.errors.postalCode}</div>
+                                        value={formik.values.zipCode} />
+                                    {formik.errors.zipCode && formik.touched.zipCode ? (
+                                        <div className="error">{formik.errors.zipCode}</div>
                                     ) : null}
                                 </FormGroup>
 

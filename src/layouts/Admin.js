@@ -8,6 +8,8 @@ import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
+import { getOfficeBranchId } from '../stores/actions/backoffice/officebranchActions.js';
+import { readFromLocalStorage } from '../infra/api/localStorage.js';
 import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
 
 let ps;
@@ -19,17 +21,20 @@ export const AdminLayout = props => {
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
-  
-  const officeBranch = useSelector(state => state.officeBranch);
+
+  const officeBranch = useSelector(state => state.officeBranch || {});
+  React.useEffect(() => {
+    if (officeBranch.id === undefined || officeBranch.id === null)
+      dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
+  }, [officeBranch]);
+  React.useEffect(() => {
+    if (officeBranch.id !== undefined)
+      dispatch(fetchOfficesList(officeBranch.id));
+  }, [officeBranch]);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, []);
-  const user= useSelector(state => state.userMe)
-  React.useEffect(()=>{
-    if(officeBranch !== null){
-      dispatch(fetchOfficesList(officeBranch.data.id));
-    }
-  },[officeBranch])
+  const user = useSelector(state => state.userMe)
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on';
@@ -76,7 +81,7 @@ export const AdminLayout = props => {
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} bgColor={backgroundColor}
-        activeColor={activeColor} user={user}/>
+        activeColor={activeColor} user={user} officeBranch={officeBranch} />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
         <Switch>{getRoutes(routes)}</Switch>
