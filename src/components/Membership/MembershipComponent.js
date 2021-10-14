@@ -26,25 +26,25 @@ export const MembershipComponent = (props) => {
           <hr />
           <div className='text'>
             <label className="form-label">
-              Oficinas: <small>Oficina 1, oficina 2</small>
+              Oficinas: <small style={{fontSize: 15}}>Oficina 1, oficina 2</small>
             </label>
           </div>
 
           <div className='text'>
             <label className="form-label">
-              Precio:  <small>{`$ ${price}`}</small>
+              Precio:  <small style={{fontSize: 15}}>{`$ ${price}`}</small>
             </label>
           </div>
 
           <div className='text'>
             <label className="form-label">
-              Días: <small>Lunes, Martes, miércoles</small>
+              Días: <small style={{fontSize: 15}}>Lunes, Martes, miércoles</small>
             </label>
           </div>
 
           <div className='text'>
             <label className="form-label">
-              Descripción: <small>{description}</small>
+              Descripción: <small style={{fontSize: 15}}>{description}</small>
             </label>
           </div>
         </CardBody>
