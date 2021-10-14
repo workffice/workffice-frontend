@@ -1,6 +1,5 @@
 import React from 'react'
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router';
 import {
     Button,
     Card,
@@ -15,15 +14,11 @@ import {
     CardHeader,
     Alert,
 } from 'reactstrap';
-import { useSelector } from 'react-redux';
 
 
 export const OfficeBranchEdit = (props) => {
     const { hideNotification, notification, officeBranch } = props;
-    const { location } = officeBranch;
-    const { province, city, street, zipCode } = location;
-    const history = useHistory();
-    const officeBranchEdit = useSelector(state => state.officeBranch);
+    const { province, city, street, zipCode } = officeBranch.location;
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -51,6 +46,7 @@ export const OfficeBranchEdit = (props) => {
     };
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
             name: officeBranch.name,
             description: officeBranch.description,
@@ -62,20 +58,7 @@ export const OfficeBranchEdit = (props) => {
         },
         validate,
         onSubmit: async (values) => {
-            const officeBranchPayload = {
-                name: values.name,
-                description: values.description,
-                phone: values.phone,
-                province: values.province,
-                city: values.city,
-                street: values.street,
-                zipCode: values.zipCode
-            }
-
-            Promise.resolve(props.edit(officeBranch.id, officeBranchPayload)).then(() => {
-                officeBranchEdit !== null && history.push('/admin/office-branch');
-            }
-            );
+            props.edit(values)
         },
     });
 

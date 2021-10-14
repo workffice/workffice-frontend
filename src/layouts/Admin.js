@@ -8,7 +8,7 @@ import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
-import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
+import { getOfficeBranchId } from '../stores/actions/backoffice/officebranchActions.js';
 import { readFromLocalStorage } from '../infra/api/localStorage.js';
 
 let ps;
@@ -21,17 +21,14 @@ export const AdminLayout = props => {
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
 
-  // const officeBranch = useSelector(state => state.officeBranch);
-  const officeBranch = readFromLocalStorage("officeBranch");
+  const officeBranch = useSelector(state => state.officeBranch);
+  React.useEffect(() => {
+    dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
+  }, []);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, []);
   const user = useSelector(state => state.userMe)
-  React.useEffect(() => {
-    if (officeBranch !== null) {
-      dispatch(fetchOfficesList(officeBranch.id));
-    }
-  }, [officeBranch])
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on';
