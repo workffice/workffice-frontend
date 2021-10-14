@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import Select from 'react-select';
-import { Button, Col, Form, FormGroup } from 'reactstrap';
+import { Badge, Button, Col, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import Forbidden from '../Common/Forbidden/Forbidden';
@@ -36,6 +36,15 @@ export const CollaboratorCard = props => {
       })
     },
   });
+
+  const getStatusColor = () => {
+    switch(status) {
+      case "PENDING": return "default"
+      case "ACTIVE": return "success"
+      case "INACTIVE": return "danger"
+    }
+  }
+
   return (<>
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
@@ -89,7 +98,7 @@ export const CollaboratorCard = props => {
       </div>
       <div className='card-footer'>
         <Col>
-          <p className='description'>{getStatus(status)}</p>
+          <Badge color={getStatusColor()}>{getStatus(status)}</Badge>
         </Col>
         <Col>
           <Form onSubmit={formik.handleSubmit}>

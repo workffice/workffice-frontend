@@ -1,5 +1,6 @@
 import { Button, Col, Row } from "reactstrap";
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
+import { getStatus } from "../../../utils/collaboratorTranslations";
 
 
 export const CollaboratorRow = props => {
@@ -10,19 +11,12 @@ export const CollaboratorRow = props => {
 
     const getButtonColor = () => {
         switch (status) {
-            case "PENDING": return "warning"
+            case "PENDING": return "default"
             case "ACTIVE": return "success"
             case "INACTIVE": return "danger"
         }
     }
 
-    const getStatus = () => {
-        switch (status) {
-            case "PENDING": return "Pendiente"
-            case "ACTIVE": return "Activo"
-            case "INACTIVE": return "Inactivo"
-        }
-    }
     return (
         <li>
             <Row>
@@ -40,7 +34,7 @@ export const CollaboratorRow = props => {
                 <Col md="7" xs="7">
                     {name} <br/>
                     <span className={`text-${getButtonColor()}`}>
-                        <small>{getStatus()}</small>
+                        <small>{getStatus(status)}</small>
                     </span>
                 </Col>
                 <Col className="text-right" md="3" xs="3">
