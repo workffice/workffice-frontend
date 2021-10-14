@@ -7,8 +7,7 @@ import { OfficeComponent } from './OfficeComponent';
 export const OfficesListComponent = (props) => {
   const { offices, officeBranch, loadOffices } = props;
   React.useEffect(() => {
-    if (offices === undefined)
-      loadOffices()
+    loadOffices()
   }, [])
   return (
     <div className="content">
