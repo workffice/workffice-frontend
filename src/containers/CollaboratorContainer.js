@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
+import { readFromLocalStorage } from '../infra/api/localStorage';
+import { hideNotification as hideNotificationAction } from '../stores/actions';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
 import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/createCollaboratorAction';
-import { readFromLocalStorage } from '../infra/api/localStorage';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
-import { hideNotification as hideNotificationAction } from '../stores/actions'
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -58,6 +57,7 @@ export const CollaboratorListContainer = () => {
   const onUpdate = useCallback(async (collaboratorId, collaboratorBody) => {
     await dispatch(updateCollaborator(collaboratorId, collaboratorBody));
   }, [dispatch]);
+  const permission = useSelector(state => state.permission)
   return <Collaborators
     notification={notification}
     hideNotification={hideNotification}
@@ -69,5 +69,6 @@ export const CollaboratorListContainer = () => {
     loadCollaboratorRoles={loadCollaboratorRoles}
     collaboratorRoles={collaboratorRoles}
     onUpdate={onUpdate}
+    permission={permission}
   />
 }

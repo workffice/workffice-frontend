@@ -3,6 +3,7 @@ import React from 'react';
 import Select from 'react-select';
 import { Button, Col, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
+import Forbidden from '../Common/Forbidden/Forbidden'
 
 export const CollaboratorCard = props => {
   React.useEffect(() => {
@@ -26,7 +27,7 @@ export const CollaboratorCard = props => {
         return { value: role.id, label: role.name }
       }) : [],
     },
-    onSubmit: async ({roles}) => {
+    onSubmit: async ({ roles }) => {
       const roleIds = roles.map(role => role.value)
       updateCollaborator(id, {
         name: name,
@@ -94,6 +95,7 @@ export const CollaboratorCard = props => {
             <FormGroup className='button-container'>
               <label htmlFor="roles">Roles</label>
               <Select
+                disabled={true}
                 className="react-select"
                 classNamePrefix="react-select"
                 id="roles"
@@ -108,6 +110,7 @@ export const CollaboratorCard = props => {
                   return { value: role.id, label: role.name }
                 }) : []}
               />
+              <Forbidden className="color-red-error" message="No tienes acceso a los roles de la sucursal" />
             </FormGroup>
             <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
           </Form>

@@ -1,8 +1,10 @@
+import { includes } from 'lodash-es';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import { ACCESS_TYPE_READ, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import Forbidden from '../Common/Forbidden/Forbidden';
 import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
 
@@ -17,6 +19,7 @@ export const Collaborators = ({
   loadOfficeBranchRoles,
   onUpdate,
   officeBranch,
+  permission,
 }) => {
 
   React.useEffect(() => {
@@ -32,6 +35,24 @@ export const Collaborators = ({
         hideNotification()
       }, 2000)
   })
+
+  const renderCollaborators = () => {
+    if (permission.isForbidden && includes(permission.resources, "collaborator"))
+      return <Forbidden message="No tienes permisos para ver los colaboradores de esta sucursal" />
+    else {
+      return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
+        return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
+          <CollaboratorCard
+            {...collaborator}
+            officeBranchRoles={officeBranchRoles}
+            loadCollaboratorRoles={loadCollaboratorRoles}
+            collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
+            updateCollaborator={onUpdate}
+          />
+        </Col>
+      }) : <EmptyComponent />
+    }
+  }
 
   return (
     <div className="content">
@@ -71,17 +92,7 @@ export const Collaborators = ({
         </Col>
       </Row>
       <Row style={{ justifyContent: 'center' }}>
-        {collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
-          return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">
-            <CollaboratorCard
-              {...collaborator}
-              officeBranchRoles={officeBranchRoles}
-              loadCollaboratorRoles={loadCollaboratorRoles}
-              collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
-              updateCollaborator={onUpdate}
-            />
-          </Col>
-        }) : <EmptyComponent />}
+        {renderCollaborators()}
       </Row>
     </div>
   )
