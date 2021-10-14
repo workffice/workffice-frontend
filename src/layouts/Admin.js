@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
 import { getOfficeBranchId } from '../stores/actions/backoffice/officebranchActions.js';
 import { readFromLocalStorage } from '../infra/api/localStorage.js';
+import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
 
 let ps;
 
@@ -21,10 +22,15 @@ export const AdminLayout = props => {
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
 
-  const officeBranch = useSelector(state => state.officeBranch);
+  const officeBranch = useSelector(state => state.officeBranch) || readFromLocalStorage("officeBranch");
   React.useEffect(() => {
-    dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
-  }, []);
+    if (officeBranch.id === undefined || officeBranch.id === null)
+      dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
+  }, [officeBranch]);
+  React.useEffect(() => {
+    if (officeBranch.id !== undefined)
+      dispatch(fetchOfficesList(officeBranch.id));
+  }, [officeBranch]);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, []);

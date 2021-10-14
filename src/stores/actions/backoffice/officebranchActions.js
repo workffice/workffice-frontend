@@ -75,6 +75,7 @@ export const editOfficeBranch = (userId, officeBranchData) => async (dispatch) =
     try {
         dispatch(fetchEditOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
         dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(readFromLocalStorage("officeBranch").id)));
+        dispatch(setSuccess())
     } catch (error) {
         dispatch(setError(error));
     } finally {

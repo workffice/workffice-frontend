@@ -5,11 +5,7 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
-  const { offices, officeBranch, loadOffices, loadOfficeBranch } = props;
-  React.useEffect(() => {
-    if (officeBranch === null)
-      loadOfficeBranch()
-  }, [])
+  const { offices, officeBranch, loadOffices } = props;
   React.useEffect(() => {
     loadOffices()
   }, [])
