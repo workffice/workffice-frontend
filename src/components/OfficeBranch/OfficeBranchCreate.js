@@ -1,18 +1,11 @@
-import React from 'react'
 import { useFormik } from 'formik';
+import React from 'react';
 import { useHistory } from 'react-router';
 import {
     Button,
     Card,
-    CardBody,
-    Form,
-    Input,
-    Label,
-    Col,
-    Row,
-    Container,
-    FormGroup,
-    CardHeader,
+    CardBody, CardHeader, Col, Container, Form, FormGroup, Input,
+    Label, Row
 } from 'reactstrap';
 import { Notification } from '../Common/Notification/Notification';
 
@@ -47,11 +40,15 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
 
     React.useEffect(() => {
         if (notification.show) {
-          setTimeout(() => {
-            hideNotification()
-          }, 2500);
+            if (notification.isSuccess)
+                setTimeout(() => {
+                    history.push('/office-branch/select')
+                }, 2500);
+            setTimeout(() => {
+                hideNotification()
+            }, 2000);
         }
-      }, [notification]);
+    }, [notification]);
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -66,10 +63,6 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
         validate,
         onSubmit: async (values) => {
             await create(values);
-            setTimeout(() => {
-                history.push('/office-branch/select')
-            }, 1500);
-
         },
     });
     return (

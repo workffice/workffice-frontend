@@ -26,10 +26,10 @@ export const NewRole = (props) => {
             if (notification.isSuccess)
                 setTimeout(() => {
                     history.push("/admin/roles")
-                }, 2000)
+                }, 2500)
             setTimeout(() => {
                 hideNotification()
-            }, 1500)
+            }, 2000)
         }
     })
     const validate = values => {

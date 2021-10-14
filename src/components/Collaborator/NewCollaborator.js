@@ -31,10 +31,10 @@ export const NewCollaborator = ({ notification, hideNotification, officeBranchRo
       if (notification.isSuccess)
         setTimeout(() => {
           history.push("/admin/collaborators")
-        }, 2000)
+        }, 2500)
       setTimeout(() => {
         hideNotification()
-      }, 1500)
+      }, 2000)
     }
   })
   const history = useHistory()

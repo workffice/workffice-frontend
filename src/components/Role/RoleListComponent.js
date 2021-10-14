@@ -14,7 +14,7 @@ export const RoleListComponent = ({ notification, hideNotification, roles, fetch
     setTimeout(() => {
       if (notification.show)
         hideNotification()
-    }, 1500)
+    }, 2500)
   })
 
   return (

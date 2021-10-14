@@ -22,7 +22,7 @@ export const AdminLayout = props => {
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
 
-  const officeBranch = useSelector(state => state.officeBranch) || readFromLocalStorage("officeBranch");
+  const officeBranch = useSelector(state => state.officeBranch || {});
   React.useEffect(() => {
     if (officeBranch.id === undefined || officeBranch.id === null)
       dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));

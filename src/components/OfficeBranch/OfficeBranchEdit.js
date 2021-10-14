@@ -6,6 +6,7 @@ import {
     CardBody, CardHeader, Col, Container, Form, FormGroup, Input,
     Label, Row
 } from 'reactstrap';
+import { getErrorMessage } from '../../utils/officeBranchTranslations';
 import { Notification } from '../Common/Notification/Notification';
 
 
@@ -71,7 +72,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                         <Notification
                             show={notification.show && notification.isError}
                             isError={true}
-                            message="Oops algo salio mal"
+                            message={getErrorMessage(notification.errorCode)}
                             hideNotification={hideNotification}
                         />
                         <Notification
