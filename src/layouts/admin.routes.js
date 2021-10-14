@@ -14,6 +14,7 @@ import { MembershipListComponent } from '../components/Membership/MembershipList
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { NewNotice } from '../components/Notice/NewNotice';
 import { RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 
 export const routes = [
   {
@@ -203,6 +204,23 @@ export const routes = [
         layout: '/admin',
       },
 
+    ]
+  },
+  {
+    collapse: true,
+    name: 'Reserva',
+    icon: 'fa fa-cog',
+    state: 'configurationCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/booking',
+        name: 'Reservar oficina',
+        mini: 'RO',
+        component: OfficeBooking,
+        layout: '/admin',
+        visibility: true,
+      },
     ]
   }
 ];
