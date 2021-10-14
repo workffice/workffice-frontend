@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../stores/actions/backoffice/userActions';
 import { readFromLocalStorage } from '../infra/api/localStorage';
+import { hideNotification as hideNotificationAction } from '../stores/actions';
 import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
+import { updateUser } from '../stores/actions/backoffice/userActions';
 import UserProfile from '../views/pages/backoffice/UserProfile';
-import { hideNotification as hideNotificationAction } from '../stores/actions'
 
 export const UserProfileContainer = () => {
     const dispatch = useDispatch()
@@ -21,6 +21,7 @@ export const UserProfileContainer = () => {
     const onUpdate = useCallback((id, userData) => {
         dispatch(updateUser(id, userData));
     }, [dispatch]);
+    const permission = useSelector(state => state.permission);
 
     return <UserProfile
         notification={notification}
@@ -30,5 +31,6 @@ export const UserProfileContainer = () => {
         loadCollaborators={loadCollaborators}
         userMe={userMe}
         onUpdate={userData => onUpdate(userMe.id, userData)}
+        permission={permission}
     />;
 };

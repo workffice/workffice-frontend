@@ -1,24 +1,18 @@
 
+import { includes } from "lodash-es";
 import React from "react";
-
-// reactstrap components
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    CardTitle,
-    Row,
-    Col,
+    Card, CardBody,
+    CardFooter, CardHeader, CardTitle, Col, Row
 } from "reactstrap";
-
-import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg"
-import image from "../../../assets/img/faces/erik-lucatero-1.jpg"
-import { UserUpdate } from "../../../components/User/UserUpdate";
-import CollaboratorRow from "./CollaboratorRow";
+import image from "../../../assets/img/faces/erik-lucatero-1.jpg";
+import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg";
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
+import Forbidden from "../../../components/Common/Forbidden/Forbidden";
 import { Notification } from "../../../components/Common/Notification/Notification";
+import { UserUpdate } from "../../../components/User/UserUpdate";
 import { getErrorMessage } from "../../../utils/userTranslations";
+import CollaboratorRow from "./CollaboratorRow";
 
 
 export const UserProfile = ({
@@ -28,11 +22,12 @@ export const UserProfile = ({
     notification,
     hideNotification,
     loadCollaborators,
-    officeBranch
+    officeBranch,
+    permission
 }) => {
     React.useEffect(() => {
         loadCollaborators(officeBranch.id);
-    }, [])
+    }, [collaborators])
     const { name, bio } = userMe || {}
     React.useEffect(() => {
         if (notification.show)
@@ -40,6 +35,14 @@ export const UserProfile = ({
                 hideNotification()
             }, 2000)
     })
+
+    const renderCollaborators = () => {
+        if (permission.isForbidden && includes(permission.resources, "collaborator"))
+            return <Forbidden message="No tienes acceso a los colaboradores de esta sucursal" />
+        return collaborators ? collaborators.map(collaborator => {
+            return <CollaboratorRow key={collaborator.id} {...collaborator} />
+        }) : < EmptyComponent />
+    }
     return (
         <div className="content">
             <Row style={{ paddingTop: 30 }}>
@@ -96,9 +99,7 @@ export const UserProfile = ({
                         </CardHeader>
                         <CardBody>
                             <ul className="list-unstyled team-members">
-                                {collaborators ? collaborators.map(collaborator => {
-                                    return <CollaboratorRow key={collaborator.id} {...collaborator} />
-                                }) : <EmptyComponent />}
+                                {renderCollaborators()}
                             </ul>
                         </CardBody>
                     </Card>
