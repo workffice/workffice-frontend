@@ -1,20 +1,21 @@
-import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { loginReducer } from './reducers/auth/loginReducer';
-import { registerReducer } from './reducers/auth/registerReducer';
+import { combineReducers } from 'redux';
 import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
-import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
-import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
-import { userMeReducer } from './reducers/backoffice/userReducer';
+import { loginReducer } from './reducers/auth/loginReducer';
+import { permissionReducer } from './reducers/auth/permissionReducer';
+import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
+import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
+import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
+import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
 import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
-import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
-import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { officesReducer } from './reducers/backoffice/officesReducer';
+import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
+import { userMeReducer } from './reducers/backoffice/userReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -33,9 +34,9 @@ const notificationInitialState = {
   errorCode: null,
 }
 const notificationReducer = (state = notificationInitialState, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case SET_SUCCESS:
-      return  {
+      return {
         message: payload.message ? payload.message : null,
         errorCode: null,
         isSuccess: true,
@@ -43,7 +44,7 @@ const notificationReducer = (state = notificationInitialState, { type, payload }
         show: true,
       }
     case SET_ERROR:
-      return  {
+      return {
         message: payload.message ? payload.message : null,
         errorCode: payload.error ? payload.error : null,
         isSuccess: false,
@@ -83,4 +84,5 @@ export const reducers = routes =>
     resetPaswword: resetPasswordReducer,
     isLoading: isLoadingReducer,
     notification: notificationReducer,
+    permission: permissionReducer,
   });

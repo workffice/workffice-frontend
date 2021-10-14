@@ -14,6 +14,7 @@ export const OfficesContainer = () => {
     if (officeBranch.id !== undefined)
       dispatch(fetchOfficesList(officeBranch.id))
   }, [dispatch, officeBranch])
+  const permission = useSelector(state => state.permission)
   return <OfficesListComponent
     offices={offices}
     officeBranch={officeBranch}
@@ -21,5 +22,6 @@ export const OfficesContainer = () => {
     loading={loading}
     error={error}
     loadOffices={loadOffices}
+    permission={permission}
   />;
 };

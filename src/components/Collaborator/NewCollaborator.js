@@ -5,8 +5,11 @@ import Select from 'react-select';
 import { Row, Col, Card, CardBody, Form, CardHeader, FormGroup } from 'reactstrap';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
 import { Notification } from '../Common/Notification/Notification';
+import Forbidden from "../Common/Forbidden/Forbidden"
+import { includes } from 'lodash-es';
+import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 
-export const NewCollaborator = ({ notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
+export const NewCollaborator = ({ permission, notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
     loadOfficeBranchRoles()
   }, [])
@@ -155,6 +158,8 @@ export const NewCollaborator = ({ notification, hideNotification, officeBranchRo
                     {formik.errors.roles ? (
                       <div className="error">{formik.errors.roles}</div>
                     ) : <div></div>}
+                    {permission.isForbidden && includes(permission.resources, "role") ?
+                    <Forbidden message={ROLE_FORBIDDEN_MESSAGE}/> : <></>}
                   </FormGroup>
                 </div>
               </div>
