@@ -11,7 +11,7 @@ import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent"
 import Forbidden from "../../../components/Common/Forbidden/Forbidden";
 import { Notification } from "../../../components/Common/Notification/Notification";
 import { UserUpdate } from "../../../components/User/UserUpdate";
-import { getErrorMessage } from "../../../utils/userTranslations";
+import { COLLABORATOR_FORBIDDEN_MESSAGE } from "../../../utils/collaboratorTranslations";
 import CollaboratorRow from "./CollaboratorRow";
 
 
@@ -38,7 +38,7 @@ export const UserProfile = ({
 
     const renderCollaborators = () => {
         if (permission.isForbidden && includes(permission.resources, "collaborator"))
-            return <Forbidden message="No tienes acceso a los colaboradores de esta sucursal" />
+            return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
         return collaborators ? collaborators.map(collaborator => {
             return <CollaboratorRow key={collaborator.id} {...collaborator} />
         }) : < EmptyComponent />
@@ -105,12 +105,6 @@ export const UserProfile = ({
                     </Card>
                 </Col>
                 <Col md="8">
-                    <Notification
-                        show={notification.show && notification.isError}
-                        isError={true}
-                        message={getErrorMessage(notification.errorCode)}
-                        hideNotification={hideNotification}
-                    />
                     <Notification
                         show={notification.show && notification.isSuccess}
                         message="El usuario se actualizo correctamente"

@@ -1,3 +1,5 @@
+export const COLLABORATOR_FORBIDDEN_MESSAGE = "No tienes acceso para ver los colaboradores de esta sucursal"
+
 export const ACCESS_TYPE_READ = "read"
 export const ACCESS_TYPE_WRITE = "write"
 
@@ -9,15 +11,10 @@ export const getStatus = status => {
     }
 }
 
-export const getErrorMessage = (error, accessType = ACCESS_TYPE_WRITE) => {
+export const getErrorMessage = (error) => {
     switch (error) {
         case "COLLABORATOR_ALREADY_EXISTS": return "Ya existe un colaborador con el email especificado"
-        case "OFFICE_BRANCH_FORBIDDEN": {
-            if (accessType == ACCESS_TYPE_WRITE)
-                return "No tienes acceso para crear colaboradores"
-            else
-                return "No tienes acceso para ver los colaboradores de esta sucursal"
-        }
+        case "OFFICE_BRANCH_FORBIDDEN": return "No tienes acceso para crear colaboradores"
         case "COLLABORATOR_FORBIDDEN": return "No tienes acceso para editar colaboradores"
         case "INVALID_ROLEIDS": return "Debe elegir al menos un rol"
     }

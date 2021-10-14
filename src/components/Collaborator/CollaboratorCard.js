@@ -3,7 +3,8 @@ import React from 'react';
 import Select from 'react-select';
 import { Button, Col, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
-import Forbidden from '../Common/Forbidden/Forbidden'
+import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import Forbidden from '../Common/Forbidden/Forbidden';
 
 export const CollaboratorCard = props => {
   React.useEffect(() => {
@@ -110,7 +111,7 @@ export const CollaboratorCard = props => {
                   return { value: role.id, label: role.name }
                 }) : []}
               />
-              <Forbidden className="color-red-error" message="No tienes acceso a los roles de la sucursal" />
+              <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
             </FormGroup>
             <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
           </Form>

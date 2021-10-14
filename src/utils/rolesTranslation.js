@@ -1,3 +1,6 @@
+export const ROLE_FORBIDDEN_MESSAGE = "No tienes acceso para ver los roles de esta sucursal"
+
+
 export const getAccessLabel = access => {
   switch (access) {
     case "WRITE": return "LECTURA / ESCRITURA"

@@ -2,7 +2,7 @@ import { includes } from 'lodash-es';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
-import { ACCESS_TYPE_READ, getErrorMessage } from '../../utils/collaboratorTranslations';
+import { ACCESS_TYPE_READ, COLLABORATOR_FORBIDDEN_MESSAGE, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from '../Common/Forbidden/Forbidden';
 import { Notification } from '../Common/Notification/Notification';
@@ -38,7 +38,7 @@ export const Collaborators = ({
 
   const renderCollaborators = () => {
     if (permission.isForbidden && includes(permission.resources, "collaborator"))
-      return <Forbidden message="No tienes permisos para ver los colaboradores de esta sucursal" />
+      return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
     else {
       return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
         return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">

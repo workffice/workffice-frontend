@@ -23,6 +23,7 @@ export const CollaboratorContainer = () => {
   const onCreateColaborator = useCallback(collaboratorBody => {
     dispatch(createColaborator(officeBranch.id, collaboratorBody));
   }, [dispatch]);
+  const permission = useSelector(state => state.permission)
 
   return <NewCollaborator
     createCollaborator={onCreateColaborator}
@@ -31,6 +32,7 @@ export const CollaboratorContainer = () => {
     loading={loading}
     notification={notification}
     hideNotification={hideNotification}
+    permission={permission}
   />;
 };
 

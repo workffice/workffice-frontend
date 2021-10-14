@@ -2,6 +2,7 @@ import { includes } from 'lodash-es';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
+import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from "../Common/Forbidden/Forbidden";
 import { RoleComponent } from './RoleComponent';
@@ -12,7 +13,7 @@ export const RoleListComponent = ({ permission, roles, fetchRoles }) => {
 
   const renderRoles = () => {
     if (permission.isForbidden && includes(permission.resources, "role"))
-      return <Forbidden message="No tienes acceso para ver los roles de esta sucursal" />
+      return <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
     return roles !== undefined && roles.length !== 0 ? roles.map((role) => {
       return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
         <RoleComponent {...role} />
