@@ -1,4 +1,4 @@
-import { React } from 'react'
+import React from 'react'
 import { Alert } from "reactstrap"
 
 export const Notification = ({ show, isError, message, hideNotification }) => {

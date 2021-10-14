@@ -39,8 +39,8 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
         if (!values.street) {
             errors.street = 'Requerido.';
         }
-        if (!values.postalCode) {
-            errors.postalCode = 'Requerido.';
+        if (!values.zipCode) {
+            errors.zipCode = 'Requerido.';
         }
         return errors;
     };
@@ -61,7 +61,7 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
             province: "",
             city: "",
             street: "",
-            postalCode: ""
+            zipCode: ""
         },
         validate,
         onSubmit: async (values) => {
@@ -145,17 +145,17 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
                                         <div className="error">{formik.errors.street}</div>
                                     ) : null}
                                 </FormGroup>
-                                <FormGroup className={formik.errors.postalCode ? 'has-danger' : ''}>
-                                    <Label htmlFor="postalCode" className="label-form"> Código postal </Label>
+                                <FormGroup className={formik.errors.zipCode ? 'has-danger' : ''}>
+                                    <Label htmlFor="zipCode" className="label-form"> Código postal </Label>
                                     <Input
                                         type="text"
-                                        name="postalCode"
+                                        name="zipCode"
                                         placeholder="Código Postal.."
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.postalCode} />
-                                    {formik.errors.postalCode && formik.touched.postalCode ? (
-                                        <div className="error">{formik.errors.postalCode}</div>
+                                        value={formik.values.zipCode} />
+                                    {formik.errors.zipCode && formik.touched.zipCode ? (
+                                        <div className="error">{formik.errors.zipCode}</div>
                                     ) : null}
                                 </FormGroup>
 

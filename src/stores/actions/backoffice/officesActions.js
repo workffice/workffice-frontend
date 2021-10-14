@@ -19,10 +19,10 @@ export const newOffice = office => {
     }
 };
 
-export const fetchOfficesList = (officeHolderId) => async (dispatch) => {
+export const fetchOfficesList = officeBranchId => async dispatch => {
     dispatch(setIsLoading(true));
     try {
-        dispatch(fetchOffices(await getOfficesAPI(officeHolderId)));
+        dispatch(fetchOffices(await getOfficesAPI(officeBranchId)));
     } catch (error) {
         dispatch(setError(error));
     } finally {

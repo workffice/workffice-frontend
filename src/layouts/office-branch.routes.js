@@ -6,5 +6,5 @@ export const routes = [
         name: 'Select',
         component: OfficeBranchSelectContainer,
         layout: '/office-branch',
-    }
+    },
 ];

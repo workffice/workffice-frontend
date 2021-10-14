@@ -1,19 +1,20 @@
 import { headerGet, sdkAuthRequest, sdkNoAuthRequest } from ".."
 import { API_OFFICE_BRANCHES } from "../../../environments/environment"
+import { searchQueryBuilder } from "../../../utils/searchQueryBuilder";
 
 
-export const getOffices = async (officeHolderId) => {
+export const getOffices = async officeBranchId => {
     try {
         const offices = await sdkNoAuthRequest(
-            `${API_OFFICE_BRANCHES}/${officeHolderId}/offices/`,
+            `${API_OFFICE_BRANCHES}/${officeBranchId}/offices/`,
             {
                 method: 'GET',
                 headers: headerGet
             }
         );
-        return Promise.resolve(offices);
+        return Promise.resolve(offices.data);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 }
 
@@ -31,16 +32,10 @@ export const createOffice = async (officeBranchId, office) => {
     }
 }
 
-export const search = async ({ officeBranchName, officeCapacityGT, officeCapacityLT, officeType }) => {
+export const search = async params => {
     try {
-
         let officesFound;
-        let queryParams = '';
-
-        queryParams = officeBranchName ? `name=${officeBranchName}&` : ""
-        queryParams += officeCapacityGT ? `office_capacity_gt=${officeCapacityGT}&` : ""
-        queryParams += officeCapacityLT ? `&ffice_capacity_gt=${officeCapacityLT}&` : ""
-        queryParams += officeType ? `office_type=${officeType}&` : ""
+        const queryParams = searchQueryBuilder(params)
 
         if (queryParams !== null) {
             officesFound = await sdkNoAuthRequest(
@@ -59,7 +54,7 @@ export const search = async ({ officeBranchName, officeCapacityGT, officeCapacit
                 }
             )
         }
-        return Promise.resolve(officesFound.data);
+        return Promise.resolve(officesFound);
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }

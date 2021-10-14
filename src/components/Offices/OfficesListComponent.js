@@ -5,7 +5,14 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
-  const { offices, branch } = props;
+  const { offices, officeBranch, loadOffices, loadOfficeBranch } = props;
+  React.useEffect(() => {
+    if (officeBranch === null)
+      loadOfficeBranch()
+  }, [])
+  React.useEffect(() => {
+    loadOffices()
+  }, [])
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -33,12 +40,11 @@ export const OfficesListComponent = (props) => {
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
-        {offices ? props.offices.data.map((office) => {
-          return <Col xs="10" md="4" lg="4" xg="4">
-            <OfficeComponent office={office} officeBranch={branch} />
+        {offices ? offices.map((office) => {
+          return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
+            <OfficeComponent office={office} officeBranch={officeBranch} />
           </Col>
         }) : <EmptyComponent />
-
         }
 
       </Row>
