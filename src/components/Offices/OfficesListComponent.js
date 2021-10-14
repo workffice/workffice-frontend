@@ -5,13 +5,10 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from './OfficeComponent';
 
 export const OfficesListComponent = (props) => {
-  const { offices, officeBranch, loadOffices, loadOfficeBranch } = props;
+  const { offices, officeBranch, loadOffices } = props;
   React.useEffect(() => {
-    if (officeBranch === null)
-      loadOfficeBranch()
-  }, [])
-  React.useEffect(() => {
-    loadOffices()
+    if (offices === undefined)
+      loadOffices()
   }, [])
   return (
     <div className="content">
