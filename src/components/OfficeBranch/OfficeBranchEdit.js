@@ -1,23 +1,16 @@
-import React from 'react'
 import { useFormik } from 'formik';
+import React from 'react';
 import {
     Button,
     Card,
-    CardBody,
-    Form,
-    Input,
-    Label,
-    Col,
-    Row,
-    Container,
-    FormGroup,
-    CardHeader,
-    Alert,
+    CardBody, CardHeader, Col, Container, Form, FormGroup, Input,
+    Label, Row
 } from 'reactstrap';
+import { Notification } from '../Common/Notification/Notification';
 
 
-export const OfficeBranchEdit = (props) => {
-    const { hideNotification, notification, officeBranch } = props;
+
+export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit }) => {
     const { province, city, street, zipCode } = officeBranch.location;
     const validate = values => {
         const errors = {};
@@ -58,7 +51,7 @@ export const OfficeBranchEdit = (props) => {
         },
         validate,
         onSubmit: async (values) => {
-            props.edit(values)
+            edit(values)
         },
     });
 
@@ -75,18 +68,19 @@ export const OfficeBranchEdit = (props) => {
             <Form onSubmit={formik.handleSubmit}>
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <CardHeader>
-                        {
-                            <Alert
-                                color="danger"
-                                isOpen={notification.show && notification.isError}
-                                fade={false}
-                            >
-                                {notification.errorCode}
-                            </Alert>
-                        }
+                        <Notification
+                            show={notification.show && notification.isError}
+                            isError={true}
+                            message="Oops algo salio mal"
+                            hideNotification={hideNotification}
+                        />
+                        <Notification
+                            show={notification.show && notification.isSuccess}
+                            message="La sucursal se actualizo correctamente"
+                            hideNotification={hideNotification}
+                        />
                     </CardHeader>
                     <CardBody>
-
                         <Row>
                             <Col lg="6">
                                 <FormGroup className={formik.errors.name ? 'has-danger' : ''}>
