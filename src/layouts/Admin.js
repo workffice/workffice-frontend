@@ -26,12 +26,9 @@ export const AdminLayout = props => {
   React.useEffect(() => {
     if (officeBranch.id === undefined || officeBranch.id === null)
       dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
-  }, []);
+  }, [officeBranch]);
   React.useEffect(() => {
-    console.log(officeBranch.id)
-    if (officeBranch.id === undefined || officeBranch.id === null)
-      dispatch(fetchOfficesList(readFromLocalStorage("officeBranch").id));
-    else
+    if (officeBranch.id !== undefined)
       dispatch(fetchOfficesList(officeBranch.id));
   }, [officeBranch]);
   React.useEffect(() => {

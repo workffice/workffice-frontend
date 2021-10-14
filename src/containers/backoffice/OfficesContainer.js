@@ -11,7 +11,8 @@ export const OfficesContainer = () => {
   const dispatch = useDispatch();
   const offices = useSelector(state => state.offices)
   const loadOffices = useCallback(() => {
-    dispatch(fetchOfficesList(officeBranch.id))
+    if (officeBranch.id !== undefined)
+      dispatch(fetchOfficesList(officeBranch.id))
   }, [dispatch, officeBranch])
   return <OfficesListComponent
     offices={offices}
