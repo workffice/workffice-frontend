@@ -1,15 +1,41 @@
-import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from ".."
-import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment"
+import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from "..";
+import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment";
 import { writeToLocalStorage } from "../localStorage";
 
-export const createOfficeBranchInfra = async (officeBranchData, userId) => {
+export const createOfficeBranchInfra = async ({
+    name,
+    description,
+    phone,
+    image,
+    province,
+    city,
+    street,
+    zipCode
+}, userId) => {
     try {
+        const data = new FormData()
+        data.append("file", image)
+        data.append("upload_preset", "testworkffice")
+        data.append("cloud_name", "workffice")
+        const imageData = await fetch("  https://api.cloudinary.com/v1_1/workffice/image/upload", {
+            method: "post",
+            body: data
+        }).then(resp => resp.json())
         const officeBranch = await sdkAuthRequest(
             `${API_OFFICE_HOLDERS}/${userId}/office_branches/`,
             {
                 method: 'POST',
                 headers: headersPost,
-                body: JSON.stringify(officeBranchData)
+                body: JSON.stringify({
+                    name,
+                    description,
+                    phone,
+                    province,
+                    city,
+                    street,
+                    zipCode,
+                    imagesUrls: [imageData.public_id],
+                })
             }
         );
         return Promise.resolve(officeBranch.data);

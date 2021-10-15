@@ -1,11 +1,11 @@
 
+import { CloudinaryContext, Image } from 'cloudinary-react';
 import { includes } from "lodash-es";
 import React from "react";
 import {
     Card, CardBody,
     CardFooter, CardHeader, CardTitle, Col, Row
 } from "reactstrap";
-import image from "../../../assets/img/faces/erik-lucatero-1.jpg";
 import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg";
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
 import Forbidden from "../../../components/Common/Forbidden/Forbidden";
@@ -13,7 +13,6 @@ import { Notification } from "../../../components/Common/Notification/Notificati
 import { UserUpdate } from "../../../components/User/UserUpdate";
 import { COLLABORATOR_FORBIDDEN_MESSAGE } from "../../../utils/collaboratorTranslations";
 import CollaboratorRow from "./CollaboratorRow";
-
 
 export const UserProfile = ({
     userMe,
@@ -49,10 +48,11 @@ export const UserProfile = ({
                 <Col md="4">
                     <Card className="card-user">
                         <div className="image">
-                            <img
-                                alt="..."
-                                src={image}
-                            />
+                            <CloudinaryContext cloudName="workffice">
+                                <div>
+                                    <Image publicId="sample" width="0.5" />
+                                </div>
+                            </CloudinaryContext>
                         </div>
                         <CardBody>
                             <div className="author">

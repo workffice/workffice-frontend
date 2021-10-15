@@ -8,9 +8,10 @@ import {
     Label, Row
 } from 'reactstrap';
 import { Notification } from '../Common/Notification/Notification';
+import ImageUpload from '../Common/CustomUpload/ImageUpload'
 
 
-export const OfficeBranchCreate = ({ hideNotification, notification, create }) => {
+export const OfficeBranchCreate = ({ hideNotification, notification, create}) => {
     const history = useHistory();
     const validate = values => {
         const errors = {};
@@ -54,7 +55,7 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
             name: "",
             description: "",
             phone: "",
-            imagesUrls: ["image2.com"],
+            image: "",
             province: "",
             city: "",
             street: "",
@@ -181,12 +182,10 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
                                     ) : null}
                                 </FormGroup>
 
+                                <Label className="label-form"> Foto </Label>
                                 <FormGroup>
-                                    <Label className="label-form"> Foto </Label>
-
-                                    {/* <ImageUpload className="text-center" /> */}
+                                    <ImageUpload onChange={(imageData) => formik.setFieldValue("image", imageData)} className="text-center"/>
                                 </FormGroup>
-
                             </Col>
                         </Row>
                         <Row style={{ textAlign: 'center' }}>
@@ -201,8 +200,6 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create }) =
                                 </Button>
                             </Col>
                         </Row>
-
-
                     </CardBody >
                 </Card >
             </Form>
