@@ -216,7 +216,7 @@ export const routes = [
     collapse: true,
     name: 'Reserva',
     icon: 'fa fa-cog',
-    state: 'configurationCollapse',
+    state: 'bookingCollapse',
     visibility: true,
     views: [
       {

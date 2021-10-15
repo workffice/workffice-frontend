@@ -16,8 +16,8 @@ export const OfficeCreateContainer = () => {
     const loading = useSelector(state => state.loading);
     const branch = useSelector(() => readFromLocalStorage("officeBranch"));
     const office = useSelector(state => state.office);
-    const onCreate = useCallback((office) => {
-        dispatch(createOffice(branch.data.id, office))
+    const onCreate = useCallback((officeBranchId, office) => {
+        dispatch(createOffice(officeBranchId, office));
     }, []);
 
     return <NewOffice
