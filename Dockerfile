@@ -8,6 +8,7 @@ RUN npm install-clean
 
 COPY . .
 
+RUN echo "REACT_APP_SERVER_HOST='https://workffice-be.herokuapp.com'" > .env
 RUN npm run build
 
 
