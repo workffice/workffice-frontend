@@ -42,7 +42,7 @@ function ImageUpload(props) {
       reader.readAsDataURL(file);
     }
   };
-  
+
   const handleClick = () => {
     fileInput.current.click();
   };

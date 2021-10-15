@@ -7,8 +7,9 @@ import {
     Label, Row
 } from 'reactstrap';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
+import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
-
 
 
 export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit }) => {
@@ -48,7 +49,8 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
             province: province,
             city: city,
             street: street,
-            zipCode: zipCode
+            zipCode: zipCode,
+            image: officeBranch.images ? officeBranch.images[0].url : "",
         },
         validate,
         onSubmit: async (values) => {
@@ -180,11 +182,23 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Label className="label-form"> Foto </Label>
-
-                                    {/* <ImageUpload className="text-center" /> */}
+                                    <Row>
+                                        <Col lg="6">
+                                            <Label className="label-form"> Foto </Label>
+                                            <ImageUpload
+                                                className="text-center"
+                                                onChange={imageData => formik.setFieldValue("image", imageData)}
+                                            />
+                                        </Col>
+                                        <Col lg="6">
+                                        <Label className="label-form"> Imagen actual </Label>
+                                            <Cloudinary
+                                                publicId={officeBranch.images ? officeBranch.images[0].url : ""}
+                                                width="0.5"
+                                            />
+                                        </Col>
+                                    </Row>
                                 </FormGroup>
-
                             </Col>
                         </Row>
                         <Row style={{ textAlign: 'center' }}>
