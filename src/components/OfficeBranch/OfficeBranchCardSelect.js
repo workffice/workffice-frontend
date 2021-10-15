@@ -1,8 +1,8 @@
+import { CloudinaryContext, Image } from 'cloudinary-react';
 import React from 'react';
 import { useHistory } from 'react-router';
 // import { Link } from 'react-router-dom';
 import { Button, Card, CardBody } from 'reactstrap';
-import image from '../../assets/img/bg/office1.jpg';
 
 export const OfficeBranchCardSelect = (props) => {
   const { branch } = props;
@@ -16,7 +16,11 @@ export const OfficeBranchCardSelect = (props) => {
       {/* <Link to={{ pathname: `/admin/offices` }} style={{ color: 'white', textDecoration: 'none' }}> */}
       <Card>
         <CardBody>
-          <img className="office-branch-card-image" src={image} />
+          <CloudinaryContext cloudName="workffice">
+            <div>
+              <Image publicId={branch.images[0].url !== '' ? branch.images[0].url : "sample"} width="0.5" />
+            </div>
+          </CloudinaryContext>
           <div className="office-branch-card-title">
             <h5>
               <small>{branch.name}</small>

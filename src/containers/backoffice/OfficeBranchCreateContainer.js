@@ -13,7 +13,7 @@ export const OfficeBranchCreateContainer = () => {
     }, [dispatch])
     const onCreate = useCallback(officeBranchData => {
         dispatch(createOfficeBranch(officeBranchData, user.id));
-    }, []);
+    }, [user]);
     return <CreateOfficeBranch
         hideNotification={hideNotification}
         onCreate={onCreate}
