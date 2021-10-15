@@ -4,6 +4,7 @@ import { createOfficeAPI, getOfficesAPI } from "../../../api/backoffice/offices"
 
 export const FETCH_OFFICES = 'FETCH_OFFICES';
 export const CREATE_OFFICE = 'CREATE_OFFICE';
+export const CLEAN_OFFICE = 'CLEAN_OFFICE';
 
 export const fetchOffices = offices => {
     return {
@@ -18,6 +19,13 @@ export const newOffice = office => {
         payload: office
     }
 };
+
+export const cleanOffice = ()=>{
+    return {
+        type: CLEAN_OFFICE,
+        payload: null
+    }
+}
 
 export const fetchOfficesList = officeBranchId => async dispatch => {
     dispatch(setIsLoading(true));
@@ -40,4 +48,8 @@ export const createOffice = (officeBranchId, office) => async (dispatch) => {
         dispatch(fetchOfficesList(officeBranchId))
         dispatch(setIsLoading(false));
     }
+}
+
+export const clean = ()=> async (dispatch)=>{
+    dispatch(cleanOffice());
 }

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficesListComponent } from '../../components/Offices/OfficesListComponent';
-import { fetchOfficesList } from '../../stores/actions/backoffice/officesActions';
+import { cleanOffice, fetchOfficesList } from '../../stores/actions/backoffice/officesActions';
 
 export const OfficesContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -10,6 +10,9 @@ export const OfficesContainer = () => {
   const officeBranch = useSelector(state => state.officeBranch);
   const dispatch = useDispatch();
   const offices = useSelector(state => state.offices)
+  React.useEffect(() => {
+    dispatch(cleanOffice());
+   }, []);
   const loadOffices = useCallback(() => {
     if (officeBranch.id !== undefined)
       dispatch(fetchOfficesList(officeBranch.id))
