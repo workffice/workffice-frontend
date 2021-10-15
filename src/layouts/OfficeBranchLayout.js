@@ -4,7 +4,6 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import { Route, Switch } from 'react-router-dom';
 
 import { routes } from "./office-branch.routes";
-import { getUserMe } from '../stores/actions/backoffice/userActions';
 import { collaboratorOfficeBranchList, officeBranchList } from '../stores/actions/backoffice/officebranchActions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,9 +11,6 @@ let ps;
 
 export const OfficeBranchLayout = () => {
     const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(getUserMe());
-    }, []);
     const user = useSelector(state => state.userMe);
     React.useEffect(async () => {
         if (user !== null) {
