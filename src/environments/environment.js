@@ -1,5 +1,5 @@
-const BASE_URL = 'http://localhost:8080';
-// const BASE_URL = 'https://workffice-be.herokuapp.com'; PROD
+// const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://workffice-be.herokuapp.com'; //PROD
 const API = '/api';
 const API_USERS = '/users';
 const API_AUTHENTICATIONS = '/authentications';
