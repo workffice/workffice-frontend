@@ -1,5 +1,5 @@
-import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from ".."
-import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment"
+import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from "..";
+import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment";
 import { writeToLocalStorage } from "../localStorage";
 
 export const createOfficeBranchInfra = async ({
@@ -13,7 +13,6 @@ export const createOfficeBranchInfra = async ({
     zipCode
 }, userId) => {
     try {
-        console.log(userId)
         const data = new FormData()
         data.append("file", image)
         data.append("upload_preset", "testworkffice")
