@@ -14,7 +14,7 @@ export const OfficesContainer = () => {
     dispatch(cleanOffice());
    }, []);
   const loadOffices = useCallback(() => {
-    if (officeBranch.id !== undefined)
+    if (officeBranch !== null)
       dispatch(fetchOfficesList(officeBranch.id))
   }, [dispatch, officeBranch])
   const permission = useSelector(state => state.permission)

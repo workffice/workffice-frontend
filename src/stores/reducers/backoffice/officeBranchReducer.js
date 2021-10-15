@@ -1,13 +1,11 @@
 import { FETCH_EDIT_OFFICEBRANCH, FETCH_OFFICEBRANCH_ID } from "../../actions/backoffice/officebranchActions";
 
-const initialState = {
-    location: {}, 
-}
+const initialState = null
 
 export const officeBranchReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case FETCH_OFFICEBRANCH_ID:
-            return {...payload};
+            return payload;
         case FETCH_EDIT_OFFICEBRANCH:
             return state;
         default:

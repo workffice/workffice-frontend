@@ -1,6 +1,5 @@
 import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from "..";
 import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment";
-import { writeToLocalStorage } from "../localStorage";
 
 const postImageToCloudinary = async imageData => {
     const data = new FormData()
@@ -123,7 +122,6 @@ export const getOfficeBranchInfra = async (officeBranchId) => {
                 headers: headerGet
             }
         )
-        writeToLocalStorage(officeBranch.data, "officeBranch")
         return Promise.resolve(officeBranch.data);
     } catch (error) {
         return Promise.reject(error.errors[0]);
