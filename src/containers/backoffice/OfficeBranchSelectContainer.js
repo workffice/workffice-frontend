@@ -9,8 +9,10 @@ export const OfficeBranchSelectContainer = () => {
         await dispatch(getOfficeBranchId(officeBranchId));
     }, [dispatch]);
     const officeBranches = useSelector(state => state.officeBranches);
+    const officeBranch = useSelector(state => state.officeBranch);
     return <OfficeBranchSelect
         selectOfficeBranch={selectOfficeBranch}
         branches={officeBranches}
+        currentOfficeBranch={officeBranch}
     />;
 };

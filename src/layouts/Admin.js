@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
 import { getOfficeBranchId } from '../stores/actions/backoffice/officebranchActions.js';
 import { readFromLocalStorage } from '../infra/api/localStorage.js';
-import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
+// import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
 
 let ps;
 
@@ -24,16 +24,16 @@ export const AdminLayout = props => {
 
   const officeBranch = useSelector(state => state.officeBranch);
   React.useEffect(() => {
-    if (officeBranch === null && readFromLocalStorage("officeBranch") !== undefined)
-        dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
-  }, [officeBranch]);
-  React.useEffect(() => {
-    if (officeBranch !== null)
-      dispatch(fetchOfficesList(officeBranch.id));
-  }, [officeBranch]);
+    if (officeBranch === null)
+      dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
+    // else
+    //   dispatch(getOfficeBranchId(officeBranch.id));
+    // if (officeBranch !== null)
+    //   dispatch(fetchOfficesList(officeBranch.id));
+  }, [officeBranch ? officeBranch.id : ""]);
   React.useEffect(() => {
     dispatch(getUserMe());
-  }, []);
+  }, [user ? user.id : ""]);
   const user = useSelector(state => state.userMe)
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {

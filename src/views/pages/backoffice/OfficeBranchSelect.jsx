@@ -1,11 +1,17 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
 import { EmptyOfficeBranch } from '../../../components/OfficeBranch/EmptyOfficeBranch'
 import { OfficeBranchCardSelect } from '../../../components/OfficeBranch/OfficeBranchCardSelect'
 
 export const OfficeBranchSelect = (props) => {
+
+    const [selected, setSelected] = useState(false)
+    const onSelect = officeBranchId => {
+        props.selectOfficeBranch(officeBranchId)
+        setSelected(true)
+    }
     return (
         <div className="login-page">
             <Container style={{
@@ -32,16 +38,17 @@ export const OfficeBranchSelect = (props) => {
                             props.branches
                                 ? props.branches.map(branch =>
                                     <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
-                                        <OfficeBranchCardSelect key={branch.id} branch={branch} select={props.selectOfficeBranch} />
+                                        <OfficeBranchCardSelect
+                                            branch={branch}
+                                            select={onSelect}
+                                            selected={selected}
+                                            currentOfficeBranch={props.currentOfficeBranch}
+                                        />
                                     </Col>
                                 )
                                 : <EmptyOfficeBranch />
                         }
                     </Col>
-                </Row>
-                <Row >
-
-
                 </Row>
             </Container>
 

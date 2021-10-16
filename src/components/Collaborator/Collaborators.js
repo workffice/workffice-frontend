@@ -24,7 +24,7 @@ export const Collaborators = ({
 
   React.useEffect(() => {
     loadCollaborators(officeBranch.id);
-  }, [])
+  }, [collaborators ? collaborators.length : 0])
   React.useEffect(() => {
     loadOfficeBranchRoles(officeBranch.id);
   }, [])
@@ -48,6 +48,7 @@ export const Collaborators = ({
             loadCollaboratorRoles={loadCollaboratorRoles}
             collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
             updateCollaborator={onUpdate}
+            permission={permission}
           />
         </Col>
       }) : <EmptyComponent />

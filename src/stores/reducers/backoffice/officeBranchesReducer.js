@@ -12,16 +12,15 @@ export const officeBranchesReducer = (state = initialState, { type, payload }) =
         case CREATE_OFFICE_BRANCH:
             return state
         case FETCH_OFFICEBRANCHES_LIST:
-            return [...payload]
+            return [...payload.map(officeBranch => ({...officeBranch, collaborator: false}))]
         case FETCH_COLLABORATOR_OFFICE_BRANCHES: {
             const officeBranchIds = payload.map(officeBranch => officeBranch.id)
             return [
                 ...state.filter(officeBranch => !includes(officeBranchIds, officeBranch.id)),
-                ...payload
+                ...payload.map(officeBranch => ({...officeBranch, collaborator: true}))
             ]
         }
         default:
             return state
     }
 }
-

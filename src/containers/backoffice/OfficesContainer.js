@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficesListComponent } from '../../components/Offices/OfficesListComponent';
-import { cleanOffice, fetchOfficesList } from '../../stores/actions/backoffice/officesActions';
+import { fetchOfficesList } from '../../stores/actions/backoffice/officesActions';
 
 export const OfficesContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -10,13 +10,12 @@ export const OfficesContainer = () => {
   const officeBranch = useSelector(state => state.officeBranch);
   const dispatch = useDispatch();
   const offices = useSelector(state => state.offices)
-  React.useEffect(() => {
-    dispatch(cleanOffice());
-   }, []);
-  const loadOffices = useCallback(() => {
-    if (officeBranch !== null)
-      dispatch(fetchOfficesList(officeBranch.id))
-  }, [dispatch, officeBranch])
+  // React.useEffect(() => {
+  //   dispatch(cleanOffice());
+  //  }, []);
+  const loadOffices = useCallback((officeBranchId) => {
+    dispatch(fetchOfficesList(officeBranchId))
+  }, [dispatch])
   const permission = useSelector(state => state.permission)
   return <OfficesListComponent
     offices={offices}

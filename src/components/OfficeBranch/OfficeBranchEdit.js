@@ -13,7 +13,7 @@ import { Notification } from '../Common/Notification/Notification';
 
 
 export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit }) => {
-    const { province, city, street, zipCode } = officeBranch.location;
+    const { province, city, street, zipCode } = officeBranch ? officeBranch.location : {};
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -43,14 +43,14 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            name: officeBranch.name,
-            description: officeBranch.description,
-            phone: officeBranch.phone,
-            province: province,
-            city: city,
-            street: street,
-            zipCode: zipCode,
-            image: officeBranch.images ? officeBranch.images[0].url : "",
+            name: officeBranch ? officeBranch.name : "",
+            description: officeBranch ? officeBranch.description : "",
+            phone: officeBranch ? officeBranch.phone : "",
+            province: officeBranch ? province : "",
+            city: officeBranch ? city : "",
+            street: officeBranch ? street : "",
+            zipCode: officeBranch ? zipCode : "",
+            image: officeBranch ? officeBranch.images[0].url : "",
         },
         validate,
         onSubmit: async (values) => {
@@ -193,7 +193,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                         <Col lg="6">
                                         <Label className="label-form"> Imagen actual </Label>
                                             <Cloudinary
-                                                publicId={officeBranch.images ? officeBranch.images[0].url : ""}
+                                                publicId={officeBranch ? officeBranch.images[0].url : ""}
                                                 width="0.5"
                                             />
                                         </Col>

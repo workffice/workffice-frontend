@@ -22,18 +22,17 @@ export const UserProfile = ({
     hideNotification,
     loadCollaborators,
     officeBranch,
-    permission
+    permission,
 }) => {
     React.useEffect(() => {
         loadCollaborators(officeBranch.id);
-    }, [collaborators])
+    }, [collaborators ? collaborators.length : 0])
     const { name, bio } = userMe || {}
     React.useEffect(() => {
-        if (notification.show)
-            setTimeout(() => {
-                hideNotification()
-            }, 2000)
-    })
+        setTimeout(() => {
+            hideNotification()
+        }, 2000)
+    }, [notification.show])
 
     const renderCollaborators = () => {
         if (permission.isForbidden && includes(permission.resources, "collaborator"))
@@ -71,19 +70,13 @@ export const UserProfile = ({
                             <hr />
                             <div className="button-container">
                                 <Row>
-                                    <Col className="ml-auto" lg="4" md="6" xs="6">
+                                    <Col className="ml-auto">
                                         <h5>
                                             4 <br />
                                             <small>Sucursales</small>
                                         </h5>
                                     </Col>
-                                    <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
-                                        <h5>
-                                            3 <br />
-                                            <small>Oficinas</small>
-                                        </h5>
-                                    </Col>
-                                    <Col className="mr-auto" lg="4">
+                                    <Col className="mr-auto">
                                         <h5>
                                             8.5 <br />
                                             <small>Valoración</small>

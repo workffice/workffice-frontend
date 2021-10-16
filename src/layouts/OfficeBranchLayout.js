@@ -16,7 +16,7 @@ export const OfficeBranchLayout = () => {
     React.useEffect(async () => {
         if (user === null || user === undefined)
             await dispatch(getUserMe());
-    }, [user]);
+    }, [user ? user.id : ""]);
     React.useEffect(async () => {
         if (user !== null) {
             await dispatch(officeBranchList(user.id));
