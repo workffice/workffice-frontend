@@ -1,13 +1,15 @@
-import { CREATE_ROLE, FETCH_COLLABORATOR_ROLES, FETCH_ROLES } from "../../actions/backoffice/rolesAction";
+import { CREATE_ROLE, DELETE_ROLE, FETCH_COLLABORATOR_ROLES, FETCH_ROLES } from "../../actions/backoffice/rolesAction";
 
 const initialState = [];
 
 export const rolesReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case FETCH_ROLES:
-            return [...payload];
+            return payload;
         case CREATE_ROLE:
             return state
+        case DELETE_ROLE:
+            return state.filter(role => role.id !== payload)
         default:
             return state;
     }

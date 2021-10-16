@@ -4,7 +4,7 @@ import { Button, Card, CardBody, CardHeader, Collapse, ListGroup, ListGroupItem,
 import { getAccessLabel, getResourceLabel } from '../../utils/rolesTranslation';
 import './styles/RolComponent.css';
 
-export const RoleComponent = ({ name, permissions }) => {
+export const RoleComponent = ({ name, permissions, onDelete }) => {
   const [opened, setOpened] = useState(false)
 
   return (
@@ -14,7 +14,7 @@ export const RoleComponent = ({ name, permissions }) => {
           <h2 style={{ margin: 0 }}>
             Rol: <small>{name}</small>
           </h2>
-          <Button className="btn-neutral btn-icon btn-danger">
+          <Button className="btn-neutral btn-icon btn-danger" onClick={() => onDelete()}>
             <i className='nc-icon nc-simple-remove'></i>
           </Button>
         </CardHeader>

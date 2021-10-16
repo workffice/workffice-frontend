@@ -4,7 +4,7 @@ import { NewRole } from '../../components/Role/NewRole';
 import { RoleListComponent } from '../../components/Role/RoleListComponent';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { hideNotification as hideNotificationAction } from '../../stores/actions/';
-import { createRole, rolesList } from '../../stores/actions/backoffice/rolesAction';
+import { createRole, deleteRole as deleteRoleAction, rolesList } from '../../stores/actions/backoffice/rolesAction';
 
 export const NewRoleContainer = () => {
     const dispatch = useDispatch()
@@ -31,9 +31,13 @@ export const RolesListContainer = () => {
     }, [dispatch])
     const roles = useSelector(state => state.roles)
     const permission = useSelector(state => state.permission)
+    const deleteRole = useCallback(async roleId => {
+        await dispatch(deleteRoleAction(roleId))
+    }, [dispatch])
     return <RoleListComponent
         fetchRoles={fetchRoles}
         roles={roles}
         permission={permission}
+        deleteRole={deleteRole}
     />
 }

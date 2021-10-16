@@ -7,16 +7,16 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from "../Common/Forbidden/Forbidden";
 import { RoleComponent } from './RoleComponent';
 
-export const RoleListComponent = ({ permission, roles, fetchRoles }) => {
+export const RoleListComponent = ({ permission, roles, fetchRoles, deleteRole }) => {
 
-  React.useEffect(() => { fetchRoles() }, [])
+  React.useEffect(() => { fetchRoles() }, [roles ? roles.length : 0])
 
   const renderRoles = () => {
     if (permission.isForbidden && includes(permission.resources, "role"))
       return <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
     return roles !== undefined && roles.length !== 0 ? roles.map((role) => {
       return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
-        <RoleComponent {...role} />
+        <RoleComponent {...role} onDelete={() => deleteRole(role.id)}/>
       </Col>
     }) : <EmptyComponent />
   }
