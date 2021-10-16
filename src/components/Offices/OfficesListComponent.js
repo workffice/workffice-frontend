@@ -2,12 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from './OfficeComponent';
 
-export const OfficesListComponent = ({ offices, officeBranch, loadOffices }) => {
+export const OfficesListComponent = ({ offices, officeBranch, loading, loadOffices }) => {
   React.useEffect(() => {
-    loadOffices()
-  }, [])
+    if (officeBranch !== null)
+      loadOffices(officeBranch.id)
+  }, [officeBranch ? officeBranch.id : ""])
+
+  const renderOffices = () => {
+    if (loading)
+      return (
+        <Col xs="10" md="4" lg="4" xg="4">
+          <Loading />
+        </Col>
+      )
+    return offices.length !== 0 ? offices.map((office) => {
+      return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
+        <OfficeComponent office={office} officeBranch={officeBranch} />
+      </Col>
+    }) : <EmptyComponent />
+  }
+
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -35,13 +52,7 @@ export const OfficesListComponent = ({ offices, officeBranch, loadOffices }) => 
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
-        {offices ? offices.map((office) => {
-          return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
-            <OfficeComponent office={office} officeBranch={officeBranch} />
-          </Col>
-        }) : <EmptyComponent />
-        }
-
+        {renderOffices()}
       </Row>
     </div >
   );

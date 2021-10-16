@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOfficeBranch } from '../../stores/actions/backoffice/officebranchActions';
+import { createOfficeBranch } from '../../stores/actions/backoffice/officeBranchActions';
 import { CreateOfficeBranch } from '../../views/pages/backoffice/CreateOfficeBranch';
 import { hideNotification as hideNotificationAction } from '../../stores/actions'
 

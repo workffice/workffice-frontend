@@ -5,7 +5,7 @@ export const permissionReducer = (state = { isForbidden: false, resources: [] },
     switch (type) {
         case SET_SUCCESS_ACCESS: return {
             isForbidden: state.isForbidden,
-            resources: state.resources.filter(resource => resource !== payload)
+            resources: set(state.resources.filter(resource => resource !== payload))
         }
         case SET_FORBIDDEN_ACCESS: return {
             isForbidden: true,
