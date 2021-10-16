@@ -12,4 +12,3 @@ export const officeReducer = (state = initialState, { type, payload }) => {
             return currentState;
     }
 }
-
