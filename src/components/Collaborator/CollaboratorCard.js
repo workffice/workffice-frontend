@@ -40,7 +40,7 @@ export const CollaboratorCard = props => {
   });
 
   const getStatusColor = () => {
-    switch(status) {
+    switch (status) {
       case "PENDING": return "default"
       case "ACTIVE": return "success"
       case "INACTIVE": return "danger"
@@ -124,8 +124,8 @@ export const CollaboratorCard = props => {
               />
               {
                 includes(permission.resources, "role") ?
-                <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
-                : <></>
+                  <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
+                  : <></>
               }
             </FormGroup>
             <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>

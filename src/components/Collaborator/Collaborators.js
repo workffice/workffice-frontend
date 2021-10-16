@@ -24,17 +24,15 @@ export const Collaborators = ({
 
   React.useEffect(() => {
     loadCollaborators(officeBranch.id);
-  }, [collaborators ? collaborators.length : 0])
-  React.useEffect(() => {
     loadOfficeBranchRoles(officeBranch.id);
-  }, [])
+  }, [officeBranch ? officeBranch.id : ""])
 
   React.useEffect(() => {
     if (notification.show)
       setTimeout(() => {
         hideNotification()
       }, 2000)
-  })
+  }, [notification.isSuccess])
 
   const renderCollaborators = () => {
     if (permission.isForbidden && includes(permission.resources, "collaborator"))
