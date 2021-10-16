@@ -17,7 +17,7 @@ export const OfficesSearch = (props) => {
             officeCapacityLT: query.get("office_capacity_lt") || "",
             officeType: query.get("office_type") || "",
             officeBranchName: query.get("name") || "",
-            page: query.get("page") - 1 || 0,
+            page: query.get("page") ? query.get("page") - 1 : 0,
         }
         props.search(data)
     }, []);
