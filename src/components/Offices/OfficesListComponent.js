@@ -13,8 +13,12 @@ export const OfficesListComponent = ({ offices, officeBranch, loading, loadOffic
 
   const renderOffices = () => {
     if (loading)
-      return <Loading />
-    return offices ? offices.map((office) => {
+      return (
+        <Col xs="10" md="4" lg="4" xg="4">
+          <Loading />
+        </Col>
+      )
+    offices ? offices.map((office) => {
       return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
         <OfficeComponent office={office} officeBranch={officeBranch} />
       </Col>
