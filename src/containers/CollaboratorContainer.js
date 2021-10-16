@@ -4,8 +4,8 @@ import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { readFromLocalStorage } from '../infra/api/localStorage';
 import { hideNotification as hideNotificationAction } from '../stores/actions';
-import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
-import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/createCollaboratorAction';
+import { collaboratorsList } from '../stores/actions/backoffice/collaborator/collaboratorsAction';
+import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/collaborator/collaboratorAction';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
 
 export const CollaboratorContainer = () => {
@@ -60,6 +60,7 @@ export const CollaboratorListContainer = () => {
     await dispatch(updateCollaborator(collaboratorId, collaboratorBody));
   }, [dispatch]);
   const permission = useSelector(state => state.permission)
+  const loading = useSelector(state => state.loadingCollaborator)
   return <Collaborators
     notification={notification}
     hideNotification={hideNotification}
@@ -72,5 +73,6 @@ export const CollaboratorListContainer = () => {
     collaboratorRoles={collaboratorRoles}
     onUpdate={onUpdate}
     permission={permission}
+    loading={loading}
   />
 }

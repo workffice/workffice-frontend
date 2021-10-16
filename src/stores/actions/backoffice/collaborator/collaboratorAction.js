@@ -1,5 +1,5 @@
-import { setError, setIsLoading, setSuccess } from '..';
-import { createCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../api/backoffice/collaborator';
+import { setError, setIsLoading, setSuccess } from '../..';
+import { createCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../../api/backoffice/collaborator';
 import { fetchCollaboratorsList } from './collaboratorsAction';
 
 export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
