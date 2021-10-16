@@ -49,7 +49,7 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create}) =>
                 hideNotification()
             }, 2000);
         }
-    }, [notification]);
+    }, [notification.isSuccess]);
     const formik = useFormik({
         initialValues: {
             name: "",
