@@ -4,14 +4,14 @@ import { Card, CardBody } from 'reactstrap';
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 
 export const OfficeBranchCard = ({ branch }) => {
-
+  const images = branch.images
   return (
     <>
       {branch &&
         <Link to={{ pathname: `/admin/office-branch/${branch.id}` }} style={{ color: 'white', textDecoration: 'none' }}>
           <Card>
             <CardBody>
-              <Cloudinary className="office-branch-card-image" publicId={branch.images ? branch.images[0].url : ""} />
+              <Cloudinary className="office-branch-card-image" publicId={images ? images[0] : ""} />
               <div className="office-branch-card-title">
                 <h5>
                   <small>{branch.name}</small>
