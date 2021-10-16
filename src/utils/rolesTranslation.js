@@ -22,5 +22,6 @@ export const getResourceLabel = resource => {
 export const getErrorMessage = error => {
   switch (error) {
     case "OFFICE_BRANCH_FORBIDDEN": return "No tienes acceso para crear roles"
+    case "ROLE_FORBIDDEN": return "No tienes acceso para modificar los roles de esta sucursal"
   }
 }
