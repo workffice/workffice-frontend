@@ -11,11 +11,12 @@ import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
 import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
-import { officeReducer } from './reducers/backoffice/officeReducer';
+import { officeReducer } from './reducers/backoffice/office/officeReducer';
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
-import { officesReducer } from './reducers/backoffice/officesReducer';
+import { officesReducer } from './reducers/backoffice/office/officesReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
+import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -76,6 +77,7 @@ export const reducers = routes =>
     officeBranch: officeBranchReducer,
     office: officeReducer,
     offices: officesReducer,
+    loadingOffice: loadingOfficeReducer,
     officesFound: officesFoundReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,

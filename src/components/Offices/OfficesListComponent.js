@@ -18,7 +18,7 @@ export const OfficesListComponent = ({ offices, officeBranch, loading, loadOffic
           <Loading />
         </Col>
       )
-    offices ? offices.map((office) => {
+    return offices.length !== 0 ? offices.map((office) => {
       return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
         <OfficeComponent office={office} officeBranch={officeBranch} />
       </Col>
