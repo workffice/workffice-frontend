@@ -14,6 +14,18 @@ export const createRole = async (officeBranchId, roleBody) => {
     }
 }
 
+export const deleteRole = async roleId => {
+    try {
+        await sdkAuthRequest(`${API_URL}/roles/${roleId}/`, {
+            method: 'DELETE',
+            headers: headersPost,
+        });
+        return Promise.resolve(roleId);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
 export const fetchRoles = async officeBranchId => {
     try {
         const roles = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/roles/`, {

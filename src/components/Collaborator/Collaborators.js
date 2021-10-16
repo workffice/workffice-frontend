@@ -33,8 +33,8 @@ export const Collaborators = ({
     if (notification.show)
       setTimeout(() => {
         hideNotification()
-      }, 2000)
-  }, [notification.isSuccess])
+      }, 2500)
+  }, [notification.show])
 
   const renderCollaborators = () => {
     if (loading)

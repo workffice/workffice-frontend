@@ -1,3 +1,4 @@
+import PropType from 'prop-types'
 import React from 'react'
 import { Alert } from "reactstrap"
 
@@ -16,4 +17,11 @@ export const Notification = ({ show, isError, message, hideNotification }) => {
             <span data-notify="message">{message}</span>
         </Alert>
     )
+}
+
+Notification.propTypes = {
+    show: PropType.bool.isRequired,
+    isError: PropType.bool,
+    message: PropType.string.isRequired,
+    hideNotification: PropType.func
 }
