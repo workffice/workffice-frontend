@@ -23,5 +23,4 @@ export const collaboratorsList = (officeBranchId) => async (dispatch) => {
     } finally {
         dispatch(stopLoadingCollaboratorAction());
     }
-
 }

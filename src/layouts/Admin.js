@@ -8,9 +8,8 @@ import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
-import { getOfficeBranchId } from '../stores/actions/backoffice/officebranchActions.js';
+import { getOfficeBranchId } from '../stores/actions/backoffice/officeBranchActions.js';
 import { readFromLocalStorage } from '../infra/api/localStorage.js';
-// import { fetchOfficesList } from '../stores/actions/backoffice/officesActions.js';
 
 let ps;
 
@@ -26,11 +25,7 @@ export const AdminLayout = props => {
   React.useEffect(() => {
     if (officeBranch === null)
       dispatch(getOfficeBranchId(readFromLocalStorage("officeBranch").id));
-    // else
-    //   dispatch(getOfficeBranchId(officeBranch.id));
-    // if (officeBranch !== null)
-    //   dispatch(fetchOfficesList(officeBranch.id));
-  }, [officeBranch ? officeBranch.id : ""]);
+  }, []);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, [user ? user.id : ""]);
