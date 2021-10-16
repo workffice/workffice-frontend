@@ -1,4 +1,4 @@
-import { CREATE_OFFICE } from "../../../actions/backoffice/office/officesActions";
+import { CREATE_OFFICE } from "../../../actions/backoffice/office/officeActions";
 
 const initialState = null;
 

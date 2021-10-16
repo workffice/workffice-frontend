@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { NewOffice } from '../../components/Offices/NewOffice';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
-import { createOffice } from '../../stores/actions/backoffice/office/officesActions';
+import { createOffice } from '../../stores/actions/backoffice/office/officeActions';
 import { getUserMe } from '../../stores/actions/backoffice/userActions';
 
 export const OfficeCreateContainer = () => {
