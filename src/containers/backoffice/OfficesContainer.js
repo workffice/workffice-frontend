@@ -10,9 +10,6 @@ export const OfficesContainer = () => {
   const officeBranch = useSelector(state => state.officeBranch);
   const dispatch = useDispatch();
   const offices = useSelector(state => state.offices)
-  // React.useEffect(() => {
-  //   dispatch(cleanOffice());
-  //  }, []);
   const loadOffices = useCallback((officeBranchId) => {
     dispatch(fetchOfficesList(officeBranchId))
   }, [dispatch])
