@@ -1,12 +1,18 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
 import { EmptyOfficeBranch } from '../../../components/OfficeBranch/EmptyOfficeBranch'
 import { OfficeBranchCardSelect } from '../../../components/OfficeBranch/OfficeBranchCardSelect'
 
 export const OfficeBranchSelect = (props) => {
-
+    const countRef = useRef(0);
+    useEffect(() => {
+        if (countRef.current === 0) {
+            props.cleanOfficeBranch()
+            countRef.current++;
+        }
+    }, [])
     const [selected, setSelected] = useState(false)
     const onSelect = officeBranchId => {
         props.selectOfficeBranch(officeBranchId)
