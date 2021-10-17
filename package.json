@@ -66,6 +66,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "4.3.1",
+    "react-slick": "^0.28.1",
     "react-table": "7.7.0",
     "react-tagsinput": "3.19.0",
     "reactstrap": "8.9.0",
@@ -73,6 +74,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
     "twemoji-awesome": "^1.0.6"
   },
   "browserslist": [
