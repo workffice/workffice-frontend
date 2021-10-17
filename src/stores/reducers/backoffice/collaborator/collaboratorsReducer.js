@@ -1,5 +1,5 @@
-import { FETCH_COLLABORATORS } from "../../actions/backoffice/collaboratorsAction";
-import { UPDATE_COLABORATOR, CREATE_COLABORATOR } from "../../actions/backoffice/createCollaboratorAction";
+import { FETCH_COLLABORATORS } from "../../../actions/backoffice/collaborator/collaboratorsAction"
+import { CREATE_COLABORATOR, UPDATE_COLABORATOR } from "../../../actions/backoffice/collaborator/collaboratorAction"
 
 const initialState = null
 

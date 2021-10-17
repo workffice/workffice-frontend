@@ -8,12 +8,14 @@ import { permissionReducer } from './reducers/auth/permissionReducer';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
-import { collaboratorsReducer } from './reducers/backoffice/collaboratorsReducer';
+import { collaboratorsReducer } from './reducers/backoffice/collaborator/collaboratorsReducer';
+import { loadingCollaboratorReducer } from './reducers/backoffice/collaborator/loading';
+import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
+import { officeReducer } from './reducers/backoffice/office/officeReducer';
+import { officesReducer } from './reducers/backoffice/office/officesReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
 import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
-import { officeReducer } from './reducers/backoffice/officeReducer';
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
-import { officesReducer } from './reducers/backoffice/officesReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 
@@ -71,11 +73,13 @@ export const reducers = routes =>
     userMe: userMeReducer,
     collaborators: collaboratorsReducer,
     collaboratorRoles: collaboratorRolesReducer,
+    loadingCollaborator: loadingCollaboratorReducer,
     roles: rolesReducer,
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
     office: officeReducer,
     offices: officesReducer,
+    loadingOffice: loadingOfficeReducer,
     officesFound: officesFoundReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,

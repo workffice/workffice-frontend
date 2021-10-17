@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
-import { editOfficeBranch, getOfficeBranchId } from '../../stores/actions/backoffice/officebranchActions';
+import { editOfficeBranch, getOfficeBranchId } from '../../stores/actions/backoffice/officeBranchActions';
 import { EditOfficeBranch } from '../../views/pages/backoffice/EditOfficeBranch';
 import { hideNotification as hideNotificationAction } from '../../stores/actions';
 

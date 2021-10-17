@@ -14,14 +14,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
 // used for making the prop types of this component
 import PropTypes from "prop-types";
-
+import React from "react";
 import { Button } from "reactstrap";
-
 import defaultImage from "../../../assets/img/bg/image_placeholder.jpg";
 import defaultAvatar from "../../../assets/img/bg/logoCirculo.svg";
+
+
 
 function ImageUpload(props) {
   const [fileState, setFileState] = React.useState(null);
@@ -36,17 +36,13 @@ function ImageUpload(props) {
     reader.onloadend = () => {
       setFileState(file);
       setImagePreviewUrl(reader.result);
+      props.onChange(reader.result)
     };
     if (file) {
       reader.readAsDataURL(file);
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // fileState is the file/image uploaded
-  //   // in this function you can save the image (fileState) on form submit
-  //   // you have to call it yourself
-  // };
+
   const handleClick = () => {
     fileInput.current.click();
   };
@@ -55,6 +51,7 @@ function ImageUpload(props) {
     setFileState(null);
     setImagePreviewUrl(props.avatar ? defaultAvatar : defaultImage);
   };
+
   return (
     <div className="fileinput text-center">
       <input type="file" onChange={handleImageChange} ref={fileInput} />
@@ -64,12 +61,12 @@ function ImageUpload(props) {
       <div>
         {fileState === null ? (
           <Button className="btn-round" onClick={() => handleClick()}>
-            {props.avatar ? "Add Photo" : "Select image"}
+            {props.avatar ? "Añadir foto" : "Seleccionar imagen"}
           </Button>
         ) : (
           <span>
             <Button className="btn-round" onClick={() => handleClick()}>
-              Change
+              Cambiar
             </Button>
             {props.avatar ? <br /> : null}
             <Button
@@ -78,7 +75,7 @@ function ImageUpload(props) {
               onClick={() => handleRemove()}
             >
               <i className="fa fa-times" />
-              Remove
+              Quitar
             </Button>
           </span>
         )}
@@ -89,6 +86,7 @@ function ImageUpload(props) {
 
 ImageUpload.propTypes = {
   avatar: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default ImageUpload;

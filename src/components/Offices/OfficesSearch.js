@@ -17,7 +17,7 @@ export const OfficesSearch = (props) => {
             officeCapacityLT: query.get("office_capacity_lt") || "",
             officeType: query.get("office_type") || "",
             officeBranchName: query.get("name") || "",
-            page: query.get("page") - 1 || 0,
+            page: query.get("page") ? query.get("page") - 1 : 0,
         }
         props.search(data)
     }, []);
@@ -53,7 +53,7 @@ export const OfficesSearch = (props) => {
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
-                        Búscar <small color="red">oficinas</small>
+                        Buscar <small color="red">oficinas</small>
                     </h1>
                     <hr />
                 </Col>
@@ -100,7 +100,7 @@ export const OfficesSearch = (props) => {
                             onBlur={formik.handleBlur}
                             value={formik.values.officeCapacityLT} placeholder="Capacidad hasta"></Input>
                         <Button className="btn btn-round" color="primary" type="submit">
-                            Búscar
+                            Buscar
                         </Button>
                     </Form>
                 </Col>

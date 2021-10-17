@@ -1,8 +1,9 @@
 import { setError, setIsLoading, setSuccess } from "..";
-import { createRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
+import { createRoleApi, deleteRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
 import { setForbiddenAccessAction, setSuccessAccess } from "../auth/permissionActions";
 
 export const CREATE_ROLE = 'CREATE_ROLE';
+export const DELETE_ROLE = 'DELETE_ROLE';
 export const FETCH_ROLES = 'FETCH_ROLES';
 export const FETCH_COLLABORATOR_ROLES = 'FETCH_COLLABORATOR_ROLES';
 
@@ -24,7 +25,25 @@ export const createRole = (officeBranchId, roleBody) => async dispatch => {
     } finally {
         dispatch(setIsLoading(false));
     }
+}
 
+export const deleteRoleAction = roleIdDeleted => {
+    return {
+        type: DELETE_ROLE,
+        payload: roleIdDeleted
+    }
+};
+
+export const deleteRole = roleId => async dispatch => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(deleteRoleAction(await deleteRoleApi(roleId)));
+        dispatch(setSuccess())
+    } catch (error) {
+        dispatch(setError(error));
+    } finally {
+        dispatch(setIsLoading(false));
+    }
 }
 
 export const fetchRolesList = roles => {

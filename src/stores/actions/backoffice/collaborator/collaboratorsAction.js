@@ -1,6 +1,6 @@
-import { setIsLoading } from "..";
-import { fetchCollaboratorsApi } from "../../../api/backoffice/collaborator";
-import { setForbiddenAccessAction, setSuccessAccess } from "../auth/permissionActions";
+import { fetchCollaboratorsApi } from "../../../../api/backoffice/collaborator";
+import { setForbiddenAccessAction, setSuccessAccess } from "../../auth/permissionActions";
+import { loadingCollaboratorAction, stopLoadingCollaboratorAction } from "./loadingActions";
 
 export const FETCH_COLLABORATORS = 'FETCH_COLLABORATORS';
 
@@ -13,7 +13,7 @@ export const fetchCollaboratorsList = collaborators => {
 };
 
 export const collaboratorsList = (officeBranchId) => async (dispatch) => {
-    dispatch(setIsLoading(true));
+    dispatch(loadingCollaboratorAction());
     try {
         dispatch(fetchCollaboratorsList(await fetchCollaboratorsApi(officeBranchId)));
         dispatch(setSuccessAccess("collaborator"))
@@ -21,7 +21,6 @@ export const collaboratorsList = (officeBranchId) => async (dispatch) => {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction("collaborator"))
     } finally {
-        dispatch(setIsLoading(false));
+        dispatch(stopLoadingCollaboratorAction());
     }
-
 }

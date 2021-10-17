@@ -3,8 +3,8 @@ export const ROLE_FORBIDDEN_MESSAGE = "No tienes acceso para ver los roles de es
 
 export const getAccessLabel = access => {
   switch (access) {
-    case "WRITE": return "LECTURA / ESCRITURA"
-    case "READ": return "LECTURA"
+    case "WRITE": return "Lectura 📖 / Escritura ✏️"
+    case "READ": return "Lectura 📖"
     default: return "N/A"
   }
 }
@@ -22,5 +22,6 @@ export const getResourceLabel = resource => {
 export const getErrorMessage = error => {
   switch (error) {
     case "OFFICE_BRANCH_FORBIDDEN": return "No tienes acceso para crear roles"
+    case "ROLE_FORBIDDEN": return "No tienes acceso para modificar los roles de esta sucursal"
   }
 }

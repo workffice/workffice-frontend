@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { readFromLocalStorage } from '../infra/api/localStorage';
 import { hideNotification as hideNotificationAction } from '../stores/actions';
-import { collaboratorsList } from '../stores/actions/backoffice/collaboratorsAction';
+import { collaboratorsList } from '../stores/actions/backoffice/collaborator/collaboratorsAction';
 import { updateUser } from '../stores/actions/backoffice/userActions';
 import UserProfile from '../views/pages/backoffice/UserProfile';
 

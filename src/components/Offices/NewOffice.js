@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {  useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
     Row,
@@ -28,6 +28,19 @@ export const NewOffice = (props) => {
     const history = useHistory();
     const dispatch = useDispatch()
     const { notification } = props;
+    const typesOptions = [
+        {
+            value: "",
+            label: "Seleccione una opción",
+        },
+        { value: "PRIVATE", label: "Privada" },
+        { value: "SHARED", label: "Compartida" },
+    ];
+    const enableOptions = [
+        { value: "-1", label: "Seleccione disponibilidad" },
+        { value: "1", label: "Disponible" },
+        { value: "0", label: "No disponible" }
+    ]
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -45,8 +58,8 @@ export const NewOffice = (props) => {
         // if (!values.enabledDays) {
         //     errors.enabledDays = 'Requerido.';
         // }
-        if (!values.tables) {
-            errors.tables = 'Requerido.';
+        if (!values.tablesQuantity) {
+            errors.tablesQuantity = 'Requerido.';
         }
         if (!values.price) {
             errors.price = 'Requerido.';
@@ -68,10 +81,6 @@ export const NewOffice = (props) => {
 
     // const [multipleSelectServ, setMultipleSelectServ] = useState(null);
     // const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
-
-    const [officePrivacy, setPrivacy] = useState({ value: "SHARED", label: "Compartida" });
-
-    const [enabledOffice, setEnabledOffice] = useState({ value: "1", label: "Disponible" })
     const [enabledDays, setEnabledDays] = useState(null)
 
 
@@ -79,12 +88,12 @@ export const NewOffice = (props) => {
         initialValues: {
             name: "",
             sucursal: props.branch.id,
-            officePrivacy: officePrivacy && officePrivacy.value,
+            office_type: typesOptions[0],
             capacity: 0,
-            enabledOffice: enabledOffice && enabledOffice.value,
+            enabledOffice: enableOptions[0].value,
             enabledDays: null,
             tablesQuantity: 0,
-            capacityPerTablex: 0,
+            capacityPerTable: 0,
             price: 0,
             multipleSelectServ: null,
             multipleSelectEqu: null,
@@ -94,8 +103,8 @@ export const NewOffice = (props) => {
         validate,
         onSubmit: async (values) => {
             console.log(values)
-            const office = { privacy: officePrivacy.value, ...values }
-            props.create(office);
+            const office = { privacy: values.office_type.value, enable: values.enabledOffice.value, ...values }
+            props.create(props.branch.id, office)
         },
     });
 
@@ -157,19 +166,15 @@ export const NewOffice = (props) => {
 
 
                                     <FormGroup className={formik.errors.officePrivacy ? 'has-danger' : ''}>
-                                        <Label htmlFor="office-type" className="label-form">Tipo de oficina</Label>
+                                        <Label htmlFor="office_type" className="label-form">Tipo de oficina</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="officePrivacy"
-                                            value={officePrivacy}
-                                            onChange={value =>
-                                                setPrivacy(value)}
+                                            name="office_type"
+                                            // value={formik.values.office_type}
+                                            onChange={value => formik.setFieldValue("office_type", value)}
                                             onBlur={formik.handleBlur}
-                                            options={[
-                                                { value: "PRIVATE", label: "Privada" },
-                                                { value: "SHARED", label: "Compartida" }
-                                            ]}
+                                            options={typesOptions}
 
                                         />
                                     </FormGroup>
@@ -193,19 +198,16 @@ export const NewOffice = (props) => {
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="enabledOffice"
-                                            value={enabledOffice}
+                                            // value={formik.values.enabledOffice}
                                             onBlur={formik.handleBlur}
-                                            onChange={value => setEnabledOffice(value)}
-                                            options={[
-                                                { value: "1", label: "Disponible" },
-                                                { value: "0", label: "No disponible" }
-                                            ]}
+                                            onChange={value => formik.setFieldValue("enabledOffice",value)}
+                                            options={enableOptions}
                                             placeholder="Seleccione disponibilidad"
                                         />
                                     </FormGroup>
 
                                     {
-                                        enabledOffice.label === "No disponible" && (
+                                        formik.values.enabledOffice.label === "No disponible" && (
                                             <FormGroup className={formik.errors.enabledDays ? 'has-danger' : ''}>
                                                 <Select
                                                     className="react-select"
@@ -249,7 +251,7 @@ export const NewOffice = (props) => {
                                         />
                                     </FormGroup>
                                     <FormGroup className={formik.errors.capacityPerTable ? 'has-danger' : ''}>
-                                        <Label htmlFor="tablesQuantity" className="label-form">Cantidad de personas por mesa</Label>
+                                        <Label htmlFor="capacityPerTable" className="label-form">Cantidad de personas por mesa</Label>
                                         <Input
                                             type="number"
                                             placeholder="Ingrese el número de personas por mesas"
@@ -399,7 +401,7 @@ export const NewOffice = (props) => {
                             <Row>
                                 <Col style={{ display: 'flex', justifyContent: 'center' }}>
                                     <Button
-                                        className="btn btn-primary"
+                                        className="btn btn-round btn-primary"
                                         color="primary"
                                         type="submit"
                                         disabled={formik.isSubmitting}>
@@ -407,7 +409,7 @@ export const NewOffice = (props) => {
                                     </Button>
                                     <Button
                                         type="reset"
-                                        className="btn btn-primary"
+                                        className="btn btn-round btn-primary"
                                         color="danger"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >

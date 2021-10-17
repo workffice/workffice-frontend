@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { NewOffice } from '../../components/Offices/NewOffice';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
-import { createOffice } from '../../stores/actions/backoffice/officesActions';
+import { createOffice } from '../../stores/actions/backoffice/office/officeActions';
 import { getUserMe } from '../../stores/actions/backoffice/userActions';
 
 export const OfficeCreateContainer = () => {
@@ -16,8 +16,8 @@ export const OfficeCreateContainer = () => {
     const loading = useSelector(state => state.loading);
     const branch = useSelector(() => readFromLocalStorage("officeBranch"));
     const office = useSelector(state => state.office);
-    const onCreate = useCallback((office) => {
-        dispatch(createOffice(branch.data.id, office))
+    const onCreate = useCallback((officeBranchId, office) => {
+        dispatch(createOffice(officeBranchId, office));
     }, []);
 
     return <NewOffice

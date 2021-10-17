@@ -5,6 +5,7 @@ import { Button, Col, Row } from 'reactstrap';
 import { ACCESS_TYPE_READ, COLLABORATOR_FORBIDDEN_MESSAGE, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from '../Common/Forbidden/Forbidden';
+import { Loading } from '../Common/Loading/Loading';
 import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
 
@@ -20,23 +21,24 @@ export const Collaborators = ({
   onUpdate,
   officeBranch,
   permission,
+  loading,
 }) => {
 
   React.useEffect(() => {
     loadCollaborators(officeBranch.id);
-  }, [])
-  React.useEffect(() => {
     loadOfficeBranchRoles(officeBranch.id);
-  }, [])
+  }, [officeBranch ? officeBranch.id : ""])
 
   React.useEffect(() => {
     if (notification.show)
       setTimeout(() => {
         hideNotification()
-      }, 2000)
-  })
+      }, 2500)
+  }, [notification.show])
 
   const renderCollaborators = () => {
+    if (loading)
+      return <Loading />
     if (permission.isForbidden && includes(permission.resources, "collaborator"))
       return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
     else {
@@ -48,6 +50,7 @@ export const Collaborators = ({
             loadCollaboratorRoles={loadCollaboratorRoles}
             collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
             updateCollaborator={onUpdate}
+            permission={permission}
           />
         </Col>
       }) : <EmptyComponent />
