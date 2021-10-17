@@ -14,6 +14,7 @@ import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/R
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
+import { OfficeBranch } from '../views/pages/OfficeBranch/OfficeBranch';
 
 export const routes = [
   {
@@ -141,7 +142,7 @@ export const routes = [
   },
   {
     collapse: true,
-    name: 'Búscar',
+    name: 'Buscar',
     icon: 'fa fa-search',
     state: 'officesSearchCollapse',
     visibility: true,
@@ -224,6 +225,14 @@ export const routes = [
         name: 'Reservar oficina',
         mini: 'RO',
         component: OfficeBooking,
+        layout: '/admin',
+        visibility: true,
+      },
+      {
+        path: '/office-branch-detail',
+        name: 'Detalle de sucursal',
+        mini: 'DS',
+        component: OfficeBranch,
         layout: '/admin',
         visibility: true,
       },

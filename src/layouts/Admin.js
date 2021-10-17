@@ -8,7 +8,7 @@ import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 import { routes } from './admin.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
-import { getOfficeBranchId } from '../stores/actions/backoffice/officeBranchActions.js';
+import { getOfficeBranchId } from '../stores/actions/backoffice/officeBranchActions';
 import { readFromLocalStorage } from '../infra/api/localStorage.js';
 
 let ps;
