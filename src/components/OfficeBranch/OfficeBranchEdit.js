@@ -7,12 +7,13 @@ import {
     Label, Row
 } from 'reactstrap';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
+import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
 
 
-
 export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit }) => {
-    const { province, city, street, zipCode } = officeBranch.location;
+    const { province, city, street, zipCode } = officeBranch ? officeBranch.location : {};
     const validate = values => {
         const errors = {};
         if (!values.name) {
@@ -42,13 +43,14 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            name: officeBranch.name,
-            description: officeBranch.description,
-            phone: officeBranch.phone,
-            province: province,
-            city: city,
-            street: street,
-            zipCode: zipCode
+            name: officeBranch ? officeBranch.name : "",
+            description: officeBranch ? officeBranch.description : "",
+            phone: officeBranch ? officeBranch.phone : "",
+            province: officeBranch ? province : "",
+            city: officeBranch ? city : "",
+            street: officeBranch ? street : "",
+            zipCode: officeBranch ? zipCode : "",
+            image: officeBranch ? officeBranch.images[0].url : "",
         },
         validate,
         onSubmit: async (values) => {
@@ -180,11 +182,23 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Label className="label-form"> Foto </Label>
-
-                                    {/* <ImageUpload className="text-center" /> */}
+                                    <Row>
+                                        <Col lg="6">
+                                            <Label className="label-form"> Foto </Label>
+                                            <ImageUpload
+                                                className="text-center"
+                                                onChange={imageData => formik.setFieldValue("image", imageData)}
+                                            />
+                                        </Col>
+                                        <Col lg="6">
+                                        <Label className="label-form"> Imagen actual </Label>
+                                            <Cloudinary
+                                                publicId={officeBranch ? officeBranch.images[0].url : ""}
+                                                width="0.5"
+                                            />
+                                        </Col>
+                                    </Row>
                                 </FormGroup>
-
                             </Col>
                         </Row>
                         <Row style={{ textAlign: 'center' }}>

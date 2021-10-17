@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { includes } from 'lodash-es';
 import React from 'react';
 import Select from 'react-select';
 import { Badge, Button, Col, Form, FormGroup } from 'reactstrap';
@@ -19,6 +20,7 @@ export const CollaboratorCard = props => {
     officeBranchRoles,
     collaboratorRoles,
     updateCollaborator,
+    permission
   } = props
 
   const formik = useFormik({
@@ -38,7 +40,7 @@ export const CollaboratorCard = props => {
   });
 
   const getStatusColor = () => {
-    switch(status) {
+    switch (status) {
       case "PENDING": return "default"
       case "ACTIVE": return "success"
       case "INACTIVE": return "danger"
@@ -120,7 +122,11 @@ export const CollaboratorCard = props => {
                   return { value: role.id, label: role.name }
                 }) : []}
               />
-              <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
+              {
+                includes(permission.resources, "role") ?
+                  <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
+                  : <></>
+              }
             </FormGroup>
             <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
           </Form>

@@ -1,4 +1,4 @@
-import { CREATE_OFFICE } from "../../actions/backoffice/officesActions";
+import { CREATE_OFFICE } from "../../../actions/backoffice/office/officeActions";
 
 const initialState = null;
 
@@ -12,4 +12,3 @@ export const officeReducer = (state = initialState, { type, payload }) => {
             return currentState;
     }
 }
-

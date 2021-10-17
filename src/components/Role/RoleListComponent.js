@@ -2,21 +2,35 @@ import { includes } from 'lodash-es';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
-import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import { getErrorMessage, ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from "../Common/Forbidden/Forbidden";
+import { Notification } from '../Common/Notification/Notification';
 import { RoleComponent } from './RoleComponent';
 
-export const RoleListComponent = ({ permission, roles, fetchRoles }) => {
+export const RoleListComponent = ({
+  permission,
+  roles,
+  fetchRoles,
+  deleteRole,
+  notification,
+  hideNotification,
+}) => {
 
-  React.useEffect(() => { fetchRoles() }, [])
+  React.useEffect(() => { fetchRoles() }, [roles ? roles.length : 0])
+  React.useEffect(() => {
+    if (notification.show)
+      setTimeout(() => {
+        hideNotification()
+      }, 2500)
+  }, [notification.show])
 
   const renderRoles = () => {
     if (permission.isForbidden && includes(permission.resources, "role"))
       return <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
     return roles !== undefined && roles.length !== 0 ? roles.map((role) => {
       return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
-        <RoleComponent {...role} />
+        <RoleComponent {...role} onDelete={() => deleteRole(role.id)} />
       </Col>
     }) : <EmptyComponent />
   }
@@ -30,6 +44,17 @@ export const RoleListComponent = ({ permission, roles, fetchRoles }) => {
           <hr />
         </Col>
       </Row>
+      <Notification
+        show={notification.show && notification.isSuccess}
+        message="El rol se elimino correctamente"
+        hideNotification={hideNotification}
+      />
+      <Notification
+        show={notification.show && notification.isError}
+        message={getErrorMessage(notification.errorCode)}
+        hideNotification={hideNotification}
+        isError={true}
+      />
       <Row>
         <Col
           xs="6"

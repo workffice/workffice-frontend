@@ -1,13 +1,21 @@
 import { setError, setIsLoading, setSuccess } from "..";
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../api/backoffice/officeBranch";
-import { readFromLocalStorage } from "../../../infra/api/localStorage";
+import { readFromLocalStorage, writeToLocalStorage } from "../../../infra/api/localStorage";
 
 
 export const CREATE_OFFICE_BRANCH = 'FETCH_CREATE_OFFICEBRANCH';
 export const FETCH_EDIT_OFFICEBRANCH = 'FETCH_EDIT_OFFICEBRANCH';
+
 export const FETCH_OFFICEBRANCHES_LIST = 'FETCH_OFFICEBRANCHES_LIST';
 export const FETCH_OFFICEBRANCH_ID = 'FETCH_OFFICEBRANCH_ID';
+
 export const FETCH_COLLABORATOR_OFFICE_BRANCHES = 'FETCH_COLLABORATOR_OFFICE_BRANCHES';
+
+export const CLEAN_OFFICE_BRANCH = 'CLEAN_OFFICE_BRANCH'
+
+export const cleanOfficeBranchAction = () => ({
+    type: CLEAN_OFFICE_BRANCH,
+})
 
 export const fetchCreateOfficebranch = officeBranchData => {
     return {
@@ -93,7 +101,9 @@ export const fetchOfficebranchId = officeBranch => {
 export const getOfficeBranchId = id => async dispatch => {
     dispatch(setIsLoading(true));
     try {
-        await dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(id)));
+        const officeBranchResponse = await getOfficeBranchIdAPI(id)
+        await dispatch(fetchOfficebranchId(officeBranchResponse))
+        writeToLocalStorage(officeBranchResponse, "officeBranch")
     } catch (error) {
         dispatch(setError(error));
     } finally {
