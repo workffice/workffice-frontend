@@ -1,6 +1,6 @@
 import { setError, setIsLoading, setSuccess } from "..";
 import { createRoleApi, deleteRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
-import { setForbiddenAccessAction, setSuccessAccess } from "../auth/permissionActions";
+import { setForbiddenAccessAction, setSuccessAccess } from "../errors/permissionActions";
 
 export const CREATE_ROLE = 'CREATE_ROLE';
 export const DELETE_ROLE = 'DELETE_ROLE';

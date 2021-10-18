@@ -4,7 +4,7 @@ import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_FOUND_ENTITY, SET_NOT_FOUND_
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 import { loginReducer } from './reducers/auth/loginReducer';
-import { permissionReducer } from './reducers/auth/permissionReducer';
+import { permissionReducer } from './reducers/errors/permissionReducer';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
