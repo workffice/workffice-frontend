@@ -1,3 +1,4 @@
+import { BookingList } from '../components/BookingList/BookingList';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
@@ -210,7 +211,6 @@ export const routes = [
         component: NewNotice,
         layout: '/admin',
       },
-
     ]
   },
   {
@@ -227,6 +227,14 @@ export const routes = [
         component: OfficeBooking,
         layout: '/admin',
         visibility: true,
+      },
+      {
+        path: '/booking-list',
+        name: 'Listado de reservas',
+        mini: 'LR',
+        component: BookingList,
+        layout: '/admin',
+        visibility: true
       },
       {
         path: '/office-branch-detail',
