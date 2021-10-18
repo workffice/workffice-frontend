@@ -32,7 +32,7 @@ export const OfficeBranchSelect = (props) => {
                         <h1 style={{ color: '#FFFF' }}>Selecione Sucursal</h1>
                         <hr />
                         <Button className="btn-round" color="danger">
-                            <Link to="/admin/create-officebranch" style={{ color: 'white', textDecoration: 'none' }}>
+                            <Link to="/office-branch/create" style={{ color: 'white', textDecoration: 'none' }}>
 
                                 {' '}
                                 <i className="fa fa-plus" /> Nueva Sucursal

@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Card, CardBody } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import image from '../../assets/img/bg/rawpixel-com.jpg';
 import './styles/OfficeComponent.css';
 
-export const OfficeComponent = (props) => {
+export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) => {
 
-  const { office, officeBranch } = props;
   const { name, privacy, price } = office;
 
   return (
@@ -13,12 +13,20 @@ export const OfficeComponent = (props) => {
       <Card>
         <CardBody>
           <img className="office-branch-card-image" src={image} />
-          <div className="office-branch-card-title" style={{ marginTop: 30 }}>
-            <h5 style={{ marginBottom: 0 }}>
-              {name}
-            </h5>
-            <i className="fa fa-heart" style={{ display: 'flex', alignItems: 'center' }} />
-          </div>
+          <CardHeader style={{ display: 'flex', 'justifyContent': 'space-between', 'alignItems': 'center' }}>
+            <h5>{name}</h5>
+            {
+              displayBookingButton ?
+                <Button
+                  className="btn btn-primary"
+                  color="primary"
+                  type="submit"
+                >
+                  Alquilar Oficina
+                </Button>
+                : <div></div>
+            }
+          </CardHeader>
           <hr />
           <div className='text'>
             <label className="form-label">
@@ -44,4 +52,18 @@ export const OfficeComponent = (props) => {
       </Card>
     </>
   );
+}
+
+
+OfficeComponent.propTypes = {
+  officeBranch: PropTypes.shape({
+    name: PropTypes.string,
+    phone: PropTypes.string
+  }),
+  office: PropTypes.shape({
+    name: PropTypes.string,
+    privacy: PropTypes.string,
+    price: PropTypes.number
+  }),
+  displayBookingButton: PropTypes.bool,
 }
