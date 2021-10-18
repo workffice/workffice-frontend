@@ -5,7 +5,6 @@ import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
-import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
@@ -48,14 +47,6 @@ export const routes = [
         component: OfficeBranchContainer,
         layout: '/admin',
         visibility: false
-      },
-      {
-        path: '/create-officebranch',
-        name: 'Nueva Sucursal',
-        mini: 'NS',
-        layout: '/admin',
-        visibility: true,
-        component: OfficeBranchCreateContainer,
       },
       {
         path: '/edit-officebranch',
