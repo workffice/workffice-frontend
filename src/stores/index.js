@@ -14,7 +14,7 @@ import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
 import { officeReducer } from './reducers/backoffice/office/officeReducer';
 import { officesReducer } from './reducers/backoffice/office/officesReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranchesReducer';
-import { officeBranchReducer } from './reducers/backoffice/officeBranchReducer';
+import { officeBranchReducer, officeBranchSearchReducer } from './reducers/backoffice/officeBranchReducer';
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
@@ -77,6 +77,7 @@ export const reducers = routes =>
     roles: rolesReducer,
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchReducer,
+    officeBranchSearch: officeBranchSearchReducer,
     office: officeReducer,
     offices: officesReducer,
     loadingOffice: loadingOfficeReducer,

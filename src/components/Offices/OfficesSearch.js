@@ -53,7 +53,7 @@ export const OfficesSearch = (props) => {
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
-                        Buscar <small color="red">oficinas</small>
+                        Buscar <small color="red">sucursales</small>
                     </h1>
                     <hr />
                 </Col>

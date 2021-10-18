@@ -11,10 +11,11 @@ import "slick-carousel/slick/slick.css";
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeComponent } from '../Offices/OfficeComponent';
-import './styles/OfficeBranchStyles.css';
+import { useLocation } from 'react-router';
 
 
-export const OfficeBranchDetail = ({ officeBranch, loadOffices, offices }) => {
+export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranchIdAdmin, loadOffices, offices }) => {
+    const query = new URLSearchParams(useLocation().search);
     const settings = {
         dots: true,
         infinite: false,
@@ -26,6 +27,13 @@ export const OfficeBranchDetail = ({ officeBranch, loadOffices, offices }) => {
 
     const [slider, setSlider] = useState(null)
 
+    useEffect(() => {
+        if (query.get("id") === null){
+            console.log(officeBranchIdAdmin)
+            loadOfficeBranch(officeBranchIdAdmin)}
+        else
+            loadOfficeBranch(query.get("id"))
+    }, [query.get("id")])
     useEffect(() => {
         if (officeBranch)
             loadOffices(officeBranch.id)

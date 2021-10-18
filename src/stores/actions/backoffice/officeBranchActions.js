@@ -13,6 +13,27 @@ export const FETCH_COLLABORATOR_OFFICE_BRANCHES = 'FETCH_COLLABORATOR_OFFICE_BRA
 
 export const CLEAN_OFFICE_BRANCH = 'CLEAN_OFFICE_BRANCH'
 
+export const FETCH_OFFICE_BRANCH_SEARCH = 'FETCH_OFFICE_BRANCH_SEARCH'
+
+export const fetchOfficeBranchSearch = officeBranch => {
+    return {
+        type: FETCH_OFFICE_BRANCH_SEARCH,
+        payload: officeBranch
+    }
+};
+
+export const getOfficeBranchSearch = id => async dispatch => {
+    dispatch(setIsLoading(true));
+    try {
+        await dispatch(fetchOfficeBranchSearch(await getOfficeBranchIdAPI(id)))
+    } catch (error) {
+        console.log(error)
+    } finally {
+        dispatch(setIsLoading(false));
+    }
+}
+
+
 export const cleanOfficeBranchAction = () => ({
     type: CLEAN_OFFICE_BRANCH,
 })
