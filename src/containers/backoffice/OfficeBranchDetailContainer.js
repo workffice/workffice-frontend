@@ -17,6 +17,7 @@ export const OfficeBranchDetailContainer = () => {
     }, [dispatch]);
     const offices = useSelector(state => state.offices)
     const loadingOffices = useSelector(state => state.loadingOffice);
+    const error = useSelector(state => state.entitiesNotFound.includes("officeBranch"))
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
@@ -24,5 +25,6 @@ export const OfficeBranchDetailContainer = () => {
         loadOfficeBranch={loadOfficeBranch}
         officeBranchIdAdmin={officeBranchIdAdmin}
         loadingOffices={loadingOffices}
+        error={error}
     />;
 };

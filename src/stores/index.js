@@ -1,6 +1,6 @@
 import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
-import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
+import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_FOUND_ENTITY, SET_NOT_FOUND_ENTITY, SET_SUCCESS } from './actions';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 import { loginReducer } from './reducers/auth/loginReducer';
@@ -66,11 +66,20 @@ const notificationReducer = (state = notificationInitialState, { type, payload }
   }
 };
 
+const entityNotFoundReducer = (state = [], { type, payload }) => {
+  switch (type) {
+    case SET_NOT_FOUND_ENTITY: return [...state, payload]
+    case SET_FOUND_ENTITY: return state.filter(entity => entity !== payload)
+    default: return state
+  }
+}
+
 export const reducers = routes =>
   combineReducers({
     router: connectRouter(routes),
     login: loginReducer,
     userMe: userMeReducer,
+    entitiesNotFound: entityNotFoundReducer,
     collaborators: collaboratorsReducer,
     collaboratorRoles: collaboratorRolesReducer,
     loadingCollaborator: loadingCollaboratorReducer,

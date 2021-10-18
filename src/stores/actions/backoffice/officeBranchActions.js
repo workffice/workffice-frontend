@@ -1,4 +1,4 @@
-import { setError, setIsLoading, setSuccess } from "..";
+import { setError, setFoundEntity, setIsLoading, setNotFoundEntity, setSuccess } from "..";
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../api/backoffice/officeBranch";
 import { readFromLocalStorage, writeToLocalStorage } from "../../../infra/api/localStorage";
 
@@ -26,8 +26,10 @@ export const getOfficeBranchSearch = id => async dispatch => {
     dispatch(setIsLoading(true));
     try {
         await dispatch(fetchOfficeBranchSearch(await getOfficeBranchIdAPI(id)))
+        dispatch(setFoundEntity('officeBranch'))
     } catch (error) {
-        console.log(error)
+        if (error.error === 'INVALID_OFFICE_BRANCH_ID' || error.error === 'OFFICE_BRANCH_NOT_FOUND')
+            dispatch(setNotFoundEntity("officeBranch"))
     } finally {
         dispatch(setIsLoading(false));
     }

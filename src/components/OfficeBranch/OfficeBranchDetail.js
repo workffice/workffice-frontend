@@ -15,7 +15,15 @@ import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from '../Offices/OfficeComponent';
 
 
-export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranchIdAdmin, loadOffices, offices, loadingOffices }) => {
+export const OfficeBranchDetail = ({
+    loadOfficeBranch,
+    officeBranch,
+    officeBranchIdAdmin,
+    loadOffices,
+    offices,
+    loadingOffices,
+    error,
+}) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
         dots: true,
@@ -30,11 +38,12 @@ export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranc
 
     useEffect(() => {
         if (query.get("id") === null) {
-            console.log(officeBranchIdAdmin)
             loadOfficeBranch(officeBranchIdAdmin)
         }
-        loadOfficeBranch(query.get("id"))
+        else
+            loadOfficeBranch(query.get("id"))
     }, [query.get("id")])
+
     useEffect(() => {
         if (officeBranch)
             loadOffices(officeBranch.id)
@@ -88,74 +97,89 @@ export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranc
                 </>
             )
     }
-    return (
-        <div className="content">
-            <Row style={{ display: 'grid', paddingTop: 40 }}>
+
+    const officeBranchDetail = () => {
+        return (
+            <>
+                <Row style={{ display: 'grid', paddingTop: 40 }}>
+                    <Col xs="12" md="6" lg="12" xg="12">
+                        <h1>
+                            Detalle sucursal <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                        </h1>
+                        <hr />
+                    </Col>
+                </Row>
+
+                <Container>
+                    <Form >
+                        <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
+                            <CardBody>
+                                <Row>
+                                    <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
+                                        <div>
+                                            <div className="imageContainer">
+                                                <Cloudinary className="office-branch-card-image" publicId={officeBranch ? officeBranch.images[0].url : ""} />
+                                            </div>
+                                        </div>
+
+                                    </Col>
+
+                                    <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20, marginTop: 'auto', marginBottom: 'auto' }}>
+                                        <div style={{ marginBottom: 30 }}>
+                                            <h3 style={{ marginBottom: 10 }}>Dirección</h3>
+                                            {
+                                                officeBranch !== null ?
+                                                    <h6 style={{ color: "#EB5D60", marginLeft: 20 }}>
+                                                        {officeBranch.location.street} - {officeBranch.location.city} {officeBranch.location.zipCode}, {officeBranch.location.province}
+                                                    </h6>
+                                                    : <h6></h6>
+                                            }
+                                        </div>
+
+                                        <div>
+                                            <h3 style={{ marginBottom: 10 }}>Descripción</h3>
+                                            <label style={{ marginLeft: 20, fontSize: 15 }}>
+                                                {officeBranch ? officeBranch.description : ""}
+                                            </label>
+                                        </div>
+
+                                        <div style={{ marginLeft: 15, marginTop: 20 }}>
+                                            <Row>
+                                                <h3 style={{ marginBottom: 10 }}>Oficinas registradas</h3>
+                                                <strong style={{ color: "#34B18A", marginLeft: 20, fontSize: 25 }}>{offices ? offices.length : 0}</strong>
+                                            </Row>
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                                <Row style={{ display: 'grid', paddingTop: 40 }}>
+                                    <Col xs="12" md="6" lg="12" xg="12">
+                                        <h1 style={{ marginBottom: 0 }}>
+                                            Oficinas de  <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                                        </h1>
+                                        <hr />
+                                    </Col>
+                                </Row>
+                                <Row style={{ paddingBottom: "5%", display: "flex", justifyContent: "center" }}>
+                                    {renderOffices()}
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Form>
+                </Container>
+            </>
+        )
+    }
+    return (<div className="content">
+        {error ?
+            <Row style={{ paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
-                        Detalle sucursal <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                        La sucursal que estas buscando no existe
                     </h1>
                     <hr />
                 </Col>
             </Row>
-
-            <Container>
-                <Form >
-                    <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
-                        <CardBody>
-                            <Row>
-                                <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                    <div>
-                                        <div className="imageContainer">
-                                            <Cloudinary className="office-branch-card-image" publicId={officeBranch ? officeBranch.images[0].url : ""} />
-                                        </div>
-                                    </div>
-
-                                </Col>
-
-                                <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20, marginTop: 'auto', marginBottom: 'auto' }}>
-                                    <div style={{ marginBottom: 30 }}>
-                                        <h3 style={{ marginBottom: 10 }}>Dirección</h3>
-                                        {
-                                            officeBranch !== null ?
-                                                <h6 style={{ color: "#EB5D60", marginLeft: 20 }}>
-                                                    {officeBranch.location.street} - {officeBranch.location.city} {officeBranch.location.zipCode}, {officeBranch.location.province}
-                                                </h6>
-                                                : <h6></h6>
-                                        }
-                                    </div>
-
-                                    <div>
-                                        <h3 style={{ marginBottom: 10 }}>Descripción</h3>
-                                        <label style={{ marginLeft: 20, fontSize: 15 }}>
-                                            {officeBranch ? officeBranch.description : ""}
-                                        </label>
-                                    </div>
-
-                                    <div style={{ marginLeft: 15, marginTop: 20 }}>
-                                        <Row>
-                                            <h3 style={{ marginBottom: 10 }}>Oficinas registradas</h3>
-                                            <strong style={{ color: "#34B18A", marginLeft: 20, fontSize: 25 }}>{offices ? offices.length : 0}</strong>
-                                        </Row>
-                                    </div>
-                                </Col>
-                            </Row>
-
-                            <Row style={{ display: 'grid', paddingTop: 40 }}>
-                                <Col xs="12" md="6" lg="12" xg="12">
-                                    <h1 style={{ marginBottom: 0 }}>
-                                        Oficinas de  <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
-                                    </h1>
-                                    <hr />
-                                </Col>
-                            </Row>
-                            <Row style={{ paddingBottom: "5%", display: "flex", justifyContent:"center"}}>
-                                {renderOffices()}
-                            </Row>
-                        </CardBody>
-                    </Card>
-                </Form>
-            </Container>
-        </div >
-    );
+            : officeBranchDetail()}
+    </div>)
 }
