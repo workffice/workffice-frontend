@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficeBranch } from '../../components/OfficeBranch/OfficeBranch';
 import { officeBranchList } from '../../stores/actions/backoffice/officeBranchActions';
-import { hideNotification as hideNotificationAction} from '../../stores/actions'
+import { hideNotificationAction} from '../../stores/actions/notifications/writeNotificationActions'
 
 export const OfficeBranchContainer = () => {
   const loading = useSelector(state => state.isLoading);

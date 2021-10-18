@@ -1,12 +1,12 @@
-import React from 'react';
 import { useFormik } from 'formik';
-import { Container, Row, Col, Form, Card, CardHeader, CardBody, Alert, CardTitle, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, CardFooter, Button } from 'reactstrap';
-import { RegisterInfo } from '../../../components/Register/RegisterInfo';
-import { useHistory } from 'react-router-dom';
-import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { Loading } from '../../../components/Common/Loading/Loading';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { hideNotification } from '../../../stores/actions';
+import { useHistory } from 'react-router-dom';
+import { Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Loading } from '../../../components/Common/Loading/Loading';
+import { RegisterInfo } from '../../../components/Register/RegisterInfo';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
 
 function Register(props) {
   const { loading, notification } = props;
@@ -56,7 +56,7 @@ function Register(props) {
   React.useEffect(() => {
     if (notification.show) {
       setTimeout(() => {
-        dispatch(hideNotification());
+        dispatch(hideNotificationAction());
       }, 2500);
     }
   }, [notification]);

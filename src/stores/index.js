@@ -1,6 +1,7 @@
 import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
-import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
+import { LOADING } from './actions';
+import { HIDE_NOTIFICATION, SET_ERROR, SET_SUCCESS } from './actions/notifications/writeNotificationActions';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 import { loginReducer } from './reducers/auth/loginReducer';

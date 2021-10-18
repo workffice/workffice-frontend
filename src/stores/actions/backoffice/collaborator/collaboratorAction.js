@@ -1,5 +1,6 @@
-import { setError, setIsLoading, setSuccess } from '../..';
+import { setIsLoading } from '../..';
 import { createCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../../api/backoffice/collaborator';
+import { setErrorAction, setSuccessAction } from '../../notifications/writeNotificationActions';
 import { fetchCollaboratorsList } from './collaboratorsAction';
 
 export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
@@ -14,10 +15,10 @@ export const createColaborator = (officeBranchId, collaboratorBody) => async (di
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchCreateCollaborator(await createCollaboratorApi(officeBranchId, collaboratorBody)));
-    dispatch(setSuccess())
+    dispatch(setSuccessAction())
     dispatch(fetchCollaboratorsList(await fetchCollaboratorsApi(officeBranchId)))
   } catch (error) {
-    dispatch(setError(error ? error : 'No ha sido posible crear el colaborador'));
+    dispatch(setErrorAction(error ? error : 'No ha sido posible crear el colaborador'));
   } finally {
     dispatch(setIsLoading(false));
   }
@@ -32,9 +33,9 @@ export const updateCollaborator = (collaboratorId, collaboratorBody) => async (d
   dispatch(setIsLoading(true));
   try {
     dispatch(updateCollaboratorAction(await updateCollaboratorApi(collaboratorId, collaboratorBody)));
-    dispatch(setSuccess())
+    dispatch(setSuccessAction())
   } catch (error) {
-    dispatch(setError(error ? error : 'No ha sido posible actualizar el colaborador'));
+    dispatch(setErrorAction(error ? error : 'No ha sido posible actualizar el colaborador'));
   } finally {
     dispatch(setIsLoading(false));
   }

@@ -1,4 +1,5 @@
-import { setError, setIsLoading, setSuccess } from "..";
+import { setIsLoading } from "..";
+import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions";
 import { setNotFoundEntity, setFoundEntity } from "../errors/notFoundActions"
 import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI, officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../api/backoffice/officeBranch";
 import { readFromLocalStorage, writeToLocalStorage } from "../../../infra/api/localStorage";
@@ -52,9 +53,9 @@ export const createOfficeBranch = (officeBranchData, userId) => async (dispatch)
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCreateOfficebranch(await createOfficeBranchAPI(officeBranchData, userId)));
-        dispatch(setSuccess())
+        dispatch(setSuccessAction())
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }
@@ -73,7 +74,7 @@ export const officeBranchList = (userId) => async (dispatch) => {
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }
@@ -91,7 +92,7 @@ export const collaboratorOfficeBranchList = collaboratorEmail => async (dispatch
     try {
         dispatch(fetchCollaboratorOfficeBranches(await officeBranchListFromCollaboratorAPI(collaboratorEmail)));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     }
 }
 
@@ -107,9 +108,9 @@ export const editOfficeBranch = (userId, officeBranchData) => async (dispatch) =
     try {
         dispatch(fetchEditOfficebranch(await editOfficeBranchAPI(officeBranchData, userId)));
         dispatch(fetchOfficebranchId(await getOfficeBranchIdAPI(readFromLocalStorage("officeBranch").id)));
-        dispatch(setSuccess())
+        dispatch(setSuccessAction())
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }
@@ -129,7 +130,7 @@ export const getOfficeBranchId = id => async dispatch => {
         await dispatch(fetchOfficebranchId(officeBranchResponse))
         writeToLocalStorage(officeBranchResponse, "officeBranch")
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }

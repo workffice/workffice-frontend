@@ -1,5 +1,6 @@
-import { setError, setIsLoading } from "..";
+import { setIsLoading } from "..";
 import { searchOfficesAPI } from "../../../api/backoffice/offices";
+import { setErrorAction } from "../notifications/writeNotificationActions";
 
 export const SEARCH_OFFICES = 'SEARCH_OFFICES';
 
@@ -15,7 +16,7 @@ export const searchAllOffices = params => async (dispatch) => {
     try {
         dispatch(searchOffices(await searchOfficesAPI(params)))
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     }finally{
         dispatch(setIsLoading(false))
     }

@@ -1,6 +1,7 @@
 
-import { setError, setIsLoading, setSuccess } from '..';
+import { setIsLoading } from '..';
 import { recoveryPasswordAPI } from '../../../api/recoveryPassword';
+import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions";
 
 export const FETCH_RECOVERY = 'FETCH_RECOVERY';
 
@@ -16,9 +17,9 @@ export const recovery = (userEmail) => async (dispatch) => {
 
     try {
         dispatch(fetchRecovery(await recoveryPasswordAPI(userEmail)))
-        dispatch(setSuccess())
+        dispatch(setSuccessAction())
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }
