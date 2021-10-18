@@ -4,7 +4,7 @@ import {
     FETCH_EDIT_OFFICEBRANCH,
     FETCH_OFFICEBRANCH_ID,
 } from "../../actions/backoffice/officeBranch/officeBranchAdminActions";
-import { FETCH_OFFICE_BRANCH_SEARCH } from "../../actions/backoffice/officeBranch/officeBranchDetailActions";
+import { FETCH_OFFICE_BRANCH_DETAIL } from "../../actions/backoffice/officeBranch/officeBranchDetailActions";
 
 
 export const officeBranchReducer = (state = null, { type, payload }) => {
@@ -24,7 +24,7 @@ export const officeBranchReducer = (state = null, { type, payload }) => {
 
 export const officeBranchSearchReducer = (state = null, { type, payload }) => {
     switch (type) {
-        case FETCH_OFFICE_BRANCH_SEARCH:
+        case FETCH_OFFICE_BRANCH_DETAIL:
             return payload;
         default: return state
     }

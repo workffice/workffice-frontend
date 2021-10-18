@@ -2,11 +2,11 @@ import { setIsLoading } from "../../";
 import { getOfficeBranchIdAPI } from "../../../../api/backoffice/officeBranch";
 import { setFoundEntity, setNotFoundEntity } from "../../errors/notFoundActions";
 
-export const FETCH_OFFICE_BRANCH_SEARCH = 'FETCH_OFFICE_BRANCH_SEARCH'
+export const FETCH_OFFICE_BRANCH_DETAIL = 'FETCH_OFFICE_BRANCH_SEARCH'
 
 export const fetchOfficeBranchSearch = officeBranch => {
     return {
-        type: FETCH_OFFICE_BRANCH_SEARCH,
+        type: FETCH_OFFICE_BRANCH_DETAIL,
         payload: officeBranch
     }
 };
