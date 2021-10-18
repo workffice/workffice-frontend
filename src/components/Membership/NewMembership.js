@@ -1,7 +1,5 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router';
 import Select from 'react-select';
 import {
     Row,
@@ -17,16 +15,11 @@ import {
     FormGroup,
     Label,
     CardHeader,
-    // Alert,
     Container
 } from 'reactstrap';
-// import { HIDE_ERROR } from '../../stores/actions';
 import './styles/MembershipStyle.css';
 
 export const NewMembership = () => {
-    // const history = useHistory();
-    // const dispatch = useDispatch()
-    // const { error } = props;
     const validate = values => {
         const errors = {};
         if (!values.name) {

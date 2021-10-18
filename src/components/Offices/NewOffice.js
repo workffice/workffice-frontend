@@ -20,7 +20,7 @@ import {
     Alert,
     Container
 } from 'reactstrap';
-import { hideNotification } from '../../stores/actions';
+import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
@@ -118,7 +118,7 @@ export const NewOffice = (props) => {
     React.useEffect(() => {
         if (notification.show) {
             setTimeout(() => {
-                dispatch(hideNotification());
+                dispatch(hideNotificationAction());
             }, 2500);
         }
     }, [notification]);

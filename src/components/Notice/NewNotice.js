@@ -1,7 +1,5 @@
 import { useFormik } from 'formik';
 import React from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router';
 import {
     Row,
     Col,
@@ -13,16 +11,11 @@ import {
     FormGroup,
     Label,
     CardHeader,
-    // Alert,
     Container
 } from 'reactstrap';
-// import { HIDE_ERROR } from '../../stores/actions';
 import './styles/NoticeStyle.css';
 
 export const NewNotice = () => {
-    // const history = useHistory();
-    // const dispatch = useDispatch()
-    // const { error } = props;
     const validate = values => {
         const errors = {};
         if (!values.name) {

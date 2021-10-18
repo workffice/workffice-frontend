@@ -1,5 +1,6 @@
-import { setError, setIsLoading } from '..';
+import { setIsLoading } from '..';
 import { registerAPI } from '../../../api/register';
+import { setErrorAction } from '../notifications/writeNotificationActions';
 
 export const FETCH_REGISTER = 'FETCH_REGISTER';
 
@@ -13,7 +14,7 @@ export const register = (credentials) => async (dispatch) => {
   try {
     dispatch(fetchRegister(await registerAPI(credentials)));
   } catch (error) {
-    dispatch(setError(error));
+    dispatch(setErrorAction(error));
   } finally {
     dispatch(setIsLoading(false));
   }

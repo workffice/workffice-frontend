@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NewRole } from '../../components/Role/NewRole';
 import { RoleListComponent } from '../../components/Role/RoleListComponent';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
-import { hideNotification as hideNotificationAction } from '../../stores/actions/';
+import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
 import { createRole, deleteRole as deleteRoleAction, rolesList } from '../../stores/actions/backoffice/rolesAction';
 
 export const NewRoleContainer = () => {

@@ -32,7 +32,7 @@ export const createOffice = async (officeBranchId, office) => {
     }
 }
 
-export const search = async params => {
+export const searchOfficeBranches = async params => {
     try {
         let officesFound;
         const queryParams = searchQueryBuilder(params)

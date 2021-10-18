@@ -1,4 +1,5 @@
-import { setError, setIsLoading } from "..";
+import { setIsLoading } from "..";
+import { setErrorAction } from "../notifications/writeNotificationActions";
 import { activatePasswordAPI } from "../../../api/register";
 
 
@@ -16,7 +17,7 @@ export const confirmationPassword = (confirmationToken, newPassword) => async (d
     try {
         dispatch(fetchConfirmationPassword(await activatePasswordAPI(confirmationToken, newPassword)));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }

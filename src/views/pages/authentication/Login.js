@@ -1,28 +1,18 @@
+import { useFormik } from 'formik';
 import React from 'react';
-
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Alert,
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Col,
-  Row,
-  FormGroup,
+  Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon,
+  InputGroupText, Row
 } from 'reactstrap';
-
-import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { useDispatch } from 'react-redux';
-import { hideNotification } from '../../../stores/actions';
+import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
+
+
 
 
 const Login = props => {
@@ -63,7 +53,7 @@ const Login = props => {
   React.useEffect(() => {
     if (notification.show) {
       setTimeout(() => {
-        dispatch(hideNotification())
+        dispatch(hideNotificationAction())
       }, 2500);
     }
   }, [notification]);

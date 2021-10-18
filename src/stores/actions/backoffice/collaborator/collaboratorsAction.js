@@ -1,5 +1,5 @@
 import { fetchCollaboratorsApi } from "../../../../api/backoffice/collaborator";
-import { setForbiddenAccessAction, setSuccessAccess } from "../../auth/permissionActions";
+import { setForbiddenAccessAction, setSuccessAccess } from "../../errors/permissionActions";
 import { loadingCollaboratorAction, stopLoadingCollaboratorAction } from "./loadingActions";
 
 export const FETCH_COLLABORATORS = 'FETCH_COLLABORATORS';
