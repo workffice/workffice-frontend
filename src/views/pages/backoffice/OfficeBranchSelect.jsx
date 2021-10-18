@@ -5,17 +5,32 @@ import { Button, Col, Container, Row } from 'reactstrap'
 import { EmptyOfficeBranch } from '../../../components/OfficeBranch/EmptyOfficeBranch'
 import { OfficeBranchCardSelect } from '../../../components/OfficeBranch/OfficeBranchCardSelect'
 
-export const OfficeBranchSelect = (props) => {
+export const OfficeBranchSelect = ({
+    loadUser,
+    user,
+    cleanOfficeBranch,
+    loadOfficeBranches,
+    selectOfficeBranch,
+    officeBranches,
+    currentOfficeBranch,
+}) => {
     const countRef = useRef(0);
+    const [selected, setSelected] = useState(false)
     useEffect(() => {
         if (countRef.current === 0) {
-            props.cleanOfficeBranch()
+            cleanOfficeBranch()
             countRef.current++;
         }
     }, [])
-    const [selected, setSelected] = useState(false)
+    useEffect(() => {
+        if (user)
+            loadOfficeBranches(user.id)
+    }, [officeBranches ? officeBranches.length : 0])
+    useEffect(() => {
+        loadUser()
+    }, [user ? user.id : ""])
     const onSelect = officeBranchId => {
-        props.selectOfficeBranch(officeBranchId)
+        selectOfficeBranch(officeBranchId)
         setSelected(true)
     }
     return (
@@ -41,14 +56,14 @@ export const OfficeBranchSelect = (props) => {
                     </Col>
                     <Col className="ml-auto mr-auto" xg="12" lg="12" md="12" style={{ display: "flex", flexWrap: "wrap" }}>
                         {
-                            props.branches
-                                ? props.branches.map(branch =>
+                            officeBranches && officeBranches.length !== 0
+                                ? officeBranches.map(branch =>
                                     <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
                                         <OfficeBranchCardSelect
                                             branch={branch}
                                             select={onSelect}
                                             selected={selected}
-                                            currentOfficeBranch={props.currentOfficeBranch}
+                                            currentOfficeBranch={currentOfficeBranch}
                                         />
                                     </Col>
                                 )
