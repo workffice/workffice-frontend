@@ -5,7 +5,7 @@ import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
+// import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
@@ -41,14 +41,14 @@ export const routes = [
     state: 'officebranchCollapse',
     visibility: true,
     views: [
-      {
-        path: '/office-branch',
-        name: 'Ver sucursales',
-        mini: 'S',
-        component: OfficeBranchContainer,
-        layout: '/admin',
-        visibility: false
-      },
+      // {
+      //   path: '/office-branch',
+      //   name: 'Ver sucursales',
+      //   mini: 'S',
+      //   component: OfficeBranchContainer,
+      //   layout: '/admin',
+      //   visibility: false
+      // },
       {
         path: '/edit-officebranch',
         name: 'Editar Sucursal',
@@ -228,7 +228,7 @@ export const routes = [
         visibility: true
       },
       {
-        path: '/office-branch-detail',
+        path: '/office-branch',
         name: 'Detalle de sucursal',
         mini: 'DS',
         component: OfficeBranchDetailContainer,
