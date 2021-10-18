@@ -42,10 +42,10 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) 
 
           <div className='text'>
             <label className="form-label">
-              Sucursal: <small>{officeBranch.name}</small>
+              Sucursal: <small>{officeBranch ? officeBranch.name : ""}</small>
             </label>
             <label className="form-label">
-              Teléfono: <small>{officeBranch.phone}</small>
+              Teléfono: <small>{officeBranch ? officeBranch.phone : ""}</small>
             </label>
           </div>
         </CardBody>
