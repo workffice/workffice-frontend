@@ -1,10 +1,9 @@
 import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
-import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_FOUND_ENTITY, SET_NOT_FOUND_ENTITY, SET_SUCCESS } from './actions';
+import { HIDE_NOTIFICATION, LOADING, SET_ERROR, SET_SUCCESS } from './actions';
 import { activateAccountReducer } from './reducers/auth/activateAccountReducer';
 import { activatePasswordReducer } from './reducers/auth/activatePasswordReducer';
 import { loginReducer } from './reducers/auth/loginReducer';
-import { permissionReducer } from './reducers/errors/permissionReducer';
 import { recoveryReducer } from './reducers/auth/recoveryPasswordReducer';
 import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
@@ -18,6 +17,8 @@ import { officeBranchReducer, officeBranchSearchReducer } from './reducers/backo
 import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
+import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
+import { permissionReducer } from './reducers/errors/permissionReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -66,13 +67,6 @@ const notificationReducer = (state = notificationInitialState, { type, payload }
   }
 };
 
-const entityNotFoundReducer = (state = [], { type, payload }) => {
-  switch (type) {
-    case SET_NOT_FOUND_ENTITY: return [...state, payload]
-    case SET_FOUND_ENTITY: return state.filter(entity => entity !== payload)
-    default: return state
-  }
-}
 
 export const reducers = routes =>
   combineReducers({
