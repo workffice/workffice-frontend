@@ -4,16 +4,26 @@ on:
       - master
 
 name: CICD
-
 jobs:
   deploy:
-    name: Deploy application
-    runs-on: ubuntu-20.04
+    runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+
+      - name: "Deploy the web dyno"
+        uses: "akhileshns/heroku-deploy@v3.12.12"
         with:
+          docker_heroku_process_type: web
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: workffice
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
+          justlogin: true
+
+      - name: "Login to heroku registry"
+        run: heroku container:login
+
+      - name: "Build and push to heroku registry"
+        run: heroku container:push web --app workffice
+
+      - name: "Releases the container"
+        run: heroku container:release web --app workffice

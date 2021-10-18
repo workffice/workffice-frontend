@@ -3,9 +3,7 @@ FROM node:alpine
 WORKDIR /workffice-client
 
 COPY package.json .
-COPY package-lock.json .
-RUN npm install-clean
-
+RUN npm install --legacy-peer-deps
 COPY . .
 
 RUN echo "REACT_APP_SERVER_HOST='https://workffice-be.herokuapp.com'" > .env
