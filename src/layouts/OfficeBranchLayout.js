@@ -3,7 +3,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { collaboratorOfficeBranchList, officeBranchList } from '../stores/actions/backoffice/officeBranchActions';
+import { collaboratorOfficeBranchList, officeBranchList } from '../stores/actions/backoffice/officeBranch/officeBranchesAdminActions';
 import { getUserMe } from '../stores/actions/backoffice/userActions';
 import { routes } from "./office-branch.routes";
 

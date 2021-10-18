@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
-import { editOfficeBranch, getOfficeBranchId } from '../../stores/actions/backoffice/officeBranchActions';
+import { editOfficeBranch, getOfficeBranch } from '../../stores/actions/backoffice/officeBranch/officeBranchAdminActions';
 import { EditOfficeBranch } from '../../views/pages/backoffice/EditOfficeBranch';
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
 
@@ -12,7 +12,7 @@ export const OfficeBranchEditContainer = () => {
     const officeBranch = useSelector(state => state.officeBranch)
     const dispatch = useDispatch();
     const loadOfficeBranch = useCallback(() => {
-        dispatch(getOfficeBranchId(officeBranchSelected.id))
+        dispatch(getOfficeBranch(officeBranchSelected.id))
     }, [dispatch])
     const onEdit = useCallback(officeBranchBody => {
         dispatch(editOfficeBranch(officeBranchSelected.id, officeBranchBody));

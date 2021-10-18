@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 import { OfficeBranchDetail } from '../../components/OfficeBranch/OfficeBranchDetail'
-import { getOfficeBranchSearch } from '../../stores/actions/backoffice/officeBranchActions';
+import { getOfficeBranchSearch } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 
 export const OfficeBranchDetailContainer = () => {
