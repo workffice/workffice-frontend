@@ -2,11 +2,10 @@ import { includes } from 'lodash';
 import {
     FETCH_COLLABORATOR_OFFICE_BRANCHES,
     FETCH_OFFICEBRANCHES_LIST
-} from "../../actions/backoffice/officeBranch/officeBranchesAdminActions";
+} from "../../../actions/backoffice/officeBranch/officeBranchesAdminActions";
 
-const initialState = [];
 
-export const officeBranchesReducer = (state = initialState, { type, payload }) => {
+export const officeBranchesReducer = (state = [], { type, payload }) => {
     switch (type) {
         case FETCH_OFFICEBRANCHES_LIST:
             return [...payload.map(officeBranch => ({ ...officeBranch, collaborator: false }))]
