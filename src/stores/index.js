@@ -15,12 +15,12 @@ import { officesReducer } from './reducers/backoffice/office/officesReducer';
 import { officeBranchAdminReducer } from './reducers/backoffice/officeBranch/officeBranchAdminReducer';
 import { officeBranchDetailReducer } from './reducers/backoffice/officeBranch/officeBranchDetailReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranch/officeBranchesAdminReducer';
-import { officesFoundReducer } from './reducers/backoffice/officesFoundReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
+import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
   let currentState = state;
@@ -47,7 +47,7 @@ export const reducers = routes =>
     office: officeReducer,
     offices: officesReducer,
     loadingOffice: loadingOfficeReducer,
-    officesFound: officesFoundReducer,
+    officesFound: officeBranchSearchReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
