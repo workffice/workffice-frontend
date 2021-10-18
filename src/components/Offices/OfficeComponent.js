@@ -13,7 +13,7 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) 
       <Card>
         <CardBody>
           <img className="office-branch-card-image" src={image} />
-          <CardHeader style={{ display: 'flex', 'justifyContent': 'space-between', 'alignItems': 'center' }}>
+          <CardHeader>
             <h5>{name}</h5>
             {
               displayBookingButton ?

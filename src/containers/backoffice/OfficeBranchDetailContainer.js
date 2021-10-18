@@ -16,11 +16,13 @@ export const OfficeBranchDetailContainer = () => {
         dispatch(fetchOfficesList(officeBranchId));
     }, [dispatch]);
     const offices = useSelector(state => state.offices)
+    const loadingOffices = useSelector(state => state.loadingOffice);
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
         loadOffices={loadOffices}
         loadOfficeBranch={loadOfficeBranch}
         officeBranchIdAdmin={officeBranchIdAdmin}
+        loadingOffices={loadingOffices}
     />;
 };

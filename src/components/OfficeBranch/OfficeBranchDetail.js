@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import {
@@ -10,11 +11,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from '../Offices/OfficeComponent';
-import { useLocation } from 'react-router';
 
 
-export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranchIdAdmin, loadOffices, offices }) => {
+export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranchIdAdmin, loadOffices, offices, loadingOffices }) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
         dots: true,
@@ -28,17 +29,65 @@ export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranc
     const [slider, setSlider] = useState(null)
 
     useEffect(() => {
-        if (query.get("id") === null){
+        if (query.get("id") === null) {
             console.log(officeBranchIdAdmin)
-            loadOfficeBranch(officeBranchIdAdmin)}
-        else
-            loadOfficeBranch(query.get("id"))
+            loadOfficeBranch(officeBranchIdAdmin)
+        }
+        loadOfficeBranch(query.get("id"))
     }, [query.get("id")])
     useEffect(() => {
         if (officeBranch)
             loadOffices(officeBranch.id)
     }, [officeBranch ? officeBranch.id : ""])
 
+    const renderOffices = () => {
+        if (loadingOffices)
+            return (
+                <Col xs="4">
+                    <Loading></Loading>
+                </Col>
+            )
+        if (offices && offices.length === 0)
+            return <EmptyComponent />
+        else
+            return (
+                <>
+                    <Col md="1" style={{ display: "flex", alignItems: "center" }}>
+                        <Button
+                            color="primary"
+                            className="btn-round btn-icon"
+                            onClick={() => slider.slickPrev()}
+                        >
+                            <i className="nc-icon nc-minimal-left" />
+                        </Button>
+                    </Col>
+                    <Col md="10">
+                        <Slider ref={s => setSlider(s)} {...settings} className="slider">
+                            {offices.map(office => {
+                                return (
+                                    <Col key={office.id}>
+                                        <Link to="#" style={{ textDecoration: 'none' }}>
+                                            <div>
+                                                <OfficeComponent displayBookingButton={true} office={office} officeBranch={officeBranch} />
+                                            </div>
+                                        </Link>
+                                    </Col>
+                                )
+                            })}
+                        </Slider>
+                    </Col>
+                    <Col md="1" style={{ display: "flex", alignItems: "center" }}>
+                        <Button
+                            color="primary"
+                            className="btn-round btn-icon btn-primary"
+                            onClick={() => slider.slickNext()}
+                        >
+                            <i className="nc-icon nc-minimal-right" />
+                        </Button>
+                    </Col>
+                </>
+            )
+    }
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -100,44 +149,8 @@ export const OfficeBranchDetail = ({ loadOfficeBranch, officeBranch, officeBranc
                                     <hr />
                                 </Col>
                             </Row>
-                            <Row style={{ paddingBottom: "5%" }}>
-                                <Col md="1" style={{ display: "flex", alignItems: "center" }}>
-                                    <Button
-                                        color="primary"
-                                        className="btn-round btn-icon"
-                                        onClick={() => slider.slickPrev()}
-                                    >
-                                        <i className="nc-icon nc-minimal-left" />
-                                    </Button>
-                                </Col>
-                                <Col md="10">
-                                    {
-                                        offices && offices.length === 0 ?
-                                            <EmptyComponent />
-                                            : <Slider ref={s => setSlider(s)} {...settings} className="slider">
-                                                {offices.map(office => {
-                                                    return (
-                                                        <Col key={office.id}>
-                                                            <Link to="#" style={{ textDecoration: 'none' }}>
-                                                                <div>
-                                                                    <OfficeComponent displayBookingButton={true} office={office} officeBranch={officeBranch} />
-                                                                </div>
-                                                            </Link>
-                                                        </Col>
-                                                    )
-                                                })}
-                                            </Slider>
-                                    }
-                                </Col>
-                                <Col md="1" style={{ display: "flex", alignItems: "center" }}>
-                                    <Button
-                                        color="primary"
-                                        className="btn-round btn-icon btn-primary"
-                                        onClick={() => slider.slickNext()}
-                                    >
-                                        <i className="nc-icon nc-minimal-right" />
-                                    </Button>
-                                </Col>
+                            <Row style={{ paddingBottom: "5%", display: "flex", justifyContent:"center"}}>
+                                {renderOffices()}
                             </Row>
                         </CardBody>
                     </Card>
