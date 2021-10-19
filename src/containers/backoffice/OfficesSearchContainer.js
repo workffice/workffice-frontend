@@ -6,7 +6,6 @@ import { searchOfficeBranches } from '../../stores/actions/search/officeBranchSe
 
 
 export const OfficesSearchContainer = () => {
-    const loading = useSelector(state => state.isLoading);
     const error = useSelector(state => state.error);
     const dispatch = useDispatch()
     const branch = useSelector(state => state.officeBranch);
@@ -14,5 +13,12 @@ export const OfficesSearchContainer = () => {
     const search = useCallback(async (values) => {
         dispatch(await searchOfficeBranches(values));
     });
-    return <OfficesSearch search={search} branch={branch} officeBranches={officeBranches} loading={loading} error={error} />;
+    const loading = useSelector(state => state.loadingOfficeBranchSearch)
+    return <OfficesSearch
+        search={search}
+        branch={branch}
+        officeBranches={officeBranches}
+        error={error}
+        loading={loading}
+    />;
 };
