@@ -1,19 +1,4 @@
-/*!
 
-=========================================================
-* Paper Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 // default color for the charts
 const chartColor = '#FFFFFF';
 // ##############################
@@ -792,7 +777,7 @@ const chartExample11 = {
 // #########################################
 
 const chartExample12 = {
-  data: canvas => ({
+  data: () => ({
     labels: [
       'Jan',
       'Feb',

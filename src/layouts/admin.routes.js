@@ -1,3 +1,4 @@
+import Dashboard from '../components/Dashboard/Dashboard';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
@@ -28,6 +29,23 @@ export const routes = [
         name: 'Perfil Usuario',
         mini: 'PU',
         component: UserProfileContainer,
+        layout: '/admin',
+        visibility: true
+      },
+    ]
+  },
+  {
+    collapse: true,
+    name: 'Dashboard',
+    icon: 'fa fa-chart',
+    state: 'dashboardCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        mini: 'D',
+        component: Dashboard,
         layout: '/admin',
         visibility: true
       },
