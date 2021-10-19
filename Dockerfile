@@ -6,7 +6,7 @@ COPY package.json .
 RUN npm install --legacy-peer-deps
 COPY . .
 
-RUN echo "REACT_APP_SERVER_HOST='https://workffice-be.herokuapp.com'" > .env
+RUN echo "REACT_APP_SERVER_HOST='https://workffice-be-niconunez96.cloud.okteto.net'" > .env
 RUN npm run build
 
 
