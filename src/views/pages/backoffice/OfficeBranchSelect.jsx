@@ -27,7 +27,7 @@ export const OfficeBranchSelect = ({
     useEffect(() => {
         if (user)
             loadOfficeBranches(user.id, user.email)
-    }, [officeBranches ? officeBranches.length : 0])
+    }, [user ? user.id : ""])
     useEffect(() => {
         loadUser()
     }, [user ? user.id : ""])
