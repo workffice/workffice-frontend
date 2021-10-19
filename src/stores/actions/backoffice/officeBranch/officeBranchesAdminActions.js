@@ -1,4 +1,3 @@
-import { setIsLoading } from "../../";
 import { officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../../api/backoffice/officeBranch";
 import { setErrorAction } from "../../notifications/writeNotificationActions";
 
@@ -14,15 +13,11 @@ export const fetchOfficeBranchesList = officeBranches => {
 };
 
 export const officeBranchList = (userId) => async (dispatch) => {
-    dispatch(setIsLoading(true));
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
     } catch (error) {
         dispatch(setErrorAction(error));
-    } finally {
-        dispatch(setIsLoading(false));
     }
-
 }
 
 export const fetchCollaboratorOfficeBranches = officeBranches => {
