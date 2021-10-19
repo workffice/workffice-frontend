@@ -50,10 +50,11 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
             city: officeBranch ? city : "",
             street: officeBranch ? street : "",
             zipCode: officeBranch ? zipCode : "",
-            image: officeBranch ? officeBranch.images[0].url : "",
+            image: null,
         },
         validate,
         onSubmit: async (values) => {
+            console.log(values.image)
             edit(values)
         },
     });
@@ -64,7 +65,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                 hideNotification()
             }, 2500);
         }
-    }, [notification]);
+    }, [notification.show]);
 
     return (
         <Container>
@@ -74,7 +75,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                         <Notification
                             show={notification.show && notification.isError}
                             isError={true}
-                            message={getErrorMessage(notification.errorCode)}
+                            message={getErrorMessage(notification.errorCode) || ""}
                             hideNotification={hideNotification}
                         />
                         <Notification

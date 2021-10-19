@@ -59,7 +59,9 @@ export const editOfficeBranchInfra = async ({
     zipCode
 }, officeBranchId) => {
     try {
-        const imageData = await postImageToCloudinary(image)
+        let imageData = null
+        if (image !== null)
+            imageData = await postImageToCloudinary(image)
         const officeBranch = await sdkAuthRequest(
             `${API_OFFICE_BRANCHES}/${officeBranchId}/`,
             {
@@ -73,7 +75,7 @@ export const editOfficeBranchInfra = async ({
                     city,
                     street,
                     zipCode,
-                    imagesUrls: [imageData.public_id],
+                    imagesUrls: imageData === null ? null : [imageData.public_id],
                 })
             }
         );
