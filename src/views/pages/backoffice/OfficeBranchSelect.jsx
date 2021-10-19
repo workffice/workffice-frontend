@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
 import { EmptyOfficeBranch } from '../../../components/OfficeBranch/EmptyOfficeBranch'
 import { OfficeBranchCardSelect } from '../../../components/OfficeBranch/OfficeBranchCardSelect'
+import { Loading } from '../../../components/Common/Loading/Loading'
 
 export const OfficeBranchSelect = ({
     loadUser,
@@ -13,6 +14,7 @@ export const OfficeBranchSelect = ({
     selectOfficeBranch,
     officeBranches,
     currentOfficeBranch,
+    loading,
 }) => {
     const countRef = useRef(0);
     const [selected, setSelected] = useState(false)
@@ -24,7 +26,7 @@ export const OfficeBranchSelect = ({
     }, [])
     useEffect(() => {
         if (user)
-            loadOfficeBranches(user.id)
+            loadOfficeBranches(user.id, user.email)
     }, [officeBranches ? officeBranches.length : 0])
     useEffect(() => {
         loadUser()
@@ -32,6 +34,29 @@ export const OfficeBranchSelect = ({
     const onSelect = officeBranchId => {
         selectOfficeBranch(officeBranchId)
         setSelected(true)
+    }
+
+    const renderOfficeBranches = () => {
+        if (loading)
+            return <Loading/>
+        return (
+            <>
+                {
+                    officeBranches && officeBranches.length !== 0
+                        ? officeBranches.map(branch =>
+                            <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
+                                <OfficeBranchCardSelect
+                                    branch={branch}
+                                    select={onSelect}
+                                    selected={selected}
+                                    currentOfficeBranch={currentOfficeBranch}
+                                />
+                            </Col>
+                        )
+                        : <EmptyOfficeBranch />
+                }
+            </>
+        )
     }
     return (
         <div className="login-page">
@@ -55,20 +80,7 @@ export const OfficeBranchSelect = ({
                         </Button>
                     </Col>
                     <Col className="ml-auto mr-auto" xg="12" lg="12" md="12" style={{ display: "flex", flexWrap: "wrap" }}>
-                        {
-                            officeBranches && officeBranches.length !== 0
-                                ? officeBranches.map(branch =>
-                                    <Col key={branch.id} xs="10" md="4" lg="4" xg="4">
-                                        <OfficeBranchCardSelect
-                                            branch={branch}
-                                            select={onSelect}
-                                            selected={selected}
-                                            currentOfficeBranch={currentOfficeBranch}
-                                        />
-                                    </Col>
-                                )
-                                : <EmptyOfficeBranch />
-                        }
+                        {renderOfficeBranches()}
                     </Col>
                 </Row>
             </Container>

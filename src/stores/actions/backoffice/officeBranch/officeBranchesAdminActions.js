@@ -1,6 +1,6 @@
-import { setIsLoading } from "../../";
 import { officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../../api/backoffice/officeBranch";
 import { setErrorAction } from "../../notifications/writeNotificationActions";
+import { loadingOfficeBranchAction } from "./loadingActions";
 
 export const FETCH_OFFICEBRANCHES_LIST = 'FETCH_OFFICEBRANCHES_LIST';
 export const FETCH_COLLABORATOR_OFFICE_BRANCHES = 'FETCH_COLLABORATOR_OFFICE_BRANCHES';
@@ -14,15 +14,11 @@ export const fetchOfficeBranchesList = officeBranches => {
 };
 
 export const officeBranchList = (userId) => async (dispatch) => {
-    dispatch(setIsLoading(true));
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
     } catch (error) {
         dispatch(setErrorAction(error));
-    } finally {
-        dispatch(setIsLoading(false));
     }
-
 }
 
 export const fetchCollaboratorOfficeBranches = officeBranches => {
@@ -33,6 +29,7 @@ export const fetchCollaboratorOfficeBranches = officeBranches => {
 };
 
 export const collaboratorOfficeBranchList = collaboratorEmail => async (dispatch) => {
+    dispatch(loadingOfficeBranchAction());
     try {
         dispatch(fetchCollaboratorOfficeBranches(await officeBranchListFromCollaboratorAPI(collaboratorEmail)));
     } catch (error) {

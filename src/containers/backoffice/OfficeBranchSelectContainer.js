@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { loadingOfficeBranchAction, stopLoadingOfficeBranchAction } from '../../stores/actions/backoffice/officeBranch/loadingActions';
 import { cleanOfficeBranchAction, getOfficeBranch } from '../../stores/actions/backoffice/officeBranch/officeBranchAdminActions';
-import { officeBranchList } from '../../stores/actions/backoffice/officeBranch/officeBranchesAdminActions';
+import { collaboratorOfficeBranchList, officeBranchList } from '../../stores/actions/backoffice/officeBranch/officeBranchesAdminActions';
 import { getUserMe } from '../../stores/actions/backoffice/userActions';
 import { OfficeBranchSelect } from '../../views/pages/backoffice/OfficeBranchSelect';
 
@@ -15,8 +16,12 @@ export const OfficeBranchSelectContainer = () => {
         await dispatch(cleanOfficeBranchAction())
     }, [dispatch])
     const officeBranches = useSelector(state => state.officeBranches);
-    const loadOfficeBranches = useCallback(async (userId) => {
+    const loading = useSelector(state => state.loadingOfficeBranch)
+    const loadOfficeBranches = useCallback(async (userId, userEmail) => {
+        dispatch(loadingOfficeBranchAction())
         await dispatch(officeBranchList(userId))
+        await dispatch(collaboratorOfficeBranchList(userEmail))
+        dispatch(stopLoadingOfficeBranchAction())
     }, [dispatch]);
     const loadUser = useCallback(async () => {
         await dispatch(getUserMe())
@@ -30,5 +35,6 @@ export const OfficeBranchSelectContainer = () => {
         cleanOfficeBranch={cleanOfficeBranch}
         loadUser={loadUser}
         user={user}
+        loading={loading}
     />;
 };
