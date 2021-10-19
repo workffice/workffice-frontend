@@ -21,6 +21,7 @@ import { userMeReducer } from './reducers/backoffice/userReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
+import { loadingOfficeBranchSearchReducer } from './reducers/search/loadingReducer';
 import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
@@ -44,8 +45,9 @@ export const reducers = routes =>
     roles: rolesReducer,
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchAdminReducer,
-    officeBranchSearch: officeBranchDetailReducer,
     loadingOfficeBranch: loadingOfficeBranchReducer,
+    officeBranchSearch: officeBranchDetailReducer,
+    loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
     office: officeReducer,
     offices: officesReducer,
     loadingOffice: loadingOfficeReducer,
