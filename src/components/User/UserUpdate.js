@@ -1,15 +1,8 @@
 import { useFormik } from 'formik';
-import React from 'react'
+import React from 'react';
 import {
-    Card,
-    CardBody,
-    Form,
-    Input,
-    Col,
-    Row,
-    FormGroup,
-    CardHeader,
-    Button,
+    Button, Card,
+    CardBody, CardHeader, Col, Form, FormGroup, Input, Row
 } from 'reactstrap';
 
 
@@ -20,6 +13,7 @@ export const UserUpdate = (props) => {
         email,
         lastname,
         name,
+        profileImage
     } = props || {}
 
     const formik = useFormik({
@@ -31,7 +25,7 @@ export const UserUpdate = (props) => {
             bio: bio,
         },
         onSubmit: async (values) => {
-            await props.update(values);
+            await props.update({ ...values, profileImage });
         },
     });
     return (

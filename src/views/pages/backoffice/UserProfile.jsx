@@ -6,7 +6,7 @@ import {
     Card, CardBody,
     CardFooter, CardHeader, CardTitle, Col, Row
 } from "reactstrap";
-import avatar from "../../../assets/img/faces/erik-lucatero-2.jpg";
+import PictureUpload from '../../../components/Common/CustomUpload/PictureUpload';
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
 import Forbidden from "../../../components/Common/Forbidden/Forbidden";
 import { Notification } from "../../../components/Common/Notification/Notification";
@@ -27,17 +27,27 @@ export const UserProfile = ({
     React.useEffect(() => {
         loadCollaborators(officeBranch.id);
     }, [collaborators ? collaborators.length : 0])
-    const { name, bio } = userMe || {}
+    const { name, bio, profileImage } = userMe || {}
     React.useEffect(() => {
         setTimeout(() => {
             hideNotification()
         }, 2000)
     }, [notification.show])
 
+    const updateUser = (imageData) => {
+        onUpdate({
+            'name': userMe.name,
+            'lastname': userMe.lastname,
+            'address': userMe.address,
+            'bio': userMe.bio,
+            'imageData': imageData
+        })
+    }
+
     const renderCollaborators = () => {
         if (permission.isForbidden && includes(permission.resources, "collaborator"))
             return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
-        return collaborators ? collaborators.map(collaborator => {
+        return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
             return <CollaboratorRow key={collaborator.id} {...collaborator} />
         }) : < EmptyComponent />
     }
@@ -55,14 +65,8 @@ export const UserProfile = ({
                         </div>
                         <CardBody>
                             <div className="author">
-                                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                                    <img
-                                        alt="..."
-                                        className="avatar border-gray"
-                                        src={avatar}
-                                    />
-                                    <h5 className="title">{name || "N/A"}</h5>
-                                </a>
+                                <PictureUpload avatar={profileImage} onChange={(imageData) => updateUser(imageData)} />
+                                <h5 className="title">{name || ""}</h5>
                             </div>
                             <p className="description text-center">{bio}</p>
                         </CardBody>
