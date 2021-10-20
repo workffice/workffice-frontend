@@ -5,8 +5,8 @@ import Select from 'react-select';
 import { Badge, Button, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import { DeleteConfirmation } from '../Common/Alert/DeleteConfirmation';
 import Forbidden from '../Common/Forbidden/Forbidden';
-import SweetAlert from 'react-bootstrap-sweetalert';
 
 
 export const CollaboratorCard = props => {
@@ -31,24 +31,15 @@ export const CollaboratorCard = props => {
     setAlert(null)
   }
   const openAlert = () => {
-    setAlert(<SweetAlert
-      warning
-      showConfirm
-      showCancel
-      style={{ display: "block", marginTop: "-100px" }}
+    setAlert(<DeleteConfirmation
       title={`Desea borrar el colaborador "${name}" ?`}
       onConfirm={() => {
         onDelete()
         hideAlert()
       }}
       onCancel={() => hideAlert()}
-      confirmBtnBsStyle="primary"
-      confirmBtnCssClass="btn-round"
-      cancelBtnBsStyle="danger"
-      cancelBtnText="Cancelar"
-      cancelBtnCssClass="btn-round"
     >
-    </SweetAlert>)
+    </DeleteConfirmation>)
   }
 
 

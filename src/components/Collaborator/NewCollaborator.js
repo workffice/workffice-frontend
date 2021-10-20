@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router';
 import Select from 'react-select';
-import { Row, Col, Card, CardBody, Form, CardHeader, FormGroup } from 'reactstrap';
+import { Row, Col, Card, CardBody, Form, CardHeader, FormGroup, Button } from 'reactstrap';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
 import { Notification } from '../Common/Notification/Notification';
 import Forbidden from "../Common/Forbidden/Forbidden"
@@ -166,10 +166,10 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
               <hr />
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="col-auto">
-                  <button type="submit" className="btn btn-primary mb-3">Aceptar</button>
+                  <Button type="submit" className="btn-round btn-primary mb-3">Crear</Button>
                 </div>
                 <div className="col-auto">
-                  <button type="reset" className="btn btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</button>
+                  <Button type="reset" className="btn-round btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</Button>
                 </div>
               </div>
             </CardBody>
