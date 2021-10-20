@@ -155,7 +155,7 @@ export const OfficeBooking = (props) => {
                             <Row>
                                 <Col style={{ display: 'flex', justifyContent: 'center' }}>
                                     <Button
-                                        className="btn btn-primary"
+                                        className="btn-round btn-primary"
                                         color="primary"
                                         type="submit"
                                         disabled={formik.isSubmitting}>
@@ -163,7 +163,7 @@ export const OfficeBooking = (props) => {
                                     </Button>
                                     <Button
                                         type="reset"
-                                        className="btn btn-primary"
+                                        className="btn-round btn-primary"
                                         color="danger"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >

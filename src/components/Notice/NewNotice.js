@@ -127,7 +127,7 @@ export const NewNotice = () => {
                                 <div className="col-auto">
                                     <Button
                                         type="submit"
-                                        className="btn btn-primary mb-3"
+                                        className="btn-round btn-primary mb-3"
                                         color="primary"
                                         style={{ minWidth: 107 }}
                                     >
@@ -137,7 +137,7 @@ export const NewNotice = () => {
                                 <div className="col-auto">
                                     <Button
                                         type="reset"
-                                        className="btn btn-primary mb-3"
+                                        className="btn-round btn-primary mb-3"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >
                                         Cancelar
