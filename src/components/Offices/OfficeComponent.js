@@ -1,20 +1,44 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
-import image from '../../assets/img/bg/rawpixel-com.jpg';
+import { Badge, Button, Card, CardBody, CardHeader, Col, Label, Row } from 'reactstrap';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import './styles/OfficeComponent.css';
 
 export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) => {
 
-  const { name, privacy, price } = office;
+  const {
+    name,
+    privacy,
+    price,
+    imageUrl,
+    capacity,
+    table,
+  } = office;
 
+  const getOfficeType = () => {
+    if (privacy === "SHARED")
+      return <Badge color="info">Compartida</Badge>
+    return <Badge color="danger">Privada</Badge>
+  }
   return (
     <>
       <Card>
         <CardBody>
-          <img className="office-branch-card-image" src={image} />
+          <Cloudinary className="office-branch-card-image" publicId={imageUrl} />
           <CardHeader>
             <h5>{name}</h5>
+            <Row>
+              <Col>
+                <h6 className="form-label">
+                  Sucursal <small>{officeBranch ? officeBranch.name : ""}</small>
+                </h6>
+              </Col>
+              <Col>
+                <h6 className="form-label">
+                  Contacto <small>{officeBranch ? officeBranch.phone : ""}</small>
+                </h6>
+              </Col>
+            </Row>
             {
               displayBookingButton ?
                 <Button
@@ -29,25 +53,43 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) 
           </CardHeader>
           <hr />
           <div className='text'>
-            <label className="form-label">
-              Tipo de oficina: <small>{privacy === 'SHARED' ? 'Compartida' : 'Privada'}</small>
-            </label>
+            <Label className="form-label">
+              Tipo de oficina: {getOfficeType()}
+            </Label>
           </div>
 
           <div className='text'>
-            <label className="form-label">
-              Precio p/hora:  <small>{`$ ${price}`}</small>
-            </label>
+            <Label className="form-label">
+              Precio por hora:  <small>{`$ ${price}`}</small>
+            </Label>
           </div>
-
           <div className='text'>
-            <label className="form-label">
-              Sucursal: <small>{officeBranch ? officeBranch.name : ""}</small>
-            </label>
-            <label className="form-label">
-              Teléfono: <small>{officeBranch ? officeBranch.phone : ""}</small>
-            </label>
+            <Label className="form-label">
+              Capacidad:  <small>{capacity} personas</small>
+            </Label>
           </div>
+          <hr />
+          {
+            privacy === "SHARED" ? <Row>
+              <Col md="12">
+                <h5 style={{margin:"0"}}>Mesas</h5>
+              </Col>
+              <Col>
+                <div className='text'>
+                  <Label className="form-label">
+                    Cantidad:  <small>{table.quantity}</small>
+                  </Label>
+                </div>
+              </Col>
+              <Col>
+                <div className='text'>
+                  <Label className="form-label">
+                    Capacidad:  <small>{table.capacity}</small>
+                  </Label>
+                </div>
+              </Col>
+            </Row> : <></>
+          }
         </CardBody>
       </Card>
     </>
