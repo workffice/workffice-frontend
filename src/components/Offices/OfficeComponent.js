@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Card, CardBody, CardHeader } from 'reactstrap';
-import image from '../../assets/img/bg/rawpixel-com.jpg';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary'
 import './styles/OfficeComponent.css';
 
 export const OfficeComponent = ({ office, officeBranch, displayBookingButton }) => {
 
-  const { name, privacy, price } = office;
+  const { name, privacy, price, imageUrl } = office;
 
   return (
     <>
       <Card>
         <CardBody>
-          <img className="office-branch-card-image" src={image} />
+          <Cloudinary className="office-branch-card-image" publicId={imageUrl} />
           <CardHeader>
             <h5>{name}</h5>
             {

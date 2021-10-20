@@ -1,6 +1,7 @@
-import { headerGet, sdkAuthRequest, sdkNoAuthRequest } from ".."
-import { API_OFFICE_BRANCHES } from "../../../environments/environment"
+import { headerGet, sdkAuthRequest, sdkNoAuthRequest } from "..";
+import { API_OFFICE_BRANCHES } from "../../../environments/environment";
 import { searchQueryBuilder } from "../../../utils/searchQueryBuilder";
+import { postImageToCloudinary } from "../cloudinary";
 
 
 export const getOffices = async officeBranchId => {
@@ -20,11 +21,15 @@ export const getOffices = async officeBranchId => {
 
 export const createOffice = async (officeBranchId, office) => {
     try {
+        let imageData = null
+        if (office.photo)
+            imageData = await postImageToCloudinary(office.photo)
+        console.log(imageData)
         const officeCreated = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/offices/`,
             {
                 method: 'POST',
                 headers: headerGet,
-                body: JSON.stringify(office)
+                body: imageData !== null ? JSON.stringify({ ...office, imageUrl: imageData.public_id }) : JSON.stringify(office)
             });
         return Promise.resolve(officeCreated);
     } catch (error) {

@@ -4,24 +4,16 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
-    Row,
-    Col,
-    Card,
-    CardBody,
-    Input,
+    Button, Card,
+    CardBody, CardHeader, Col, Container, Form,
+    FormGroup, Input,
     InputGroup,
     InputGroupAddon,
-    InputGroupText,
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    CardHeader,
-    Alert,
-    Container
+    InputGroupText, Label, Row
 } from 'reactstrap';
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
+import { Notification } from '../Common/Notification/Notification';
 import './styles/OfficeStyle.css';
 
 export const NewOffice = (props) => {
@@ -102,26 +94,26 @@ export const NewOffice = (props) => {
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values)
-            const office = { privacy: values.office_type.value, enable: values.enabledOffice.value, ...values }
+            const office = {
+                privacy: values.office_type.value,
+                enable: values.enabledOffice.value,
+                ...values
+            }
             props.create(props.branch.id, office)
         },
     });
 
-
-    React.useEffect(() => {
-        if (props.office !== null) {
-            history.push('/admin/offices');
-        }
-    }, [props.office]);
-
     React.useEffect(() => {
         if (notification.show) {
+            if (notification.isSuccess)
+                setTimeout(() => {
+                    history.push('/admin/offices');
+                }, 2500);
             setTimeout(() => {
                 dispatch(hideNotificationAction());
-            }, 2500);
+            }, 2000);
         }
-    }, [notification]);
+    }, [notification.show]);
 
 
     return (
@@ -134,20 +126,19 @@ export const NewOffice = (props) => {
                     <hr />
                 </Col>
             </Row>
-
             <Container>
                 <Form onSubmit={formik.handleSubmit} >
                     <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                         <CardHeader>
-                            {
-                                <Alert
-                                    isOpen={notification.show && notification.isError}
-                                    color="danger"
-                                    fade={false}
-                                >
-                                    {'Ocurrió un error. Intente nuevamente'}
-                                </Alert>
-                            }
+                            <Notification
+                                isError={true}
+                                message="Oops algo salio mal"
+                                show={notification.show && notification.isError}
+                            />
+                            <Notification
+                                message="La oficina se creo correctamente"
+                                show={notification.show && notification.isSuccess}
+                            />
                         </CardHeader>
                         <CardBody>
                             <Row>
@@ -200,7 +191,7 @@ export const NewOffice = (props) => {
                                             name="enabledOffice"
                                             // value={formik.values.enabledOffice}
                                             onBlur={formik.handleBlur}
-                                            onChange={value => formik.setFieldValue("enabledOffice",value)}
+                                            onChange={value => formik.setFieldValue("enabledOffice", value)}
                                             options={enableOptions}
                                             placeholder="Seleccione disponibilidad"
                                         />
@@ -386,12 +377,12 @@ export const NewOffice = (props) => {
                                         />
                                     </FormGroup>
 
-                                    <FormGroup className={formik.errors.photo ? 'has-danger' : ''}>
+                                    <FormGroup>
                                         <Row className='photo' style={{ marginLeft: '0%' }}>
                                             <Label htmlFor="photo" className="label-form">Fotos</Label>
                                         </Row>
                                         <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <ImageUpload />
+                                            <ImageUpload onChange={imageData => formik.setFieldValue("photo", imageData)} />
                                         </Row>
                                     </FormGroup>
                                 </Col>
