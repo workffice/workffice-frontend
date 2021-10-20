@@ -1,17 +1,15 @@
 import { useFormik } from 'formik';
 import { includes } from 'lodash-es';
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
-import { Badge, Button, Col, Form, FormGroup } from 'reactstrap';
+import { Badge, Button, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import Forbidden from '../Common/Forbidden/Forbidden';
+import SweetAlert from 'react-bootstrap-sweetalert';
+
 
 export const CollaboratorCard = props => {
-  React.useEffect(() => {
-    props.loadCollaboratorRoles(props.id);
-  }, [])
-
   const {
     id,
     name,
@@ -20,8 +18,39 @@ export const CollaboratorCard = props => {
     officeBranchRoles,
     collaboratorRoles,
     updateCollaborator,
-    permission
+    permission,
+    onDelete
   } = props
+  React.useEffect(() => {
+    props.loadCollaboratorRoles(props.id);
+  }, [])
+
+  const [alert, setAlert] = useState(null)
+
+  const hideAlert = () => {
+    setAlert(null)
+  }
+  const openAlert = () => {
+    setAlert(<SweetAlert
+      warning
+      showConfirm
+      showCancel
+      style={{ display: "block", marginTop: "-100px" }}
+      title={`Desea borrar el colaborador "${name}" ?`}
+      onConfirm={() => {
+        onDelete()
+        hideAlert()
+      }}
+      onCancel={() => hideAlert()}
+      confirmBtnBsStyle="primary"
+      confirmBtnCssClass="btn-round"
+      cancelBtnBsStyle="danger"
+      cancelBtnText="Cancelar"
+      cancelBtnCssClass="btn-round"
+    >
+    </SweetAlert>)
+  }
+
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -48,6 +77,7 @@ export const CollaboratorCard = props => {
   }
 
   return (<>
+    {alert}
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
         <div className='image' id='image' style={{ position: 'absolute' }}>
@@ -61,9 +91,9 @@ export const CollaboratorCard = props => {
               display: 'flex',
               justifyContent: 'flex-end',
             }}>
-            <button type='button' id='tooltip570363224' title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
+            <Button onClick={openAlert} title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
               <i className='nc-icon nc-simple-remove'></i>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -96,41 +126,44 @@ export const CollaboratorCard = props => {
             <h5>{name}</h5>
           </a>
           <p className='description'>{email}</p>
+          <Badge color={getStatusColor()}>{getStatus(status)}</Badge>
         </div>
       </div>
-      <div className='card-footer'>
-        <Col>
-          <Badge color={getStatusColor()}>{getStatus(status)}</Badge>
-        </Col>
-        <Col>
-          <Form onSubmit={formik.handleSubmit}>
-            <FormGroup className='button-container'>
-              <label htmlFor="roles">Roles</label>
-              <Select
-                disabled={true}
-                className="react-select"
-                classNamePrefix="react-select"
-                id="roles"
-                name="roles"
-                placeholder="Roles"
-                closeMenuOnSelect={false}
-                isMulti
-                value={formik.values.roles}
-                onChange={value => formik.setFieldValue("roles", value)}
-                onBlur={formik.handleBlur}
-                options={officeBranchRoles ? officeBranchRoles.map(role => {
-                  return { value: role.id, label: role.name }
-                }) : []}
-              />
-              {
-                includes(permission.resources, "role") ?
-                  <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
-                  : <></>
-              }
-            </FormGroup>
-            <Button className="btn btn-primary" type="submit" disabled={formik.isSubmitting}>Actualizar</Button>
-          </Form>
-        </Col>
+      <div>
+        <Form style={{ padding: "5%" }} onSubmit={formik.handleSubmit}>
+          <FormGroup className='button-container'>
+            <label className="form-label" htmlFor="roles">Roles</label>
+            <Select
+              disabled={true}
+              className="react-select"
+              classNamePrefix="react-select"
+              id="roles"
+              name="roles"
+              placeholder="Roles"
+              closeMenuOnSelect={false}
+              isMulti
+              value={formik.values.roles}
+              onChange={value => formik.setFieldValue("roles", value)}
+              onBlur={formik.handleBlur}
+              options={officeBranchRoles ? officeBranchRoles.map(role => {
+                return { value: role.id, label: role.name }
+              }) : []}
+            />
+            {
+              includes(permission.resources, "role") ?
+                <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
+                : <></>
+            }
+          </FormGroup>
+          <Button
+            style={{ marginLeft: "60%" }}
+            className="btn-round btn-primary"
+            type="submit"
+            disabled={formik.isSubmitting}
+          >
+            Actualizar
+          </Button>
+        </Form>
       </div>
     </div>
   </>)
