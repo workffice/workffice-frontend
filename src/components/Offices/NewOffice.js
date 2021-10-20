@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
@@ -28,24 +28,13 @@ export const NewOffice = (props) => {
         { value: "PRIVATE", label: "Privada" },
         { value: "SHARED", label: "Compartida" },
     ];
-    const enableOptions = [
-        { value: "-1", label: "Seleccione disponibilidad" },
-        { value: "1", label: "Disponible" },
-        { value: "0", label: "No disponible" }
-    ]
     const validate = values => {
         const errors = {};
-        if (!values.name) {
-            errors.name = 'Requerido.';
+        if (!values.officeName) {
+            errors.officeName = 'Requerido.';
         }
-        if (!values.sucursal) {
-            errors.sucursal = 'Requerido.';
-        }
-        // if (!values.officePrivacy) {
-        //     errors.officePrivacy = 'Requerido.';
-        // }
-        if (!values.capacity) {
-            errors.capacity = 'Requerido.';
+        if (!values.officeType.value || values.officeType.value === "") {
+            errors.officeType = 'Requerido.';
         }
         // if (!values.enabledDays) {
         //     errors.enabledDays = 'Requerido.';
@@ -73,17 +62,12 @@ export const NewOffice = (props) => {
 
     // const [multipleSelectServ, setMultipleSelectServ] = useState(null);
     // const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
-    const [enabledDays, setEnabledDays] = useState(null)
-
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            sucursal: props.branch.id,
-            office_type: typesOptions[0],
-            capacity: 0,
-            enabledOffice: enableOptions[0].value,
-            enabledDays: null,
+            officeName: "",
+            officeType: typesOptions[0],
+            inactivityDays: [],
             tablesQuantity: 0,
             capacityPerTable: 0,
             price: 0,
@@ -93,11 +77,26 @@ export const NewOffice = (props) => {
             photo: "",
         },
         validate,
-        onSubmit: async (values) => {
+        onSubmit: async ({
+            officeName,
+            officeType,
+            inactivityDays,
+            tablesQuantity,
+            capacityPerTable,
+            price,
+            description,
+            photo,
+        }) => {
             const office = {
-                privacy: values.office_type.value,
-                enable: values.enabledOffice.value,
-                ...values
+                name: officeName,
+                description: description,
+                privacy: officeType.value,
+                price: price,
+                capacity: tablesQuantity * capacityPerTable,
+                tablesQuantity: tablesQuantity,
+                capacityPerTable: capacityPerTable,
+                photo: photo,
+                inactivityDays: inactivityDays.map(day => day.value),
             }
             props.create(props.branch.id, office)
         },
@@ -143,91 +142,34 @@ export const NewOffice = (props) => {
                         <CardBody>
                             <Row>
                                 <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                    <FormGroup className={formik.errors.name ? 'has-danger' : ''}>
+                                    <FormGroup className={formik.errors.officeName ? 'has-danger' : ''}>
                                         <Label htmlFor="officeName" className="label-form">Nombre</Label>
                                         <Input
                                             type="text"
                                             placeholder="Ingrese el nombre de la oficina"
-                                            name="name"
+                                            name="officeName"
+                                            id="officeName"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.name}
+                                            value={formik.values.officeName}
                                         />
                                     </FormGroup>
 
 
-                                    <FormGroup className={formik.errors.officePrivacy ? 'has-danger' : ''}>
-                                        <Label htmlFor="office_type" className="label-form">Tipo de oficina</Label>
+                                    <FormGroup className={formik.errors.officeType ? 'has-danger' : ''}>
+                                        <Label htmlFor="officeType" className="label-form">Tipo de oficina</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="office_type"
-                                            // value={formik.values.office_type}
-                                            onChange={value => formik.setFieldValue("office_type", value)}
+                                            name="officeType"
+                                            id="officeType"
+                                            onChange={value => formik.setFieldValue("officeType", value)}
                                             onBlur={formik.handleBlur}
                                             options={typesOptions}
 
                                         />
+                                        {formik.errors.officeType ? <Label className="error">{formik.errors.officeType}</Label> : <></>}
                                     </FormGroup>
-
-                                    <FormGroup className={formik.errors.capacity ? 'has-danger' : ''}>
-                                        <Label htmlFor="capacity" className="label-form">Capacidad</Label>
-                                        <Input
-                                            type="number"
-                                            placeholder="Ingrese el número máximo de personas..."
-                                            name="capacity"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            min={1}
-                                            value={formik.values.capacity}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup className={formik.errors.enabledOffice ? 'has-danger' : ''}>
-                                        <Label htmlFor="availability" className="label-form">Disponibilidad</Label>
-                                        <Select
-                                            className="react-select primary"
-                                            classNamePrefix="react-select"
-                                            name="enabledOffice"
-                                            // value={formik.values.enabledOffice}
-                                            onBlur={formik.handleBlur}
-                                            onChange={value => formik.setFieldValue("enabledOffice", value)}
-                                            options={enableOptions}
-                                            placeholder="Seleccione disponibilidad"
-                                        />
-                                    </FormGroup>
-
-                                    {
-                                        formik.values.enabledOffice.label === "No disponible" && (
-                                            <FormGroup className={formik.errors.enabledDays ? 'has-danger' : ''}>
-                                                <Select
-                                                    className="react-select"
-                                                    classNamePrefix="react-select"
-                                                    placeholder="Seleccione los días que la oficina no está disponible"
-                                                    name="enabledDays"
-                                                    closeMenuOnSelect={false}
-                                                    isMulti
-                                                    value={enabledDays}
-                                                    onChange={value => setEnabledDays(value)}
-                                                    onBlur={formik.handleBlur}
-                                                    options={[
-                                                        {
-                                                            value: "",
-                                                            label: "Seleccione uno más días días",
-                                                            isDisabled: true
-                                                        },
-                                                        { value: "2", label: "Lunes" },
-                                                        { value: "3", label: "Martes" },
-                                                        { value: "4", label: "Miércoles" },
-                                                        { value: "5", label: "Jueves" },
-                                                        { value: "6", label: "Viernes" },
-                                                        { value: "7", label: "Sábado" },
-                                                        { value: "8", label: "Domingo" },
-                                                    ]}
-                                                />
-                                            </FormGroup>
-                                        )
-                                    }
 
                                     <FormGroup className={formik.errors.tablesQuantity ? 'has-danger' : ''}>
                                         <Label htmlFor="tablesQuantity" className="label-form">Cantidad de mesas</Label>
@@ -235,6 +177,7 @@ export const NewOffice = (props) => {
                                             type="number"
                                             placeholder="Ingrese el número de mesas..."
                                             name="tablesQuantity"
+                                            id="tablesQuantity"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             min={1}
@@ -247,10 +190,40 @@ export const NewOffice = (props) => {
                                             type="number"
                                             placeholder="Ingrese el número de personas por mesas"
                                             name="capacityPerTable"
+                                            id="capacityPerTable"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             min={1}
                                             value={formik.values.capacityPerTable}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor="inactivityDays" className="label-form">Dias no disponibles</Label>
+                                        <Select
+                                            className="react-select"
+                                            classNamePrefix="react-select"
+                                            placeholder="Seleccione los días que la oficina no está disponible"
+                                            name="inactivityDays"
+                                            id="inactivityDays"
+                                            closeMenuOnSelect={false}
+                                            isMulti
+                                            value={formik.values.inactivityDays}
+                                            onChange={value => formik.setFieldValue("inactivityDays", value)}
+                                            onBlur={formik.handleBlur}
+                                            options={[
+                                                {
+                                                    value: "",
+                                                    label: "Seleccione uno más días días",
+                                                    isDisabled: true
+                                                },
+                                                { value: "MONDAY", label: "Lunes" },
+                                                { value: "TUESDAY", label: "Martes" },
+                                                { value: "WEDNESDAY", label: "Miércoles" },
+                                                { value: "THURSDAY", label: "Jueves" },
+                                                { value: "FRIDAY", label: "Viernes" },
+                                                { value: "SATURDAY", label: "Sábado" },
+                                                { value: "SUNDAY", label: "Domingo" },
+                                            ]}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -266,6 +239,7 @@ export const NewOffice = (props) => {
                                                 type="number"
                                                 placeholder="Ingrese el precio por hora"
                                                 name="price"
+                                                id="price"
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 min={0}
@@ -370,7 +344,7 @@ export const NewOffice = (props) => {
                                         <Input
                                             type="textarea"
                                             name="description"
-                                            id="exampleText"
+                                            id="description"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.description}
