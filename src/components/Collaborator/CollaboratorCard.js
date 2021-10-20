@@ -1,17 +1,15 @@
 import { useFormik } from 'formik';
 import { includes } from 'lodash-es';
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import { Badge, Button, Form, FormGroup } from 'reactstrap';
 import { getStatus } from '../../utils/collaboratorTranslations';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import Forbidden from '../Common/Forbidden/Forbidden';
+import SweetAlert from 'react-bootstrap-sweetalert';
+
 
 export const CollaboratorCard = props => {
-  React.useEffect(() => {
-    props.loadCollaboratorRoles(props.id);
-  }, [])
-
   const {
     id,
     name,
@@ -23,6 +21,36 @@ export const CollaboratorCard = props => {
     permission,
     onDelete
   } = props
+  React.useEffect(() => {
+    props.loadCollaboratorRoles(props.id);
+  }, [])
+
+  const [alert, setAlert] = useState(null)
+
+  const hideAlert = () => {
+    setAlert(null)
+  }
+  const openAlert = () => {
+    setAlert(<SweetAlert
+      warning
+      showConfirm
+      showCancel
+      style={{ display: "block", marginTop: "-100px" }}
+      title={`Desea borrar el colaborador "${name}" ?`}
+      onConfirm={() => {
+        onDelete()
+        hideAlert()
+      }}
+      onCancel={() => hideAlert()}
+      confirmBtnBsStyle="primary"
+      confirmBtnCssClass="btn-round"
+      cancelBtnBsStyle="danger"
+      cancelBtnText="Cancelar"
+      cancelBtnCssClass="btn-round"
+    >
+    </SweetAlert>)
+  }
+
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -49,6 +77,7 @@ export const CollaboratorCard = props => {
   }
 
   return (<>
+    {alert}
     <div className='card-user card'>
       <div style={{ position: 'relative' }}>
         <div className='image' id='image' style={{ position: 'absolute' }}>
@@ -62,7 +91,7 @@ export const CollaboratorCard = props => {
               display: 'flex',
               justifyContent: 'flex-end',
             }}>
-            <Button onClick={onDelete} title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
+            <Button onClick={openAlert} title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
               <i className='nc-icon nc-simple-remove'></i>
             </Button>
           </div>
@@ -101,7 +130,7 @@ export const CollaboratorCard = props => {
         </div>
       </div>
       <div>
-        <Form style={{padding:"5%"}} onSubmit={formik.handleSubmit}>
+        <Form style={{ padding: "5%" }} onSubmit={formik.handleSubmit}>
           <FormGroup className='button-container'>
             <label className="form-label" htmlFor="roles">Roles</label>
             <Select
