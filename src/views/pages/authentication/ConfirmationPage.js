@@ -1,11 +1,11 @@
 
-import React from 'react'
-import { useLocation, useHistory } from 'react-router-dom';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Col, Container, Row } from 'reactstrap'
-import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm'
+import { useHistory, useLocation } from 'react-router-dom';
+import { Col, Container, Row } from 'reactstrap';
+import { ConfirmationAccountForm } from '../../../components/ConfirmationAccount/ConfirmationAccountForm';
 import { confirmation } from '../../../stores/actions/auth/confirmationAccountActions';
-import { hideNotification } from '../../../stores/actions';
+import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
 
 
 export const ConfirmationPage = (props) => {
@@ -15,7 +15,7 @@ export const ConfirmationPage = (props) => {
     const query = new URLSearchParams(useLocation().search);
     token = query.get("token");
     React.useEffect(() => {
-        dispatch(hideNotification());
+        dispatch(hideNotificationAction());
     }, [props.error]);
 
     React.useEffect(() => {

@@ -5,8 +5,7 @@ import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
-import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
+import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
@@ -15,7 +14,6 @@ import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/R
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import { OfficeBranch } from '../views/pages/OfficeBranch/OfficeBranch';
 
 export const routes = [
   {
@@ -44,19 +42,11 @@ export const routes = [
     views: [
       {
         path: '/office-branch',
-        name: 'Ver sucursales',
-        mini: 'S',
-        component: OfficeBranchContainer,
-        layout: '/admin',
-        visibility: false
-      },
-      {
-        path: '/create-officebranch',
-        name: 'Nueva Sucursal',
-        mini: 'NS',
+        name: 'Mi sucursal',
+        mini: 'MS',
+        component: OfficeBranchDetailContainer,
         layout: '/admin',
         visibility: true,
-        component: OfficeBranchCreateContainer,
       },
       {
         path: '/edit-officebranch',
@@ -221,15 +211,7 @@ export const routes = [
     visibility: true,
     views: [
       {
-        path: '/booking',
-        name: 'Reservar oficina',
-        mini: 'RO',
-        component: OfficeBooking,
-        layout: '/admin',
-        visibility: true,
-      },
-      {
-        path: '/booking-list',
+        path: '/bookings/list',
         name: 'Listado de reservas',
         mini: 'LR',
         component: BookingList,
@@ -237,10 +219,10 @@ export const routes = [
         visibility: true
       },
       {
-        path: '/office-branch-detail',
-        name: 'Detalle de sucursal',
-        mini: 'DS',
-        component: OfficeBranch,
+        path: '/create-booking',
+        name: 'Reservar oficina',
+        mini: 'RO',
+        component: OfficeBooking,
         layout: '/admin',
         visibility: true,
       },

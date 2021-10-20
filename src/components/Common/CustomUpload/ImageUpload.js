@@ -60,12 +60,12 @@ function ImageUpload(props) {
       </div>
       <div>
         {fileState === null ? (
-          <Button className="btn-round" onClick={() => handleClick()}>
+          <Button className="btn-round" color="primary" onClick={() => handleClick()}>
             {props.avatar ? "Añadir foto" : "Seleccionar imagen"}
           </Button>
         ) : (
           <span>
-            <Button className="btn-round" onClick={() => handleClick()}>
+            <Button className="btn-round" color="primary" onClick={() => handleClick()}>
               Cambiar
             </Button>
             {props.avatar ? <br /> : null}

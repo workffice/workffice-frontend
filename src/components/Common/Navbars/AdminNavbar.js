@@ -18,19 +18,8 @@ import React from 'react';
 import classnames from 'classnames';
 import { useLocation } from 'react-router-dom';
 import {
-  Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   NavbarBrand,
   Navbar,
-  Nav,
   Container,
 } from 'reactstrap';
 import logo from '../../../assets/img/Recurso 4.png';
@@ -119,72 +108,6 @@ function AdminNavbar() {
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
           </button>
-          <Collapse
-            className="justify-content-end"
-            navbar
-            isOpen={collapseOpen}>
-            <Form>
-              <InputGroup className="no-border">
-                <Input defaultValue="" placeholder="Buscar..." type="text" />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <i className="nc-icon nc-zoom-split" />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            </Form>
-            <Nav navbar>
-              {/* <NavItem>
-                <NavLink
-                  className="btn-magnify fix__navlink"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}>
-
-                  <Avatar img={avatar}></Avatar>
-                  <p>
-                    <span className="d-lg-none d-md-block">Perfil</span>
-                  </p>
-                </NavLink>
-              </NavItem> */}
-              <UncontrolledDropdown className="btn-rotate" nav>
-                <DropdownToggle
-                  aria-haspopup
-                  caret
-                  color="default"
-                  data-toggle="dropdown"
-                  id="navbarDropdownMenuLink"
-                  nav>
-                  <i id="settings" className="nc-icon nc-settings-gear-65" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Oficinas</span>
-                  </p>
-                </DropdownToggle>
-                <DropdownMenu
-                  persist
-                  aria-labelledby="navbarDropdownMenuLink"
-                  right>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Sucursales
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Oficinas
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Noticias
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Reportes
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Perfil
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
-                    Cerrar Sesión
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
         </Container>
       </Navbar>
     </>

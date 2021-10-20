@@ -6,7 +6,7 @@ import { getErrorMessage, ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTransl
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from "../Common/Forbidden/Forbidden";
 import { Notification } from '../Common/Notification/Notification';
-import { RoleComponent } from './RoleComponent';
+import { RoleCard } from './RoleCard';
 
 export const RoleListComponent = ({
   permission,
@@ -30,12 +30,18 @@ export const RoleListComponent = ({
       return <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
     return roles !== undefined && roles.length !== 0 ? roles.map((role) => {
       return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
-        <RoleComponent {...role} onDelete={() => deleteRole(role.id)} />
+        <RoleCard {...role} onDelete={() => deleteRole(role.id)} />
       </Col>
     }) : <EmptyComponent />
   }
   return (
     <div className="content">
+      <Notification
+        show={notification.show && notification.isError}
+        message={getErrorMessage(notification.errorCode) || ""}
+        hideNotification={hideNotification}
+        isError={true}
+      />
       <Row style={{ display: 'grid', paddingTop: 40 }}>
         <Col xs="12" md="12" lg="12" xg="12">
           <h1>
@@ -48,12 +54,6 @@ export const RoleListComponent = ({
         show={notification.show && notification.isSuccess}
         message="El rol se elimino correctamente"
         hideNotification={hideNotification}
-      />
-      <Notification
-        show={notification.show && notification.isError}
-        message={getErrorMessage(notification.errorCode)}
-        hideNotification={hideNotification}
-        isError={true}
       />
       <Row>
         <Col

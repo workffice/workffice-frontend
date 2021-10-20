@@ -1,11 +1,10 @@
 
+import PerfectScrollbar from "perfect-scrollbar";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Nav, Collapse } from "reactstrap";
-import PerfectScrollbar from "perfect-scrollbar";
+import { Collapse, Nav } from "reactstrap";
+import { Cloudinary } from "../Common/Cloudinary/Cloudinary";
 
-import avatar from "../../assets/img/faces/erik-lucatero-2.jpg"
-// import avatar from "../../assets/img/faces/menem.png"
 
 var ps;
 
@@ -148,7 +147,8 @@ function Sidebar(props) {
       <div className="sidebar-wrapper" ref={sidebar}>
         <div className="user">
           <div className="photo">
-            <img src={avatar} alt="Avatar" />
+            <Cloudinary publicId={props.user ? props.user.profileImage : ""} />
+            {/* <img src={avatar} alt="Avatar" /> */}
           </div>
           <div className="info">
             <a
@@ -158,7 +158,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                {props.user ? props.user.name + ' ' + props.user.lastname || "N/A" : "N/A"}
+                {props.user ? props.user.name + ' ' + props.user.lastname : ""}
                 <b className="caret" />
               </span>
             </a>

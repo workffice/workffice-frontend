@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { readFromLocalStorage } from '../infra/api/localStorage';
-import { hideNotification as hideNotificationAction } from '../stores/actions';
+import { createColaborator, deleteCollaborator, updateCollaborator } from '../stores/actions/backoffice/collaborator/collaboratorAction';
 import { collaboratorsList } from '../stores/actions/backoffice/collaborator/collaboratorsAction';
-import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/collaborator/collaboratorAction';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';
+import { hideNotificationAction } from '../stores/actions/notifications/writeNotificationActions';
 
 export const CollaboratorContainer = () => {
   const loading = useSelector(state => state.isLoading);
@@ -61,6 +61,9 @@ export const CollaboratorListContainer = () => {
   }, [dispatch]);
   const permission = useSelector(state => state.permission)
   const loading = useSelector(state => state.loadingCollaborator)
+  const deleteCollab = useCallback(async collaboratorId => {
+    await dispatch(deleteCollaborator(collaboratorId));
+  }, [dispatch]);
   return <Collaborators
     notification={notification}
     hideNotification={hideNotification}
@@ -74,5 +77,6 @@ export const CollaboratorListContainer = () => {
     onUpdate={onUpdate}
     permission={permission}
     loading={loading}
+    onDelete={deleteCollab}
   />
 }

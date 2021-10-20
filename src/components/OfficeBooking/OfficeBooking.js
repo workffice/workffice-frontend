@@ -1,7 +1,5 @@
 import { useFormik } from 'formik';
 import React from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
 import {
     Row,
     Col,
@@ -17,14 +15,10 @@ import {
     Container,
     CardTitle,
 } from 'reactstrap';
-// import { hideNotification } from '../../stores/actions';
 import './styles/OfficeBookingStyle.css';
 import Datetime from 'react-datetime';
 
 export const OfficeBooking = (props) => {
-    // const history = useHistory();
-    // const dispatch = useDispatch();
-    // const { notification } = props;
     const validate = values => {
         const errors = {};
         if (!values.date) {
@@ -161,7 +155,7 @@ export const OfficeBooking = (props) => {
                             <Row>
                                 <Col style={{ display: 'flex', justifyContent: 'center' }}>
                                     <Button
-                                        className="btn btn-primary"
+                                        className="btn-round btn-primary"
                                         color="primary"
                                         type="submit"
                                         disabled={formik.isSubmitting}>
@@ -169,7 +163,7 @@ export const OfficeBooking = (props) => {
                                     </Button>
                                     <Button
                                         type="reset"
-                                        className="btn btn-primary"
+                                        className="btn-round btn-primary"
                                         color="danger"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
                                     >

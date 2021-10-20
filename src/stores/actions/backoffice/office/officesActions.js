@@ -1,5 +1,5 @@
-import { setError } from "../..";
 import { getOfficesAPI } from "../../../../api/backoffice/offices";
+import { setErrorAction } from "../../notifications/writeNotificationActions";
 import { loadingOfficeAction, stopLoadingOfficeAction } from "./loadingActions";
 
 export const FETCH_OFFICES = 'FETCH_OFFICES';
@@ -14,7 +14,7 @@ export const fetchOfficesList = officeBranchId => async dispatch => {
     try {
         dispatch(fetchOffices(await getOfficesAPI(officeBranchId)));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(stopLoadingOfficeAction());
     }

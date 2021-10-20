@@ -105,7 +105,7 @@ export const OfficeDetailComponent = () => {
                             <hr />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Link to="/admin/offices">
-                                    <Button className='btn btn-primary' id='servicesButton'>
+                                    <Button className='btn-round btn-primary' id='servicesButton'>
                                         Aceptar
                                     </Button>
                                 </Link>

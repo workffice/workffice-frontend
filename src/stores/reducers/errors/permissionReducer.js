@@ -1,5 +1,5 @@
 import { set } from "lodash"
-import { SET_FORBIDDEN_ACCESS, SET_SUCCESS_ACCESS } from "../../actions/auth/permissionActions"
+import { SET_FORBIDDEN_ACCESS, SET_SUCCESS_ACCESS } from "../../actions/errors/permissionActions"
 
 export const permissionReducer = (state = { isForbidden: false, resources: [] }, { type, payload }) => {
     switch (type) {
