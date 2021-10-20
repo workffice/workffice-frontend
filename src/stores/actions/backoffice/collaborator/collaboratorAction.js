@@ -1,13 +1,14 @@
 import { setIsLoading } from '../..';
-import { createCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../../api/backoffice/collaborator';
+import { createCollaboratorApi, deleteCollaboratorApi, fetchCollaboratorsApi, updateCollaboratorApi } from '../../../../api/backoffice/collaborator';
 import { setErrorAction, setSuccessAction } from '../../notifications/writeNotificationActions';
-import { fetchCollaboratorsList } from './collaboratorsAction';
+import { collaboratorsList, fetchCollaboratorsList } from './collaboratorsAction';
 
-export const CREATE_COLABORATOR = 'CREATE_COLABORATOR';
-export const UPDATE_COLABORATOR = 'UPDATE_COLABORATOR';
+export const CREATE_COLLABORATOR = 'CREATE_COLABORATOR';
+export const UPDATE_COLLABORATOR = 'UPDATE_COLABORATOR';
+export const DELETE_COLLABORATOR = 'DELETE_COLLABORATOR';
 
 export const fetchCreateCollaborator = response => ({
-  type: CREATE_COLABORATOR,
+  type: CREATE_COLLABORATOR,
   payload: response,
 });
 
@@ -25,7 +26,7 @@ export const createColaborator = (officeBranchId, collaboratorBody) => async (di
 };
 
 export const updateCollaboratorAction = response => ({
-  type: UPDATE_COLABORATOR,
+  type: UPDATE_COLLABORATOR,
   payload: response,
 });
 
@@ -36,6 +37,25 @@ export const updateCollaborator = (collaboratorId, collaboratorBody) => async (d
     dispatch(setSuccessAction())
   } catch (error) {
     dispatch(setErrorAction(error ? error : 'No ha sido posible actualizar el colaborador'));
+  } finally {
+    dispatch(setIsLoading(false));
+  }
+};
+
+export const deleteCollaboratorAction = response => ({
+  type: DELETE_COLLABORATOR,
+  payload: response,
+});
+
+export const deleteCollaborator = collaboratorId => async dispatch => {
+  dispatch(setIsLoading(true));
+  try {
+    await deleteCollaboratorApi(collaboratorId)
+    dispatch(deleteCollaboratorAction(collaboratorId));
+    dispatch(collaboratorsList())
+    dispatch(setSuccessAction())
+  } catch (error) {
+    dispatch(setErrorAction(error));
   } finally {
     dispatch(setIsLoading(false));
   }

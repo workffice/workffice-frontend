@@ -22,12 +22,13 @@ export const Collaborators = ({
   officeBranch,
   permission,
   loading,
+  onDelete
 }) => {
 
   React.useEffect(() => {
     loadCollaborators(officeBranch.id);
     loadOfficeBranchRoles(officeBranch.id);
-  }, [officeBranch ? officeBranch.id : ""])
+  }, [officeBranch ? officeBranch.id : "", collaborators ? collaborators.length : 0])
 
   React.useEffect(() => {
     if (notification.show)
@@ -51,6 +52,7 @@ export const Collaborators = ({
             collaboratorRoles={collaboratorRoles ? collaboratorRoles[collaborator.id] : []}
             updateCollaborator={onUpdate}
             permission={permission}
+            onDelete={() => onDelete(collaborator.id)}
           />
         </Col>
       }) : <EmptyComponent />
@@ -67,6 +69,20 @@ export const Collaborators = ({
           <hr />
         </Col>
       </Row>
+      <Row style={{ justifyContent: 'center' }}>
+        <Col
+          xs="6"
+          md="6"
+          lg="12"
+          xg="12"
+          style={{ display: 'flex', justifyContent: 'flex-start' }}>
+          <Button className="btn-round" color="primary" size="medium" >
+            <Link to='/admin/new-collaborator' style={{ color: 'white', textDecoration: 'none' }}>
+              <i className="fa fa-plus" /> Nuevo Colaborador
+            </Link>
+          </Button>
+        </Col>
+      </Row>
       <Notification
         show={notification.show && notification.isError}
         isError={true}
@@ -78,22 +94,6 @@ export const Collaborators = ({
         message="El colaborador se actualizo correctamente"
         hideNotification={hideNotification}
       />
-      <Row style={{ justifyContent: 'center' }}>
-        <Col
-          xs="6"
-          md="6"
-          lg="12"
-          xg="12"
-          style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Button className="btn-round" color="primary" size="medium" >
-            <Link to='/admin/new-collaborator' style={{ color: 'white', textDecoration: 'none' }}>
-              {' '}
-              <i className="fa fa-plus" />
-              {' '} Nuevo Colaborador
-            </Link>
-          </Button>
-        </Col>
-      </Row>
       <Row style={{ justifyContent: 'center' }}>
         {renderCollaborators()}
       </Row>

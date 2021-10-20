@@ -20,7 +20,8 @@ export const CollaboratorCard = props => {
     officeBranchRoles,
     collaboratorRoles,
     updateCollaborator,
-    permission
+    permission,
+    onDelete
   } = props
 
   const formik = useFormik({
@@ -61,9 +62,9 @@ export const CollaboratorCard = props => {
               display: 'flex',
               justifyContent: 'flex-end',
             }}>
-            <button type='button' id='tooltip570363224' title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
+            <Button onClick={onDelete} title="true" className="btn-round btn-icon btn-icon-mini btn-neutral btn btn-danger" style={{ marginRight: 5 }}>
               <i className='nc-icon nc-simple-remove'></i>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
