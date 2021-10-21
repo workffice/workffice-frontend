@@ -1,7 +1,7 @@
 import { CloudinaryContext, Image } from 'cloudinary-react';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Card, CardBody, ListGroup, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { Badge, Button, Card, CardBody, ListGroup, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 
 export const OfficeBranchCardSelect = ({ branch, select, selected, currentOfficeBranch }) => {
   const history = useHistory();
@@ -27,7 +27,7 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
               <small>{branch.name}</small>
             </ListGroupItemHeading>
             <ListGroupItemText>
-              {branch.collaborator ? "Colaborador" : "Dueño"}
+              {branch.collaborator ? <Badge color="danger">Colaborador</Badge> : <Badge color="primary">Dueño</Badge>}
             </ListGroupItemText>
             <ListGroupItemText>
               <b>{branch.location.province}, {branch.location.city}, {branch.location.street}</b>
