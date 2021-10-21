@@ -29,9 +29,9 @@ export const BookingListComponent = (props) => {
                     </CardHeader>
                     <Row style={{ display: 'grid', paddingTop: 10 }}>
                         <Col xs="12" md="6" lg="12" xg="12">
-                            <h2 style={{marginBottom: 10}}>
-                                Reserva N° <small style={{ fontSize: 25, color: "#34B18A" }}>{`${bookingNumber}`}</small>
-                            </h2>
+                            <h5 style={{marginBottom: 10}}>
+                                Reserva N° <label style={{ fontSize: 22, color: "#34B18A" }}>{`${bookingNumber}`}</label>
+                            </h5>
                             <hr />
                         </Col>
                     </Row>
@@ -40,38 +40,22 @@ export const BookingListComponent = (props) => {
                             <Row>
                                 <Col>
                                     <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Fecha: <small style={{ fontSize: 20 }}>{`${date}`}</small>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Fecha: <small style={{ fontSize: 18 }}>{`${date}`}</small>
                                         </label>
                                     </div>
                                 </Col>
                                 <Col>
                                     <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Hora desde: <small style={{ fontSize: 20 }}>{`${hourFrom} hs`}</small>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Hora desde: <small style={{ fontSize: 18 }}>{`${hourFrom} hs`}</small>
                                         </label>
                                     </div>
                                 </Col>
                                 <Col>
                                     <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Hora hasta: <small style={{ fontSize: 20 }}>{`${hourTo} hs`}</small>
-                                        </label>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Nombre oficina: <small style={{ fontSize: 20 }}>{`${officeName}`}</small>
-                                        </label>
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Cantidad de personas: <small style={{ fontSize: 20 }}>{`${capacity}`}</small>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Hora hasta: <small style={{ fontSize: 18 }}>{`${hourTo} hs`}</small>
                                         </label>
                                     </div>
                                 </Col>
@@ -79,8 +63,24 @@ export const BookingListComponent = (props) => {
                             <Row>
                                 <Col>
                                     <div className='text'>
-                                        <label className="form-label" style={{ fontSize: 20 }}>
-                                            Monto total: <small style={{ fontSize: 20 }}>{`$ ${price}`}</small>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Nombre oficina: <small style={{ fontSize: 18 }}>{`${officeName}`}</small>
+                                        </label>
+                                    </div>
+                                </Col>
+                                <Col>
+                                    <div className='text'>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Cantidad de personas: <small style={{ fontSize: 18 }}>{`${capacity}`}</small>
+                                        </label>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <div className='text'>
+                                        <label className="form-label" style={{ fontSize: 18 }}>
+                                            Monto total: <small style={{ fontSize: 18 }}>{`$ ${price}`}</small>
                                         </label>
                                     </div>
                                 </Col>
