@@ -19,6 +19,21 @@ export const getOffices = async officeBranchId => {
     }
 }
 
+export const getOffice = async officeId => {
+    try {
+        const office = await sdkNoAuthRequest(
+            `${API_URL}/offices/${officeId}/`,
+            {
+                method: 'GET',
+                headers: headerGet
+            }
+        );
+        return Promise.resolve(office.data);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
 export const createOffice = async (officeBranchId, office) => {
     try {
         let imageData = null
