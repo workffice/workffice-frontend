@@ -30,6 +30,7 @@ export const EditOffice = ({ office, loadOffice, loading, inactivities, loadInac
                             office={office}
                             onSubmit={officeFormData => console.log(officeFormData)}
                             inactivities={inactivities}
+                            confirmButtonName="Guardar"
                         />
                 }
             </Row>

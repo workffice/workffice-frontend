@@ -18,23 +18,18 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Button } from "reactstrap";
-import defaultImage from "../../../assets/img/bg/image_placeholder.jpg";
-import defaultAvatar from "../../../assets/img/bg/logoCirculo.svg";
+import { Cloudinary } from "../Cloudinary/Cloudinary";
 
 
 
 function ImageUpload(props) {
-  const [fileState, setFileState] = React.useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
-    props.avatar ? defaultAvatar : defaultImage
-  );
-  const fileInput = React.useRef();
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
+  const fileInput = React.useRef()
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      setFileState(file);
       setImagePreviewUrl(reader.result);
       props.onChange(reader.result)
     };
@@ -42,42 +37,25 @@ function ImageUpload(props) {
       reader.readAsDataURL(file);
     }
   };
-
   const handleClick = () => {
     fileInput.current.click();
-  };
-  const handleRemove = () => {
-    fileInput.current.value = null;
-    setFileState(null);
-    setImagePreviewUrl(props.avatar ? defaultAvatar : defaultImage);
   };
 
   return (
     <div className="fileinput text-center">
       <input type="file" onChange={handleImageChange} ref={fileInput} />
-      <div className={"thumbnail" + (props.avatar ? " img-circle" : "")}>
-        <img src={imagePreviewUrl} alt="..." />
+      <div className={"thumbnail"}>
+        {imagePreviewUrl !== null ? <img src={imagePreviewUrl} alt="..." /> : <Cloudinary className="picture-src" publicId={props.avatar} />}
       </div>
       <div>
-        {fileState === null ? (
+        {imagePreviewUrl === null ? (
           <Button className="btn-round" color="primary" onClick={() => handleClick()}>
-            {props.avatar ? "Añadir foto" : "Seleccionar imagen"}
+            Seleccionar imagen
           </Button>
         ) : (
-          <span>
-            <Button className="btn-round" color="primary" onClick={() => handleClick()}>
-              Cambiar
-            </Button>
-            {props.avatar ? <br /> : null}
-            <Button
-              color="danger"
-              className="btn-round"
-              onClick={() => handleRemove()}
-            >
-              <i className="fa fa-times" />
-              Quitar
-            </Button>
-          </span>
+          <Button className="btn-round" color="primary" onClick={() => handleClick()}>
+            Cambiar
+          </Button>
         )}
       </div>
     </div>
@@ -85,7 +63,7 @@ function ImageUpload(props) {
 }
 
 ImageUpload.propTypes = {
-  avatar: PropTypes.bool,
+  avatar: PropTypes.string,
   onChange: PropTypes.func,
 };
 

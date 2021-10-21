@@ -13,7 +13,7 @@ import {
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 
-export const OfficeForm = ({ office, onSubmit, inactivities }) => {
+export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }) => {
     const typesOptions = [
         {
             value: "",
@@ -338,7 +338,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities }) => {
                                         <Label htmlFor="photo" className="label-form">Fotos</Label>
                                     </Row>
                                     <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <ImageUpload onChange={imageData => formik.setFieldValue("photo", imageData)} />
+                                        <ImageUpload onChange={imageData => formik.setFieldValue("photo", imageData)} avatar={office ? office.imageUrl : ""} />
                                     </Row>
                                 </FormGroup>
                             </Col>
@@ -352,7 +352,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities }) => {
                                     color="primary"
                                     type="submit"
                                     disabled={formik.isSubmitting}>
-                                    Crear Oficina
+                                    {confirmButtonName}
                                 </Button>
                                 <Button
                                     type="reset"
@@ -373,6 +373,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities }) => {
 
 
 OfficeForm.propTypes = {
+    confirmButtonName: PropTypes.string.isRequired,
     office: PropTypes.shape({
         name: PropTypes.string,
         price: PropTypes.number,
