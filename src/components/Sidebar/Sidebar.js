@@ -158,7 +158,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                {props.user ? props.user.name + ' ' + props.user.lastname : ""}
+                {props.user ? `${props.user.name || 'Username'} ${props.user.lastname || ''}` : ""}
                 <b className="caret" />
               </span>
             </a>
