@@ -55,7 +55,7 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
             </Row>
             {
               displayBookingButton ?
-                <Link to="/admin/create-booking">
+                <Link to={`/admin/create-booking?id=${id}`}>
                   <Button
                     className="btn btn-primary"
                     color="primary"
