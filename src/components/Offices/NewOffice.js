@@ -1,15 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
-import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
+import { getErrorMessage } from '../../utils/officeTranslations';
 import { Notification } from '../Common/Notification/Notification';
 import { OfficeForm } from './OfficeForm';
 import './styles/OfficeStyle.css';
 
-export const NewOffice = ({ notification, create, branch }) => {
+export const NewOffice = ({ hideNotification, notification, create, branch }) => {
     const history = useHistory();
-    const dispatch = useDispatch()
 
     React.useEffect(() => {
         if (notification.show) {
@@ -18,7 +16,7 @@ export const NewOffice = ({ notification, create, branch }) => {
                     history.push('/admin/offices');
                 }, 2500);
             setTimeout(() => {
-                dispatch(hideNotificationAction());
+                hideNotification()
             }, 2000);
         }
     }, [notification.show]);
@@ -37,21 +35,23 @@ export const NewOffice = ({ notification, create, branch }) => {
                     <hr />
                 </Col>
             </Row>
-            <Row>
-                <Notification
-                    isError={true}
-                    message="Oops algo salio mal"
-                    show={notification.show && notification.isError}
-                />
-                <Notification
-                    message="La oficina se creo correctamente"
-                    show={notification.show && notification.isSuccess}
+            <Notification
+                isError={true}
+                message={getErrorMessage(notification.errorCode)}
+                show={notification.show && notification.isError}
+                hideNotification={hideNotification}
+            />
+            <Notification
+                message="La oficina se creo correctamente"
+                show={notification.show && notification.isSuccess}
+                hideNotification={hideNotification}
+            />
+            <Row style={{ justifyContent: 'center' }}>
+                <OfficeForm
+                    onSubmit={createOffice}
+                    confirmButtonName="Crear"
                 />
             </Row>
-            <OfficeForm
-                onSubmit={createOffice}
-                confirmButtonName="Crear"
-            />
         </div>
     );
 }

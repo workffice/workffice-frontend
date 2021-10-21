@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { Col, Row } from 'reactstrap';
+import { getErrorMessage } from '../../utils/officeTranslations';
 import { Loading } from '../Common/Loading/Loading';
 import { Notification } from '../Common/Notification/Notification';
 import { OfficeForm } from './OfficeForm';
@@ -41,7 +42,7 @@ export const EditOffice = ({
             </Row>
             <Notification
                 isError
-                message="Oops algo salio mal"
+                message={getErrorMessage(notification.errorCode)}
                 show={notification.show && notification.isError}
                 hideNotification={hideNotification}
             />
