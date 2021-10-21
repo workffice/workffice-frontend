@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { Loading } from '../Common/Loading/Loading';
 import { OfficeForm } from './OfficeForm';
 import './styles/OfficeStyle.css';
 
-export const EditOffice = ({ office, loadOffice, loading }) => {
+export const EditOffice = ({ office, loadOffice, loading, inactivities, loadInactivities }) => {
     const query = new URLSearchParams(useLocation().search)
     useEffect(() => {
         loadOffice(query.get("id"))
+    }, [])
+    useEffect(() => {
+        loadInactivities(query.get("id"))
     }, [])
     return (
         <div className="content">
@@ -20,15 +23,16 @@ export const EditOffice = ({ office, loadOffice, loading }) => {
                     <hr />
                 </Col>
             </Row>
-            {
-                loading ? <Container><Row><Col md="12"><Loading /></Col></Row></Container> :
-                    <>
+            <Row style={{ justifyContent: 'center' }}>
+                {
+                    loading ? <Row><Col md="12"><Loading /></Col></Row> :
                         <OfficeForm
                             office={office}
                             onSubmit={officeFormData => console.log(officeFormData)}
+                            inactivities={inactivities}
                         />
-                    </>
-            }
+                }
+            </Row>
         </div>
     )
 }

@@ -33,12 +33,10 @@ export const getOfficeAction = office => ({
 export const getOffice = officeId => async dispatch => {
     dispatch(loadingOfficeAction())
     try {
-        setTimeout(async () => {
-            dispatch(getOfficeAction(await getOfficeAPI(officeId)))
-            dispatch(stopLoadingOfficeAction())
-        }, 500)
+        dispatch(getOfficeAction(await getOfficeAPI(officeId)))
     } catch (error) {
         dispatch(setErrorAction(error))
-    } /*finally {
-    }*/
+    } finally {
+        dispatch(stopLoadingOfficeAction())
+    }
 }

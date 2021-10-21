@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { EditOffice } from '../../components/Offices/EditOffice'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
+import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
 
 
 export const OfficeEditContainer = () => {
@@ -11,5 +12,15 @@ export const OfficeEditContainer = () => {
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
     }, [dispatch])
-    return <EditOffice office={office} loadOffice={loadOffice} loading={loading} />
+    const inactivities = useSelector(state => state.officeInactivities)
+    const loadInactivities = useCallback(officeId => {
+        dispatch(getOfficeInactivities(officeId))
+    }, [dispatch])
+    return <EditOffice
+        office={office}
+        loadOffice={loadOffice}
+        loading={loading}
+        inactivities={inactivities}
+        loadInactivities={loadInactivities}
+    />
 }

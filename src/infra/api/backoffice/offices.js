@@ -92,3 +92,18 @@ export const searchOfficeBranches = async params => {
         return Promise.reject(error.errors[0]);
     }
 }
+
+export const getOfficeInactivities = async officeId => {
+    try {
+        const inactivities = await sdkNoAuthRequest(
+            `${API_URL}/offices/${officeId}/inactivities/`,
+            {
+                method: 'GET',
+                headers: headerGet
+            }
+        )
+        return Promise.resolve(inactivities.data)
+    } catch (error) {
+        return Promise.reject(error.errors[0])
+    }
+}

@@ -80,7 +80,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities }) => {
             officeType: office ? { value: office.privacy, label: getPrivacyLabel(office.privacy) } : typesOptions[0],
             inactivityDays: inactivities ? inactivities
                 .filter(inactivity => inactivity.type === "RECURRING_DAY")
-                .map(inactivity => ({ value: inactivity.dayOfWeek, label: getDay(inactivity.dayOfWeek)}))
+                .map(inactivity => ({ value: inactivity.dayOfWeek, label: getDay(inactivity.dayOfWeek) }))
                 : [],
             tablesQuantity: office ? office.table.quantity : 0,
             capacityPerTable: office ? office.table.capacity : 0,
