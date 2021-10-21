@@ -2,10 +2,19 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { Col, Row } from 'reactstrap';
 import { Loading } from '../Common/Loading/Loading';
+import { Notification } from '../Common/Notification/Notification';
 import { OfficeForm } from './OfficeForm';
-import './styles/OfficeStyle.css';
 
-export const EditOffice = ({ office, loadOffice, loading, inactivities, loadInactivities }) => {
+export const EditOffice = ({
+    office,
+    loadOffice,
+    loading,
+    inactivities,
+    loadInactivities,
+    update,
+    notification,
+    hideNotification,
+}) => {
     const query = new URLSearchParams(useLocation().search)
     useEffect(() => {
         loadOffice(query.get("id"))
@@ -13,6 +22,13 @@ export const EditOffice = ({ office, loadOffice, loading, inactivities, loadInac
     useEffect(() => {
         loadInactivities(query.get("id"))
     }, [])
+    useEffect(() => {
+        if (notification.show)
+            setTimeout(() => {
+                hideNotification()
+            }, 2500)
+    }, [notification.show])
+
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -23,12 +39,23 @@ export const EditOffice = ({ office, loadOffice, loading, inactivities, loadInac
                     <hr />
                 </Col>
             </Row>
+            <Notification
+                isError
+                message="Oops algo salio mal"
+                show={notification.show && notification.isError}
+                hideNotification={hideNotification}
+            />
+            <Notification
+                message="La oficina se actualizo correctamente"
+                show={notification.show && notification.isSuccess}
+                hideNotification={hideNotification}
+            />
             <Row style={{ justifyContent: 'center' }}>
                 {
                     loading ? <Row><Col md="12"><Loading /></Col></Row> :
                         <OfficeForm
                             office={office}
-                            onSubmit={officeFormData => console.log(officeFormData)}
+                            onSubmit={officeFormData => update(office.id, officeFormData)}
                             inactivities={inactivities}
                             confirmButtonName="Guardar"
                         />

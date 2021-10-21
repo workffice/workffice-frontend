@@ -65,6 +65,24 @@ export const createOffice = async (officeBranchId, office) => {
     }
 }
 
+export const updateOffice = async (officeId, office) => {
+    try {
+        let imageData = null
+        if (office.photo)
+            imageData = await postImageToCloudinary(office.photo)
+        const officeUpdated = await sdkAuthRequest(
+            `${API_URL}/offices/${officeId}/`,
+            {
+                method: 'PUT',
+                headers: headersPost,
+                body: imageData !== null ? JSON.stringify({ ...office, imageUrl: imageData.public_id }) : JSON.stringify(office)
+            });
+        return Promise.resolve(officeUpdated);
+    } catch (error) {
+        return Promise.reject(new Error(error.errors[0].error));
+    }
+}
+
 export const searchOfficeBranches = async params => {
     try {
         let officesFound;

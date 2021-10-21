@@ -1,11 +1,12 @@
 import { setIsLoading } from "../..";
-import { createOfficeAPI, getOfficeAPI } from "../../../../api/backoffice/offices";
+import { createOfficeAPI, getOfficeAPI, updateOfficeAPI } from "../../../../api/backoffice/offices";
 import { setErrorAction, setSuccessAction } from "../../notifications/writeNotificationActions";
 import { loadingOfficeAction, stopLoadingOfficeAction } from "./loadingActions";
 import { fetchOfficesList } from "./officesActions";
 
 export const CREATE_OFFICE = 'CREATE_OFFICE';
 export const FETCH_OFFICE = 'FETCH_OFFICE';
+export const UPDATE_OFFICE = 'UPDATE_OFFICE';
 
 export const newOffice = office => ({
     type: CREATE_OFFICE,
@@ -38,5 +39,20 @@ export const getOffice = officeId => async dispatch => {
         dispatch(setErrorAction(error))
     } finally {
         dispatch(stopLoadingOfficeAction())
+    }
+}
+
+export const updateOfficeAction = office => ({
+    type: UPDATE_OFFICE,
+    payload: office
+});
+
+export const updateOffice = (officeId, office) => async dispatch => {
+    try {
+        dispatch(updateOfficeAction(await updateOfficeAPI(officeId, office)))
+        dispatch(setSuccessAction())
+        dispatch(getOfficeAction(await getOfficeAPI(officeId)))
+    } catch (error) {
+        dispatch(setErrorAction(error))
     }
 }
