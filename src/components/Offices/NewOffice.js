@@ -1,106 +1,15 @@
-import { useFormik } from 'formik';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
-import {
-    Button, Card,
-    CardBody, CardHeader, Col, Container, Form,
-    FormGroup, Input,
-    InputGroup,
-    InputGroupAddon,
-    InputGroupText, Label, Row
-} from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions';
-import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
+import { OfficeForm } from './OfficeForm';
 import './styles/OfficeStyle.css';
 
-export const NewOffice = (props) => {
+export const NewOffice = ({ notification, create, branch }) => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const { notification } = props;
-    const typesOptions = [
-        {
-            value: "",
-            label: "Seleccione una opción",
-        },
-        { value: "PRIVATE", label: "Privada" },
-        { value: "SHARED", label: "Compartida" },
-    ];
-    const validate = values => {
-        const errors = {};
-        if (!values.officeName) {
-            errors.officeName = 'Requerido.';
-        }
-        if (!values.officeType.value || values.officeType.value === "") {
-            errors.officeType = 'Requerido.';
-        }
-        // if (!values.enabledDays) {
-        //     errors.enabledDays = 'Requerido.';
-        // }
-        if (!values.tablesQuantity) {
-            errors.tablesQuantity = 'Requerido.';
-        }
-        if (!values.price) {
-            errors.price = 'Requerido.';
-        }
-        // if (!values.multipleSelectServ) {
-        //     errors.multipleSelectServ = 'Requerido.';
-        // }
-        // if (!values.multipleSelectEqu) {
-        //     errors.multipleSelectEqu = 'Requerido.';
-        // }
-        if (!values.description) {
-            errors.description = 'Requerido.';
-        }
-        // if (!values.photo) {
-        //     errors.photo = 'Requerido.';
-        // }
-        return errors;
-    };
-
-    // const [multipleSelectServ, setMultipleSelectServ] = useState(null);
-    // const [multipleSelectEqu, setMultipleSelectEqu] = useState(null);
-
-    const formik = useFormik({
-        initialValues: {
-            officeName: "",
-            officeType: typesOptions[0],
-            inactivityDays: [],
-            tablesQuantity: 0,
-            capacityPerTable: 0,
-            price: 0,
-            multipleSelectServ: null,
-            multipleSelectEqu: null,
-            description: "",
-            photo: "",
-        },
-        validate,
-        onSubmit: async ({
-            officeName,
-            officeType,
-            inactivityDays,
-            tablesQuantity,
-            capacityPerTable,
-            price,
-            description,
-            photo,
-        }) => {
-            const office = {
-                name: officeName,
-                description: description,
-                privacy: officeType.value,
-                price: price,
-                capacity: tablesQuantity * capacityPerTable,
-                tablesQuantity: tablesQuantity,
-                capacityPerTable: capacityPerTable,
-                photo: photo,
-                inactivityDays: inactivityDays.map(day => day.value),
-            }
-            props.create(props.branch.id, office)
-        },
-    });
 
     React.useEffect(() => {
         if (notification.show) {
@@ -114,6 +23,9 @@ export const NewOffice = (props) => {
         }
     }, [notification.show]);
 
+    const createOffice = (officeFormData) => {
+        create(branch.id, officeFormData)
+    }
 
     return (
         <div className="content">
@@ -125,267 +37,21 @@ export const NewOffice = (props) => {
                     <hr />
                 </Col>
             </Row>
-            <Container>
-                <Form onSubmit={formik.handleSubmit} >
-                    <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
-                        <CardHeader>
-                            <Notification
-                                isError={true}
-                                message="Oops algo salio mal"
-                                show={notification.show && notification.isError}
-                            />
-                            <Notification
-                                message="La oficina se creo correctamente"
-                                show={notification.show && notification.isSuccess}
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Row>
-                                <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                    <FormGroup className={formik.errors.officeName ? 'has-danger' : ''}>
-                                        <Label htmlFor="officeName" className="label-form">Nombre</Label>
-                                        <Input
-                                            type="text"
-                                            placeholder="Ingrese el nombre de la oficina"
-                                            name="officeName"
-                                            id="officeName"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.officeName}
-                                        />
-                                    </FormGroup>
-
-
-                                    <FormGroup className={formik.errors.officeType ? 'has-danger' : ''}>
-                                        <Label htmlFor="officeType" className="label-form">Tipo de oficina</Label>
-                                        <Select
-                                            className="react-select primary"
-                                            classNamePrefix="react-select"
-                                            name="officeType"
-                                            id="officeType"
-                                            onChange={value => formik.setFieldValue("officeType", value)}
-                                            onBlur={formik.handleBlur}
-                                            options={typesOptions}
-
-                                        />
-                                        {formik.errors.officeType ? <Label className="error">{formik.errors.officeType}</Label> : <></>}
-                                    </FormGroup>
-
-                                    <FormGroup className={formik.errors.tablesQuantity ? 'has-danger' : ''}>
-                                        <Label htmlFor="tablesQuantity" className="label-form">Cantidad de mesas</Label>
-                                        <Input
-                                            type="number"
-                                            placeholder="Ingrese el número de mesas..."
-                                            name="tablesQuantity"
-                                            id="tablesQuantity"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            min={1}
-                                            value={formik.values.tablesQuantity}
-                                        />
-                                    </FormGroup>
-                                    <FormGroup className={formik.errors.capacityPerTable ? 'has-danger' : ''}>
-                                        <Label htmlFor="capacityPerTable" className="label-form">Cantidad de personas por mesa</Label>
-                                        <Input
-                                            type="number"
-                                            placeholder="Ingrese el número de personas por mesas"
-                                            name="capacityPerTable"
-                                            id="capacityPerTable"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            min={1}
-                                            value={formik.values.capacityPerTable}
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label htmlFor="inactivityDays" className="label-form">Dias no disponibles</Label>
-                                        <Select
-                                            className="react-select"
-                                            classNamePrefix="react-select"
-                                            placeholder="Seleccione los días que la oficina no está disponible"
-                                            name="inactivityDays"
-                                            id="inactivityDays"
-                                            closeMenuOnSelect={false}
-                                            isMulti
-                                            value={formik.values.inactivityDays}
-                                            onChange={value => formik.setFieldValue("inactivityDays", value)}
-                                            onBlur={formik.handleBlur}
-                                            options={[
-                                                {
-                                                    value: "",
-                                                    label: "Seleccione uno más días días",
-                                                    isDisabled: true
-                                                },
-                                                { value: "MONDAY", label: "Lunes" },
-                                                { value: "TUESDAY", label: "Martes" },
-                                                { value: "WEDNESDAY", label: "Miércoles" },
-                                                { value: "THURSDAY", label: "Jueves" },
-                                                { value: "FRIDAY", label: "Viernes" },
-                                                { value: "SATURDAY", label: "Sábado" },
-                                                { value: "SUNDAY", label: "Domingo" },
-                                            ]}
-                                        />
-                                    </FormGroup>
-                                </Col>
-
-                                <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                    <FormGroup className={formik.errors.price ? 'has-danger' : ''}>
-                                        <Label htmlFor="price" className="label-form">Precio por hora</Label>
-                                        <InputGroup>
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>$ {'  '}</InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input
-                                                type="number"
-                                                placeholder="Ingrese el precio por hora"
-                                                name="price"
-                                                id="price"
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                min={0}
-                                                value={formik.values.price}
-                                            />
-                                        </InputGroup>
-                                    </FormGroup>
-
-                                    {/* <FormGroup className={formik.errors.multipleSelectServ ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
-                                        <Row className='row-label-services'>
-                                            <Label htmlFor="multipleSelectServ" className="label-form">Servicios</Label>
-
-                                            <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
-                                                <div style={{ width: '80%' }}>
-                                                    <Select
-                                                        className="react-select"
-                                                        classNamePrefix="react-select"
-                                                        placeholder='Seleccione los servicios...'
-                                                        name="multipleSelectServ"
-                                                        closeMenuOnSelect={false}
-                                                        isMulti
-                                                        value={multipleSelectServ}
-                                                        onChange={value => setMultipleSelectServ(value)}
-                                                        onBlur={formik.handleBlur}
-                                                        options={[
-                                                            {
-                                                                value: "",
-                                                                label: " Servicios",
-                                                                isDisabled: true
-                                                            },
-                                                            { value: "2", label: "Cafetería" },
-                                                            { value: "3", label: "Wifi" },
-                                                            { value: "4", label: "Estacionamiento" },
-                                                            { value: "5", label: "Cafetería " },
-                                                            { value: "6", label: "Wifi" },
-                                                            { value: "7", label: "Estacionamiento" },
-                                                            { value: "8", label: "Cafetería " },
-                                                            { value: "9", label: "Wifi" },
-                                                            { value: "10", label: "Estacionamiento" },
-                                                        ]}
-                                                    />
-                                                </div>
-                                                <div className='button-container'>
-                                                    <Link to="/admin/services-equipment">
-                                                        <Button className='btn btn-primary' id='servicesButton' type='button'>
-                                                            Crear
-                                                        </Button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </Row>
-                                    </FormGroup>
-
-                                    <FormGroup className={formik.errors.multipleSelectEqu ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
-                                        <Row className='row-label-equipment'>
-                                            <Label htmlFor="multipleSelectEqu" className="label-form">Equipamiento</Label>
-
-                                            <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
-                                                <div style={{ width: '80%' }}>
-                                                    <Select
-                                                        className="react-select"
-                                                        classNamePrefix="react-select"
-                                                        placeholder='Seleccione el equipamiento...'
-                                                        name="multipleSelectEqu"
-                                                        closeMenuOnSelect={false}
-                                                        isMulti
-                                                        value={multipleSelectEqu}
-                                                        onChange={value => setMultipleSelectEqu(value)}
-                                                        onBlur={formik.handleBlur}
-                                                        options={[
-                                                            {
-                                                                value: "",
-                                                                label: "Equipamiento",
-                                                                isDisabled: true
-                                                            },
-                                                            { value: "2", label: "Monitores" },
-                                                            { value: "3", label: "Silla ergonómica" },
-                                                            { value: "4", label: "Parlante" },
-                                                            { value: "5", label: "Teclado" },
-                                                            { value: "6", label: "Proyector" },
-                                                            { value: "7", label: "Monitores " },
-                                                            { value: "8", label: "Silla ergonómica" },
-                                                            { value: "9", label: "Parlante" },
-                                                            { value: "10", label: "Teclado" },
-                                                            { value: "11", label: "Proyector" },
-                                                        ]}
-                                                    />
-                                                </div>
-                                                <div className='button-container'>
-                                                    <Link to="/admin/services-equipment">
-                                                        <Button className='btn btn-primary' id='equipmentButton'>
-                                                            Crear
-                                                        </Button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </Row>
-                                    </FormGroup> */}
-
-                                    <FormGroup className={formik.errors.description ? 'has-danger' : ''}>
-                                        <Label htmlFor="description" className="label-form">Descripción</Label>
-                                        <Input
-                                            type="textarea"
-                                            name="description"
-                                            id="description"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.description}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <Row className='photo' style={{ marginLeft: '0%' }}>
-                                            <Label htmlFor="photo" className="label-form">Fotos</Label>
-                                        </Row>
-                                        <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <ImageUpload onChange={imageData => formik.setFieldValue("photo", imageData)} />
-                                        </Row>
-                                    </FormGroup>
-                                </Col>
-
-                            </Row>
-
-                            <Row>
-                                <Col style={{ display: 'flex', justifyContent: 'center' }}>
-                                    <Button
-                                        className="btn btn-round btn-primary"
-                                        color="primary"
-                                        type="submit"
-                                        disabled={formik.isSubmitting}>
-                                        Crear Oficina
-                                    </Button>
-                                    <Button
-                                        type="reset"
-                                        className="btn btn-round btn-primary"
-                                        color="danger"
-                                        style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
-                                    >
-                                        Cancelar
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </CardBody>
-                    </Card>
-                </Form>
-            </Container>
+            <Row>
+                <Notification
+                    isError={true}
+                    message="Oops algo salio mal"
+                    show={notification.show && notification.isError}
+                />
+                <Notification
+                    message="La oficina se creo correctamente"
+                    show={notification.show && notification.isSuccess}
+                />
+            </Row>
+            <OfficeForm
+                onSubmit={createOffice}
+                confirmButtonName="Crear"
+            />
         </div>
     );
 }

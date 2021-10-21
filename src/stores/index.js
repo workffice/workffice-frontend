@@ -10,6 +10,7 @@ import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaborator/collaboratorsReducer';
 import { loadingCollaboratorReducer } from './reducers/backoffice/collaborator/loading';
 import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
+import { officeInactivitiesReducer } from './reducers/backoffice/office/officeInactivitiesReducer';
 import { officeReducer } from './reducers/backoffice/office/officeReducer';
 import { officesReducer } from './reducers/backoffice/office/officesReducer';
 import { loadingOfficeBranchReducer } from './reducers/backoffice/officeBranch/loadingReducer';
@@ -50,6 +51,7 @@ export const reducers = routes =>
     loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
     office: officeReducer,
     offices: officesReducer,
+    officeInactivities: officeInactivitiesReducer,
     loadingOffice: loadingOfficeReducer,
     officesFound: officeBranchSearchReducer,
     activateUser: activateAccountReducer,
