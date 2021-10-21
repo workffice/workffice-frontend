@@ -66,8 +66,9 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create}) =>
             await create(values);
         },
     });
+
     return (
-        <Container>
+        <Container style={{ marginTop:0 }}>
             <Form onSubmit={formik.handleSubmit}>
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <CardHeader>
@@ -142,12 +143,14 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create}) =>
                                 <FormGroup className={formik.errors.zipCode ? 'has-danger' : ''}>
                                     <Label htmlFor="zipCode" className="label-form"> Código postal </Label>
                                     <Input
-                                        type="text"
+                                        type="number"
                                         name="zipCode"
                                         placeholder="Código Postal.."
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.zipCode} />
+                                        value={formik.values.zipCode} 
+                                        min={0}
+                                    />
                                     {formik.errors.zipCode && formik.touched.zipCode ? (
                                         <div className="error">{formik.errors.zipCode}</div>
                                     ) : null}
@@ -158,12 +161,14 @@ export const OfficeBranchCreate = ({ hideNotification, notification, create}) =>
                                 <FormGroup className={formik.errors.phone ? 'has-danger' : ''}>
                                     <Label htmlFor="phone" className="label-form"> Teléfono de contacto </Label>
                                     <Input
-                                        type="text"
+                                        type="number"
                                         name="phone"
                                         placeholder="Ingrese el teléfono"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.phone} />
+                                        value={formik.values.phone} 
+                                        min={0}
+                                    />
                                     {formik.errors.phone && formik.touched.phone ? (
                                         <div className="error">{formik.errors.phone}</div>
                                     ) : null}
