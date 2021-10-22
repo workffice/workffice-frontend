@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import {
     Button, Card,
@@ -75,11 +74,9 @@ export const OfficeBranchDetail = ({
                             {offices.map(office => {
                                 return (
                                     <Col key={office.id}>
-                                        <Link to="#" style={{ textDecoration: 'none' }}>
-                                            <div>
-                                                <OfficeComponent displayBookingButton={true} office={office} officeBranch={officeBranch} />
-                                            </div>
-                                        </Link>
+                                        <div>
+                                            <OfficeComponent displayBookingButton={true} office={office} officeBranch={officeBranch} />
+                                        </div>
                                     </Col>
                                 )
                             })}
