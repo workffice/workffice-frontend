@@ -61,7 +61,7 @@ export const createOffice = async (officeBranchId, office) => {
         }
         return Promise.resolve(officeCreated);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 }
 
@@ -79,7 +79,7 @@ export const updateOffice = async (officeId, office) => {
             });
         return Promise.resolve(officeUpdated);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
     }
 }
 

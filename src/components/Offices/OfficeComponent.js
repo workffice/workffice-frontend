@@ -55,13 +55,15 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
             </Row>
             {
               displayBookingButton ?
-                <Button
-                  className="btn btn-primary"
-                  color="primary"
-                  type="submit"
-                >
-                  Alquilar Oficina
-                </Button>
+                <Link to={`/admin/create-booking?id=${id}`}>
+                  <Button
+                    className="btn btn-primary"
+                    color="primary"
+                    type="submit"
+                  >
+                    Alquilar Oficina
+                  </Button>
+                </Link>
                 : <div></div>
             }
           </CardHeader>
