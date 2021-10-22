@@ -48,7 +48,7 @@ export const OfficeBooking = ({
             errors.endTime = 'Requerido.';
         if (!values.numberOfAssistants)
             errors.numberOfAssistants = 'Requerido.';
-        if (values.endTime._d.getHours() - values.startTime._d.getHours() <= 0)
+        if (values.endTime.hours() - values.startTime.hours() <= 0)
             errors.invalidTimeRange = 'La hora de ingreso debe ser previa a la hora de salida'
         return errors;
     };
@@ -63,9 +63,11 @@ export const OfficeBooking = ({
         },
         validate,
         onSubmit: async ({ date, startTime, endTime, numberOfAssistants }) => {
+            const start = startTime.hours() < 10 ? "0" + startTime.hours() : startTime.hours()
+            const end = endTime.hours() < 10 ? "0" + endTime.hours() : endTime.hours()
             const booking = {
-                startTime: `${date._d.getFullYear()}-${date._d.getMonth() + 1}-${date._d.getDate()}T${startTime._d.getHours()}:00:00`,
-                endTime: `${date._d.getFullYear()}-${date._d.getMonth() + 1}-${date._d.getDate()}T${endTime._d.getHours()}:00:00`,
+                startTime: `${date.year()}-${date.month() + 1}-${date.date()}T${start}:00:00`,
+                endTime: `${date.year()}-${date.month() + 1}-${date.date()}T${end}:00:00`,
                 attendeesQuantity: numberOfAssistants
             }
             createBooking(office.id, booking)
@@ -171,7 +173,7 @@ export const OfficeBooking = ({
                                     {
                                         office
                                             ? <Label className="label-form">
-                                                {` Precio total $ ${office.price * (formik.values.endTime._d.getHours() - formik.values.startTime._d.getHours())}`}
+                                                {` Precio total $ ${office.price * (formik.values.endTime.hours() - formik.values.startTime.hours())}`}
                                             </Label>
                                             : <Label className="label-form">
                                                 Precio total $
