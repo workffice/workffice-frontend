@@ -34,7 +34,9 @@ export const OfficeBooking = ({
     inactivities,
     loadInactivities,
     createBooking,
+    booking,
     mercadoPagoPreferenceId,
+    createMercadoPagoPreference,
 }) => {
     const query = new URLSearchParams(useLocation().search)
     const [mpCheckout, setMpCheckout] = useState(null)
@@ -46,6 +48,23 @@ export const OfficeBooking = ({
         if (query.get("id"))
             loadInactivities(query.get("id"))
     }, [])
+    useEffect(() => {
+        const bookingId = booking ? booking.id : null
+        if (bookingId)
+            createMercadoPagoPreference(bookingId)
+    }, [booking ? booking.id : ""])
+    useEffect(() => {
+        // con el preferenceId en mano, inyectamos el script de mercadoPago
+        if (mercadoPagoPreferenceId) {
+            const script = document.createElement('script');
+            const checkout = addCheckout(mercadoPagoPreferenceId)
+            script.type = 'text/javascript';
+            script.src = 'https://sdk.mercadopago.com/js/v2';
+            script.addEventListener('load', addCheckout); // Cuando cargue el script, se ejecutará la función addCheckout
+            document.body.appendChild(script);
+            setMpCheckout(checkout)
+        }
+    }, [mercadoPagoPreferenceId]);
     useEffect(() => {
         if (notification.show)
             setTimeout(() => {
@@ -88,20 +107,6 @@ export const OfficeBooking = ({
             createBooking(office.id, booking)
         },
     });
-
-    useEffect(() => {
-        // con el preferenceId en mano, inyectamos el script de mercadoPago
-        if (mercadoPagoPreferenceId) {
-            const script = document.createElement('script');
-            const checkout = addCheckout(mercadoPagoPreferenceId)
-            script.type = 'text/javascript';
-            script.src = 'https://sdk.mercadopago.com/js/v2';
-            script.addEventListener('load', addCheckout); // Cuando cargue el script, se ejecutará la función addCheckout
-            document.body.appendChild(script);
-            setMpCheckout(checkout)
-        }
-    }, [mercadoPagoPreferenceId]);
-
 
     const renderBookingForm = () => {
         return (

@@ -19,6 +19,7 @@ import { officeBranchDetailReducer } from './reducers/backoffice/officeBranch/of
 import { officeBranchesReducer } from './reducers/backoffice/officeBranch/officeBranchesAdminReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
+import { bookingReducer, mercadoPagoPreferenceReducer } from './reducers/booking/bookingReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
@@ -37,29 +38,39 @@ const isLoadingReducer = (state = false, { type, payload }) => {
 export const reducers = routes =>
   combineReducers({
     router: connectRouter(routes),
+    // Authentication
     login: loginReducer,
     userMe: userMeReducer,
-    entitiesNotFound: entityNotFoundReducer,
-    collaborators: collaboratorsReducer,
-    collaboratorRoles: collaboratorRolesReducer,
-    loadingCollaborator: loadingCollaboratorReducer,
-    roles: rolesReducer,
-    officeBranches: officeBranchesReducer,
-    officeBranch: officeBranchAdminReducer,
-    loadingOfficeBranch: loadingOfficeBranchReducer,
-    officeBranchSearch: officeBranchDetailReducer,
-    loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
-    office: officeReducer,
-    offices: officesReducer,
-    officeInactivities: officeInactivitiesReducer,
-    loadingOffice: loadingOfficeReducer,
-    officesFound: officeBranchSearchReducer,
+    resetPaswword: resetPasswordReducer,
     activateUser: activateAccountReducer,
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
     register: registerReducer,
-    resetPaswword: resetPasswordReducer,
-    isLoading: isLoadingReducer,
-    notification: notificationReducer,
+    // Collaborators
+    collaborators: collaboratorsReducer,
+    loadingCollaborator: loadingCollaboratorReducer,
+    collaboratorRoles: collaboratorRolesReducer,
+    // Roles
+    roles: rolesReducer,
+    // Office branch
+    officeBranches: officeBranchesReducer,
+    officeBranch: officeBranchAdminReducer,
+    loadingOfficeBranch: loadingOfficeBranchReducer,
+    officeBranchSearch: officeBranchDetailReducer, // TODO rename to officeBranchDetail
+    officesFound: officeBranchSearchReducer, // TODO rename to officeBranchesFound
+    loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
+    // Office
+    office: officeReducer,
+    offices: officesReducer,
+    officeInactivities: officeInactivitiesReducer,
+    loadingOffice: loadingOfficeReducer,
+    // Booking
+    booking: bookingReducer,
+    mercadoPagoPreference: mercadoPagoPreferenceReducer,
+    // Errors
+    entitiesNotFound: entityNotFoundReducer,
     permission: permissionReducer,
+    // Notification
+    notification: notificationReducer,
+    isLoading: isLoadingReducer,
   });

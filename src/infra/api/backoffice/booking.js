@@ -14,6 +14,18 @@ export const bookOffice = async (officeId, bookingBody) => {
     }
 };
 
+export const createMercadoPagoPreference = async bookingId => {
+    try {
+        const mpPreference = await sdkAuthRequest(`${API_URL}/bookings/${bookingId}/mp_preferences/`, {
+            method: 'POST',
+            headers: headersPost,
+        });
+        return Promise.resolve(mpPreference.data.id);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
 export const getBooking = async bookingId => {
     try {
         const booking = await sdkAuthRequest(`${API_URL}/bookings/${bookingId}/`, {

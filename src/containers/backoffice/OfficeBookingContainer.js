@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { OfficeBooking } from '../../components/OfficeBooking/OfficeBooking'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
-import { bookOffice } from '../../stores/actions/booking/bookingActions'
+import { bookOffice, createMercadoPagoPreference } from '../../stores/actions/booking/bookingActions'
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions'
 
 export const OfficeBookingContainer = () => {
@@ -25,6 +25,11 @@ export const OfficeBookingContainer = () => {
         dispatch(bookOffice(officeId, bookingBody))
     }, [dispatch])
     const officeNotFound = useSelector(state => includes(state.entitiesNotFound, "office"))
+    const booking = useSelector(state => state.booking)
+    const mercadoPagoPreferenceId = useSelector(state => state.mercadoPagoPreference)
+    const createMPPreference = useCallback(bookingId => {
+        dispatch(createMercadoPagoPreference(bookingId))
+    }, [dispatch])
     return <OfficeBooking
         office={office}
         loadOffice={loadOffice}
@@ -34,5 +39,8 @@ export const OfficeBookingContainer = () => {
         hideNotification={hideNotification}
         createBooking={createBooking}
         officeNotFound={officeNotFound}
+        booking={booking}
+        mercadoPagoPreferenceId={mercadoPagoPreferenceId}
+        createMercadoPagoPreference={createMPPreference}
     />
 }
