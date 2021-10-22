@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Datetime from 'react-datetime';
 import { useLocation } from 'react-router';
 import {
@@ -13,6 +13,18 @@ import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { Notification } from '../Common/Notification/Notification';
 import './styles/OfficeBookingStyle.css';
 
+
+const addCheckout = preferenceId => {
+    const mp = new window.MercadoPago('TEST-34c7f33c-0c48-4dfd-b26c-61fb7700fbc5', {
+        locale: 'es-AR'
+    });
+
+    // Inicializa el checkout
+    return mp.checkout({
+        preference: { id: preferenceId },
+    });
+}
+
 export const OfficeBooking = ({
     officeNotFound,
     office,
@@ -22,8 +34,12 @@ export const OfficeBooking = ({
     inactivities,
     loadInactivities,
     createBooking,
+    booking,
+    mercadoPagoPreferenceId,
+    createMercadoPagoPreference,
 }) => {
     const query = new URLSearchParams(useLocation().search)
+    const [mpCheckout, setMpCheckout] = useState(null)
     useEffect(() => {
         if (query.get("id"))
             loadOffice(query.get("id"))
@@ -32,6 +48,23 @@ export const OfficeBooking = ({
         if (query.get("id"))
             loadInactivities(query.get("id"))
     }, [])
+    useEffect(() => {
+        const bookingId = booking ? booking.id : null
+        if (bookingId)
+            createMercadoPagoPreference(bookingId)
+    }, [booking ? booking.id : ""])
+    useEffect(() => {
+        // con el preferenceId en mano, inyectamos el script de mercadoPago
+        if (mercadoPagoPreferenceId) {
+            const script = document.createElement('script');
+            const checkout = addCheckout(mercadoPagoPreferenceId)
+            script.type = 'text/javascript';
+            script.src = 'https://sdk.mercadopago.com/js/v2';
+            script.addEventListener('load', addCheckout); // Cuando cargue el script, se ejecutará la función addCheckout
+            document.body.appendChild(script);
+            setMpCheckout(checkout)
+        }
+    }, [mercadoPagoPreferenceId]);
     useEffect(() => {
         if (notification.show)
             setTimeout(() => {
@@ -74,7 +107,6 @@ export const OfficeBooking = ({
             createBooking(office.id, booking)
         },
     });
-
 
     const renderBookingForm = () => {
         return (
@@ -193,9 +225,10 @@ export const OfficeBooking = ({
                                         </Button>
                                         <Button
                                             type="reset"
-                                            className="btn-round btn-info"
+                                            className="btn-round btn-info cho-container"
                                             color="info"
-                                            disabled
+                                            onClick={mpCheckout ? mpCheckout.open : null}
+                                            disabled={mercadoPagoPreferenceId ? false : true}
                                         >
                                             Pagar
                                         </Button>
