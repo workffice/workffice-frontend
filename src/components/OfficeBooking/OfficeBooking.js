@@ -8,6 +8,7 @@ import {
     Button, Card, CardFooter, CardHeader, CardTitle, Col, Form,
     FormGroup, Input, Label, Row
 } from 'reactstrap';
+import { getErrorMessage } from '../../utils/bookingTranslations';
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { Notification } from '../Common/Notification/Notification';
 import './styles/OfficeBookingStyle.css';
@@ -88,7 +89,7 @@ export const OfficeBooking = ({
                 </Row>
                 <Notification
                     isError
-                    message="Oops algo salio mal"
+                    message={getErrorMessage(notification.errorCode)}
                     show={notification.show && notification.isError}
                     hideNotification={hideNotification}
                 />
