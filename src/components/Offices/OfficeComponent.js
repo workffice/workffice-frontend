@@ -25,9 +25,9 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
     <>
       <Card>
         <CardBody>
-          <Cloudinary className="office-branch-card-image" publicId={imageUrl} />
+          <Cloudinary className="office-branch-card-image" height={300} publicId={imageUrl} />
           <CardHeader>
-            <div style={{ marginBottom: "3%", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
               <h5 style={{ marginBottom: "0", marginRight: "3%" }}>{name}</h5>
               {
                 displayEditButton ?
@@ -43,14 +43,18 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
             </div>
             <Row>
               <Col>
-                <h6 className="form-label">
-                  Sucursal <small>{officeBranch ? officeBranch.name : ""}</small>
-                </h6>
+                <div className='text'>
+                  <Label className="form-label">
+                    Sucursal <small>{officeBranch ? officeBranch.name : ""}</small>
+                  </Label>
+                </div>
               </Col>
               <Col>
-                <h6 className="form-label">
-                  Contacto <small>{officeBranch ? officeBranch.phone : ""}</small>
-                </h6>
+                <div className='text' style={{marginBottom: 0}}>
+                  <Label className="form-label">
+                    Contacto <small>{officeBranch ? officeBranch.phone : ""}</small>
+                  </Label>
+                </div>
               </Col>
             </Row>
             {
@@ -61,50 +65,55 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
                     color="primary"
                     type="submit"
                   >
-                    Alquilar Oficina
+                    Alquilar oficina
                   </Button>
                 </Link>
                 : <div></div>
             }
           </CardHeader>
           <hr />
-          <div className='text'>
-            <Label className="form-label">
-              Tipo de oficina: {getOfficeType()}
-            </Label>
-          </div>
+          <Col>
+            <div className='text'>
+              <Label className="form-label">
+                Tipo de oficina: {getOfficeType()}
+              </Label>
+            </div>
 
-          <div className='text'>
-            <Label className="form-label">
-              Precio por hora:  <small>{`$ ${price}`}</small>
-            </Label>
-          </div>
-          <div className='text'>
-            <Label className="form-label">
-              Capacidad:  <small>{capacity} personas</small>
-            </Label>
-          </div>
+            <div className='text'>
+              <Label className="form-label">
+                Precio por hora:  <small>{`$ ${price}`}</small>
+              </Label>
+            </div>
+            <div className='text'>
+              <Label className="form-label">
+                Capacidad:  <small>{capacity} personas</small>
+              </Label>
+            </div>
+          </Col>
           <hr />
           {
-            privacy === "SHARED" ? <Row>
-              <Col md="12">
-                <h5 style={{ margin: "0" }}>Mesas</h5>
-              </Col>
+            privacy === "SHARED" ?
               <Col>
-                <div className='text'>
-                  <Label className="form-label">
-                    Cantidad:  <small>{table.quantity}</small>
-                  </Label>
-                </div>
-              </Col>
-              <Col>
-                <div className='text'>
-                  <Label className="form-label">
-                    Capacidad:  <small>{table.capacity}</small>
-                  </Label>
-                </div>
-              </Col>
-            </Row> : <></>
+                <Row>
+                  <Col md="12">
+                    <h5 style={{ margin: "0" }}>Mesas</h5>
+                  </Col>
+                  <Col>
+                    <div className='text'>
+                      <Label className="form-label">
+                        Cantidad:  <small>{table.quantity}</small>
+                      </Label>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className='text'>
+                      <Label className="form-label">
+                        Capacidad:  <small>{table.capacity}</small>
+                      </Label>
+                    </div>
+                  </Col>
+                </Row>
+              </Col> : <></>
           }
         </CardBody>
       </Card>

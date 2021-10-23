@@ -17,9 +17,9 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
     <>
       <Card>
         <CardBody>
-          <CloudinaryContext cloudName="workffice">
+          <CloudinaryContext cloudName="workffice" width={310} height={175}>
             <div>
-              <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width="0.5" />
+              <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width={310} />
             </div>
           </CloudinaryContext>
           <ListGroup>

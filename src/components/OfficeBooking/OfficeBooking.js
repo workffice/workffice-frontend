@@ -237,7 +237,7 @@ export const OfficeBooking = ({
                             </Form>
                         </Col>
                         <Col style={{ padding: "5%" }}>
-                            <Cloudinary publicId={office ? office.imageUrl : ""} height="300" width="200" />
+                            <Cloudinary publicId={office ? office.imageUrl : ""} height="300" width="500" />
                             <CardHeader>
                                 <CardTitle>
                                     {office ? office.name : ""}
