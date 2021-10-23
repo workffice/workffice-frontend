@@ -1,12 +1,11 @@
-import Dashboard from '../components/Dashboard/Dashboard';
+import { BookingList } from '../components/BookingList/BookingList';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { OfficeBranchContainer } from '../containers/backoffice/OfficeBranchContainer';
-import { OfficeBranchCreateContainer } from '../containers/backoffice/OfficeBranchCreateContainer';
+import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
@@ -15,6 +14,7 @@ import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/R
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
+import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 
 export const routes = [
   {
@@ -37,7 +37,7 @@ export const routes = [
   {
     collapse: true,
     name: 'Dashboard',
-    icon: 'fa fa-chart',
+    icon: 'nc-icon nc-chart-bar-32',
     state: 'dashboardCollapse',
     visibility: true,
     views: [
@@ -45,7 +45,7 @@ export const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         mini: 'D',
-        component: Dashboard,
+        component: DashboardContainer,
         layout: '/admin',
         visibility: true
       },
@@ -60,19 +60,11 @@ export const routes = [
     views: [
       {
         path: '/office-branch',
-        name: 'Ver sucursales',
-        mini: 'S',
-        component: OfficeBranchContainer,
-        layout: '/admin',
-        visibility: false
-      },
-      {
-        path: '/create-officebranch',
-        name: 'Nueva Sucursal',
-        mini: 'NS',
+        name: 'Mi sucursal',
+        mini: 'MS',
+        component: OfficeBranchDetailContainer,
         layout: '/admin',
         visibility: true,
-        component: OfficeBranchCreateContainer,
       },
       {
         path: '/edit-officebranch',
@@ -159,7 +151,7 @@ export const routes = [
   },
   {
     collapse: true,
-    name: 'Búscar',
+    name: 'Buscar',
     icon: 'fa fa-search',
     state: 'officesSearchCollapse',
     visibility: true,
@@ -227,7 +219,6 @@ export const routes = [
         component: NewNotice,
         layout: '/admin',
       },
-
     ]
   },
   {
@@ -238,7 +229,15 @@ export const routes = [
     visibility: true,
     views: [
       {
-        path: '/booking',
+        path: '/bookings/list',
+        name: 'Listado de reservas',
+        mini: 'LR',
+        component: BookingList,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/create-booking',
         name: 'Reservar oficina',
         mini: 'RO',
         component: OfficeBooking,

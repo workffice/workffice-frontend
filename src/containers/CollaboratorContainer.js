@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Collaborators } from '../components/Collaborator/Collaborators';
 import { NewCollaborator } from '../components/Collaborator/NewCollaborator';
 import { readFromLocalStorage } from '../infra/api/localStorage';
-import { hideNotification as hideNotificationAction } from '../stores/actions';
+import { hideNotificationAction } from '../stores/actions/notifications/writeNotificationActions';
 import { collaboratorsList } from '../stores/actions/backoffice/collaborator/collaboratorsAction';
 import { createColaborator, updateCollaborator } from '../stores/actions/backoffice/collaborator/collaboratorAction';
 import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/rolesAction';

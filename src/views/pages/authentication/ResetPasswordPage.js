@@ -1,10 +1,10 @@
-import React from 'react'
-import { useFormik } from 'formik'
-import { useLocation } from 'react-router-dom';
-import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
-import { customizedErrorAuth } from '../../../infra/errorsAuth';
-import { hideNotification } from '../../../stores/actions';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { Alert, Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
 
 
 export const ResetPasswordPage = props => {
@@ -38,7 +38,7 @@ export const ResetPasswordPage = props => {
     React.useEffect(() => {
         if (notification.show) {
             setTimeout(() => {
-                dispatch(hideNotification());
+                dispatch(hideNotificationAction());
             }, 2500);
         }
     }, [notification]);

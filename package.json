@@ -11,7 +11,7 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install",
     "compile-sass": "node-sass src/assets/scss/paper-dashboard.scss src/assets/css/paper-dashboard.css",
     "minify-sass": "node-sass src/assets/scss/paper-dashboard.scss src/assets/css/paper-dashboard.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/paper-dashboard.scss src/assets/css/paper-dashboard.css --source-map true"
@@ -67,6 +67,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "4.3.1",
+    "react-slick": "^0.28.1",
     "react-table": "7.7.0",
     "react-tagsinput": "3.19.0",
     "reactstrap": "8.9.0",
@@ -74,6 +75,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
     "twemoji-awesome": "^1.0.6"
   },
   "browserslist": [

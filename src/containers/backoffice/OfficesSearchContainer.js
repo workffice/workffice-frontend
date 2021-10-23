@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficesSearch } from '../../components/Offices/OfficesSearch';
-import { searchAllOffices } from '../../stores/actions/backoffice/officesFoundAction';
+import { searchOfficeBranches } from '../../stores/actions/search/officeBranchSearchActions';
 
 
 
@@ -12,7 +12,7 @@ export const OfficesSearchContainer = () => {
     const branch = useSelector(state => state.officeBranch);
     const officeBranches = useSelector(state => state.officesFound)
     const search = useCallback(async (values) => {
-        dispatch(await searchAllOffices(values));
+        dispatch(await searchOfficeBranches(values));
     });
     return <OfficesSearch search={search} branch={branch} officeBranches={officeBranches} loading={loading} error={error} />;
 };

@@ -125,7 +125,7 @@ function AdminNavbar() {
             isOpen={collapseOpen}>
             <Form>
               <InputGroup className="no-border">
-                <Input defaultValue="" placeholder="Búscar..." type="text" />
+                <Input defaultValue="" placeholder="Buscar..." type="text" />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <i className="nc-icon nc-zoom-split" />

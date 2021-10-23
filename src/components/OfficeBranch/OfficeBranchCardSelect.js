@@ -1,4 +1,4 @@
-import { CloudinaryContext, Image } from 'cloudinary-react';
+import { CloudinaryContext } from 'cloudinary-react';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Button, Card, CardBody, ListGroup, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
@@ -19,7 +19,7 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
         <CardBody>
           <CloudinaryContext cloudName="workffice">
             <div>
-              <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width="0.5" />
+              {/* <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width="0.5" /> */}
             </div>
           </CloudinaryContext>
           <ListGroup>

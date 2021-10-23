@@ -1,5 +1,6 @@
-import { setError, setIsLoading } from "..";
+import { setIsLoading } from "..";
 import { activateUserAPI } from "../../../api/register";
+import { setErrorAction } from "../notifications/writeNotificationActions";
 
 
 export const FETCH_CONFIRM_ACCOUNT = 'FETCH_CONFIRM_ACCOUNT';
@@ -16,7 +17,7 @@ export const confirmation = (confirmationToken) => async (dispatch) => {
     try {
         dispatch(fetchConfirmationAccount(await activateUserAPI(confirmationToken)));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }

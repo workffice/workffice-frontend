@@ -1,16 +1,7 @@
 import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from "..";
 import { API_OFFICE_BRANCHES, API_OFFICE_HOLDERS } from "../../../environments/environment";
+import { postImageToCloudinary } from "../cloudinary";
 
-const postImageToCloudinary = async imageData => {
-    const data = new FormData()
-    data.append("file", imageData)
-    data.append("upload_preset", "testworkffice")
-    data.append("cloud_name", "workffice")
-    return await fetch("https://api.cloudinary.com/v1_1/workffice/image/upload", {
-        method: "post",
-        body: data
-    }).then(resp => resp.json())
-}
 
 export const createOfficeBranchInfra = async ({
     name,
@@ -59,7 +50,9 @@ export const editOfficeBranchInfra = async ({
     zipCode
 }, officeBranchId) => {
     try {
-        const imageData = await postImageToCloudinary(image)
+        let imageData = null
+        if (image !== null)
+            imageData = await postImageToCloudinary(image)
         const officeBranch = await sdkAuthRequest(
             `${API_OFFICE_BRANCHES}/${officeBranchId}/`,
             {
@@ -73,7 +66,7 @@ export const editOfficeBranchInfra = async ({
                     city,
                     street,
                     zipCode,
-                    imagesUrls: [imageData.public_id],
+                    imagesUrls: imageData === null ? null : [imageData.public_id],
                 })
             }
         );

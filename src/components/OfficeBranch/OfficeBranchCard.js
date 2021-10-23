@@ -8,7 +8,7 @@ export const OfficeBranchCard = ({ branch }) => {
   return (
     <>
       {branch &&
-        <Link to={{ pathname: `/admin/office-branch/${branch.id}` }} style={{ color: 'white', textDecoration: 'none' }}>
+        <Link to={`/admin/office-branch?id=${branch.id}`} exact style={{ color: 'white', textDecoration: 'none' }}>
           <Card>
             <CardBody>
               <Cloudinary className="office-branch-card-image" publicId={images ? images[0] : ""} />

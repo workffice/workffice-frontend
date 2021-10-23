@@ -1,24 +1,18 @@
 
-import React from 'react';
 import { useFormik } from 'formik';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Alert,
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Form,
+  Card, CardBody,
+  CardFooter, CardHeader, CardTitle, Col, Container, Form,
   FormGroup,
-  Input,
-  Container,
-  Col,
+  Input
 } from 'reactstrap';
 import { Loading } from '../../../components/Common/Loading/Loading';
-import { hideNotification } from '../../../stores/actions';
-import { useDispatch } from 'react-redux';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
+import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
 
 export const RecoveryPassword = (props) => {
   const dispatch = useDispatch()
@@ -45,7 +39,7 @@ export const RecoveryPassword = (props) => {
   });
 
   React.useEffect(() => {
-    dispatch(hideNotification());
+    dispatch(hideNotificationAction());
   }, [])
 
   React.useEffect(() => {

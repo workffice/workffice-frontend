@@ -1,4 +1,5 @@
-import { setError, setIsLoading, setSuccess } from "..";
+import { setIsLoading } from "..";
+import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions";
 import { updateUserApi, userMeAPI } from "../../../api/backoffice/users";
 
 
@@ -17,7 +18,7 @@ export const getUserMe = () => async (dispatch) => {
     try {
         dispatch(fetchMe(await userMeAPI()));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     }
 
 }
@@ -34,10 +35,10 @@ export const updateUser = (userId, userBody) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(updateUserAction(await updateUserApi(userId, userBody)));
-        dispatch(setSuccess())
+        dispatch(setSuccessAction())
         dispatch(fetchMe(await userMeAPI()));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(setErrorAction(error));
     } finally {
         dispatch(setIsLoading(false));
     }

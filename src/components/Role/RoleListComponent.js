@@ -51,7 +51,7 @@ export const RoleListComponent = ({
       />
       <Notification
         show={notification.show && notification.isError}
-        message={getErrorMessage(notification.errorCode)}
+        message={getErrorMessage(notification.errorCode) || ""}
         hideNotification={hideNotification}
         isError={true}
       />

@@ -1,16 +1,16 @@
-
 import React from "react";
+import { useFormik } from "formik";
+import Select from 'react-select';
 // react plugin used to create charts
-// import { Line, Bar, Doughnut } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 // react plugin for creating vector maps
 // import { VectorMap } from "react-jvectormap";
 
 // reactstrap components
 import {
-  // Badge,
-  // Button,
+  Form,
   Card,
-  // CardHeader,
+  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
@@ -21,35 +21,90 @@ import {
   Row,
   Col,
   Container,
+  Table,
   // UncontrolledTooltip,
 } from "reactstrap";
 
-// import {
-//   chartExample1,
-//   chartExample2,
-//   chartExample3,
-//   chartExample4,
-//   chartExample5,
-//   chartExample6,
-//   chartExample7,
-//   chartExample8,
-// } from "../../variables/charts.js";
+import {
+  chartExample1,
+  //   chartExample4,
+  //   chartExample5,
+  //   chartExample6,
+  //   chartExample7,
+  //   chartExample8,
+} from "../../variables/charts.js";
 
-// var mapData = {
-//   AU: 760,
-//   BR: 550,
-//   CA: 120,
-//   DE: 1300,
-//   FR: 540,
-//   GB: 690,
-//   GE: 200,
-//   IN: 200,
-//   RO: 600,
-//   RU: 300,
-//   US: 2920,
-// };
 
-function Dashboard() {
+function Dashboard(props) {
+  const date = new Date().getMonth();
+  const { offices, branch, collaborators } = props;
+  const validate = values => {
+    const errors = {};
+    if (!values.year) {
+      errors.year = 'Requerido.';
+    }
+    return errors;
+  };
+
+  const monthFilter = [
+    { value: 'JANUARY', label: 'Enero' },
+    { value: 'FEBRUARY', label: 'Febrero' },
+    { value: 'MARCH', label: 'Marzo' },
+    { value: 'APRIL', label: 'Abril' },
+    { value: 'MAY', label: 'Mayo' },
+    { value: 'JUNE', label: 'Junio' },
+    { value: 'JULY', label: 'Julio' },
+    { value: 'AUGUST', label: 'Agosto' },
+    { value: 'SEPTEMBER', label: 'Septiembre' },
+    { value: 'OCTOBER', label: 'Octubre' },
+    { value: 'NOVEMBER', label: 'Noviembre' },
+    { value: 'DECEMBER', label: 'Diciembre' },
+  ];
+
+
+
+  // const bookingOfficeForm = useFormik({
+  //   initialValues: {
+  //     month: 2021
+  //   },
+  //   validate,
+  //   onChange: async (values) => {
+  //     console.log(values)
+  //     // const office = { privacy: values.office_type.value, enable: values.enabledOffice.value, ...values }
+  //     // props.create(props.branch.id, office)
+  //   },
+  // });
+
+  const amountOfficeForm = useFormik({
+    initialValues: {
+      monthOffice: monthFilter[date]
+    },
+    validate,
+    onChange: async (values) => {
+      console.log(values)
+      // const office = { privacy: values.office_type.value, enable: values.enabledOffice.value, ...values }
+      // props.create(props.branch.id, office)
+    },
+  });
+  const amountYearForm = useFormik({
+    initialValues: {
+      year: 2021
+    },
+    validate,
+    onChange: async (values) => {
+      console.log(values)
+      // const office = { privacy: values.office_type.value, enable: values.enabledOffice.value, ...values }
+      // props.create(props.branch.id, office)
+    },
+  });
+  const yearFilter = [
+    { value: 2021, label: '2021' },
+    { value: 2020, label: '2020' }
+  ]
+  let capacityTotal = 0;
+  let collaboratorTotal = collaborators ? collaborators.length : 0;
+
+  offices.map(office => capacityTotal += office.capacity)
   return (
     <>
 
@@ -64,7 +119,33 @@ function Dashboard() {
         </Row>
         <Container>
           <Row>
-            <Col lg="3" md="6" sm="6">
+            <Col lg="4" md="6" sm="6">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <Col md="4" xs="5">
+                      <div className="icon-big text-center icon-warning">
+                        <i className="fa fa-users text-primary" />
+                      </div>
+                    </Col>
+                    <Col md="8" xs="7">
+                      <div className="numbers">
+                        <p className="card-category">Colaboradores</p>
+                        <CardTitle tag="p">{collaboratorTotal} <i className="fa-solid fa-user-tie" ></i></CardTitle>
+                        <p />
+                      </div>
+                    </Col>
+                  </Row>
+                </CardBody>
+                <CardFooter>
+                  <hr />
+                  <div className="stats text-center">
+                    Cantidad de colaboradores <br /> <i>{branch.name}</i>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Col>
+            <Col lg="4" md="6" sm="6">
               <Card className="card-stats">
                 <CardBody>
                   <Row>
@@ -76,250 +157,253 @@ function Dashboard() {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Capacidad</p>
-                        <CardTitle tag="p">150 <i className="fa-solid fa-user-tie" ></i></CardTitle>
-                      <p />
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-refresh" />
-                  Actualizar
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col lg="3" md="6" sm="6">
-            <Card className="card-stats">
-              <CardBody>
-                <Row>
-                  <Col md="4" xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-money-coins text-success" />
-                    </div>
-                  </Col>
-                  <Col md="8" xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Ingresos</p>
-                      <CardTitle tag="p">$ 1.345</CardTitle>
-                      <p />
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-calendar-o" />
-                  Last day
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col lg="3" md="6" sm="6">
-            <Card className="card-stats">
-              <CardBody>
-                <Row>
-                  <Col md="4" xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="fa fa-laptop text-primary" />
-                    </div>
-                  </Col>
-                  <Col md="8" xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Disponibilidad</p>
-                      <CardTitle tag="p"></CardTitle>
-                      <p />
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-clock-o" />
-                  In the last hour
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col lg="3" md="6" sm="6">
-            <Card className="card-stats">
-              <CardBody>
-                <Row>
-                  <Col md="4" xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-favourite-28 text-danger" />
-                    </div>
-                  </Col>
-                  <Col md="8" xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Seguidores</p>
-                      <CardTitle tag="p">+1K</CardTitle>
-                      <p />
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-refresh" />
-                  Update now
-                </div>
-              </CardFooter>
-            </Card>
+                        <CardTitle tag="p">{capacityTotal} <i className="fa-solid fa-user-tie" ></i></CardTitle>
+                        <p />
+                      </div>
+                    </Col>
+                  </Row>
+                </CardBody>
+                <CardFooter>
+                  <hr />
+                  <div className="stats text-center">
+                    Cantidad de lugares <br /> <i>{branch.name}</i>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Col>
+            <Col lg="4" md="6" sm="6">
+              <Card className="card-stats">
+                <CardBody>
+                  <Row>
+                    <Col md="4" xs="5">
+                      <div className="icon-big text-center icon-warning">
+                        <i className="nc-icon nc-money-coins text-success" />
+                      </div>
+                    </Col>
+                    <Col md="8" xs="7">
+                      <div className="numbers">
+                        <p className="card-category">Ingresos</p>
+                        <CardTitle tag="p">$ 1.345</CardTitle>
+                        <p />
+                      </div>
+                    </Col>
+                  </Row>
+                </CardBody>
+                <CardFooter>
+                  <hr />
+                  <div className="stats text-center">
+                    Ingresos <br /> <i>{branch.name}</i>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+        <Row>
+          <Col xs="12" md="6" lg="12" xg="12">
+            <h2>
+              Ingresos de la<small color="red"> Sucursal</small>
+            </h2>
+            <hr />
           </Col>
         </Row>
-      </Container>
-    </div>
-      {/* <Row>
-          <Col lg="4" sm="6">
+        <Row>
+          <Col lg="6" sm="6">
             <Card>
               <CardHeader>
+                <CardTitle tag="h4">Por oficina</CardTitle>
+                <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
+                  <Col sm="6">
+                    <p className="card-category" style={{ color: '#34b18a' }}>Oficinas de la sucursal</p>
+                  </Col>
+                  <Col sm="6">
+                    <Form onSubmit={amountOfficeForm.handleChange}>
+                      <div className="pull-right pull-right-filter" style={{ width: '50%' }}>
+                        <Select
+                          className="react-select primary"
+                          classNamePrefix="react-select"
+                          name="monthOffice"
+                          value={amountOfficeForm.values.monthOffice}
+                          placeholder={amountOfficeForm.values.monthOffice}
+                          onChange={value => amountOfficeForm.setFieldValue("monthOffice", value)}
+                          onBlur={amountOfficeForm.handleBlur}
+                          options={monthFilter}
+
+                        />
+                      </div>
+                    </Form>
+                  </Col>
+                </Row>
+              </CardHeader>
+              <CardBody>
                 <Row>
-                  <Col sm="7">
+                  <Col md="12">
+                    <Table>
+                      <tbody>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>USA</td>
+                          <td className="text-right">2.920</td>
+                          <td className="text-right">53.23%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Germany</td>
+                          <td className="text-right">1.300</td>
+                          <td className="text-right">20.43%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Australia</td>
+                          <td className="text-right">760</td>
+                          <td className="text-right">10.35%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>United Kingdom</td>
+                          <td className="text-right">690</td>
+                          <td className="text-right">7.87%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Romania</td>
+                          <td className="text-right">600</td>
+                          <td className="text-right">5.94%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Brasil</td>
+                          <td className="text-right">550</td>
+                          <td className="text-right">4.34%</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="6" sm="6">
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">
+                  Por año
+                </CardTitle>
+                <Row>
+                  <Col sm="6">
                     <div className="numbers pull-left">$34,657</div>
                   </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Badge color="success" pill>
-                        +18%
-                      </Badge>
+                  <Col sm="6">
+                    <div className="pull-right pull-right-filter" style={{ width: '36%' }}>
+                      <Select
+                        className="react-select primary"
+                        classNamePrefix="react-select"
+                        name="year"
+                        value={amountYearForm.values.year}
+                        placeholder={amountYearForm.values.year}
+                        onChange={value => amountYearForm.setFieldValue("year", value)}
+                        onBlur={amountYearForm.handleBlur}
+                        options={yearFilter}
+
+                      />
                     </div>
                   </Col>
                 </Row>
               </CardHeader>
               <CardBody>
                 <h6 className="big-title">
-                  total earnings in last ten quarters
+                  Total ingresos mensuales
                 </h6>
                 <Line
                   data={chartExample1.data}
                   options={chartExample1.options}
-                  height={380}
-                  width={826}
+                  height={280}
+                  width={726}
                 />
               </CardBody>
-              <CardFooter>
-                <hr />
-                <Row>
-                  <Col sm="7">
-                    <div className="footer-title">Financial Statistics</div>
-                  </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Button
-                        className="btn-round btn-icon"
-                        color="success"
-                        size="sm"
-                      >
-                        <i className="nc-icon nc-simple-add" />
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </CardFooter>
             </Card>
           </Col>
-          <Col lg="4" sm="6">
+
+        </Row>
+        <Row>
+          <Col xs="12" md="6" lg="12" xg="12">
+            <h2>
+              Reservas por<small color="red"> Oficinas</small>
+            </h2>
+            <hr />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6" sm="6">
             <Card>
               <CardHeader>
-                <Row>
-                  <Col sm="7">
-                    <div className="numbers pull-left">169</div>
-                  </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Badge color="danger" pill>
-                        -14%
-                      </Badge>
-                    </div>
-                  </Col>
-                </Row>
+                <CardTitle tag="h4">Por oficina</CardTitle>
+                <p className="card-category" style={{ color: '#34b18a' }}>Oficinas de la sucursal</p>
               </CardHeader>
               <CardBody>
-                <h6 className="big-title">
-                  total subscriptions in last 7 days
-                </h6>
-                <Line
-                  data={chartExample2.data}
-                  options={chartExample2.options}
-                  height={380}
-                  width={828}
-                />
-              </CardBody>
-              <CardFooter>
-                <hr />
                 <Row>
-                  <Col sm="7">
-                    <div className="footer-title">View all members</div>
-                  </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Button
-                        className="btn-round btn-icon"
-                        color="danger"
-                        size="sm"
-                      >
-                        <i className="nc-icon nc-button-play" />
-                      </Button>
-                    </div>
+                  <Col md="12">
+                    <Table>
+                      <tbody>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>USA</td>
+                          <td className="text-right">2.920</td>
+                          <td className="text-right">53.23%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Germany</td>
+                          <td className="text-right">1.300</td>
+                          <td className="text-right">20.43%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Australia</td>
+                          <td className="text-right">760</td>
+                          <td className="text-right">10.35%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>United Kingdom</td>
+                          <td className="text-right">690</td>
+                          <td className="text-right">7.87%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Romania</td>
+                          <td className="text-right">600</td>
+                          <td className="text-right">5.94%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                          </td>
+                          <td>Brasil</td>
+                          <td className="text-right">550</td>
+                          <td className="text-right">4.34%</td>
+                        </tr>
+                      </tbody>
+                    </Table>
                   </Col>
                 </Row>
-              </CardFooter>
+              </CardBody>
             </Card>
           </Col>
-          <Col lg="4" sm="6">
-            <Card>
-              <CardHeader>
-                <Row>
-                  <Col sm="7">
-                    <div className="numbers pull-left">8,960</div>
-                  </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Badge color="warning" pill>
-                        ~51%
-                      </Badge>
-                    </div>
-                  </Col>
-                </Row>
-              </CardHeader>
-              <CardBody>
-                <h6 className="big-title">total downloads in last 6 years</h6>
-                <Line
-                  data={chartExample3.data}
-                  options={chartExample3.options}
-                  height={380}
-                  width={826}
-                />
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <Row>
-                  <Col sm="7">
-                    <div className="footer-title">View more details</div>
-                  </Col>
-                  <Col sm="5">
-                    <div className="pull-right">
-                      <Button
-                        className="btn-round btn-icon"
-                        color="warning"
-                        size="sm"
-                      >
-                        <i className="nc-icon nc-alert-circle-i" />
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row> */}
-  {/* <Row>
+        </Row>
+
+      </div>
+      {/* <Row>
           <Col md="12">
             <Card>
               <CardHeader>

@@ -1,5 +1,6 @@
-import { headerGet, headersPost, sdkAuthRequest } from ".."
-import { API_AUTH_URL } from "../../../environments/environment"
+import { headerGet, headersPost, sdkAuthRequest } from "..";
+import { API_AUTH_URL } from "../../../environments/environment";
+import { postImageToCloudinary } from "../cloudinary";
 
 export const getMe = async () => {
     try {
@@ -17,11 +18,14 @@ export const getMe = async () => {
 
 export const updateUser = async (userId, userData) => {
     try {
+        let profileImageUrl = null
+        if (userData.imageData)
+            profileImageUrl = await postImageToCloudinary(userData.imageData)
         const userUpdated = await sdkAuthRequest(`${API_AUTH_URL}/${userId}/`,
             {
                 method: 'PUT',
                 headers: headersPost,
-                body: JSON.stringify(userData),
+                body: profileImageUrl ? JSON.stringify({ ...userData, profileImage: profileImageUrl.public_id }) : JSON.stringify(userData),
             });
         return Promise.resolve(userUpdated)
     } catch (error) {

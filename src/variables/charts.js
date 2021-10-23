@@ -35,6 +35,8 @@ const chartExample1 = {
       'Aug',
       'Sep',
       'Oct',
+      'Nov',
+      'Dec'
     ],
     datasets: [
       {
