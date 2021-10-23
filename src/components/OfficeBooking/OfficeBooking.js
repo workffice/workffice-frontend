@@ -114,7 +114,7 @@ export const OfficeBooking = ({
                 <Row style={{ display: 'grid', paddingTop: 40 }}>
                     <Col xs="12" md="6" lg="12" xg="12">
                         <h1>
-                            Alquilar <small color="red">oficina A</small>
+                            Alquilar <small color="red">{office ? office.name : ""}</small>
                         </h1>
                         <hr />
                     </Col>
