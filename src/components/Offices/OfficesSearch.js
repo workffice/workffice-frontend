@@ -150,7 +150,7 @@ export const OfficesSearch = ({ officeBranches, search, loading }) => {
                     <hr />
                     <h2>Sucursales</h2>
                     <hr />
-                    <Row>
+                    <Row style={{marginLeft: "1%", marginRight: "1%"}}>
                         {renderOfficeBranches()}
                     </Row>
                 </Col>

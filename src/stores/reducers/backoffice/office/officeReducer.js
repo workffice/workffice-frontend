@@ -1,14 +1,15 @@
-import { CREATE_OFFICE } from "../../../actions/backoffice/office/officeActions";
+import { CREATE_OFFICE, FETCH_OFFICE, UPDATE_OFFICE } from "../../../actions/backoffice/office/officeActions";
 
-const initialState = null;
 
-export const officeReducer = (state = initialState, { type, payload }) => {
-
-    let currentState = state;
+export const officeReducer = (state = null, { type, payload }) => {
     switch (type) {
         case CREATE_OFFICE:
-            return currentState = payload;
+            return state;
+        case FETCH_OFFICE:
+            return payload;
+        case UPDATE_OFFICE:
+            return state;
         default:
-            return currentState;
+            return state;
     }
 }

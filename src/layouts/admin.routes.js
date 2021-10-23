@@ -3,11 +3,12 @@ import { MembershipListComponent } from '../components/Membership/MembershipList
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
-import { OfficeBooking } from '../components/OfficeBooking/OfficeBooking';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
+import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
@@ -87,6 +88,14 @@ export const routes = [
         component: OfficeCreateContainer,
         layout: '/admin',
         visibility: true
+      },
+      {
+        path: '/offices/edit',
+        name: 'Editar oficina',
+        mini: 'EO',
+        component: OfficeEditContainer,
+        layout: '/admin',
+        visibility: false
       },
       {
         path: '/services-equipment',
@@ -222,7 +231,7 @@ export const routes = [
         path: '/create-booking',
         name: 'Reservar oficina',
         mini: 'RO',
-        component: OfficeBooking,
+        component: OfficeBookingContainer,
         layout: '/admin',
         visibility: true,
       },

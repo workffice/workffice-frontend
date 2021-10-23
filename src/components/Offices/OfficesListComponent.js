@@ -20,7 +20,7 @@ export const OfficesListComponent = ({ offices, officeBranch, loading, loadOffic
       )
     return offices.length !== 0 ? offices.map((office) => {
       return <Col key={office.id} xs="10" md="4" lg="4" xg="4">
-        <OfficeComponent office={office} officeBranch={officeBranch} />
+        <OfficeComponent office={office} officeBranch={officeBranch} displayEditButton/>
       </Col>
     }) : <EmptyComponent />
   }

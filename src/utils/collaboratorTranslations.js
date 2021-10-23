@@ -14,8 +14,8 @@ export const getStatus = status => {
 export const getErrorMessage = (error) => {
     switch (error) {
         case "COLLABORATOR_ALREADY_EXISTS": return "Ya existe un colaborador con el email especificado"
-        case "OFFICE_BRANCH_FORBIDDEN": return "No tienes acceso para crear colaboradores"
-        case "COLLABORATOR_FORBIDDEN": return "No tienes acceso para editar colaboradores"
+        case "OFFICE_BRANCH_FORBIDDEN": return "No tienes permisos para crear colaboradores"
+        case "COLLABORATOR_FORBIDDEN": return "No tienes permisos para editar colaboradores"
         case "INVALID_ROLEIDS": return "Debe elegir al menos un rol"
     }
 }

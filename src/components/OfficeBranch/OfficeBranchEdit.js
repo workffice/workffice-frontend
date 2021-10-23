@@ -7,7 +7,6 @@ import {
     Label, Row
 } from 'reactstrap';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
-import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
 
@@ -54,7 +53,6 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values.image)
             edit(values)
         },
     });
@@ -189,13 +187,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                             <ImageUpload
                                                 className="text-center"
                                                 onChange={imageData => formik.setFieldValue("image", imageData)}
-                                            />
-                                        </Col>
-                                        <Col lg="6">
-                                        <Label className="label-form"> Imagen actual </Label>
-                                            <Cloudinary
-                                                publicId={officeBranch ? officeBranch.images[0].url : ""}
-                                                width="0.5"
+                                                avatar={officeBranch ? officeBranch.images[0].url : ""}
                                             />
                                         </Col>
                                     </Row>
