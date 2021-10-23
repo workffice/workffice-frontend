@@ -40,3 +40,15 @@ export const readFromLocalStorage = key => {
   }
   throw new Error('No window object detected');
 };
+
+export const deleteFromLocalStorage = (key) => {
+  if (window && window.localStorage) {
+    return localStorage.removeItem(key);
+  }
+  throw new Error(`No window object detected`);
+};
+
+export const invalidateSession = () => {
+  deleteFromLocalStorage(AUTH_TOKEN);
+  deleteFromLocalStorage('officeBranch');
+}
