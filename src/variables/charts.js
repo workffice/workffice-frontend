@@ -25,41 +25,41 @@ const hexToRGB = (hex, alpha) => {
 const chartExample1 = {
   data: {
     labels: [
-      'Jan',
+      'Ene',
       'Feb',
       'Mar',
-      'Apr',
+      'Abr',
       'May',
       'Jun',
       'Jul',
-      'Aug',
+      'Ago',
       'Sep',
       'Oct',
       'Nov',
-      'Dec'
+      'Dic'
     ],
     datasets: [
       {
-        label: 'Active Users',
+        label: 'Ingresos',
         borderColor: '#6bd098',
-        pointRadius: 0,
-        pointHoverRadius: 0,
+        pointRadius: 0.5,
+        pointHoverRadius: 0.5,
         fill: false,
-        borderWidth: 3,
-        barPercentage: 1.6,
-        tension: 0.4,
-        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610],
+        borderWidth: 4,
+        barPercentage: 1.0,
+        tension: 0,
+        data: null,
       },
     ],
   },
   options: {
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
 
       tooltips: {
-        enabled: false,
+        enabled: true,
       },
     },
 

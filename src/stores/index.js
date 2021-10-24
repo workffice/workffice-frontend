@@ -21,6 +21,7 @@ import { userMeReducer } from './reducers/backoffice/userReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
+import { reportsReducer } from './reducers/reports/reportsReducer';
 import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
 const isLoadingReducer = (state = false, { type, payload }) => {
@@ -54,6 +55,7 @@ export const reducers = routes =>
     activatePass: activatePasswordReducer,
     recovery: recoveryReducer,
     register: registerReducer,
+    reports: reportsReducer,
     resetPaswword: resetPasswordReducer,
     isLoading: isLoadingReducer,
     notification: notificationReducer,
