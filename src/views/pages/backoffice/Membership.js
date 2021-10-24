@@ -8,7 +8,7 @@ export const Membership = () => {
     // const equipamiento = ['Tecnología', 'Confort'];
 
     return (
-        <div class= 'content'>
+        <div className='content'>
             <MembershipListComponent />
         </div>
     )

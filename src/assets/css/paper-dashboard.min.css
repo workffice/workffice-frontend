@@ -7589,6 +7589,10 @@ a[data-toggle='collapse'][aria-expanded='true'] .caret,
 .pull-right {
   float: right;
 }
+.pull-right-filter {
+  width: 26% !important;
+  border-radius: 8px;
+}
 .offline-doc .navbar.navbar-transparent {
   padding-top: 25px;
   border-bottom: none;

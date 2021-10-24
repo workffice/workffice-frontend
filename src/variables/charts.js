@@ -1,19 +1,4 @@
-/*!
 
-=========================================================
-* Paper Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 // default color for the charts
 const chartColor = '#FFFFFF';
 // ##############################
@@ -40,39 +25,41 @@ const hexToRGB = (hex, alpha) => {
 const chartExample1 = {
   data: {
     labels: [
-      'Jan',
+      'Ene',
       'Feb',
       'Mar',
-      'Apr',
+      'Abr',
       'May',
       'Jun',
       'Jul',
-      'Aug',
+      'Ago',
       'Sep',
       'Oct',
+      'Nov',
+      'Dic'
     ],
     datasets: [
       {
-        label: 'Active Users',
+        label: 'Ingresos',
         borderColor: '#6bd098',
-        pointRadius: 0,
-        pointHoverRadius: 0,
+        pointRadius: 0.5,
+        pointHoverRadius: 0.5,
         fill: false,
-        borderWidth: 3,
-        barPercentage: 1.6,
-        tension: 0.4,
-        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610],
+        borderWidth: 4,
+        barPercentage: 1.0,
+        tension: 0,
+        data: null,
       },
     ],
   },
   options: {
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
 
       tooltips: {
-        enabled: false,
+        enabled: true,
       },
     },
 
@@ -792,7 +779,7 @@ const chartExample11 = {
 // #########################################
 
 const chartExample12 = {
-  data: canvas => ({
+  data: () => ({
     labels: [
       'Jan',
       'Feb',
