@@ -1,5 +1,7 @@
-import React from 'react';
 import { useFormik } from 'formik';
+import React from 'react';
+import { useHistory } from 'react-router';
+import Select from 'react-select';
 import {
     Button,
     Card,
@@ -12,10 +14,8 @@ import {
     Label,
     Row
 } from 'reactstrap';
-import Select from 'react-select';
-import { Notification } from '../Common/Notification/Notification'
 import { getErrorMessage } from '../../utils/rolesTranslation';
-import { useHistory } from 'react-router';
+import { Notification } from '../Common/Notification/Notification';
 
 
 export const NewRole = (props) => {
@@ -38,16 +38,20 @@ export const NewRole = (props) => {
             errors.roleName = 'Requerido.';
         }
         const {
-            officeRoleAccess,
-            collaboratorRoleAccess,
-            roleRoleAccess,
-            membershipRoleAccess,
+            officeAccess,
+            collaboratorAccess,
+            roleAccess,
+            membershipAccess,
+            bookingAccess,
+            reportAccess
         } = values
         const permissions = [
-            officeRoleAccess.value,
-            collaboratorRoleAccess.value,
-            roleRoleAccess.value,
-            membershipRoleAccess.value,
+            officeAccess.value,
+            collaboratorAccess.value,
+            roleAccess.value,
+            membershipAccess.value,
+            bookingAccess.value,
+            reportAccess.value,
         ].filter(permission => permission !== null && permission !== undefined && permission !== '')
         if (permissions.length == 0)
             errors.access = 'Al menos un permiso es requerido'
@@ -57,24 +61,30 @@ export const NewRole = (props) => {
     const formik = useFormik({
         initialValues: {
             roleName: "",
-            officeRoleAccess: "",
-            collaboratorRoleAccess: "",
-            roleRoleAccess: "",
-            membershipRoleAccess: "",
+            officeAccess: "",
+            collaboratorAccess: "",
+            roleAccess: "",
+            membershipAccess: "",
+            bookingAccess: "",
+            reportAccess: "",
         },
         validate,
         onSubmit: async ({
             roleName,
-            officeRoleAccess,
-            collaboratorRoleAccess,
-            roleRoleAccess,
-            membershipRoleAccess,
+            officeAccess,
+            collaboratorAccess,
+            roleAccess,
+            membershipAccess,
+            bookingAccess,
+            reportAccess
         }) => {
             const permissions = [
-                { resource: "OFFICE", access: officeRoleAccess.value },
-                { resource: "COLLABORATOR", access: collaboratorRoleAccess.value },
-                { resource: "ROLE", access: roleRoleAccess.value },
-                { resource: "MEMBERSHIP", access: membershipRoleAccess.value },
+                { resource: "OFFICE", access: officeAccess.value },
+                { resource: "COLLABORATOR", access: collaboratorAccess.value },
+                { resource: "ROLE", access: roleAccess.value },
+                { resource: "MEMBERSHIP", access: membershipAccess.value },
+                { resource: "BOOKING", access: bookingAccess.value },
+                { resource: "REPORT", access: reportAccess.value },
             ].filter(permission => permission.access !== null && permission.access !== undefined && permission.access !== '')
             props.createRole({
                 name: roleName,
@@ -84,14 +94,19 @@ export const NewRole = (props) => {
     });
 
     const accessOptions = [
-        {
-            value: "",
-            label: "Seleccione una opción",
-            isDisabled: true,
-        },
+        { value: "", label: "Seleccione una opción", isDisabled: true },
         { value: "READ", label: "Lectura" },
+        { value: "WRITE", label: "Lectura y escritura"},
+    ]
+    const writeOnly = [
+        { value: "", label: "Seleccione una opción", isDisabled: true },
         { value: "WRITE", label: "Lectura y escritura" },
-    ];
+    ]
+
+    const readOnly = [
+        { value: "", label: "Seleccione una opción", isDisabled: true },
+        { value: "READ", label: "Lectura" },
+    ]
 
     return (
         <div className="content">
@@ -143,28 +158,28 @@ export const NewRole = (props) => {
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label htmlFor="officeRoleAccess" className="label-form">Oficina</Label>
+                                        <Label htmlFor="officeAccess" className="label-form">Oficina</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="officeRoleAccess"
-                                            id="officeRoleAccess"
-                                            onChange={value => formik.setFieldValue("officeRoleAccess", value)}
+                                            name="officeAccess"
+                                            id="officeAccess"
+                                            onChange={value => formik.setFieldValue("officeAccess", value)}
                                             onBlur={formik.handleChange}
-                                            options={accessOptions}
+                                            options={writeOnly}
                                             placeholder="Seleccione un permiso"
                                             styles={{ width: '80%' }}
                                         />
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label htmlFor="collaboratorRoleAccess" className="label-form">Colaborador</Label>
+                                        <Label htmlFor="collaboratorAccess" className="label-form">Colaborador</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="collaboratorRoleAccess"
-                                            id="collaboratorRoleAccess"
-                                            onChange={value => formik.setFieldValue("collaboratorRoleAccess", value)}
+                                            name="collaboratorAccess"
+                                            id="collaboratorAccess"
+                                            onChange={value => formik.setFieldValue("collaboratorAccess", value)}
                                             onBlur={formik.handleBlur}
                                             options={accessOptions}
                                             placeholder="Seleccione un permiso"
@@ -173,27 +188,55 @@ export const NewRole = (props) => {
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label htmlFor="roleRoleAccess" className="label-form">Rol</Label>
+                                        <Label htmlFor="roleAccess" className="label-form">Rol</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="roleRoleAccess"
-                                            id="roleRoleAccess"
-                                            onChange={value => formik.setFieldValue("roleRoleAccess", value)}
+                                            name="roleAccess"
+                                            id="roleAccess"
+                                            onChange={value => formik.setFieldValue("roleAccess", value)}
                                             options={accessOptions}
+                                            placeholder="Seleccione un permiso"
+                                            styles={{ width: '80%' }}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor="bookingAccess" className="label-form">Reservas</Label>
+                                        <Select
+                                            className="react-select primary"
+                                            classNamePrefix="react-select"
+                                            name="bookingAccess"
+                                            id="bookingAccess"
+                                            onChange={value => formik.setFieldValue("bookingAccess", value)}
+                                            onBlur={formik.handleBlur}
+                                            options={readOnly}
+                                            placeholder="Seleccione un permiso"
+                                            styles={{ width: '80%' }}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor="reportAccess" className="label-form">Reportes</Label>
+                                        <Select
+                                            className="react-select primary"
+                                            classNamePrefix="react-select"
+                                            name="reportAccess"
+                                            id="reportAccess"
+                                            onChange={value => formik.setFieldValue("reportAccess", value)}
+                                            onBlur={formik.handleBlur}
+                                            options={readOnly}
                                             placeholder="Seleccione un permiso"
                                             styles={{ width: '80%' }}
                                         />
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label htmlFor="membershipRoleAccess" className="label-form">Membresía</Label>
+                                        <Label htmlFor="membershipAccess" className="label-form">Membresía</Label>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="membershipRoleAccess"
-                                            id="membershipRoleAccess"
-                                            onChange={value => formik.setFieldValue("membershipRoleAccess", value)}
+                                            name="membershipAccess"
+                                            id="membershipAccess"
+                                            onChange={value => formik.setFieldValue("membershipAccess", value)}
                                             onBlur={formik.handleBlur}
                                             options={accessOptions}
                                             placeholder="Seleccione un permiso"
