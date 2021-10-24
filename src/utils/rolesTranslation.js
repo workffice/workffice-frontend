@@ -15,6 +15,8 @@ export const getResourceLabel = resource => {
     case "MEMBERSHIP": return "Membresia"
     case "ROLE": return "Rol"
     case "COLLABORATOR": return "Colaborador"
+    case "BOOKING": return "Reservas"
+    case "REPORT": return "Reportes"
     default: return "N/A"
   }
 }
