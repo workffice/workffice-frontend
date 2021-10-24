@@ -89,7 +89,7 @@ export const DashboardOfficeBooking = (props) => {
                                 <p className="card-category" style={{ color: '#34b18a' }}>Oficinas de la sucursal</p>
                             </Col>
                             <Col sm="6">
-                                <div className="pull-right pull-right-filter" style={{ width: '50%' }}>
+                                <div className="pull-right pull-right-filter" style={{ width: '70%' }}>
                                     <Form onChange={bookingOfficeForm.handleChange}>
                                         <Select
                                             className="react-select primary"

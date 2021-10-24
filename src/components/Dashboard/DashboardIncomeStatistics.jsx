@@ -127,7 +127,7 @@ export const DashboardIncomeStatistics = (props) => {
                             </Col>
                             <Col sm="6">
                                 <Form onChange={amountOfficeForm.handleChange}>
-                                    <div className="pull-right pull-right-filter" style={{ width: '50%' }}>
+                                    <div className="pull-right pull-right-filter" style={{ width: '70%' }}>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
@@ -193,7 +193,7 @@ export const DashboardIncomeStatistics = (props) => {
                                 <div className="numbers pull-left">${total()? total(): '0'}</div>
                             </Col>
                             <Col sm="6">
-                                <div className="pull-right pull-right-filter" style={{ width: '40%' }}>
+                                <div className="pull-right pull-right-filter" style={{ width: '50%' }}>
                                     <Select
                                         className="react-select primary"
                                         classNamePrefix="react-select"
