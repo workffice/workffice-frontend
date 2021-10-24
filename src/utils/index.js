@@ -22,3 +22,7 @@ export const isUserLoggedin = authData => {
   }
   return 'OK';
 };
+
+export const logout = ()=>{
+  return 
+}
