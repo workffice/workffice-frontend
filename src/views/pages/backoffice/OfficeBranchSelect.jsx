@@ -69,7 +69,7 @@ export const OfficeBranchSelect = ({
                 <Row
                 >
                     <Col className="" xg="12" lg="12" md="12" style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
-                        <h1 style={{ color: '#FFFF' }}>Selecione Sucursal</h1>
+                        <h1 style={{ color: '#FFFF' }}>Selecione sucursal</h1>
                         <hr />
                         <Button className="btn-round" color="danger">
                             <Link to="/office-branch/create" style={{ color: 'white', textDecoration: 'none' }}>

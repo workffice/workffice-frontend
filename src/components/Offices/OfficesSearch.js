@@ -1,16 +1,16 @@
-import React from 'react'
 import { useFormik } from 'formik';
-import { Button, Col, Form, Input, Row } from 'reactstrap';
-import Select from 'react-select';
-import { OfficeBranchCard } from '../OfficeBranch/OfficeBranchCard';
-import { EmptyComponent } from '../Common/Empty/EmptyComponent';
-import { Pagination } from '../Common/Pagination/Pagination';
+import React from 'react';
 import { useLocation } from 'react-router';
+import Select from 'react-select';
+import { Button, Col, Form, Input, Row } from 'reactstrap';
 import { searchQueryBuilder } from '../../utils/searchQueryBuilder';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Loading } from '../Common/Loading/Loading';
+import { Pagination } from '../Common/Pagination/Pagination';
+import { OfficeBranchCard } from '../OfficeBranch/OfficeBranchCard';
 
-export const OfficesSearch = (props) => {
+export const OfficesSearch = ({ officeBranches, search, loading }) => {
     const query = new URLSearchParams(useLocation().search);
-    const { officeBranches } = props;
     React.useEffect(() => {
         const data = {
             officeCapacityGT: query.get("office_capacity_gt") || "",
@@ -19,7 +19,7 @@ export const OfficesSearch = (props) => {
             officeBranchName: query.get("name") || "",
             page: query.get("page") ? query.get("page") - 1 : 0,
         }
-        props.search(data)
+        search(data)
     }, []);
     const typesOptions = [
         {
@@ -44,9 +44,25 @@ export const OfficesSearch = (props) => {
                 officeType: values.officeType.value,
                 page: 0,
             }
-            await props.search(data);
+            await search(data);
         }
     })
+
+    const renderOfficeBranches = () => {
+        if (loading)
+            return <Loading />
+        return (
+            <>
+                {officeBranches.data !== undefined && officeBranches.data.length !== 0 ? officeBranches.data.map(officeBranch => {
+                    return (
+                        <Col key={officeBranch.id} xs="10" md="4" lg="4" xg="4">
+                            <OfficeBranchCard key={officeBranch.id} branch={officeBranch} />
+                        </Col>
+                    )
+                }) : <EmptyComponent />}
+            </>
+        )
+    }
 
     return (
         <div className="content">
@@ -134,14 +150,8 @@ export const OfficesSearch = (props) => {
                     <hr />
                     <h2>Sucursales</h2>
                     <hr />
-                    <Row>
-                        {officeBranches.data !== undefined && officeBranches.data.length !== 0 ? officeBranches.data.map(officeBranch => {
-                            return (
-                                <Col key={officeBranch.id} xs="10" md="4" lg="4" xg="4">
-                                    <OfficeBranchCard key={officeBranch.id} branch={officeBranch} />
-                                </Col>
-                            )
-                        }) : <EmptyComponent />}
+                    <Row style={{marginLeft: "1%", marginRight: "1%"}}>
+                        {renderOfficeBranches()}
                     </Row>
                 </Col>
             </Row>

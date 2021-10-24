@@ -14,7 +14,7 @@ export const EmptyOfficeBranch = () => (
                 </div>
                 <hr />
                 <p>
-                    <b>Por favor Cree su sucursal para comenzar a trabajar</b>
+                    <b>Por favor cree su sucursal para comenzar a trabajar</b>
                 </p>
                 <p><small><i>Workffice</i></small></p>
             </CardBody>

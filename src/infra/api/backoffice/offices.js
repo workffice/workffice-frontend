@@ -1,6 +1,7 @@
-import { headerGet, sdkAuthRequest, sdkNoAuthRequest } from ".."
-import { API_OFFICE_BRANCHES } from "../../../environments/environment"
+import { headerGet, headersPost, sdkAuthRequest, sdkNoAuthRequest } from "..";
+import { API_OFFICE_BRANCHES, API_URL } from "../../../environments/environment";
 import { searchQueryBuilder } from "../../../utils/searchQueryBuilder";
+import { postImageToCloudinary } from "../cloudinary";
 
 
 export const getOffices = async officeBranchId => {
@@ -18,17 +19,67 @@ export const getOffices = async officeBranchId => {
     }
 }
 
+export const getOffice = async officeId => {
+    try {
+        const office = await sdkNoAuthRequest(
+            `${API_URL}/offices/${officeId}/`,
+            {
+                method: 'GET',
+                headers: headerGet
+            }
+        );
+        return Promise.resolve(office.data);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
 export const createOffice = async (officeBranchId, office) => {
     try {
+        let imageData = null
+        if (office.photo)
+            imageData = await postImageToCloudinary(office.photo)
         const officeCreated = await sdkAuthRequest(`${API_OFFICE_BRANCHES}/${officeBranchId}/offices/`,
             {
                 method: 'POST',
-                headers: headerGet,
-                body: JSON.stringify(office)
+                headers: headersPost,
+                body: imageData !== null ? JSON.stringify({ ...office, imageUrl: imageData.public_id }) : JSON.stringify(office)
             });
+        if (office.inactivityDays.length > 0) {
+            const officeId = officeCreated.data.uri.match("/api/offices/(.*)/")[1]
+            office.inactivityDays.map(async (inactivityDay) => {
+                await sdkAuthRequest(`${API_URL}/offices/${officeId}/inactivities/`,
+                    {
+                        method: 'POST',
+                        headers: headersPost,
+                        body: JSON.stringify({
+                            "type": "RECURRING_DAY",
+                            "dayOfWeek": inactivityDay
+                        })
+                    });
+            })
+        }
         return Promise.resolve(officeCreated);
     } catch (error) {
-        return Promise.reject(new Error(error.errors[0].error));
+        return Promise.reject(error.errors[0]);
+    }
+}
+
+export const updateOffice = async (officeId, office) => {
+    try {
+        let imageData = null
+        if (office.photo)
+            imageData = await postImageToCloudinary(office.photo)
+        const officeUpdated = await sdkAuthRequest(
+            `${API_URL}/offices/${officeId}/`,
+            {
+                method: 'PUT',
+                headers: headersPost,
+                body: imageData !== null ? JSON.stringify({ ...office, imageUrl: imageData.public_id }) : JSON.stringify(office)
+            });
+        return Promise.resolve(officeUpdated);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
     }
 }
 
@@ -57,5 +108,20 @@ export const searchOfficeBranches = async params => {
         return Promise.resolve(officesFound);
     } catch (error) {
         return Promise.reject(error.errors[0]);
+    }
+}
+
+export const getOfficeInactivities = async officeId => {
+    try {
+        const inactivities = await sdkNoAuthRequest(
+            `${API_URL}/offices/${officeId}/inactivities/`,
+            {
+                method: 'GET',
+                headers: headerGet
+            }
+        )
+        return Promise.resolve(inactivities.data)
+    } catch (error) {
+        return Promise.reject(error.errors[0])
     }
 }

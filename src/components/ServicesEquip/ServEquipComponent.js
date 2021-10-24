@@ -71,7 +71,7 @@ export const ServEquipComponent = ({ title, typeName, elements }) => {
                                 <div class="col-auto">
                                     <Button
                                         block
-                                        className="btn btn-primary mb-3"
+                                        className="btn-round btn-primary mb-3"
                                         type="submit"
                                     >
                                         Crear
@@ -81,7 +81,7 @@ export const ServEquipComponent = ({ title, typeName, elements }) => {
                                     {/* <button type="reset" class="btn btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</button> */}
                                     <Button
                                         block
-                                        className="btn btn-primary mb-3"
+                                        className="btn-round btn-primary mb-3"
                                         type="reset"
                                         color="danger"
                                     >

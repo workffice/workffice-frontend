@@ -11,7 +11,7 @@ export const NoticeComponent = (props) => {
 
   return (
     <>
-      <Card style={{marginRight: '5%'}}>
+      <Card style={{marginRight: '5%', marginLeft: '5%'}}>
         <CardBody>
           <div className="office-branch-card-title">
             <h5 style={{ marginBottom: 0 }}>

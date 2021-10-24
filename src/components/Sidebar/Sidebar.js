@@ -3,12 +3,19 @@ import PerfectScrollbar from "perfect-scrollbar";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Nav } from "reactstrap";
+import { invalidateSession } from "../../infra/api/localStorage";
 import { Cloudinary } from "../Common/Cloudinary/Cloudinary";
+import { useHistory } from "react-router"
+import { useDispatch } from "react-redux";
+import { setIsLoading } from "../../stores/actions";
 
 
 var ps;
 
 function Sidebar(props) {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [logout, setLogout] = React.useState(false)
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
   const sidebar = React.useRef();
@@ -41,6 +48,20 @@ function Sidebar(props) {
     }
     return false;
   };
+
+  const doLogout = () => {
+    setLogout(true);
+  };
+
+  // LOGOUT
+  React.useEffect(() => {
+    if (logout) {
+      invalidateSession();
+      history.replace('/auth/login')
+      dispatch(setIsLoading(false));
+    }
+  }, [logout,history])
+
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
@@ -158,7 +179,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <span>
-                {props.user ? props.user.name + ' ' + props.user.lastname : ""}
+                {props.user ? `${props.user.name || 'Username'} ${props.user.lastname || ''}` : ""}
                 <b className="caret" />
               </span>
             </a>
@@ -171,9 +192,9 @@ function Sidebar(props) {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/#" activeClassName="">
+                  <NavLink to='#' activeClassName="">
                     <span className="sidebar-mini-icon">CS</span>
-                    <span className="sidebar-normal">Cerrar sesion</span>
+                    <span className="sidebar-normal" onClick={doLogout}>Cerrar sesion</span>
                   </NavLink>
                 </li>
               </ul>
