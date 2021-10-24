@@ -15,6 +15,7 @@ import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/R
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
+import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 
 export const routes = [
   {
@@ -29,6 +30,23 @@ export const routes = [
         name: 'Perfil Usuario',
         mini: 'PU',
         component: UserProfileContainer,
+        layout: '/admin',
+        visibility: true
+      },
+    ]
+  },
+  {
+    collapse: true,
+    name: 'Dashboard',
+    icon: 'nc-icon nc-chart-bar-32',
+    state: 'dashboardCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        mini: 'D',
+        component: DashboardContainer,
         layout: '/admin',
         visibility: true
       },
