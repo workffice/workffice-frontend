@@ -1,3 +1,4 @@
+
 export const monthFilter = [
     { value: 'JANUARY', label: 'Enero' },
     { value: 'FEBRUARY', label: 'Febrero' },
@@ -22,62 +23,62 @@ export const yearFilter = [
 export let monthDataReport = [
     {
         // "year": 0,
-        "month": "JANUARY",
+        "monthData": "JANUARY",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "FEBRUARY",
+        "monthData": "FEBRUARY",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "MARCH",
+        "monthData": "MARCH",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "APRIL",
+        "monthData": "APRIL",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "MAY",
+        "monthData": "MAY",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "JUNE",
+        "monthData": "JUNE",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "JULY",
+        "monthData": "JULY",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "AUGUST",
+        "monthData": "AUGUST",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "SEPTEMBER",
+        "monthData": "SEPTEMBER",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "OCTOBER",
+        "monthData": "OCTOBER",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "NOVEMBER",
+        "monthData": "NOVEMBER",
         "totalAmount": 0
     },
     {
         // "year": 0,
-        "month": "DECEMBER",
+        "monthData": "DECEMBER",
         "totalAmount": 0
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { Line } from 'react-chartjs-2'
 import Select from 'react-select';
@@ -17,10 +17,11 @@ import {
 import { useSelector } from 'react-redux';
 import { DashboardRowTable } from './DashboardRowTable.jsx';
 import { monthDataReport } from '../../utils/filters.js';
-
+import { Loading } from '../Common/Loading/Loading'
 
 export const DashboardIncomeStatistics = (props) => {
     const date = new Date().getMonth();
+    const [dataLoaded, setDataLoaded] = useState(false);
     // reports state
     const offices = useSelector(state => state.offices);
     const { reports } = props;
@@ -47,25 +48,21 @@ export const DashboardIncomeStatistics = (props) => {
     }
     const total = () => {
         if (reportOfficeYear.length > 0) {
-            return reportOfficeYear.reduce((prevValue, currentValue) => { 
-                return prevValue += currentValue.totalAmount; 
+            return reportOfficeYear.reduce((prevValue, currentValue) => {
+                return prevValue += currentValue.totalAmount;
             }, 0);
         }
     }
     const data = () => {
         let dataReportChart = [];
-        if(reportOfficeYear.length>0){
-            monthDataReport.map(month => {
-                let monthReportFound = reportOfficeYear.find(monthR => monthR.month == month.month);
-                if (monthReportFound) {
-                    month.totalAmount = monthReportFound.totalAmount;
+        if (reportOfficeYear.length > 0 && monthDataReport.length > 0) {
+            monthDataReport.forEach(monthDR => {
+                if (monthDR) {
+                    let found = reportOfficeYear.find(report => report.month == monthDR.monthData)
+                    found ? dataReportChart.push(monthDR.totalAmount = found.totalAmount) : dataReportChart.push(monthDR.totalAmount);
                 }
-                dataReportChart.push(month.totalAmount);
             });
-        }else{
-            dataReportChart = monthDataReport;
         }
-        
         let chartData = chartExample1.data;
         chartData.datasets[0].data = dataReportChart;
         return chartData;
@@ -76,9 +73,11 @@ export const DashboardIncomeStatistics = (props) => {
     }, [reportPerOffice])
 
     useEffect(() => {
-        data();
+        let result = data();
+        setDataLoaded(true)
         total();
-    }, [reportOfficeYear])
+        return result;
+    }, [reportOfficeYear]);
 
 
     const validate = values => {
@@ -110,8 +109,8 @@ export const DashboardIncomeStatistics = (props) => {
             year: 2021
         },
         validate,
-        onSubmit: async (values) => {
-            amountYear(props.branch.id, values.year.value)
+        onSubmit: async (values) => {   
+            await amountYear(props.branch.id, values.year.value)
         },
     });
 
@@ -140,7 +139,6 @@ export const DashboardIncomeStatistics = (props) => {
                                             }}
                                             onBlur={amountOfficeForm.handleBlur}
                                             options={props.monthFilter}
-
                                         />
                                     </div>
                                 </Form>
@@ -190,7 +188,7 @@ export const DashboardIncomeStatistics = (props) => {
                         </CardTitle>
                         <Row>
                             <Col sm="6">
-                                <div className="numbers pull-left">${total()? total(): '0'}</div>
+                                <div className="numbers pull-left">${total() ? total() : '0'}</div>
                             </Col>
                             <Col sm="6">
                                 <div className="pull-right pull-right-filter" style={{ width: '50%' }}>
@@ -204,7 +202,7 @@ export const DashboardIncomeStatistics = (props) => {
                                             amountYearForm.setFieldValue("year", value)
                                             amountYearForm.submitForm();
                                         }}
-                                        onBlur={amountYearForm.handleBlur}
+                                        closeMenuOnSelect={true}
                                         options={props.yearFilter}
 
                                     />
@@ -216,12 +214,16 @@ export const DashboardIncomeStatistics = (props) => {
                         <h6 className="big-title">
                             Total ingresos mensuales
                         </h6>
-                        <Line
-                            data={data}
-                            options={chartExample1.options}
-                            height={180}
-                            width={626}
-                        />
+                        {
+                            dataLoaded ? <Line
+                                data={data}
+                                options={chartExample1.options}
+                                height={180}
+                                width={626}
+                            /> :
+                                <Loading />
+                        }
+
                     </CardBody>
                 </Card>
             </Col>
