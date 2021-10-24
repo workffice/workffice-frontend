@@ -12,6 +12,7 @@ export const OfficeBookingContainer = () => {
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
     }, [dispatch])
+    const branch = useSelector(state => state.officeBranch)
     const office = useSelector(state => state.office)
     const loadInactivities = useCallback(officeId => {
         dispatch(getOfficeInactivities(officeId))
@@ -40,6 +41,7 @@ export const OfficeBookingContainer = () => {
         createBooking={createBooking}
         officeNotFound={officeNotFound}
         booking={booking}
+        branch={branch}
         mercadoPagoPreferenceId={mercadoPagoPreferenceId}
         createMercadoPagoPreference={createMPPreference}
     />

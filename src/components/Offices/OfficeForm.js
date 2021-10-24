@@ -33,10 +33,10 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
         switch (day) {
             case ("MONDAY"): return "Lunes"
             case ("TUESDAY"): return "Martes"
-            case ("WEDNESDAY"): return "Miercoles"
+            case ("WEDNESDAY"): return "Miércoles"
             case ("THURSDAY"): return "Jueves"
             case ("FRIDAY"): return "Viernes"
-            case ("SATURDAY"): return "Sabado"
+            case ("SATURDAY"): return "Sábado"
             case ("SUNDAY"): return "Domingo"
         }
     }

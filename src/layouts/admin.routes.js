@@ -233,7 +233,7 @@ export const routes = [
         mini: 'RO',
         component: OfficeBookingContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
     ]
   }
