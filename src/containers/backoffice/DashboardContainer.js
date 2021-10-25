@@ -4,7 +4,7 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { collaboratorsList } from '../../stores/actions/backoffice/collaborator/collaboratorsAction';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
-import { amountPerYear, booking } from '../../stores/actions/backoffice/reports/reportsActions';
+import { amountPerOffice, amountPerYear, booking } from '../../stores/actions/backoffice/reports/reportsActions';
 
 export const DashboardContainer = () => {
     const dispatch = useDispatch();
@@ -21,14 +21,17 @@ export const DashboardContainer = () => {
     const offices = useSelector(state => state.offices);
     // Reports
     const reports = useSelector(state => state.reports.reports);
-    const loadAmountPerMonth = useCallback(async (officeBranchId, year) => {
-        await dispatch(amountPerYear(officeBranchId, year));
+    const revenuePerMonth = useSelector(state => state.reports.reports.reportOfficeYear);
+    const revenuePerOffice = useSelector(state => state.reports.reports.reportPerOffice);
+    const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking);
+    const loadRevenuePerMonth = useCallback(year => {
+        dispatch(amountPerYear(officeBranch.id, year));
     }, [dispatch]);
-    const loadAmountPerOffice = useCallback(async (officeBranchId, month) => {
-        await dispatch(loadAmountPerOffice(officeBranchId, month));
+    const loadRevenuePerOffice = useCallback(month => {
+        dispatch(amountPerOffice(officeBranch.id, month));
     }, [dispatch]);
-    const loadBookingsQuantityPerOffice = useCallback(async (officeBranchId, month) => {
-        await dispatch(booking(officeBranchId, month));
+    const loadBookingsQuantityPerOffice = useCallback(month => {
+        dispatch(booking(officeBranch.id, month));
     }, [dispatch]);
 
     return <Dashboard
@@ -39,7 +42,10 @@ export const DashboardContainer = () => {
         offices={offices}
         reports={reports}
         loadBookingsQuantityPerOffice={loadBookingsQuantityPerOffice}
-        loadAmountPerMonth={loadAmountPerMonth}
-        loadAmountPerOffice={loadAmountPerOffice}
+        bookingsQuantityPerOffice={bookingsQuantityPerOffice}
+        loadRevenuePerMonth={loadRevenuePerMonth}
+        revenuePerMonth={revenuePerMonth}
+        loadRevenuePerOffice={loadRevenuePerOffice}
+        revenuePerOffice={revenuePerOffice}
     />;
 };

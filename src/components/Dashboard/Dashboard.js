@@ -11,15 +11,17 @@ function Dashboard({
   collaborators,
   loadOffices,
   offices,
-  loadAmountPerOffice,
+  loadRevenuePerOffice,
   loadBookingsQuantityPerOffice,
-  loadAmountPerMonth,
-  reports
+  loadRevenuePerMonth,
+  reports,
+  revenuePerMonth,
+  // bookingsQuantityPerOffice,
+  revenuePerOffice,
 }) {
   let capacityTotal = 0;
   let collaboratorTotal = collaborators ? collaborators.length : 0;
   offices.map(office => capacityTotal += office.capacity)
-
   useEffect(() => {
     loadOffices()
     loadCollaborators()
@@ -42,7 +44,8 @@ function Dashboard({
             collaboratorTotal={collaboratorTotal}
             capacityTotal={capacityTotal}
             branch={officeBranch}
-            reports={reports}
+            currentYearRevenue={revenuePerMonth}
+            loadRevenuePerMonth={loadRevenuePerMonth}
           />
         </Container>
         <Row>
@@ -56,10 +59,10 @@ function Dashboard({
         <DashboardIncomeStatistics
           monthFilter={monthFilter}
           yearFilter={yearFilter}
-          branch={officeBranch}
-          reports={reports}
-          amountYear={loadAmountPerMonth}
-          amountPerOffice={loadAmountPerOffice}
+          revenuePerOffice={revenuePerOffice}
+          revenuePerMonth={revenuePerMonth}
+          loadRevenuePerMonth={loadRevenuePerMonth}
+          loadRevenuePerOffice={loadRevenuePerOffice}
           offices={offices}
         />
         <Row>
