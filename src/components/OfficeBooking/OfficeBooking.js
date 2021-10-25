@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { includes } from 'lodash-es';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Datetime from 'react-datetime';
@@ -6,7 +7,7 @@ import { useLocation } from 'react-router';
 import {
     Badge,
     Button, Card, Col, Form,
-    FormGroup, Input, Label, Row
+    FormGroup, Input, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 import { getErrorMessage } from '../../utils/bookingTranslations';
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
@@ -114,6 +115,10 @@ export const OfficeBooking = ({
         return <Badge color="danger">Privada</Badge>
     }
 
+    const daysOfWeek = [
+        "MONDAY", "TUESDAY", "WEDNESDAY",
+        "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    ]
     const getDay = day => {
         switch (day) {
             case ("MONDAY"): return "Lunes"
@@ -124,6 +129,10 @@ export const OfficeBooking = ({
             case ("SATURDAY"): return "Sábado"
             case ("SUNDAY"): return "Domingo"
         }
+    }
+    const getLabelColor = day => {
+        return includes(inactivities.map(inactivity => inactivity.dayOfWeek), day)
+            ? "danger" : "info"
     }
 
     const renderBookingForm = () => {
@@ -170,20 +179,27 @@ export const OfficeBooking = ({
                                     </div>
                                 </Row>
                                 <Row style={{ paddingLeft: "5%" }}>
-                                    
+
                                 </Row>
-                                {
-                                    inactivities.length === 0 ? "" : (
-                                        <>
-                                            <Row style={{ paddingLeft: "5%" }}>
-                                                <Label htmlFor="officePrice" className="label-form">Dias en que la oficina no está disponible </Label>
-                                            </Row>
-                                            <Row style={{ paddingLeft: "5%" }}>
-                                                {inactivities.map(inactivity => <Badge key={inactivity.id} color="info">{getDay(inactivity.dayOfWeek)}</Badge>)}
-                                            </Row>
-                                        </>
-                                    )
-                                }
+                                <Row style={{ paddingLeft: "5%" }}>
+                                    <Label htmlFor="officePrice" className="label-form">Disponibilidad </Label>
+                                </Row>
+                                <Row style={{ paddingLeft: "5%" }}>
+                                    {
+                                        daysOfWeek.map(day =>
+                                            <Badge id={`down-${day}`} key={day} color={getLabelColor(day)}>
+                                                {
+                                                    getLabelColor(day) === "danger"
+                                                        ? <UncontrolledTooltip placement="down" target={`down-${day}`} delay={0}>
+                                                            No disponible
+                                                        </UncontrolledTooltip> : <></>
+                                                }
+
+                                                {getDay(day)}
+                                            </Badge>
+                                        )
+                                    }
+                                </Row>
                             </Form>
                         </Col>
                         <Col xs="12" md="6" lg="6" xg="6">
