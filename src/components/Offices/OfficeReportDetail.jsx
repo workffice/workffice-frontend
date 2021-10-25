@@ -1,9 +1,9 @@
-import React from 'react'
-import image from '../../assets/img/bg/rawpixel-com.jpg';
+import React from 'react';
 import { Col, Row } from 'reactstrap';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 
 export const OfficeReportDetail = (props) => {
-    const { capacity, description, /* id, imageUrl, */ name, price, privacy, table } = props.office;
+    const { capacity, description, /* id,*/ imageUrl, name, price, privacy, table } = props.office;
     return (
 
         <form>
@@ -12,7 +12,7 @@ export const OfficeReportDetail = (props) => {
                     <Row style={{ paddingLeft: 20 }} >
                         <Col xs="6" md="6" lg="6" xg="6">
                             <div className="imageContainer" style={{ width: '80%' }}>
-                                <img className="office-branch-card-image" src={image} />
+                                <Cloudinary publicId={imageUrl} className="office-branch-card-image" />
                             </div>
                         </Col>
                         <Col xs="6" md="6" lg="6" xg="6">
@@ -35,7 +35,7 @@ export const OfficeReportDetail = (props) => {
 
                 <Col xs="12" md="12" lg="12" xg="12" style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <hr style={{ borderWidth: 2, borderBlockColor: '#133148', marginTop: 8 }} />
-                    <Row style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
+                    <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                         <Col>
                             <div className='capacity'>
                                 <label htmlFor="capacity" className="form-label">Capacidad: <strong className="infoDetail">{capacity}</strong></label>

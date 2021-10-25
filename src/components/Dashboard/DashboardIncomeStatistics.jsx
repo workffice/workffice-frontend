@@ -1,36 +1,31 @@
-import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
-import { Line } from 'react-chartjs-2'
+import { uniqueId } from 'lodash-es';
+import React, { useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
 import Select from 'react-select';
-import { chartExample1 } from "../../variables/charts.js";
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    Form,
-    Row,
-    Col,
-    Table,
-    Badge
+    Badge, Card, CardBody, CardHeader, CardTitle, Col, Form,
+    Row, Table
 } from "reactstrap";
-import { useSelector } from 'react-redux';
-import { DashboardRowTable } from './DashboardRowTable.jsx';
 import { monthDataReport } from '../../utils/filters.js';
-import { Loading } from '../Common/Loading/Loading'
+import { chartExample1 } from "../../variables/charts.js";
+import { DashboardRowTable } from './DashboardRowTable.jsx';
 
-export const DashboardIncomeStatistics = (props) => {
-    const date = new Date().getMonth();
-    const [dataLoaded, setDataLoaded] = useState(false);
-    // reports state
-    const offices = useSelector(state => state.offices);
-    const { reports } = props;
-    const { reportPerOffice, reportOfficeYear } = reports;
-    // callbacks props
-    const { amountPerOffice, amountYear } = props;
+export const DashboardIncomeStatistics = ({
+    monthFilter,
+    yearFilter,
+    revenuePerOffice,
+    revenuePerMonth,
+    loadRevenuePerMonth,
+    loadRevenuePerOffice,
+    offices,
+}) => {
+    const date = new Date()
+    const currentMonth = date.getMonth()
+    const currentYear = date.getFullYear()
     const reportOfficeRow = () => {
-        if (reportPerOffice.length > 0 && offices.length > 0) {
-            return reportPerOffice.map(office => {
+        if (revenuePerOffice.length > 0 && offices.length > 0) {
+            return revenuePerOffice.map(office => {
                 let officeFound = offices.find(oFound => oFound.id == office.officeId)
                 const officeData = { ...office, name: officeFound.name };
                 return officeData;
@@ -38,27 +33,27 @@ export const DashboardIncomeStatistics = (props) => {
         }
     }
     const totalAmountPerOffice = () => {
-        if (reportPerOffice.length > 0 && offices.length > 0) {
+        if (revenuePerOffice.length > 0 && offices.length > 0) {
             let total = 0;
-            reportPerOffice.forEach(office => {
+            revenuePerOffice.forEach(office => {
                 return total += parseInt(office.totalAmount);
             })
             return total;
         }
     }
     const total = () => {
-        if (reportOfficeYear.length > 0) {
-            return reportOfficeYear.reduce((prevValue, currentValue) => {
+        if (revenuePerMonth.length > 0) {
+            return revenuePerMonth.reduce((prevValue, currentValue) => {
                 return prevValue += currentValue.totalAmount;
             }, 0);
         }
     }
     const data = () => {
         let dataReportChart = [];
-        if (reportOfficeYear.length > 0 && monthDataReport.length > 0) {
+        if (revenuePerMonth.length > 0 && monthDataReport.length > 0) {
             monthDataReport.forEach(monthDR => {
                 if (monthDR) {
-                    let found = reportOfficeYear.find(report => report.month == monthDR.monthData)
+                    let found = revenuePerMonth.find(report => report.month == monthDR.monthData)
                     found ? dataReportChart.push(monthDR.totalAmount = found.totalAmount) : dataReportChart.push(monthDR.totalAmount);
                 }
             });
@@ -68,17 +63,12 @@ export const DashboardIncomeStatistics = (props) => {
         return chartData;
     }
 
-    useEffect(() => {
-        reportOfficeRow();
-    }, [reportPerOffice])
-
-    useEffect(() => {
-        let result = data();
-        setDataLoaded(true)
-        total();
-        return result;
-    }, [reportOfficeYear]);
-
+    useEffect(async () => {
+        loadRevenuePerOffice(monthFilter[currentMonth].value)
+    }, [])
+    useEffect(async () => {
+        loadRevenuePerMonth(currentYear)
+    }, [])
 
     const validate = values => {
         const errors = {};
@@ -96,21 +86,21 @@ export const DashboardIncomeStatistics = (props) => {
     };
     const amountOfficeForm = useFormik({
         initialValues: {
-            monthOffice: props.monthFilter[date]
+            monthOffice: monthFilter[currentMonth]
         },
         validateOffice,
         onSubmit: async (values) => {
             const month = values.monthOffice.value;
-            await amountPerOffice(props.branch.id, month);
+            await loadRevenuePerOffice(month);
         },
     });
     const amountYearForm = useFormik({
         initialValues: {
-            year: 2021
+            year: currentYear
         },
         validate,
-        onSubmit: async (values) => {   
-            await amountYear(props.branch.id, values.year.value)
+        onSubmit: async (values) => {
+            await loadRevenuePerMonth(values.year.value)
         },
     });
 
@@ -138,7 +128,7 @@ export const DashboardIncomeStatistics = (props) => {
                                                 amountOfficeForm.submitForm();
                                             }}
                                             onBlur={amountOfficeForm.handleBlur}
-                                            options={props.monthFilter}
+                                            options={monthFilter}
                                         />
                                     </div>
                                 </Form>
@@ -158,7 +148,9 @@ export const DashboardIncomeStatistics = (props) => {
                                     <tbody>
                                         {
                                             reportOfficeRow() && reportOfficeRow().length &&
-                                            (reportOfficeRow().map(office => <DashboardRowTable key={office.id} title={office.name} value={office.totalAmount} />))
+                                            (reportOfficeRow().map(office =>
+                                                <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalAmount} />
+                                            ))
 
                                         }
                                     </tbody>
@@ -203,7 +195,7 @@ export const DashboardIncomeStatistics = (props) => {
                                             amountYearForm.submitForm();
                                         }}
                                         closeMenuOnSelect={true}
-                                        options={props.yearFilter}
+                                        options={yearFilter}
 
                                     />
                                 </div>
@@ -215,13 +207,12 @@ export const DashboardIncomeStatistics = (props) => {
                             Total ingresos mensuales
                         </h6>
                         {
-                            dataLoaded ? <Line
+                            <Line
                                 data={data}
                                 options={chartExample1.options}
                                 height={180}
                                 width={626}
-                            /> :
-                                <Loading />
+                            />
                         }
 
                     </CardBody>

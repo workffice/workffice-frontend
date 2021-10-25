@@ -25,7 +25,7 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
     <>
       <Card>
         <CardBody>
-          <Cloudinary className="office-branch-card-image" height={300} publicId={imageUrl} />
+          <Cloudinary className="office-branch-card-image" height="300" publicId={imageUrl} />
           <CardHeader>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
               <h5 style={{ marginBottom: "0", marginRight: "3%" }}>{name}</h5>
