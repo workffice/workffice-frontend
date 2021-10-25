@@ -1,21 +1,21 @@
 import { useFormik } from 'formik';
+import { uniqueId } from 'lodash-es';
 import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { Card, CardBody, CardHeader, CardTitle, Col, Form, Row, Table } from 'reactstrap';
 import { OfficeReportDetail } from '../Offices/OfficeReportDetail';
-// import { useSelector } from 'react-redux';
 import { DashboardRowTable } from './DashboardRowTable';
 
-export const DashboardOfficeBooking = (props) => {
-    const date = new Date().getMonth();
-    // const offices = useSelector(state => state.offices);
-    const { reports, offices } = props;
-    const { reportOfficeBooking } = reports;
-    const { bookingOffice } = props;
-    // callbacks props
+export const DashboardOfficeBooking = ({
+    monthFilter,
+    offices,
+    loadBookingsQuantityPerOffice,
+    bookingsQuantityPerOffice,
+}) => {
+    const currentMonth = new Date().getMonth();
     const bookingOfficeRow = () => {
-        if (reportOfficeBooking && reportOfficeBooking.length > 0 && offices.length > 0) {
-            return reportOfficeBooking.map(office => {
+        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0 && offices.length > 0) {
+            return bookingsQuantityPerOffice.map(office => {
                 let officeFound = offices.find(oFound => oFound.id == office.officeId)
                 const officeData = { ...office, name: officeFound.name };
                 return officeData;
@@ -23,9 +23,9 @@ export const DashboardOfficeBooking = (props) => {
         }
     }
     const bestOffice = () => {
-        if (reportOfficeBooking && reportOfficeBooking.length > 0) {
+        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0) {
             let bestOfficeBooking = null;
-            reportOfficeBooking.forEach(office => {
+            bookingsQuantityPerOffice.forEach(office => {
                 if (bestOfficeBooking == null) bestOfficeBooking = office;
                 if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
             });
@@ -35,10 +35,8 @@ export const DashboardOfficeBooking = (props) => {
     }
 
     useEffect(() => {
-        bookingOfficeRow();
-        bestOffice();
-        monthSelected();
-    }, [reportOfficeBooking, bestOffice])
+        loadBookingsQuantityPerOffice(monthFilter[currentMonth].value)
+    }, [])
 
     const validate = values => {
         const errors = {};
@@ -49,11 +47,11 @@ export const DashboardOfficeBooking = (props) => {
     };
     const bookingOfficeForm = useFormik({
         initialValues: {
-            month: props.monthFilter[date]
+            month: monthFilter[currentMonth]
         },
         validate,
         onSubmit: async (values) => {
-            await bookingOffice(props.branch.id, values.month.value)
+            await loadBookingsQuantityPerOffice(values.month.value)
         },
     });
     const monthSelected = () => {
@@ -102,7 +100,7 @@ export const DashboardOfficeBooking = (props) => {
                                                 bookingOfficeForm.submitForm();
                                             }}
                                             onBlur={bookingOfficeForm.handleBlur}
-                                            options={props.monthFilter}
+                                            options={monthFilter}
 
                                         />
                                     </Form>
@@ -123,7 +121,7 @@ export const DashboardOfficeBooking = (props) => {
                                     <tbody>
                                         {
                                             bookingOfficeRow() && bookingOfficeRow().length &&
-                                            (bookingOfficeRow().map(office => <DashboardRowTable key={office.id} title={office.name} value={office.totalBookings} />))
+                                            (bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />))
                                         }
                                     </tbody>
 

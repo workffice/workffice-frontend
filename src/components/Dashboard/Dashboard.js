@@ -16,7 +16,7 @@ function Dashboard({
   loadRevenuePerMonth,
   reports,
   revenuePerMonth,
-  // bookingsQuantityPerOffice,
+  bookingsQuantityPerOffice,
   revenuePerOffice,
 }) {
   let capacityTotal = 0;
@@ -75,9 +75,9 @@ function Dashboard({
         </Row>
         <DashboardOfficeBooking
           monthFilter={monthFilter}
-          branch={officeBranch}
           reports={reports}
-          bookingOffice={loadBookingsQuantityPerOffice}
+          bookingsQuantityPerOffice={bookingsQuantityPerOffice}
+          loadBookingsQuantityPerOffice={loadBookingsQuantityPerOffice}
           offices={offices}
         />
       </div>

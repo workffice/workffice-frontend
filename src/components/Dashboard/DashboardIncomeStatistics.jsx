@@ -20,6 +20,9 @@ export const DashboardIncomeStatistics = ({
     loadRevenuePerOffice,
     offices,
 }) => {
+    const date = new Date()
+    const currentMonth = date.getMonth()
+    const currentYear = date.getFullYear()
     const reportOfficeRow = () => {
         if (revenuePerOffice.length > 0 && offices.length > 0) {
             return revenuePerOffice.map(office => {
@@ -61,12 +64,10 @@ export const DashboardIncomeStatistics = ({
     }
 
     useEffect(async () => {
-        const date = new Date()
-        loadRevenuePerOffice(monthFilter[date.getMonth()].value)
+        loadRevenuePerOffice(monthFilter[currentMonth].value)
     }, [])
     useEffect(async () => {
-        const date = new Date()
-        loadRevenuePerMonth(date.getFullYear())
+        loadRevenuePerMonth(currentYear)
     }, [])
 
     const validate = values => {
@@ -85,7 +86,7 @@ export const DashboardIncomeStatistics = ({
     };
     const amountOfficeForm = useFormik({
         initialValues: {
-            monthOffice: monthFilter[new Date().getMonth()]
+            monthOffice: monthFilter[currentMonth]
         },
         validateOffice,
         onSubmit: async (values) => {
@@ -95,7 +96,7 @@ export const DashboardIncomeStatistics = ({
     });
     const amountYearForm = useFormik({
         initialValues: {
-            year: 2021
+            year: currentYear
         },
         validate,
         onSubmit: async (values) => {
