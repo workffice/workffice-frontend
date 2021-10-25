@@ -2,6 +2,7 @@ import { includes } from 'lodash-es';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
+import { COLLABORATOR_RESOURCE } from '../../stores/actions/errors/permissionActions';
 import { ACCESS_TYPE_READ, COLLABORATOR_FORBIDDEN_MESSAGE, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import Forbidden from '../Common/Forbidden/Forbidden';
@@ -40,7 +41,7 @@ export const Collaborators = ({
   const renderCollaborators = () => {
     if (loading)
       return <Loading />
-    if (permission.isForbidden && includes(permission.resources, "collaborator"))
+    if (permission.isForbidden && includes(permission.resources, COLLABORATOR_RESOURCE))
       return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
     else {
       return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {

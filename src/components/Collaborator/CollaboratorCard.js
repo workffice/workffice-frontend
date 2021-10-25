@@ -3,6 +3,7 @@ import { includes } from 'lodash-es';
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { Badge, Button, Form, FormGroup } from 'reactstrap';
+import { ROLE_RESOURCE } from '../../stores/actions/errors/permissionActions';
 import { getStatus } from '../../utils/collaboratorTranslations';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import { DeleteConfirmation } from '../Common/Alert/DeleteConfirmation';
@@ -141,7 +142,7 @@ export const CollaboratorCard = props => {
               }) : []}
             />
             {
-              includes(permission.resources, "role") ?
+              includes(permission.resources, ROLE_RESOURCE) ?
                 <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
                 : <></>
             }

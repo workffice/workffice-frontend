@@ -11,6 +11,7 @@ import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent"
 import Forbidden from "../../../components/Common/Forbidden/Forbidden";
 import { Notification } from "../../../components/Common/Notification/Notification";
 import { UserUpdate } from "../../../components/User/UserUpdate";
+import { COLLABORATOR_RESOURCE } from '../../../stores/actions/errors/permissionActions';
 import { COLLABORATOR_FORBIDDEN_MESSAGE } from "../../../utils/collaboratorTranslations";
 import CollaboratorRow from "./CollaboratorRow";
 
@@ -45,7 +46,7 @@ export const UserProfile = ({
     }
 
     const renderCollaborators = () => {
-        if (permission.isForbidden && includes(permission.resources, "collaborator"))
+        if (permission.isForbidden && includes(permission.resources, COLLABORATOR_RESOURCE))
             return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
         return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
             return <CollaboratorRow key={collaborator.id} {...collaborator} />

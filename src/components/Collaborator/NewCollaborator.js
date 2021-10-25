@@ -8,6 +8,7 @@ import { Notification } from '../Common/Notification/Notification';
 import Forbidden from "../Common/Forbidden/Forbidden"
 import { includes } from 'lodash-es';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import { ROLE_RESOURCE } from '../../stores/actions/errors/permissionActions';
 
 export const NewCollaborator = ({ permission, notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
@@ -158,7 +159,7 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
                     {formik.errors.roles ? (
                       <div className="error">{formik.errors.roles}</div>
                     ) : <div></div>}
-                    {permission.isForbidden && includes(permission.resources, "role") ?
+                    {permission.isForbidden && includes(permission.resources, ROLE_RESOURCE) ?
                     <Forbidden message={ROLE_FORBIDDEN_MESSAGE}/> : <></>}
                   </FormGroup>
                 </div>
