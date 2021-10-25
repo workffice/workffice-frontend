@@ -190,7 +190,7 @@ export const OfficeBooking = ({
                                             <Badge id={`down-${day}`} key={day} color={getLabelColor(day)}>
                                                 {
                                                     getLabelColor(day) === "danger"
-                                                        ? <UncontrolledTooltip placement="down" target={`down-${day}`} delay={0}>
+                                                        ? <UncontrolledTooltip placement="bottom" target={`down-${day}`} delay={0}>
                                                             No disponible
                                                         </UncontrolledTooltip> : <></>
                                                 }
@@ -284,27 +284,27 @@ export const OfficeBooking = ({
                                     }
 
                                 </FormGroup>
+                                <Row style={{ marginTop: '1%', marginBottom: '1%' }}>
+                                    <Col style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Button
+                                            className="btn-round btn-primary"
+                                            color="primary"
+                                            type="submit"
+                                            disabled={formik.isSubmitting}>
+                                            Alquilar Oficina
+                                        </Button>
+                                        <Button
+                                            type="reset"
+                                            className="btn-round btn-info cho-container"
+                                            color="info"
+                                            onClick={mpCheckout ? mpCheckout.open : null}
+                                            disabled={mercadoPagoPreferenceId ? false : true}
+                                        >
+                                            Pagar
+                                        </Button>
+                                    </Col>
+                                </Row>
                             </Form>
-                        </Col>
-                    </Row>
-                    <Row style={{ marginTop: '1%', marginBottom: '1%' }}>
-                        <Col style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Button
-                                className="btn-round btn-primary"
-                                color="primary"
-                                type="submit"
-                                disabled={formik.isSubmitting}>
-                                Alquilar Oficina
-                            </Button>
-                            <Button
-                                type="reset"
-                                className="btn-round btn-info cho-container"
-                                color="info"
-                                onClick={mpCheckout ? mpCheckout.open : null}
-                                disabled={mercadoPagoPreferenceId ? false : true}
-                            >
-                                Pagar
-                            </Button>
                         </Col>
                     </Row>
                 </Card>
