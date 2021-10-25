@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
 import { useFormik } from 'formik';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
-import { Card, CardHeader, CardTitle, CardBody, Col, Row, Table, Form } from 'reactstrap';
-import { useSelector } from 'react-redux';
-import { DashboardRowTable } from './DashboardRowTable';
+import { Card, CardBody, CardHeader, CardTitle, Col, Form, Row, Table } from 'reactstrap';
 import { OfficeReportDetail } from '../Offices/OfficeReportDetail';
+// import { useSelector } from 'react-redux';
+import { DashboardRowTable } from './DashboardRowTable';
 
 export const DashboardOfficeBooking = (props) => {
     const date = new Date().getMonth();
-    const offices = useSelector(state => state.offices);
-    const { reports } = props;
+    // const offices = useSelector(state => state.offices);
+    const { reports, offices } = props;
     const { reportOfficeBooking } = reports;
     const { bookingOffice } = props;
     // callbacks props
     const bookingOfficeRow = () => {
-        if (reportOfficeBooking.length > 0 && offices.length > 0) {
+        if (reportOfficeBooking && reportOfficeBooking.length > 0 && offices.length > 0) {
             return reportOfficeBooking.map(office => {
                 let officeFound = offices.find(oFound => oFound.id == office.officeId)
                 const officeData = { ...office, name: officeFound.name };
@@ -22,23 +22,23 @@ export const DashboardOfficeBooking = (props) => {
             })
         }
     }
-    const betterOffice = () => {
-        if (offices && reportOfficeBooking.length > 0) {
-            let betterOfficeBooking = null;
+    const bestOffice = () => {
+        if (reportOfficeBooking && reportOfficeBooking.length > 0) {
+            let bestOfficeBooking = null;
             reportOfficeBooking.forEach(office => {
-                if (betterOfficeBooking == null) betterOfficeBooking = office;
-                if (betterOfficeBooking.totalBookings < office.totalBookings) betterOfficeBooking = office;
+                if (bestOfficeBooking == null) bestOfficeBooking = office;
+                if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
             });
 
-            return offices.find(office => office.id === betterOfficeBooking.officeId);
+            return offices.find(office => office.id === bestOfficeBooking.officeId);
         }
     }
 
     useEffect(() => {
         bookingOfficeRow();
-        betterOffice();
+        bestOffice();
         monthSelected();
-    }, [reportOfficeBooking, betterOffice])
+    }, [reportOfficeBooking, bestOffice])
 
     const validate = values => {
         const errors = {};
@@ -74,7 +74,7 @@ export const DashboardOfficeBooking = (props) => {
                     </CardHeader>
                     <CardBody>
                         {
-                            betterOffice() && <OfficeReportDetail office={betterOffice()} />
+                            bestOffice() && <OfficeReportDetail office={bestOffice()} />
                         }
                     </CardBody>
                 </Card>
@@ -123,7 +123,7 @@ export const DashboardOfficeBooking = (props) => {
                                     <tbody>
                                         {
                                             bookingOfficeRow() && bookingOfficeRow().length &&
-                                            (bookingOfficeRow().map(office => <DashboardRowTable key={office.officeId} title={office.name} value={office.totalBookings} />))
+                                            (bookingOfficeRow().map(office => <DashboardRowTable key={office.id} title={office.name} value={office.totalBookings} />))
                                         }
                                     </tbody>
 

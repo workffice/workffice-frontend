@@ -14,7 +14,6 @@ import {
     Table,
     Badge
 } from "reactstrap";
-import { useSelector } from 'react-redux';
 import { DashboardRowTable } from './DashboardRowTable.jsx';
 import { monthDataReport } from '../../utils/filters.js';
 import { Loading } from '../Common/Loading/Loading'
@@ -23,8 +22,7 @@ export const DashboardIncomeStatistics = (props) => {
     const date = new Date().getMonth();
     const [dataLoaded, setDataLoaded] = useState(false);
     // reports state
-    const offices = useSelector(state => state.offices);
-    const { reports } = props;
+    const { offices, reports } = props;
     const { reportPerOffice, reportOfficeYear } = reports;
     // callbacks props
     const { amountPerOffice, amountYear } = props;
