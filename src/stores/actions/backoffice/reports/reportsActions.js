@@ -1,4 +1,3 @@
-import { setIsLoading } from '../../';
 import { amountPerOfficeAPI, amountPerYearAPI, bookingOfficeAPI } from "../../../../api/backoffice/reports";
 import { REPORT_RESOURCE, setForbiddenAccessAction } from "../../errors/permissionActions";
 
@@ -20,14 +19,11 @@ export const fetch_amount_per_year = report => ({
 });
 
 export const amountPerOffice = (officeBranchId, month) => async (dispatch) => {
-    dispatch(setIsLoading(true))
     try {
         dispatch(fetch_amount_per_office(await amountPerOfficeAPI(officeBranchId, month)));
     } catch (error) {
         if (error.error === "OFFICE_BRANCH_FORBIDDEN")
             dispatch(setForbiddenAccessAction(REPORT_RESOURCE));
-    } finally {
-        dispatch(setIsLoading(false))
     }
 }
 

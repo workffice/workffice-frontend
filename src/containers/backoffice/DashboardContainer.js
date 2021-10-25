@@ -10,7 +10,6 @@ export const DashboardContainer = () => {
     const dispatch = useDispatch();
     const officeBranch = readFromLocalStorage("officeBranch");
     const permission = useSelector(state => state.permission)
-    const isLoading = useSelector(state => state.isLoading)
     // Collaborators
     const loadCollaborators = useCallback(() => {
         dispatch(collaboratorsList(officeBranch.id));
@@ -50,6 +49,5 @@ export const DashboardContainer = () => {
         loadRevenuePerOffice={loadRevenuePerOffice}
         revenuePerOffice={revenuePerOffice}
         permission={permission}
-        isLoading={isLoading}
     />;
 };

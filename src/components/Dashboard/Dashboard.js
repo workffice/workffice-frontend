@@ -4,7 +4,6 @@ import { Col, Container, Row } from "reactstrap";
 import { REPORT_RESOURCE } from "../../stores/actions/errors/permissionActions";
 import { monthFilter, yearFilter } from '../../utils/filters';
 import Forbidden from '../Common/Forbidden/Forbidden';
-import { Loading } from '../Common/Loading/Loading';
 import { DashboardGeneralCards } from "./DashboardGeneralCards.jsx";
 import { DashboardIncomeStatistics } from "./DashboardIncomeStatistics.jsx";
 import { DashboardOfficeBooking } from "./DashboardOfficeBooking.jsx";
@@ -23,7 +22,6 @@ function Dashboard({
   bookingsQuantityPerOffice,
   revenuePerOffice,
   permission,
-  isLoading,
 }) {
   let capacityTotal = 0;
   let collaboratorTotal = collaborators ? collaborators.length : 0;
@@ -88,8 +86,8 @@ function Dashboard({
   }
 
   const render = () => {
-    if (isLoading)
-      return <Row style={{display:"flex", justifyContent:"center"}}><Loading /></Row>
+    // if (isLoading)
+    //   return <Row style={{display:"flex", justifyContent:"center"}}><Loading /></Row>
     if (permission.isForbidden && includes(permission.resources, REPORT_RESOURCE))
       return <Forbidden message="No tienes acceso a los reportes de esta sucursal" />
     else
