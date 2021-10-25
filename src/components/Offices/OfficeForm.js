@@ -110,7 +110,10 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                 tablesQuantity: tablesQuantity,
                 capacityPerTable: capacityPerTable,
                 photo: photo,
-                inactivityDays: inactivityDays.map(day => day.value),
+                inactivityDays: inactivityDays.map(day => ({
+                    type: "RECURRING_DAY",
+                    dayOfWeek: day.value
+                })),
             }
             onSubmit(officeFormData)
         },
@@ -184,7 +187,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                     <Select
                                         className="react-select"
                                         classNamePrefix="react-select"
-                                        placeholder="Seleccione los días que la oficina no está disponible"
+                                        placeholder="Seleccione días"
                                         name="inactivityDays"
                                         id="inactivityDays"
                                         closeMenuOnSelect={false}
