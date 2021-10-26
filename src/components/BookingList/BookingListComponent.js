@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-    Badge, Button, Card, CardBody, CardHeader, Col, Container, Label, Row, UncontrolledTooltip
+    Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 
 export const BookingListComponent = (props) => {
@@ -35,17 +35,6 @@ export const BookingListComponent = (props) => {
         <div className="content">
             <Container>
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
-                    <CardHeader>
-                        {/* {
-                                <Alert
-                                    isOpen={error.show}
-                                    color="danger"
-                                    fade={false}
-                                >
-                                    {'Ocurrió un error. Intente nuevamente'}
-                                </Alert> */}
-                        {/* } */}
-                    </CardHeader>
                     <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
                         <Col>
                             <h5 style={{ marginBottom: 0 }}>
@@ -58,7 +47,7 @@ export const BookingListComponent = (props) => {
                                     Ver sucursal
                                 </UncontrolledTooltip>
                                 <Button id={`officeBranch-${officeBranchId}`} margin="0" size="sm" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i className="nc-icon nc-istanbul"></i>
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
                                 </Button>
                             </Link>
                         </Col>

@@ -3,6 +3,7 @@ import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
@@ -11,11 +12,10 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
-import { UserBookingListContainer } from '../containers/booking/BookingListContainer';
 
 export const routes = [
   {
@@ -242,6 +242,14 @@ export const routes = [
         name: 'Mis reservas',
         mini: 'LR',
         component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/bookings/history',
+        name: 'Reservas anteriores',
+        mini: 'RA',
+        component: UserPastBookingListContainer,
         layout: '/admin',
         visibility: true
       },

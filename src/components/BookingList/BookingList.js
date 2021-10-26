@@ -7,6 +7,7 @@ import {
     Col, Form,
     FormGroup, Label, Row
 } from 'reactstrap';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { BookingListComponent } from './BookingListComponent';
 
 export const BookingList = ({ user, bookings, loadBookings, displayDateSelector }) => {
@@ -69,7 +70,7 @@ export const BookingList = ({ user, bookings, loadBookings, displayDateSelector 
                 </Form> : <></>
             }
             {
-                bookings.map(booking => {
+                bookings.length !== 0 ? bookings.map(booking => {
                     return <BookingListComponent
                         officeName={booking.officeName}
                         key={booking.id}
@@ -86,7 +87,7 @@ export const BookingList = ({ user, bookings, loadBookings, displayDateSelector 
                         paymentTypeId={booking.paymentInformation ? booking.paymentInformation.paymentTypeId : "No definido"}
                         officeBranchId={booking.officeBranchId}
                     />
-                })
+                }) : <EmptyComponent/>
             }
         </div >
     )
