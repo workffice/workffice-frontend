@@ -239,7 +239,7 @@ export const routes = [
     views: [
       {
         path: '/bookings/list',
-        name: 'Listado de reservas',
+        name: 'Mis reservas',
         mini: 'LR',
         component: UserBookingListContainer,
         layout: '/admin',

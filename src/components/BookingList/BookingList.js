@@ -41,7 +41,7 @@ export const BookingList = ({ user, bookings, loadBookings }) => {
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1 >
-                        Listado de <small color="#EB5D60">reservas</small>
+                        Mis <small color="#EB5D60">reservas</small>
                     </h1>
                     <hr />
                 </Col>
