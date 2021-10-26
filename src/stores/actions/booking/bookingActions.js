@@ -61,10 +61,10 @@ export const fetchUserCurrentBookingsAction = bookings => ({
     payload: bookings
 })
 
-export const fetchUserCurrentBookings = userEmail => async dispatch => {
+export const fetchUserCurrentBookings = (userEmail, page=0) => async dispatch => {
     dispatch(loadingBookingAction())
     try {
-        dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail)))
+        dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail, page)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")

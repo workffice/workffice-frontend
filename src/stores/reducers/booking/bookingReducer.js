@@ -17,7 +17,7 @@ export const mercadoPagoPreferenceReducer = (state = null, { type, payload }) =>
 }
 
 
-export const userBookingsReducer = (state = [], { type, payload }) => {
+export const userBookingsReducer = (state = {data: [], pagination: {}}, { type, payload }) => {
     switch (type) {
         case (FETCH_USER_CURRENT_BOOKINGS): return payload
         case (FETCH_USER_PAST_BOOKINGS): return payload
