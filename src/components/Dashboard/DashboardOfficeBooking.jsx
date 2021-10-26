@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { uniqueId } from 'lodash-es';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { Card, CardBody, CardHeader, CardTitle, Col, Form, Row, Table } from 'reactstrap';
 import { OfficeReportDetail } from '../Offices/OfficeReportDetail';
@@ -10,9 +11,10 @@ export const DashboardOfficeBooking = ({
     monthFilter,
     offices,
     loadBookingsQuantityPerOffice,
-    bookingsQuantityPerOffice,
+    // bookingsQuantityPerOffice,
 }) => {
-    const currentMonth = new Date().getMonth();
+    const [currentMonth, setCurrentMonth] = useState(monthFilter[new Date().getMonth()].value)
+    const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking)
     const bookingOfficeRow = () => {
         if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0 && offices.length > 0) {
             return bookingsQuantityPerOffice.map(office => {
@@ -35,23 +37,16 @@ export const DashboardOfficeBooking = ({
     }
 
     useEffect(() => {
-        loadBookingsQuantityPerOffice(monthFilter[currentMonth].value)
-    }, [])
+        loadBookingsQuantityPerOffice(currentMonth)
+    }, [currentMonth])
 
-    const validate = values => {
-        const errors = {};
-        if (!values.month) {
-            errors.month = 'Requerido.';
-        }
-        return errors;
-    };
     const bookingOfficeForm = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            month: monthFilter[currentMonth]
+            month: monthFilter[new Date().getMonth()].label
         },
-        validate,
-        onSubmit: async (values) => {
-            await loadBookingsQuantityPerOffice(values.month.value)
+        onSubmit: values => {
+            setCurrentMonth(values.month.value)
         },
     });
     const monthSelected = () => {
@@ -88,20 +83,19 @@ export const DashboardOfficeBooking = ({
                             </Col>
                             <Col sm="6">
                                 <div className="pull-right pull-right-filter" style={{ width: '70%' }}>
-                                    <Form onChange={bookingOfficeForm.handleChange}>
+                                    <Form onSubmit={bookingOfficeForm.handleSubmit}>
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
                                             name="month"
-                                            value={bookingOfficeForm.values.month}
+                                            // value={bookingOfficeForm.values.month}
                                             placeholder={bookingOfficeForm.values.month}
                                             onChange={value => {
                                                 bookingOfficeForm.setFieldValue("month", value)
                                                 bookingOfficeForm.submitForm();
                                             }}
-                                            onBlur={bookingOfficeForm.handleBlur}
+                                            onBlur={() => bookingOfficeForm.setFieldTouched("month", true)}
                                             options={monthFilter}
-
                                         />
                                     </Form>
                                 </div>

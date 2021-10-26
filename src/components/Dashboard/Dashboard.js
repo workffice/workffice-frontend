@@ -17,7 +17,6 @@ function Dashboard({
   loadRevenuePerOffice,
   loadBookingsQuantityPerOffice,
   loadRevenuePerMonth,
-  reports,
   revenuePerMonth,
   bookingsQuantityPerOffice,
   revenuePerOffice,
@@ -77,7 +76,6 @@ function Dashboard({
       </Row>
       <DashboardOfficeBooking
         monthFilter={monthFilter}
-        reports={reports}
         bookingsQuantityPerOffice={bookingsQuantityPerOffice}
         loadBookingsQuantityPerOffice={loadBookingsQuantityPerOffice}
         offices={offices}
