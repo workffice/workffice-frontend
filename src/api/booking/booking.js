@@ -12,8 +12,8 @@ export const getBookingApi = bookingId => {
     return Promise.resolve(getBooking(bookingId))
 }
 
-export const getUserCurrentBookingsApi = userEmail => {
-    return Promise.resolve(getUserCurrentBookings(userEmail))
+export const getUserCurrentBookingsApi = (userEmail, page) => {
+    return Promise.resolve(getUserCurrentBookings(userEmail, page))
 }
 
 export const getUserPastBookingsApi = (userEmail, page) => {

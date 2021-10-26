@@ -8,9 +8,9 @@ export const UserBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
     const isLoading = useSelector(state => state.loadingBooking)
-    const bookings = useSelector(state => state.userBookings)
+    const bookings = useSelector(state => state.userBookings.data || [])
     const loadBookings = useCallback(userEmail => {
-        dispatch(fetchUserCurrentBookings(userEmail))
+        dispatch(fetchUserCurrentBookings(userEmail, 0))
     }, [dispatch])
     return <BookingList
         bookings={bookings}
@@ -24,7 +24,7 @@ export const UserPastBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
     const isLoading = useSelector(state => state.loadingBooking)
-    const bookings = useSelector(state => state.userBookings)
+    const bookings = useSelector(state => state.userBookings || [])
     const loadBookings = useCallback(userEmail => {
         dispatch(fetchUserPastBookings(userEmail, 0))
     }, [dispatch])
