@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading'
-import { BookingListComponent } from './BookingListComponent';
+import { BookingComponent } from './BookingListComponent';
 
 export const BookingList = ({
     user,
@@ -56,7 +56,7 @@ export const BookingList = ({
                 </Row>
             </Row>
         return bookings.length !== 0 ? bookings.map(booking => {
-            return <BookingListComponent
+            return <BookingComponent
                 officeName={booking.officeName}
                 key={booking.id}
                 id={booking.id}

@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 
-export const BookingListComponent = (props) => {
+export const BookingComponent = (props) => {
     const {
         officeName,
         id,
@@ -141,4 +142,21 @@ export const BookingListComponent = (props) => {
             </Container>
         </div>
     )
+}
+
+BookingComponent.propTypes = {
+    id: PropTypes.string,
+    status: PropTypes.string,
+    attendeesQuantity: PropTypes.number,
+    scheduleDate: PropTypes.string,
+    startTime: PropTypes.string,
+    endTime: PropTypes.string,
+    totalAmount: PropTypes.number,
+    officeBranchId: PropTypes.string,
+    paymentInformation: PropTypes.shape({
+        providerFee: PropTypes.number,
+        currency: PropTypes.number,
+        paymentMethodId: PropTypes.number,
+        paymentTypeId: PropTypes.number,
+    })
 }
