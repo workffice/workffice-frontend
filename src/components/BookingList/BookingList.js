@@ -3,12 +3,14 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import ReactDatetimeClass from 'react-datetime';
+import { useLocation } from 'react-router';
 import {
     Col, Form,
     FormGroup, Label, Row
 } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
-import { Loading } from '../Common/Loading/Loading'
+import { Loading } from '../Common/Loading/Loading';
+import { Pagination } from '../Common/Pagination/Pagination';
 import { BookingListComponent } from './BookingListComponent';
 
 export const BookingList = ({
@@ -16,7 +18,8 @@ export const BookingList = ({
     bookings,
     loadBookings,
     isLoading,
-    displayDateSelector
+    displayDateSelector,
+    pageInfo,
 }) => {
 
     const validate = values => {
@@ -35,9 +38,11 @@ export const BookingList = ({
             console.log(date);
         }
     })
+    const query = new URLSearchParams(useLocation().search);
+    const currentPage = query.get('page')
     useEffect(() => {
         if (user)
-            loadBookings(user.email)
+            loadBookings(user.email, currentPage ? (currentPage - 1) : 0)
     }, [user ? user.id : ""])
     const formatDate = datetime => {
         return datetime.match("(.*)T.*")[1]
@@ -106,6 +111,17 @@ export const BookingList = ({
                     </Row>
                 </Form> : <></>
             }
+            <Pagination
+                currentPage={pageInfo.currentPage || 1}
+                totalPages={pageInfo.totalPages || 1}
+                uri="/admin/bookings/list"
+            // queryParams={searchQueryBuilder(
+            //     {
+            //         ...formik.values,
+            //         officeType: formik.values.officeType.value,
+            //     }
+            // )}
+            />
             {renderBookings()}
         </div >
     )
