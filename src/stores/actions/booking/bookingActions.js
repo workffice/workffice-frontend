@@ -60,7 +60,7 @@ export const fetchUserPastBookingsAction = bookings => ({
     payload: bookings
 })
 
-export const fetchUserPastBookings = (userEmail, page = 1) => async dispatch => {
+export const fetchUserPastBookings = (userEmail, page = 0) => async dispatch => {
     try {
         dispatch(fetchUserPastBookingsAction(await getUserPastBookingsApi(userEmail, page)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
