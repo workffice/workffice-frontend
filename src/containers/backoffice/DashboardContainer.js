@@ -21,7 +21,6 @@ export const DashboardContainer = () => {
     }, [dispatch]);
     const offices = useSelector(state => state.offices);
     // Reports
-    const reports = useSelector(state => state.reports.reports);
     const revenuePerMonth = useSelector(state => state.reports.reports.reportOfficeYear);
     const revenuePerOffice = useSelector(state => state.reports.reports.reportPerOffice);
     const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking);
@@ -41,7 +40,6 @@ export const DashboardContainer = () => {
         collaborators={collaborators}
         loadOffices={loadOffices}
         offices={offices}
-        reports={reports}
         loadBookingsQuantityPerOffice={loadBookingsQuantityPerOffice}
         bookingsQuantityPerOffice={bookingsQuantityPerOffice}
         loadRevenuePerMonth={loadRevenuePerMonth}
