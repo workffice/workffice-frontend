@@ -30,7 +30,7 @@ export const BookingListComponent = (props) => {
 
     const getOfficeType = () => {
         if (status === "SCHEDULED") {
-            return <Badge color="success" style={{ fontSize: 15 }}>Programada</Badge>
+            return <Badge color="success" style={{ fontSize: 18 }}>Programada</Badge>
         } else if (status === "PENDING") {
             return <Badge color="warning" style={{ fontSize: 18 }}>Pendiente</Badge>
         } else if (status === "CANCELLED") {

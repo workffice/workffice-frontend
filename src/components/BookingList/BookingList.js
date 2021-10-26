@@ -1,11 +1,34 @@
+import { useFormik } from 'formik';
+import moment from 'moment';
 import React from 'react';
+import ReactDatetimeClass from 'react-datetime';
 import {
     Row,
     Col,
+    Label,
+    Form,
+    FormGroup,
 } from 'reactstrap';
 import { BookingListComponent } from './BookingListComponent';
 
 export const BookingList = () => {
+
+    const validate = values => {
+        const errors = {};
+        if (!values.date)
+            errors.date = 'Requerido.';
+        return errors;
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            date: moment(),
+        },
+        validate,
+        onSubmit: async ({ date }) => {
+            console.log(date);
+        }
+    })
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -16,7 +39,26 @@ export const BookingList = () => {
                     <hr />
                 </Col>
             </Row>
-            <BookingListComponent                
+            <Form onSubmit={formik.handleSubmit}>
+                <Row style={{display: "flex", justifyContent: "center", marginBottom: 20}}>
+                    <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
+                    <FormGroup style={{marginLeft: 20, marginTop: 10}}>
+                        <ReactDatetimeClass
+                            initialValue={formik.values.date}
+                            name="date"
+                            id="date"
+                            onChange={value => formik.setFieldValue("date", value)}
+                            timeFormat={false}
+                            inputProps={{ placeholder: "Seleccione una fecha" }}
+                            isValidDate={current => {
+                                const yesterday = moment().subtract(1, 'day');
+                                return current.isAfter(yesterday);
+                            }}
+                        />
+                    </FormGroup>
+                </Row>
+            </Form>
+            <BookingListComponent
                 officeName="Oficina número 1"
                 id="0cfad0be-69e9-469a-85e5-803507516fc7"
                 status="SCHEDULED"
@@ -31,7 +73,7 @@ export const BookingList = () => {
                 paymentTypeId="tarjeta de crédito"
                 officeBranchName="Whale"
             />
-            <BookingListComponent                
+            <BookingListComponent
                 officeName="Oficina número 1"
                 id="0cfad0be-69e9-469a-85e5-803507516fc7"
                 status="PENDING"
@@ -46,7 +88,7 @@ export const BookingList = () => {
                 paymentTypeId="tarjeta de crédito"
                 officeBranchName="Whale"
             />
-            <BookingListComponent                
+            <BookingListComponent
                 officeName="Oficina número 1"
                 id="0cfad0be-69e9-469a-85e5-803507516fc7"
                 status="CANCELLED"
