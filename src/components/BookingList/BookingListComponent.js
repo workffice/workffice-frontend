@@ -134,7 +134,7 @@ export const BookingListComponent = (props) => {
                                 <Col>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18 }}>
-                                            Impuestos: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
+                                            Tarifa: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
                                         </Label>
                                     </div>
                                 </Col>

@@ -1,34 +1,32 @@
-// import { useFormik } from 'formik';
-// import moment from 'moment';
+import { useFormik } from 'formik';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-// import ReactDatetimeClass from 'react-datetime';
-// import {
-//     Col, Form,
-//     FormGroup, Label, Row
-// } from 'reactstrap';
+import ReactDatetimeClass from 'react-datetime';
 import {
-    Col, Row
+    Col, Form,
+    FormGroup, Label, Row
 } from 'reactstrap';
 import { BookingListComponent } from './BookingListComponent';
 
-export const BookingList = ({ user, bookings, loadBookings }) => {
+export const BookingList = ({ user, bookings, loadBookings, displayDateSelector }) => {
 
-    // const validate = values => {
-    //     const errors = {};
-    //     if (!values.date)
-    //         errors.date = 'Requerido.';
-    //     return errors;
-    // };
+    const validate = values => {
+        const errors = {};
+        if (!values.date)
+            errors.date = 'Requerido.';
+        return errors;
+    };
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         date: moment(),
-    //     },
-    //     validate,
-    //     onSubmit: async ({ date }) => {
-    //         console.log(date);
-    //     }
-    // })
+    const formik = useFormik({
+        initialValues: {
+            date: moment(),
+        },
+        validate,
+        onSubmit: async ({ date }) => {
+            console.log(date);
+        }
+    })
     useEffect(() => {
         if (user)
             loadBookings(user.email)
@@ -49,25 +47,27 @@ export const BookingList = ({ user, bookings, loadBookings }) => {
                     <hr />
                 </Col>
             </Row>
-            {/* <Form onSubmit={formik.handleSubmit}>
-                <Row style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
-                    <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
-                    <FormGroup style={{ marginLeft: 20, marginTop: 10 }}>
-                        <ReactDatetimeClass
-                            initialValue={formik.values.date}
-                            name="date"
-                            id="date"
-                            onChange={value => formik.setFieldValue("date", value)}
-                            timeFormat={false}
-                            inputProps={{ placeholder: "Seleccione una fecha" }}
-                            isValidDate={current => {
-                                const yesterday = moment().subtract(1, 'day');
-                                return current.isAfter(yesterday);
-                            }}
-                        />
-                    </FormGroup>
-                </Row>
-            </Form> */}
+            {
+                displayDateSelector ? <Form onSubmit={formik.handleSubmit}>
+                    <Row style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+                        <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
+                        <FormGroup style={{ marginLeft: 20, marginTop: 10 }}>
+                            <ReactDatetimeClass
+                                initialValue={formik.values.date}
+                                name="date"
+                                id="date"
+                                onChange={value => formik.setFieldValue("date", value)}
+                                timeFormat={false}
+                                inputProps={{ placeholder: "Seleccione una fecha" }}
+                                isValidDate={current => {
+                                    const yesterday = moment().subtract(1, 'day');
+                                    return current.isAfter(yesterday);
+                                }}
+                            />
+                        </FormGroup>
+                    </Row>
+                </Form> : <></>
+            }
             {
                 bookings.map(booking => {
                     return <BookingListComponent
@@ -90,4 +90,29 @@ export const BookingList = ({ user, bookings, loadBookings }) => {
             }
         </div >
     )
+}
+
+BookingList.propTypes = {
+    user: PropTypes.shape({
+        id: PropTypes.string,
+        email: PropTypes.string
+    }),
+    bookings: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        status: PropTypes.string,
+        attendeesQuantity: PropTypes.number,
+        scheduleDate: PropTypes.string,
+        startTime: PropTypes.string,
+        endTime: PropTypes.string,
+        totalAmount: PropTypes.number,
+        officeBranchId: PropTypes.string,
+        paymentInformation: PropTypes.shape({
+            providerFee: PropTypes.number,
+            currency: PropTypes.number,
+            paymentMethodId: PropTypes.number,
+            paymentTypeId: PropTypes.number,
+        })
+    })),
+    loadBookings: PropTypes.func,
+    displayDateSelector: PropTypes.bool,
 }
