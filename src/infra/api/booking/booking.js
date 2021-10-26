@@ -37,3 +37,27 @@ export const getBooking = async bookingId => {
         return Promise.reject(error.errors[0]);
     }
 }
+
+export const getUserCurrentBookings = async userEmail => {
+    try {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=true`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return Promise.resolve(bookings.data);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
+export const getUserPastBookings = async (userEmail, page) => {
+    try {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=false&page=${page}`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return Promise.resolve(bookings.data);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}

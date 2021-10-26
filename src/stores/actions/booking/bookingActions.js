@@ -1,4 +1,4 @@
-import { bookOfficeApi, createMercadoPagoPreferenceApi } from '../../../api/backoffice/booking'
+import { bookOfficeApi, createMercadoPagoPreferenceApi } from '../../../api/booking/booking'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
 
 export const BOOK_OFFICE = 'BOOK_OFFICE'
