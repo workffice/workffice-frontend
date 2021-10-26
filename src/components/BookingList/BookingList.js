@@ -81,10 +81,10 @@ export const BookingList = ({ user, bookings, loadBookings, displayDateSelector 
                         startTime={formatHour(booking.startTime)}
                         endTime={formatHour(booking.endTime)}
                         transactionAmount={booking.totalAmount}
-                        providerFee={booking.paymentInformation ? booking.paymentInformation.providerFee : "-"}
-                        currency={booking.paymentInformation ? booking.paymentInformation.currency : "No definido"}
-                        paymentMethodId={booking.paymentInformation ? booking.paymentInformation.paymentMethodId : "No definido"}
-                        paymentTypeId={booking.paymentInformation ? booking.paymentInformation.paymentTypeId : "No definido"}
+                        providerFee={booking.payment ? booking.payment.providerFee : "-"}
+                        currency={booking.payment ? booking.payment.currency : "No definido"}
+                        paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}
+                        paymentTypeId={booking.payment ? booking.payment.paymentTypeId : "No definido"}
                         officeBranchId={booking.officeBranchId}
                     />
                 }) : <EmptyComponent/>
