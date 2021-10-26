@@ -8,9 +8,16 @@ import {
     FormGroup, Label, Row
 } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Loading } from '../Common/Loading/Loading'
 import { BookingListComponent } from './BookingListComponent';
 
-export const BookingList = ({ user, bookings, loadBookings, displayDateSelector }) => {
+export const BookingList = ({
+    user,
+    bookings,
+    loadBookings,
+    isLoading,
+    displayDateSelector
+}) => {
 
     const validate = values => {
         const errors = {};
@@ -38,6 +45,36 @@ export const BookingList = ({ user, bookings, loadBookings, displayDateSelector 
     const formatHour = datetime => {
         return datetime.match(".*T(.*):00")[1]
     }
+
+    const renderBookings = () => {
+        if (isLoading)
+            return <Row style={{ display: "flex", justifyContent: "center" }}>
+                <Row>
+                    <Col>
+                        <Loading></Loading>
+                    </Col>
+                </Row>
+            </Row>
+        return bookings.length !== 0 ? bookings.map(booking => {
+            return <BookingListComponent
+                officeName={booking.officeName}
+                key={booking.id}
+                id={booking.id}
+                status={booking.status}
+                attendeesQuantity={booking.attendeesQuantity}
+                scheduleDate={formatDate(booking.startTime)}
+                startTime={formatHour(booking.startTime)}
+                endTime={formatHour(booking.endTime)}
+                transactionAmount={booking.totalAmount}
+                providerFee={booking.payment ? booking.payment.providerFee : "-"}
+                currency={booking.payment ? booking.payment.currency : "No definido"}
+                paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}
+                paymentTypeId={booking.payment ? booking.payment.paymentTypeId : "No definido"}
+                officeBranchId={booking.officeBranchId}
+            />
+        }) : <EmptyComponent />
+    }
+
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -69,26 +106,7 @@ export const BookingList = ({ user, bookings, loadBookings, displayDateSelector 
                     </Row>
                 </Form> : <></>
             }
-            {
-                bookings.length !== 0 ? bookings.map(booking => {
-                    return <BookingListComponent
-                        officeName={booking.officeName}
-                        key={booking.id}
-                        id={booking.id}
-                        status={booking.status}
-                        attendeesQuantity={booking.attendeesQuantity}
-                        scheduleDate={formatDate(booking.startTime)}
-                        startTime={formatHour(booking.startTime)}
-                        endTime={formatHour(booking.endTime)}
-                        transactionAmount={booking.totalAmount}
-                        providerFee={booking.payment ? booking.payment.providerFee : "-"}
-                        currency={booking.payment ? booking.payment.currency : "No definido"}
-                        paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}
-                        paymentTypeId={booking.payment ? booking.payment.paymentTypeId : "No definido"}
-                        officeBranchId={booking.officeBranchId}
-                    />
-                }) : <EmptyComponent/>
-            }
+            {renderBookings()}
         </div >
     )
 }
@@ -116,4 +134,5 @@ BookingList.propTypes = {
     })),
     loadBookings: PropTypes.func,
     displayDateSelector: PropTypes.bool,
+    isLoading: PropTypes.bool,
 }

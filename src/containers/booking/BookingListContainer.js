@@ -7,6 +7,7 @@ import { fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/ac
 export const UserBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
+    const isLoading = useSelector(state => state.loadingBooking)
     const bookings = useSelector(state => state.userBookings)
     const loadBookings = useCallback(userEmail => {
         dispatch(fetchUserCurrentBookings(userEmail))
@@ -15,12 +16,14 @@ export const UserBookingListContainer = () => {
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
+        isLoading={isLoading}
     />
 }
 
 export const UserPastBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
+    const isLoading = useSelector(state => state.loadingBooking)
     const bookings = useSelector(state => state.userBookings)
     const loadBookings = useCallback(userEmail => {
         dispatch(fetchUserPastBookings(userEmail, 0))
@@ -29,5 +32,6 @@ export const UserPastBookingListContainer = () => {
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
+        isLoading={isLoading}
     />
 }
