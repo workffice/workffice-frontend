@@ -1,8 +1,8 @@
-import { bookOfficeApi, createMercadoPagoPreferenceApi } from '../../../api/backoffice/booking'
+import { bookOfficeApi, createMercadoPagoPreferenceApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
+import { BOOKING_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from '../errors/permissionActions'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
 
 export const BOOK_OFFICE = 'BOOK_OFFICE'
-
 
 export const bookOfficeAction = booking => ({
     type: BOOK_OFFICE,
@@ -18,8 +18,8 @@ export const bookOffice = (officeId, bookingBody) => async dispatch => {
     }
 }
 
-export const CREATE_MERCADO_PAGO_PREFERENCE = 'CREATE_MERCADO_PAGO_PREFERENCE'
 
+export const CREATE_MERCADO_PAGO_PREFERENCE = 'CREATE_MERCADO_PAGO_PREFERENCE'
 
 export const createMercadoPagoPreferenceAction = mpPreferenceId => ({
     type: CREATE_MERCADO_PAGO_PREFERENCE,
@@ -31,5 +31,41 @@ export const createMercadoPagoPreference = bookingId => async dispatch => {
         dispatch(createMercadoPagoPreferenceAction(await createMercadoPagoPreferenceApi(bookingId)))
     } catch (error) {
         dispatch(setErrorAction(error))
+    }
+}
+
+
+export const FETCH_USER_CURRENT_BOOKINGS = 'FETCH_USER_CURRENT_BOOKINGS'
+
+export const fetchUserCurrentBookingsAction = bookings => ({
+    type: FETCH_USER_CURRENT_BOOKINGS,
+    payload: bookings
+})
+
+export const fetchUserCurrentBookings = userEmail => async dispatch => {
+    try {
+        dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail)))
+        dispatch(setSuccessAccess(BOOKING_RESOURCE))
+    } catch (error) {
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+    }
+}
+
+
+export const FETCH_USER_PAST_BOOKINGS = 'FETCH_USER_PAST_BOOKINGS'
+
+export const fetchUserPastBookingsAction = bookings => ({
+    type: FETCH_USER_PAST_BOOKINGS,
+    payload: bookings
+})
+
+export const fetchUserPastBookings = (userEmail, page = 1) => async dispatch => {
+    try {
+        dispatch(fetchUserPastBookingsAction(await getUserPastBookingsApi(userEmail, page)))
+        dispatch(setSuccessAccess(BOOKING_RESOURCE))
+    } catch (error) {
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
     }
 }

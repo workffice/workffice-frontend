@@ -1,4 +1,3 @@
-import { BookingList } from '../components/BookingList/BookingList';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
@@ -16,6 +15,7 @@ import { CollaboratorContainer, CollaboratorListContainer } from '../containers/
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
+import { UserBookingListContainer } from '../containers/booking/BookingListContainer';
 
 export const routes = [
   {
@@ -239,9 +239,9 @@ export const routes = [
     views: [
       {
         path: '/bookings/list',
-        name: 'Listado de reservas',
+        name: 'Mis reservas',
         mini: 'LR',
-        component: BookingList,
+        component: UserBookingListContainer,
         layout: '/admin',
         visibility: true
       },
