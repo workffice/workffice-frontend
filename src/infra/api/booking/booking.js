@@ -40,7 +40,7 @@ export const getBooking = async bookingId => {
 
 export const getUserCurrentBookings = async (userEmail, page) => {
     try {
-        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=true&page=${page}&size=1`, {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=true&page=${page}&size=10`, {
             method: 'GET',
             headers: headerGet,
         });
@@ -52,7 +52,7 @@ export const getUserCurrentBookings = async (userEmail, page) => {
 
 export const getUserPastBookings = async (userEmail, page) => {
     try {
-        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=false&page=${page}`, {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=false&page=${page}&size=10`, {
             method: 'GET',
             headers: headerGet,
         });

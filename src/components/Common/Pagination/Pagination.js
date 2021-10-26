@@ -1,8 +1,9 @@
-import React from 'react'
-import { range } from 'lodash'
+import { range } from 'lodash';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Pagination as ReactStrapPagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-export const Pagination = ({ currentPage, totalPages, queryParams }) => {
+export const Pagination = ({ currentPage, totalPages, uri, queryParams }) => {
     return (
         <ReactStrapPagination>
             {
@@ -10,12 +11,12 @@ export const Pagination = ({ currentPage, totalPages, queryParams }) => {
                     {
                         return page + 1 === currentPage ?
                             <PaginationItem key={page} active>
-                                <PaginationLink href={`/admin/search/?page=${page + 1}&${queryParams}`}>
+                                <PaginationLink href={`${uri}?page=${page + 1}&${queryParams ? queryParams : ""}`}>
                                     {page + 1}
                                 </PaginationLink>
                             </PaginationItem>
                             : <PaginationItem key={page}>
-                                <PaginationLink href={`/admin/search/?page=${page + 1}&${queryParams}`}>
+                                <PaginationLink href={`${uri}?page=${page + 1}&${queryParams ? queryParams : ""}`}>
                                     {page + 1}
                                 </PaginationLink>
                             </PaginationItem>
@@ -24,4 +25,11 @@ export const Pagination = ({ currentPage, totalPages, queryParams }) => {
             }
         </ReactStrapPagination>
     )
+}
+
+Pagination.propTypes = {
+    currentPage: PropTypes.number.isRequired,
+    totalPages: PropTypes.number.isRequired,
+    uri: PropTypes.string.isRequired,
+    queryParams: PropTypes.string
 }

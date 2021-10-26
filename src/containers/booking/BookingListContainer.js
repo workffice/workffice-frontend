@@ -8,15 +8,17 @@ export const UserBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
     const isLoading = useSelector(state => state.loadingBooking)
-    const bookings = useSelector(state => state.userBookings.data || [])
-    const loadBookings = useCallback(userEmail => {
-        dispatch(fetchUserCurrentBookings(userEmail, 0))
+    const bookings = useSelector(state => state.userBookings.data)
+    const pageInfo = useSelector(state => state.userBookings.pagination)
+    const loadBookings = useCallback((userEmail, page) => {
+        dispatch(fetchUserCurrentBookings(userEmail, page))
     }, [dispatch])
     return <BookingList
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
         isLoading={isLoading}
+        pageInfo={pageInfo}
     />
 }
 
@@ -24,14 +26,16 @@ export const UserPastBookingListContainer = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userMe)
     const isLoading = useSelector(state => state.loadingBooking)
-    const bookings = useSelector(state => state.userBookings || [])
-    const loadBookings = useCallback(userEmail => {
-        dispatch(fetchUserPastBookings(userEmail, 0))
+    const bookings = useSelector(state => state.userBookings.data)
+    const loadBookings = useCallback((userEmail, page) => {
+        dispatch(fetchUserPastBookings(userEmail, page))
     }, [dispatch])
+    const pageInfo = useSelector(state => state.userBookings.pagination)
     return <BookingList
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
         isLoading={isLoading}
+        pageInfo={pageInfo}
     />
 }
