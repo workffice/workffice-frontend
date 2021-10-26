@@ -1,17 +1,14 @@
 import { useFormik } from 'formik';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDatetimeClass from 'react-datetime';
 import {
-    Row,
-    Col,
-    Label,
-    Form,
-    FormGroup,
+    Col, Form,
+    FormGroup, Label, Row
 } from 'reactstrap';
 import { BookingListComponent } from './BookingListComponent';
 
-export const BookingList = () => {
+export const BookingList = ({ user, bookings, loadBookings }) => {
 
     const validate = values => {
         const errors = {};
@@ -29,6 +26,16 @@ export const BookingList = () => {
             console.log(date);
         }
     })
+    useEffect(() => {
+        if (user)
+            loadBookings(user.email)
+    }, [user ? user.id : ""])
+    const formatDate = datetime => {
+        return datetime.match("(.*)T.*")[1]
+    }
+    const formatHour = datetime => {
+        return datetime.match(".*T(.*):00")[1]
+    }
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -40,9 +47,9 @@ export const BookingList = () => {
                 </Col>
             </Row>
             <Form onSubmit={formik.handleSubmit}>
-                <Row style={{display: "flex", justifyContent: "center", marginBottom: 20}}>
+                <Row style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
                     <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
-                    <FormGroup style={{marginLeft: 20, marginTop: 10}}>
+                    <FormGroup style={{ marginLeft: 20, marginTop: 10 }}>
                         <ReactDatetimeClass
                             initialValue={formik.values.date}
                             name="date"
@@ -58,6 +65,26 @@ export const BookingList = () => {
                     </FormGroup>
                 </Row>
             </Form>
+            {
+                bookings.map(booking => {
+                    return <BookingListComponent
+                        officeName={booking.officeName}
+                        key={booking.id}
+                        id={booking.id}
+                        status={booking.status}
+                        attendeesQuantity={booking.attendeesQuantity}
+                        scheduleDate={formatDate(booking.startTime)}
+                        startTime={formatHour(booking.startTime)}
+                        endTime={formatHour(booking.endTime)}
+                        transactionAmount={booking.paymentInformation ? booking.paymentInformation.transactionAmount : "No definido"}
+                        providerFee={booking.paymentInformation ? booking.paymentInformation.providerFee : "No definido"}
+                        currency={booking.paymentInformation ? booking.paymentInformation.currency : "No definido"}
+                        paymentMethodId={booking.paymentInformation ? booking.paymentInformation.paymentMethodId : "No definido"}
+                        paymentTypeId={booking.paymentInformation ? booking.paymentInformation.paymentTypeId : "No definido"}
+                        officeBranchId={booking.officeBranchId}
+                    />
+                })
+            }
             <BookingListComponent
                 officeName="Oficina número 1"
                 id="0cfad0be-69e9-469a-85e5-803507516fc7"
@@ -103,6 +130,6 @@ export const BookingList = () => {
                 paymentTypeId="tarjeta de crédito"
                 officeBranchName="Whale"
             />
-        </div>
+        </div >
     )
 }

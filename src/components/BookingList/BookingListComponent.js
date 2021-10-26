@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
-    Badge, Card, CardBody, CardHeader, Col, Container, Label, Row
+    Badge, Button, Card, CardBody, CardHeader, Col, Container, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 
 export const BookingListComponent = (props) => {
@@ -9,7 +10,7 @@ export const BookingListComponent = (props) => {
         id,
         status,
         attendeesQuantity,
-        created,
+        scheduleDate,
         startTime,
         endTime,
         transactionAmount,
@@ -17,7 +18,7 @@ export const BookingListComponent = (props) => {
         currency,
         paymentMethodId,
         paymentTypeId,
-        officeBranchName,
+        officeBranchId,
     } = props;
 
     const getOfficeType = () => {
@@ -45,12 +46,21 @@ export const BookingListComponent = (props) => {
                                 </Alert> */}
                         {/* } */}
                     </CardHeader>
-                    <Row style={{ display: 'grid', paddingTop: 10 }}>
-                        <Col xs="12" md="6" lg="12" xg="12">
-                            <h5 style={{ marginBottom: 10 }}>
+                    <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
+                        <Col>
+                            <h5 style={{ marginBottom: 0 }}>
                                 Código de reserva: <Label style={{ fontSize: 22, color: "#34B18A" }}>{`${id}`}</Label> - {getOfficeType()}
                             </h5>
-                            <hr />
+                        </Col>
+                        <Col xs="2">
+                            <Link to={`/admin/office-branch?${officeBranchId}`}>
+                                <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
+                                    Ver sucursal
+                                </UncontrolledTooltip>
+                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="sm" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                    <i className="nc-icon nc-istanbul"></i>
+                                </Button>
+                            </Link>
                         </Col>
                     </Row>
                     <CardBody style={{ paddingTop: 0 }}>
@@ -66,13 +76,6 @@ export const BookingListComponent = (props) => {
                                 <Col>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18 }}>
-                                            Sucursal: <small style={{ fontSize: 18 }}>{`${officeBranchName}`}</small>
-                                        </Label>
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <div className='text'>
-                                        <Label className="form-label" style={{ fontSize: 18 }}>
                                             Cantidad de personas: <small style={{ fontSize: 18 }}>{`${attendeesQuantity}`}</small>
                                         </Label>
                                     </div>
@@ -82,7 +85,7 @@ export const BookingListComponent = (props) => {
                                 <Col>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18 }}>
-                                            Fecha: <small style={{ fontSize: 18 }}>{`${created}`}</small>
+                                            Fecha: <small style={{ fontSize: 18 }}>{`${scheduleDate}`}</small>
                                         </Label>
                                     </div>
                                 </Col>
