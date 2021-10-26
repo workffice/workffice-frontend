@@ -20,6 +20,7 @@ import { officeBranchesReducer } from './reducers/backoffice/officeBranch/office
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { bookingReducer, mercadoPagoPreferenceReducer, userBookingsReducer } from './reducers/booking/bookingReducer';
+import { loadingBookingReducer } from './reducers/booking/loadingReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
@@ -70,6 +71,7 @@ export const reducers = routes =>
     booking: bookingReducer,
     mercadoPagoPreference: mercadoPagoPreferenceReducer,
     userBookings: userBookingsReducer,
+    loadingBooking: loadingBookingReducer,
     // Errors
     entitiesNotFound: entityNotFoundReducer,
     permission: permissionReducer,

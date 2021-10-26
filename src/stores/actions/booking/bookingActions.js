@@ -1,6 +1,7 @@
 import { bookOfficeApi, createMercadoPagoPreferenceApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
 import { BOOKING_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from '../errors/permissionActions'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
+import { loadingBookingAction, stopLoadingBookingAction } from './loadingActions'
 
 export const BOOK_OFFICE = 'BOOK_OFFICE'
 
@@ -43,12 +44,15 @@ export const fetchUserCurrentBookingsAction = bookings => ({
 })
 
 export const fetchUserCurrentBookings = userEmail => async dispatch => {
+    dispatch(loadingBookingAction())
     try {
         dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+    } finally {
+        dispatch(stopLoadingBookingAction())
     }
 }
 
@@ -61,11 +65,14 @@ export const fetchUserPastBookingsAction = bookings => ({
 })
 
 export const fetchUserPastBookings = (userEmail, page = 0) => async dispatch => {
+    dispatch(loadingBookingAction())
     try {
         dispatch(fetchUserPastBookingsAction(await getUserPastBookingsApi(userEmail, page)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+    } finally {
+        dispatch(stopLoadingBookingAction())
     }
 }
