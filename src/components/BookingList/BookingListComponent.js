@@ -1,17 +1,9 @@
 import React from 'react';
 import {
-    Row,
-    Col,
-    Card,
-    CardHeader,
-    CardBody,
-    Container,
-    Badge,
-    Label,
+    Badge, Card, CardBody, CardHeader, Col, Container, Label, Row
 } from 'reactstrap';
 
 export const BookingListComponent = (props) => {
-
     const {
         officeName,
         id,
