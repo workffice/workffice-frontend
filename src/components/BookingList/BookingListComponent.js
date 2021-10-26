@@ -58,7 +58,7 @@ export const BookingListComponent = (props) => {
                                     Ver sucursal
                                 </UncontrolledTooltip>
                                 <Button id={`officeBranch-${officeBranchId}`} margin="0" size="sm" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i className="nc-icon nc-istanbul"></i>
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
                                 </Button>
                             </Link>
                         </Col>
