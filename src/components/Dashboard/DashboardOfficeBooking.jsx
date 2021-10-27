@@ -1,9 +1,12 @@
-import { useFormik } from 'formik';
+// import { useFormik } from 'formik';
 import { uniqueId } from 'lodash-es';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Select from 'react-select';
-import { Card, CardBody, CardHeader, CardTitle, Col, Form, Row, Table } from 'reactstrap';
+// import { useSelector } from 'react-redux';
+// import Select from 'react-select';
+import {
+    Card, CardBody, CardHeader, CardTitle, Col,
+    /*Dropdown,*/ DropdownItem, DropdownMenu, DropdownToggle, Row, Table, UncontrolledDropdown
+} from 'reactstrap';
 import { OfficeReportDetail } from '../Offices/OfficeReportDetail';
 import { DashboardRowTable } from './DashboardRowTable';
 
@@ -11,11 +14,14 @@ export const DashboardOfficeBooking = ({
     monthFilter,
     offices,
     loadBookingsQuantityPerOffice,
-    // bookingsQuantityPerOffice,
+    bookingsQuantityPerOffice,
 }) => {
     const [currentMonth, setCurrentMonth] = useState(monthFilter[new Date().getMonth()].value)
-    const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking)
+    const [open, setOpen] = useState(false)
+    // const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking)
     const bookingOfficeRow = () => {
+        console.log("CALCULATING BEST OFFICE")
+        console.log(bookingsQuantityPerOffice)
         if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0 && offices.length > 0) {
             return bookingsQuantityPerOffice.map(office => {
                 let officeFound = offices.find(oFound => oFound.id == office.officeId)
@@ -40,25 +46,25 @@ export const DashboardOfficeBooking = ({
         loadBookingsQuantityPerOffice(currentMonth)
     }, [currentMonth])
 
-    const bookingOfficeForm = useFormik({
-        enableReinitialize: true,
-        initialValues: {
-            month: monthFilter[new Date().getMonth()].label
-        },
-        onSubmit: values => {
-            setCurrentMonth(values.month.value)
-        },
-    });
-    const monthSelected = () => {
-        const month = bookingOfficeForm.values.month.label;
-        return month;
-    }
+    // const bookingOfficeForm = useFormik({
+    //     enableReinitialize: true,
+    //     initialValues: {
+    //         month: monthFilter[new Date().getMonth()].label
+    //     },
+    //     onSubmit: values => {
+    //         setCurrentMonth(values.month.value)
+    //     },
+    // });
+    // const monthSelected = () => {
+    //     const month = bookingOfficeForm.values.month.label;
+    //     return month;
+    // }
     return (
         <Row>
             <Col lg="6" md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Oficinia del mes: <small>{monthSelected()}</small></CardTitle>
+                        <CardTitle tag="h4">Oficinia del mes: <small>{currentMonth}</small></CardTitle>
                         <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
                             <Col sm="6">
                                 <p className="card-category" style={{ color: '#34b18a' }}>Oficina con más reservas</p>
@@ -83,21 +89,36 @@ export const DashboardOfficeBooking = ({
                             </Col>
                             <Col sm="6">
                                 <div className="pull-right pull-right-filter" style={{ width: '70%' }}>
-                                    <Form onSubmit={bookingOfficeForm.handleSubmit}>
-                                        <Select
-                                            className="react-select primary"
-                                            classNamePrefix="react-select"
-                                            name="month"
-                                            // value={bookingOfficeForm.values.month}
-                                            placeholder={bookingOfficeForm.values.month}
-                                            onChange={value => {
-                                                bookingOfficeForm.setFieldValue("month", value)
-                                                bookingOfficeForm.submitForm();
-                                            }}
-                                            onBlur={() => bookingOfficeForm.setFieldTouched("month", true)}
-                                            options={monthFilter}
-                                        />
-                                    </Form>
+                                    {/* <Form onSubmit={bookingOfficeForm.handleSubmit}> */}
+                                    <UncontrolledDropdown direction="left" isOpen={open} toggle={() => setOpen(!open)}>
+                                        <DropdownToggle caret>
+                                            {currentMonth}
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                            {monthFilter.map(month => {
+                                                return <DropdownItem
+                                                    key={month.value}
+                                                    onClick={() => setCurrentMonth(month.value)}
+                                                >
+                                                    {month.label}
+                                                </DropdownItem>
+                                            })}
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                    {/* <Select
+                                        className="react-select primary"
+                                        classNamePrefix="react-select"
+                                        name="month"
+                                        // value={bookingOfficeForm.values.month}
+                                        closeMenuOnSelect
+                                        placeholder={currentMonth}
+                                        onChange={value => {
+                                            console.log(value)
+                                            setCurrentMonth(value.value)
+                                        }}
+                                        options={monthFilter}
+                                    /> */}
+                                    {/* </Form> */}
                                 </div>
                             </Col>
                         </Row>
@@ -114,8 +135,9 @@ export const DashboardOfficeBooking = ({
                                     </thead>
                                     <tbody>
                                         {
-                                            bookingOfficeRow() && bookingOfficeRow().length &&
-                                            (bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />))
+                                            bookingOfficeRow()
+                                                ? bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />)
+                                                : <></>
                                         }
                                     </tbody>
 

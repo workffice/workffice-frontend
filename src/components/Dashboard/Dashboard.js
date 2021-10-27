@@ -93,7 +93,7 @@ function Dashboard({
   }
   return (
     <>
-      <div className="content">
+      <div style={{ height: "85rem" }} className="content">
         {render()}
       </div>
     </>
