@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { uniqueId } from 'lodash-es';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import Select from 'react-select';
 import {
@@ -23,23 +23,21 @@ export const DashboardIncomeStatistics = ({
     const date = new Date()
     const currentMonth = date.getMonth()
     const currentYear = date.getFullYear()
+    const [month, setMonth] = useState(monthFilter[currentMonth].value)
+    const [year, setYear] = useState(currentYear)
     const reportOfficeRow = () => {
-        if (revenuePerOffice.length > 0 && offices.length > 0) {
-            return revenuePerOffice.map(office => {
-                let officeFound = offices.find(oFound => oFound.id == office.officeId)
-                const officeData = { ...office, name: officeFound.name };
-                return officeData;
-            })
-        }
+        return revenuePerOffice.map(office => {
+            let officeFound = offices.find(oFound => oFound.id == office.officeId)
+            const officeData = { ...office, name: officeFound.name };
+            return officeData;
+        })
     }
     const totalAmountPerOffice = () => {
-        if (revenuePerOffice.length > 0 && offices.length > 0) {
-            let total = 0;
-            revenuePerOffice.forEach(office => {
-                return total += parseInt(office.totalAmount);
-            })
-            return total;
-        }
+        let total = 0;
+        revenuePerOffice.forEach(office => {
+            return total += parseInt(office.totalAmount);
+        })
+        return total;
     }
     const total = () => {
         if (revenuePerMonth.length > 0) {
@@ -64,43 +62,26 @@ export const DashboardIncomeStatistics = ({
     }
 
     useEffect(async () => {
-        loadRevenuePerOffice(monthFilter[currentMonth].value)
-    }, [])
+        loadRevenuePerOffice(month)
+    }, [month])
     useEffect(async () => {
-        loadRevenuePerMonth(currentYear)
-    }, [])
+        loadRevenuePerMonth(year)
+    }, [year])
 
-    const validate = values => {
-        const errors = {};
-        if (!values.year) {
-            errors.year = 'Requerido.';
-        }
-        return errors;
-    };
-    const validateOffice = values => {
-        const errors = {};
-        if (!values.monthOffice) {
-            errors.monthOffice = 'Requerido.';
-        }
-        return errors;
-    };
     const amountOfficeForm = useFormik({
         initialValues: {
             monthOffice: monthFilter[currentMonth]
         },
-        validateOffice,
-        onSubmit: async (values) => {
-            const month = values.monthOffice.value;
-            await loadRevenuePerOffice(month);
+        onSubmit: ({ monthOffice }) => {
+            setMonth(monthOffice.value)
         },
     });
     const amountYearForm = useFormik({
         initialValues: {
-            year: currentYear
+            year: { value: currentYear, label: currentYear }
         },
-        validate,
-        onSubmit: async (values) => {
-            await loadRevenuePerMonth(values.year.value)
+        onSubmit: ({ year }) => {
+            setYear(year.value)
         },
     });
 
@@ -147,24 +128,25 @@ export const DashboardIncomeStatistics = ({
                                     </thead>
                                     <tbody>
                                         {
-                                            reportOfficeRow() && reportOfficeRow().length &&
-                                            (reportOfficeRow().map(office =>
-                                                <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalAmount} />
-                                            ))
+                                            revenuePerOffice.length > 0 && offices.length > 0
+                                                ? reportOfficeRow().map(office =>
+                                                    <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalAmount} />
+                                                )
+                                                : <></>
 
                                         }
                                     </tbody>
                                     <tfoot>
-                                        {
-                                            totalAmountPerOffice() && (
-                                                <tr>
-                                                    <td style={{ fontWeight: 'bolder', color: '#133148', fontSize: '22px' }}>Total</td>
-                                                    <td className="text-right" style={{ fontWeight: 'bolder' }}><Badge color="success" style={{ fontSize: '20px' }}>{totalAmountPerOffice()}</Badge></td>
-                                                </tr>
-                                            )
-                                        }
-
-
+                                        <tr>
+                                            <td style={{ fontWeight: 'bolder', color: '#133148', fontSize: '22px' }}>Total</td>
+                                            <td className="text-right" style={{ fontWeight: 'bolder' }}>
+                                                <Badge color="success" style={{ fontSize: '20px' }}>
+                                                    {offices.length > 0 && revenuePerOffice.length > 0
+                                                        ? totalAmountPerOffice() : 0
+                                                    }
+                                                </Badge>
+                                            </td>
+                                        </tr>
                                     </tfoot>
                                 </Table>
                             </Col>
