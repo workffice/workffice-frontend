@@ -45,7 +45,7 @@ export const BookingComponent = (props) => {
                             </h5>
                         </Col>
                         <Col xs="2">
-                            <Link to={`/admin/office-branch?${officeBranchId}`}>
+                            <Link to={`/admin/office-branch?id=${officeBranchId}`}>
                                 <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
                                     Ver sucursal
                                 </UncontrolledTooltip>

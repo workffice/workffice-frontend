@@ -58,7 +58,7 @@ export const reducers = routes =>
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchAdminReducer,
     loadingOfficeBranch: loadingOfficeBranchReducer,
-    officeBranchSearch: officeBranchDetailReducer, // TODO rename to officeBranchDetail
+    officeBranchDetail: officeBranchDetailReducer,
     officesFound: officeBranchSearchReducer, // TODO rename to officeBranchesFound
     loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
     // Office

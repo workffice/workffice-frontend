@@ -12,7 +12,7 @@ export const OfficeBookingContainer = () => {
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
     }, [dispatch])
-    const branch = useSelector(state => state.officeBranch)
+    const branch = useSelector(state => state.officeBranchDetail)
     const office = useSelector(state => state.office)
     const loadInactivities = useCallback(officeId => {
         dispatch(getOfficeInactivities(officeId))

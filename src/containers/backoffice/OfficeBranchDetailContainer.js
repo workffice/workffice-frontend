@@ -7,7 +7,7 @@ import { readFromLocalStorage } from '../../infra/api/localStorage';
 
 export const OfficeBranchDetailContainer = () => {
     const dispatch = useDispatch();
-    const officeBranch = useSelector(state => state.officeBranchSearch)
+    const officeBranch = useSelector(state => state.officeBranchDetail)
     const officeBranchIdAdmin = readFromLocalStorage("officeBranch").id
     const loadOfficeBranch = useCallback(officeBranchId => {
         dispatch(getOfficeBranchSearch(officeBranchId));
