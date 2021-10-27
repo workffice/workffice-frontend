@@ -41,14 +41,15 @@ export const OfficeBooking = ({
     createMercadoPagoPreference,
 }) => {
     const query = new URLSearchParams(useLocation().search)
+    const officeId = query.get("officeId")
     const [mpCheckout, setMpCheckout] = useState(null)
     useEffect(() => {
-        if (query.get("id"))
-            loadOffice(query.get("id"))
+        if (officeId)
+            loadOffice(officeId)
     }, [])
     useEffect(() => {
-        if (query.get("id"))
-            loadInactivities(query.get("id"))
+        if (officeId)
+            loadInactivities(officeId)
     }, [])
     useEffect(() => {
         const bookingId = booking ? booking.id : null
@@ -56,7 +57,6 @@ export const OfficeBooking = ({
             createMercadoPagoPreference(bookingId)
     }, [booking ? booking.id : ""])
     useEffect(() => {
-        // con el preferenceId en mano, inyectamos el script de mercadoPago
         if (mercadoPagoPreferenceId) {
             const script = document.createElement('script');
             const checkout = addCheckout(mercadoPagoPreferenceId)
