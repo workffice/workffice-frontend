@@ -28,8 +28,9 @@ const addCheckout = preferenceId => {
 
 export const OfficeBooking = ({
     officeNotFound,
+    officeBranch,
+    loadOfficeBranch,
     office,
-    branch,
     loadOffice,
     notification,
     hideNotification,
@@ -42,7 +43,12 @@ export const OfficeBooking = ({
 }) => {
     const query = new URLSearchParams(useLocation().search)
     const officeId = query.get("officeId")
+    const officeBranchId = query.get("officeBranchId")
     const [mpCheckout, setMpCheckout] = useState(null)
+    useEffect(() => {
+        if (officeBranchId)
+            loadOfficeBranch(officeBranchId)
+    }, [])
     useEffect(() => {
         if (officeId)
             loadOffice(officeId)
@@ -166,7 +172,7 @@ export const OfficeBooking = ({
                                 <Cloudinary publicId={office ? office.imageUrl : ""} height="300" width="500" />
                                 <Row style={{ paddingLeft: "5%", paddingRight: '5%', display: 'flex', justifyContent: 'space-between' }}>
                                     <div>
-                                        <Label htmlFor="officeBranchName" className="label-form">Sucursal <Label style={{ color: "#EB5D60", fontSize: 18 }}>{branch ? branch.name : ""}</Label> </Label>
+                                        <Label htmlFor="officeBranchName" className="label-form">Sucursal <Label style={{ color: "#EB5D60", fontSize: 18 }}>{officeBranch ? officeBranch.name : ""}</Label> </Label>
                                     </div>
                                     <div>
                                         <Label htmlFor="officeType" className="label-form">Tipo de oficina <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? getOfficeType() : ""}</Label> </Label>
@@ -177,7 +183,7 @@ export const OfficeBooking = ({
                                         <Label htmlFor="officePrice" className="label-form">Precio por hora $ <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? office.price : ""}</Label> </Label>
                                     </div>
                                     <div>
-                                        <Label htmlFor="officeContact" className="label-form">Contacto <Label style={{ color: "#EB5D60", fontSize: 18 }}>{branch ? branch.phone : ""}</Label> </Label>
+                                        <Label htmlFor="officeContact" className="label-form">Contacto <Label style={{ color: "#EB5D60", fontSize: 18 }}>{officeBranch ? officeBranch.phone : ""}</Label> </Label>
                                     </div>
                                 </Row>
                                 <Row style={{ paddingLeft: "5%" }}>
