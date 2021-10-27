@@ -8,6 +8,8 @@ import { BookingList } from '../Booking/BookingList'
 
 
 export const OfficeBookings = ({
+    loadOffice,
+    office,
     loadBookings,
     bookings,
     isLoading,
@@ -21,6 +23,11 @@ export const OfficeBookings = ({
         if (officeId)
             return loadBookings(officeId, date)
     }, [date])
+
+    useEffect(() => {
+        if (officeId)
+            return loadOffice(officeId)
+    }, [])
 
     const validate = values => {
         const errors = {};
@@ -44,7 +51,7 @@ export const OfficeBookings = ({
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
-                        Reservas de la <small color="#EB5D60">oficina</small>
+                        Reservas de la oficina <small color="#EB5D60">{office ? office.name : ""}</small>
                     </h1>
                     <hr />
                 </Col>
