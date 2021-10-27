@@ -20,6 +20,7 @@ export const BookingList = ({
     isLoading,
     displayDateSelector,
     pageInfo,
+    title,
 }) => {
 
     const validate = values => {
@@ -84,9 +85,11 @@ export const BookingList = ({
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
-                    <h1 >
-                        Mis <small color="#EB5D60">reservas</small>
-                    </h1>
+                    {
+                        title ? title : <h1 >
+                            Mis <small color="#EB5D60">reservas</small>
+                        </h1>
+                    }
                     <hr />
                 </Col>
             </Row>
@@ -145,4 +148,5 @@ BookingList.propTypes = {
     loadBookings: PropTypes.func,
     displayDateSelector: PropTypes.bool,
     isLoading: PropTypes.bool,
+    title: PropTypes.element,
 }

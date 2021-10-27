@@ -37,5 +37,10 @@ export const UserPastBookingListContainer = () => {
         user={user}
         isLoading={isLoading}
         pageInfo={pageInfo}
+        title={<h1 >Historial de <small color="#EB5D60">reservas</small></h1>}
     />
+}
+
+export const OfficeBookingListContainer = () => {
+    return <h1>Something</h1>
 }

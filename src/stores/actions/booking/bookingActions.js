@@ -1,4 +1,4 @@
-import { bookOfficeApi, createMercadoPagoPreferenceApi, getBookingApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
+import { bookOfficeApi, createMercadoPagoPreferenceApi, getBookingApi, getOfficeBookingsApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
 import { BOOKING_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from '../errors/permissionActions'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
 import { loadingBookingAction, stopLoadingBookingAction } from './loadingActions'
@@ -61,7 +61,7 @@ export const fetchUserCurrentBookingsAction = bookings => ({
     payload: bookings
 })
 
-export const fetchUserCurrentBookings = (userEmail, page=0) => async dispatch => {
+export const fetchUserCurrentBookings = (userEmail, page = 0) => async dispatch => {
     dispatch(loadingBookingAction())
     try {
         dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail, page)))
@@ -86,6 +86,27 @@ export const fetchUserPastBookings = (userEmail, page = 0) => async dispatch => 
     dispatch(loadingBookingAction())
     try {
         dispatch(fetchUserPastBookingsAction(await getUserPastBookingsApi(userEmail, page)))
+        dispatch(setSuccessAccess(BOOKING_RESOURCE))
+    } catch (error) {
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+    } finally {
+        dispatch(stopLoadingBookingAction())
+    }
+}
+
+
+export const FETCH_OFFICE_BOOKINGS = 'FETCH_OFFICE_BOOKINGS'
+
+export const fetchOfficeBookingsAction = bookings => ({
+    type: FETCH_OFFICE_BOOKINGS,
+    payload: bookings
+})
+
+export const fetchUserPastBookings = (officeId, date) => async dispatch => {
+    dispatch(loadingBookingAction())
+    try {
+        dispatch(fetchOfficeBookingsAction(await getOfficeBookingsApi(officeId, date)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
