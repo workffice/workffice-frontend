@@ -6,7 +6,7 @@ import { Loading } from '../Common/Loading/Loading'
 import { BookingComponent } from './BookingComponent'
 
 
-export const BookingList = ({ isLoading, bookings }) => {
+export const BookingList = ({ isLoading, bookings, disableBookingLinks }) => {
     const formatDate = datetime => {
         return datetime.match("(.*)T.*")[1]
     }
@@ -39,6 +39,7 @@ export const BookingList = ({ isLoading, bookings }) => {
                 paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}
                 paymentTypeId={booking.payment ? booking.payment.paymentTypeId : "No definido"}
                 officeBranchId={booking.officeBranchId}
+                disableBookingLink={disableBookingLinks}
             />
         }) : <EmptyComponent />
     }
@@ -63,4 +64,5 @@ BookingList.propTypes = {
         })
     })),
     isLoading: PropTypes.bool,
+    disableBookingLinks: PropTypes.bool,
 }

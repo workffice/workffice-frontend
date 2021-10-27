@@ -20,6 +20,7 @@ export const BookingComponent = (props) => {
         paymentMethodId,
         paymentTypeId,
         officeBranchId,
+        disableBookingLink
     } = props;
 
     const getBookingStatus = () => {
@@ -39,9 +40,12 @@ export const BookingComponent = (props) => {
                     <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
                         <Col>
                             <h5 style={{ marginBottom: 0 }}>
-                                Código de reserva: <Link color="primary" to={`/admin/booking?id=${id}`}>
-                                    {id}
-                                </Link> - {getBookingStatus()}
+                                Código de reserva: {
+                                    disableBookingLink ? <Label>{id}</Label>
+                                        : <><Link color="primary" to={`/admin/booking?id=${id}`}>
+                                            {id}
+                                        </Link> - {getBookingStatus()}</>
+                                }
                             </h5>
                         </Col>
                         <Col xs="2">
@@ -155,8 +159,9 @@ BookingComponent.propTypes = {
     endTime: PropTypes.string,
     transactionAmount: PropTypes.number,
     officeBranchId: PropTypes.string,
-    providerFee: PropTypes.number,
+    providerFee: PropTypes.any,
     currency: PropTypes.string,
     paymentMethodId: PropTypes.string,
     paymentTypeId: PropTypes.string,
+    disableBookingLink: PropTypes.bool,
 }

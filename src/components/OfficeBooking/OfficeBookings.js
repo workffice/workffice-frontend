@@ -83,7 +83,7 @@ export const OfficeBookings = ({
                 </Row>
             </Form>
 
-            <BookingList isLoading={isLoading} bookings={bookings} />
+            <BookingList isLoading={isLoading} bookings={bookings} disableBookingLinks={true}/>
         </>
     }
 
