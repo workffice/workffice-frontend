@@ -151,12 +151,10 @@ BookingComponent.propTypes = {
     scheduleDate: PropTypes.string,
     startTime: PropTypes.string,
     endTime: PropTypes.string,
-    totalAmount: PropTypes.number,
+    transactionAmount: PropTypes.number,
     officeBranchId: PropTypes.string,
-    paymentInformation: PropTypes.shape({
-        providerFee: PropTypes.number,
-        currency: PropTypes.number,
-        paymentMethodId: PropTypes.number,
-        paymentTypeId: PropTypes.number,
-    })
+    providerFee: PropTypes.number,
+    currency: PropTypes.number,
+    paymentMethodId: PropTypes.number,
+    paymentTypeId: PropTypes.number,
 }
