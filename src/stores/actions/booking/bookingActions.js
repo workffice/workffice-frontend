@@ -103,7 +103,7 @@ export const fetchOfficeBookingsAction = bookings => ({
     payload: bookings
 })
 
-export const fetchUserPastBookings = (officeId, date) => async dispatch => {
+export const fetchOfficeBookings = (officeId, date) => async dispatch => {
     dispatch(loadingBookingAction())
     try {
         dispatch(fetchOfficeBookingsAction(await getOfficeBookingsApi(officeId, date)))

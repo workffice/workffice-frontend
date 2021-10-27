@@ -239,20 +239,28 @@ export const routes = [
     visibility: true,
     views: [
       {
-        path: '/bookings/list',
-        name: 'Mis reservas',
-        mini: 'LR',
-        component: UserBookingListContainer,
-        layout: '/admin',
-        visibility: true
-      },
-      {
         path: '/booking',
         name: 'Detalle de reserva',
         mini: 'DR',
         component: BookingDetailContainer,
         layout: '/admin',
         visibility: false
+      },
+      {
+        path: '/office/bookings',
+        name: 'Reservas de oficina',
+        mini: 'RO',
+        component: OfficeBookingContainer,
+        layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/bookings/list',
+        name: 'Mis reservas',
+        mini: 'LR',
+        component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
       },
       {
         path: '/bookings/history',
