@@ -64,11 +64,11 @@ export const getUserPastBookings = async (userEmail, page) => {
 
 export const getOfficeBookings = async (officeId, date) => {
     try {
-        const bookings = await sdkAuthRequest(`${API_URL}/offices/${officeId}/?date=${date}`, {
+        const bookings = await sdkAuthRequest(`${API_URL}/offices/${officeId}/bookings/?date=${date}`, {
             method: 'GET',
             headers: headerGet,
         });
-        return Promise.resolve(bookings);
+        return Promise.resolve(bookings.data);
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }

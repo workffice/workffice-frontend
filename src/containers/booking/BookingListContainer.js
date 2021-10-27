@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookingList } from '../../components/Booking/BookingList'
-import { fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/actions/booking/bookingActions'
+import { OfficeBookings } from '../../components/OfficeBooking/OfficeBookings'
+import { fetchOfficeBookings, fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/actions/booking/bookingActions'
 
 
 export const UserBookingListContainer = () => {
@@ -42,5 +43,15 @@ export const UserPastBookingListContainer = () => {
 }
 
 export const OfficeBookingListContainer = () => {
-    return <h1>Something</h1>
+    const dispatch = useDispatch()
+    const isLoading = useSelector(state => state.loadingBooking)
+    const bookings = useSelector(state => state.officeBookings)
+    const loadBookings = useCallback((officeId, date) => {
+        dispatch(fetchOfficeBookings(officeId, date))
+    }, [dispatch])
+    return <OfficeBookings
+        isLoading={isLoading}
+        bookings={bookings}
+        loadBookings={loadBookings}
+    />
 }

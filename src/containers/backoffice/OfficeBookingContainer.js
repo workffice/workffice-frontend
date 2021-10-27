@@ -1,7 +1,7 @@
 import { includes } from 'lodash-es'
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { OfficeBooking } from '../../components/OfficeBooking/OfficeBooking'
+import { BookingForm } from '../../components/Booking/BookingForm'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
 import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions'
@@ -35,7 +35,7 @@ export const OfficeBookingContainer = () => {
     const createMPPreference = useCallback(bookingId => {
         dispatch(createMercadoPagoPreference(bookingId))
     }, [dispatch])
-    return <OfficeBooking
+    return <BookingForm
         office={office}
         loadOffice={loadOffice}
         inactivities={inactivities}
