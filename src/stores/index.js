@@ -24,7 +24,7 @@ import { loadingBookingReducer } from './reducers/booking/loadingReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
-import { bookingsQuantityPerOfficeReducer, reportsReducer, revenuePerMonthReducer, revenuePerOfficeReducer } from './reducers/reports/reportsReducer';
+import { bookingsQuantityPerOfficeReducer, revenuePerMonthReducer, revenuePerOfficeReducer } from './reducers/reports/reportsReducer';
 import { loadingOfficeBranchSearchReducer } from './reducers/search/loadingReducer';
 import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
@@ -78,7 +78,6 @@ export const reducers = routes =>
     notification: notificationReducer,
     isLoading: isLoadingReducer,
     // Report
-    reports: reportsReducer,
     bookingsQuantityPerOffice: bookingsQuantityPerOfficeReducer,
     revenuePerOffice: revenuePerOfficeReducer,
     revenuePerMonth: revenuePerMonthReducer,

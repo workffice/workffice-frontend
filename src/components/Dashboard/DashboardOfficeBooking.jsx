@@ -5,6 +5,7 @@ import Select from 'react-select';
 import {
     Card, CardBody, CardHeader, CardTitle, Col, Form, Row, Table
 } from 'reactstrap';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { OfficeReportDetail } from '../Offices/OfficeReportDetail';
 import { DashboardRowTable } from './DashboardRowTable';
 
@@ -16,24 +17,20 @@ export const DashboardOfficeBooking = ({
 }) => {
     const [currentMonth, setCurrentMonth] = useState(monthFilter[new Date().getMonth()].value)
     const bookingOfficeRow = () => {
-        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0 && offices.length > 0) {
-            return bookingsQuantityPerOffice.map(office => {
-                let officeFound = offices.find(oFound => oFound.id == office.officeId)
-                const officeData = { ...office, name: officeFound.name };
-                return officeData;
-            })
-        }
+        return bookingsQuantityPerOffice.map(office => {
+            let officeFound = offices.find(oFound => oFound.id == office.officeId)
+            const officeData = { ...office, name: officeFound.name };
+            return officeData;
+        })
     }
     const bestOffice = () => {
-        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0) {
-            let bestOfficeBooking = null;
-            bookingsQuantityPerOffice.forEach(office => {
-                if (bestOfficeBooking == null) bestOfficeBooking = office;
-                if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
-            });
+        let bestOfficeBooking = null;
+        bookingsQuantityPerOffice.forEach(office => {
+            if (bestOfficeBooking == null) bestOfficeBooking = office;
+            if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
+        });
 
-            return offices.find(office => office.id === bestOfficeBooking.officeId);
-        }
+        return offices.find(office => office.id === bestOfficeBooking.officeId);
     }
 
     useEffect(() => {
@@ -54,7 +51,7 @@ export const DashboardOfficeBooking = ({
             <Col lg="6" md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Oficinia del mes: <small>{currentMonth}</small></CardTitle>
+                        <CardTitle tag="h4">Oficinia del mes: <small>{formik.values.month.label}</small></CardTitle>
                         <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
                             <Col sm="6">
                                 <p className="card-category" style={{ color: '#34b18a' }}>Oficina con más reservas</p>
@@ -63,7 +60,9 @@ export const DashboardOfficeBooking = ({
                     </CardHeader>
                     <CardBody>
                         {
-                            bestOffice() && <OfficeReportDetail office={bestOffice()} />
+                            bookingsQuantityPerOffice.length > 0 && offices.length > 0
+                                ? <OfficeReportDetail office={bestOffice()} />
+                                : <EmptyComponent></EmptyComponent>
                         }
                     </CardBody>
                 </Card>
@@ -102,22 +101,24 @@ export const DashboardOfficeBooking = ({
                     <CardBody>
                         <Row>
                             <Col md="12" lg="12">
-                                <Table>
-                                    <thead>
-                                        <tr>
-                                            <td style={{ fontWeight: 'bolder', color: '#eb5d60' }}>Oficina</td>
-                                            <td className="text-right" style={{ fontWeight: 'bolder', color: '#eb5d60' }}>Reservas</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            bookingOfficeRow()
-                                                ? bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />)
-                                                : <></>
-                                        }
-                                    </tbody>
+                                {
+                                    bookingsQuantityPerOffice.length > 0 && offices.length > 0
+                                        ? (
+                                            <Table>
+                                                <thead>
+                                                    <tr>
+                                                        <td style={{ fontWeight: 'bolder', color: '#eb5d60' }}>Oficina</td>
+                                                        <td className="text-right" style={{ fontWeight: 'bolder', color: '#eb5d60' }}>Reservas</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />)}
+                                                </tbody>
 
-                                </Table>
+                                            </Table>
+                                        )
+                                        : <EmptyComponent></EmptyComponent>
+                                }
                             </Col>
                         </Row>
                     </CardBody>
