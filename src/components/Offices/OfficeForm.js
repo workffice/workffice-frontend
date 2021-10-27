@@ -43,33 +43,24 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
 
     const validate = values => {
         const errors = {};
-        if (!values.officeName) {
-            errors.officeName = 'Requerido.';
-        }
-        if (!values.officeType.value || values.officeType.value === "") {
-            errors.officeType = 'Requerido.';
-        }
-        // if (!values.enabledDays) {
-        //     errors.enabledDays = 'Requerido.';
-        // }
-        if (!values.tablesQuantity) {
-            errors.tablesQuantity = 'Requerido.';
-        }
-        if (!values.price) {
-            errors.price = 'Requerido.';
-        }
+        if (!values.officeName)
+            errors.officeName = 'Requerido';
+        if (!values.officeType.value || values.officeType.value === "")
+            errors.officeType = 'Requerido';
+        if (!values.tablesQuantity)
+            errors.tablesQuantity = 'Requerido';
+        if (!values.capacityPerTable)
+            errors.capacityPerTable = 'Requerido';
+        if (!values.price)
+            errors.price = 'Requerido';
         // if (!values.multipleSelectServ) {
         //     errors.multipleSelectServ = 'Requerido.';
         // }
         // if (!values.multipleSelectEqu) {
         //     errors.multipleSelectEqu = 'Requerido.';
         // }
-        if (!values.description) {
-            errors.description = 'Requerido.';
-        }
-        // if (!values.photo) {
-        //     errors.photo = 'Requerido.';
-        // }
+        if (!values.description)
+            errors.description = 'Requerido';
         return errors;
     };
 
@@ -126,7 +117,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                     <CardBody>
                         <Row>
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                <FormGroup className={formik.errors.officeName ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.officeName && formik.touched.officeName ? 'has-danger' : ''}>
                                     <Label htmlFor="officeName" className="label-form">Nombre</Label>
                                     <Input
                                         type="text"
@@ -140,7 +131,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                 </FormGroup>
 
 
-                                <FormGroup className={formik.errors.officeType ? 'has-danger' : ''}>
+                                <FormGroup>
                                     <Label htmlFor="officeType" className="label-form">Tipo de oficina</Label>
                                     <Select
                                         className="react-select primary"
@@ -153,10 +144,10 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         options={typesOptions}
 
                                     />
-                                    {formik.errors.officeType ? <Label className="error">{formik.errors.officeType}</Label> : <></>}
+                                    {formik.errors.officeType ? <Label className="text-danger">{formik.errors.officeType}</Label> : <></>}
                                 </FormGroup>
 
-                                <FormGroup className={formik.errors.tablesQuantity ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.tablesQuantity && formik.touched.tablesQuantity ? 'has-danger' : ''}>
                                     <Label htmlFor="tablesQuantity" className="label-form">Cantidad de mesas</Label>
                                     <Input
                                         type="number"
@@ -169,7 +160,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         value={formik.values.tablesQuantity}
                                     />
                                 </FormGroup>
-                                <FormGroup className={formik.errors.capacityPerTable ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.capacityPerTable && formik.touched.capacityPerTable ? 'has-danger' : ''}>
                                     <Label htmlFor="capacityPerTable" className="label-form">Cantidad de personas por mesa</Label>
                                     <Input
                                         type="number"
@@ -214,7 +205,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                             </Col>
 
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                <FormGroup className={formik.errors.price ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.price && formik.touched.price ? 'has-danger' : ''}>
                                     <Label htmlFor="price" className="label-form">Precio por hora</Label>
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">
@@ -324,7 +315,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         </Row>
                                     </FormGroup> */}
 
-                                <FormGroup className={formik.errors.description ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.description && formik.touched.description ? 'has-danger' : ''}>
                                     <Label htmlFor="description" className="label-form">Descripción</Label>
                                     <Input
                                         type="textarea"
