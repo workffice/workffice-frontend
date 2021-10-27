@@ -84,6 +84,8 @@ export const OfficeBooking = ({
             errors.endTime = 'Requerido.';
         if (!values.numberOfAssistants)
             errors.numberOfAssistants = 'Requerido.';
+        if (values.numberOfAssistants > office.capacity)
+            errors.numberOfAssistants = 'La cantidad de asistentes no puede superar a la capacidad maxima de la oficina';
         if (values.endTime.hours() - values.startTime.hours() <= 0)
             errors.invalidTimeRange = 'La hora de ingreso debe ser previa a la hora de salida'
         return errors;
@@ -179,7 +181,7 @@ export const OfficeBooking = ({
                                     </div>
                                 </Row>
                                 <Row style={{ paddingLeft: "5%" }}>
-
+                                    <Label htmlFor="officePrice" className="label-form">Capacidad <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? office.capacity + " personas" : ""}</Label></Label>
                                 </Row>
                                 <Row style={{ paddingLeft: "5%" }}>
                                     <Label htmlFor="officePrice" className="label-form">Disponibilidad </Label>
@@ -268,8 +270,10 @@ export const OfficeBooking = ({
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         min={1}
+                                        max={office && office.capacity}
                                         value={formik.values.numberOfAssistants}
                                     />
+                                    {formik.errors.numberOfAssistants ? <Label className="text-danger">{formik.errors.numberOfAssistants}</Label> : <></>}
                                 </FormGroup>
 
                                 <FormGroup>
