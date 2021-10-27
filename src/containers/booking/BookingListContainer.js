@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BookingList } from '../../components/Booking/BookingList'
+import { UserBookings } from '../../components/Booking/UserBookings'
 import { OfficeBookings } from '../../components/OfficeBooking/OfficeBookings'
 import { fetchOfficeBookings, fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/actions/booking/bookingActions'
 
@@ -14,7 +14,7 @@ export const UserBookingListContainer = () => {
     const loadBookings = useCallback((userEmail, page) => {
         dispatch(fetchUserCurrentBookings(userEmail, page))
     }, [dispatch])
-    return <BookingList
+    return <UserBookings
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
@@ -32,7 +32,7 @@ export const UserPastBookingListContainer = () => {
         dispatch(fetchUserPastBookings(userEmail, page))
     }, [dispatch])
     const pageInfo = useSelector(state => state.userBookings.pagination)
-    return <BookingList
+    return <UserBookings
         bookings={bookings}
         loadBookings={loadBookings}
         user={user}
