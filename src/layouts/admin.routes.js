@@ -12,6 +12,7 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
@@ -244,6 +245,14 @@ export const routes = [
         component: UserBookingListContainer,
         layout: '/admin',
         visibility: true
+      },
+      {
+        path: '/booking',
+        name: 'Detalle de reserva',
+        mini: 'DR',
+        component: BookingDetailContainer,
+        layout: '/admin',
+        visibility: false
       },
       {
         path: '/bookings/history',

@@ -48,26 +48,6 @@ export const DashboardOfficeBooking = ({
     });
     return (
         <Row>
-            <Col lg="6" md="12">
-                <Card>
-                    <CardHeader>
-                        <CardTitle tag="h4">Oficinia del mes: <small>{formik.values.month.label}</small></CardTitle>
-                        <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
-                            <Col sm="6">
-                                <p className="card-category" style={{ color: '#34b18a' }}>Oficina con más reservas</p>
-                            </Col>
-                        </Row>
-                    </CardHeader>
-                    <CardBody>
-                        {
-                            bookingsQuantityPerOffice.length > 0 && offices.length > 0
-                                ? <OfficeReportDetail office={bestOffice()} />
-                                : <EmptyComponent></EmptyComponent>
-                        }
-                    </CardBody>
-                </Card>
-
-            </Col>
             <Col lg="6" sm="12">
                 <Card>
                     <CardHeader>
@@ -124,7 +104,26 @@ export const DashboardOfficeBooking = ({
                     </CardBody>
                 </Card>
             </Col>
+            <Col lg="6" md="12">
+                <Card>
+                    <CardHeader>
+                        <CardTitle tag="h4">Oficinia del mes: <small>{formik.values.month.label}</small></CardTitle>
+                        <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
+                            <Col sm="6">
+                                <p className="card-category" style={{ color: '#34b18a' }}>Oficina con más reservas</p>
+                            </Col>
+                        </Row>
+                    </CardHeader>
+                    <CardBody>
+                        {
+                            bookingsQuantityPerOffice.length > 0 && offices.length > 0
+                                ? <OfficeReportDetail office={bestOffice()} />
+                                : <EmptyComponent></EmptyComponent>
+                        }
+                    </CardBody>
+                </Card>
 
+            </Col>
         </Row>
     )
 }
