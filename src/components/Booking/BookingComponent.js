@@ -22,7 +22,7 @@ export const BookingComponent = (props) => {
         officeBranchId,
     } = props;
 
-    const getOfficeType = () => {
+    const getBookingStatus = () => {
         if (status === "SCHEDULED") {
             return <Badge color="success" style={{ fontSize: 18 }}>Programada</Badge>
         } else if (status === "PENDING") {
@@ -39,7 +39,9 @@ export const BookingComponent = (props) => {
                     <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
                         <Col>
                             <h5 style={{ marginBottom: 0 }}>
-                                Código de reserva: <Label style={{ fontSize: 22, color: "#34B18A" }}>{`${id}`}</Label> - {getOfficeType()}
+                                Código de reserva: <Link color="primary" to={`/admin/booking?id=${id}`}>
+                                    {id}
+                                </Link> - {getBookingStatus()}
                             </h5>
                         </Col>
                         <Col xs="2">
@@ -47,7 +49,7 @@ export const BookingComponent = (props) => {
                                 <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
                                     Ver sucursal
                                 </UncontrolledTooltip>
-                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="sm" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
                                     <i class="fa fa-building-o" aria-hidden="true"></i>
                                 </Button>
                             </Link>

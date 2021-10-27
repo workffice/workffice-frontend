@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BookingDetail } from '../../components/BookingList/BookingDetail'
+import { BookingDetail } from '../../components/Booking/BookingDetail'
 import { fetchBooking } from '../../stores/actions/booking/bookingActions'
 
 export const BookingDetailContainer = () => {

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BookingList } from '../../components/BookingList/BookingList'
+import { BookingList } from '../../components/Booking/BookingList'
 import { fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/actions/booking/bookingActions'
 
 

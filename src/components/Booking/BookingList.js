@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading'
-import { BookingComponent } from './BookingListComponent';
+import { BookingComponent } from './BookingComponent';
 
 export const BookingList = ({
     user,

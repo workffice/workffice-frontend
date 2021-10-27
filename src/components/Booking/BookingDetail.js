@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { Col, Container, Row } from 'reactstrap'
-import { BookingComponent } from './BookingListComponent'
+import { BookingComponent } from './BookingComponent'
 
 export const BookingDetail = ({ loadBooking, booking }) => {
 
