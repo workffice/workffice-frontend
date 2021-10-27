@@ -50,7 +50,7 @@ export const BookingComponent = (props) => {
                                     Ver sucursal
                                 </UncontrolledTooltip>
                                 <Button id={`officeBranch-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <i className="fa fa-building-o" aria-hidden="true"></i>
                                 </Button>
                             </Link>
                         </Col>
@@ -156,7 +156,7 @@ BookingComponent.propTypes = {
     transactionAmount: PropTypes.number,
     officeBranchId: PropTypes.string,
     providerFee: PropTypes.number,
-    currency: PropTypes.number,
-    paymentMethodId: PropTypes.number,
-    paymentTypeId: PropTypes.number,
+    currency: PropTypes.string,
+    paymentMethodId: PropTypes.string,
+    paymentTypeId: PropTypes.string,
 }

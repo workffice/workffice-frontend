@@ -13,7 +13,7 @@ import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
-import { UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
+import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
@@ -239,20 +239,28 @@ export const routes = [
     visibility: true,
     views: [
       {
-        path: '/bookings/list',
-        name: 'Mis reservas',
-        mini: 'LR',
-        component: UserBookingListContainer,
-        layout: '/admin',
-        visibility: true
-      },
-      {
         path: '/booking',
         name: 'Detalle de reserva',
         mini: 'DR',
         component: BookingDetailContainer,
         layout: '/admin',
         visibility: false
+      },
+      {
+        path: '/office_bookings',
+        name: 'Reservas de oficina',
+        mini: 'RO',
+        component: OfficeBookingListContainer,
+        layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/bookings/list',
+        name: 'Mis reservas',
+        mini: 'LR',
+        component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
       },
       {
         path: '/bookings/history',

@@ -26,7 +26,7 @@ const addCheckout = preferenceId => {
     });
 }
 
-export const OfficeBooking = ({
+export const BookingForm = ({
     officeNotFound,
     officeBranch,
     loadOfficeBranch,

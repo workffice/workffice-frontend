@@ -61,3 +61,15 @@ export const getUserPastBookings = async (userEmail, page) => {
         return Promise.reject(error.errors[0]);
     }
 }
+
+export const getOfficeBookings = async (officeId, date) => {
+    try {
+        const bookings = await sdkAuthRequest(`${API_URL}/offices/${officeId}/bookings/?date=${date}`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return Promise.resolve(bookings.data);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}

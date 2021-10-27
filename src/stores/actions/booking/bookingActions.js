@@ -1,4 +1,5 @@
-import { bookOfficeApi, createMercadoPagoPreferenceApi, getBookingApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
+import { bookOfficeApi, createMercadoPagoPreferenceApi, getBookingApi, getOfficeBookingsApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
+import { OFFICE_ENTITY, setFoundEntity, setNotFoundEntity } from '../errors/notFoundActions'
 import { BOOKING_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from '../errors/permissionActions'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
 import { loadingBookingAction, stopLoadingBookingAction } from './loadingActions'
@@ -61,7 +62,7 @@ export const fetchUserCurrentBookingsAction = bookings => ({
     payload: bookings
 })
 
-export const fetchUserCurrentBookings = (userEmail, page=0) => async dispatch => {
+export const fetchUserCurrentBookings = (userEmail, page = 0) => async dispatch => {
     dispatch(loadingBookingAction())
     try {
         dispatch(fetchUserCurrentBookingsAction(await getUserCurrentBookingsApi(userEmail, page)))
@@ -90,6 +91,30 @@ export const fetchUserPastBookings = (userEmail, page = 0) => async dispatch => 
     } catch (error) {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+    } finally {
+        dispatch(stopLoadingBookingAction())
+    }
+}
+
+
+export const FETCH_OFFICE_BOOKINGS = 'FETCH_OFFICE_BOOKINGS'
+
+export const fetchOfficeBookingsAction = bookings => ({
+    type: FETCH_OFFICE_BOOKINGS,
+    payload: bookings
+})
+
+export const fetchOfficeBookings = (officeId, date) => async dispatch => {
+    dispatch(loadingBookingAction())
+    try {
+        dispatch(fetchOfficeBookingsAction(await getOfficeBookingsApi(officeId, date)))
+        dispatch(setSuccessAccess(BOOKING_RESOURCE))
+        dispatch(setFoundEntity(OFFICE_ENTITY))
+    } catch (error) {
+        if (error.code === "FORBIDDEN")
+            dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+        else if(error.code === "NOT_FOUND")
+            dispatch(setNotFoundEntity(OFFICE_ENTITY))
     } finally {
         dispatch(stopLoadingBookingAction())
     }

@@ -11,7 +11,8 @@ export const OfficeComponent = ({
   displayOfficeBranchInformation,
   displayTableInformation,
   displayBookingButton,
-  displayEditButton
+  displayEditButton,
+  displayBookingsButton,
 }) => {
   const {
     id,
@@ -52,9 +53,24 @@ export const OfficeComponent = ({
                 displayEditButton ?
                   <div>
                     <Link to={`/admin/offices/edit?id=${id}`}>
-                      <Button id={`editOffice-${id}`} color="primary" className="btn-round btn-icon" size="sm"><i className="nc-icon nc-ruler-pencil"></i></Button>
+                      <Button id={`editOffice-${id}`} color="primary" className="btn-round btn-icon" size="sm">
+                        <i className="nc-icon nc-ruler-pencil"></i>
+                      </Button>
                       <UncontrolledTooltip placement="right" target={`editOffice-${id}`} delay={0}>
                         Editar oficina
+                      </UncontrolledTooltip>
+                    </Link>
+                  </div> : <></>
+              }
+              {
+                displayBookingsButton ?
+                  <div>
+                    <Link to={`/admin/office_bookings?id=${id}`}>
+                      <Button id={`officeBookings-${id}`} color="primary" className="btn-round btn-icon" size="sm">
+                        <i className="fa fa-ticket"></i>
+                      </Button>
+                      <UncontrolledTooltip placement="right" target={`officeBookings-${id}`} delay={0}>
+                        Ver reservas
                       </UncontrolledTooltip>
                     </Link>
                   </div> : <></>
@@ -118,11 +134,11 @@ export const OfficeComponent = ({
               <Col>
                 <Row>
                   <Col>
-                    <h5 style={{marginBottom:".1rem"}}>Mesas</h5>
+                    <h5 style={{ marginBottom: ".1rem" }}>Mesas</h5>
                   </Col>
                 </Row>
                 <Row>
-                  <Col style={{paddingRight:"0"}}>
+                  <Col style={{ paddingRight: "0" }}>
                     <div className="text">
                       <Label className="form-label">
                         Cantidad:  <small>{table.quantity}</small>
@@ -158,6 +174,7 @@ OfficeComponent.propTypes = {
   }),
   displayBookingButton: PropTypes.bool,
   displayEditButton: PropTypes.bool,
+  displayBookingsButton: PropTypes.bool,
   displayOfficeBranchInformation: PropTypes.bool,
   displayTableInformation: PropTypes.bool,
 }
