@@ -4,15 +4,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { OfficeBooking } from '../../components/OfficeBooking/OfficeBooking'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
+import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions'
 import { bookOffice, createMercadoPagoPreference } from '../../stores/actions/booking/bookingActions'
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions'
 
 export const OfficeBookingContainer = () => {
     const dispatch = useDispatch()
+    const loadOfficeBranch = useCallback(officeBranchId => {
+        dispatch(getOfficeBranchDetail(officeBranchId))
+    }, [dispatch])
+    const officeBranch = useSelector(state => state.officeBranchDetail)
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
     }, [dispatch])
-    const branch = useSelector(state => state.officeBranchDetail)
     const office = useSelector(state => state.office)
     const loadInactivities = useCallback(officeId => {
         dispatch(getOfficeInactivities(officeId))
@@ -41,7 +45,8 @@ export const OfficeBookingContainer = () => {
         createBooking={createBooking}
         officeNotFound={officeNotFound}
         booking={booking}
-        branch={branch}
+        officeBranch={officeBranch}
+        loadOfficeBranch={loadOfficeBranch}
         mercadoPagoPreferenceId={mercadoPagoPreferenceId}
         createMercadoPagoPreference={createMPPreference}
     />
