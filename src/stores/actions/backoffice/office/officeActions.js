@@ -1,7 +1,7 @@
 import { setIsLoading } from "../..";
 import { createOfficeAPI, getOfficeAPI, updateOfficeAPI } from "../../../../api/backoffice/offices";
+import { OFFICE_ENTITY, setFoundEntity, setNotFoundEntity } from '../../errors/notFoundActions';
 import { setErrorAction, setSuccessAction } from "../../notifications/writeNotificationActions";
-import { setNotFoundEntity, setFoundEntity } from '../../errors/notFoundActions'
 import { loadingOfficeAction, stopLoadingOfficeAction } from "./loadingActions";
 import { fetchOfficesList } from "./officesActions";
 
@@ -36,9 +36,9 @@ export const getOffice = officeId => async dispatch => {
     dispatch(loadingOfficeAction())
     try {
         dispatch(getOfficeAction(await getOfficeAPI(officeId)))
-        dispatch(setFoundEntity("office"))
+        dispatch(setFoundEntity(OFFICE_ENTITY))
     } catch (error) {
-        dispatch(setNotFoundEntity("office"))
+        dispatch(setNotFoundEntity(OFFICE_ENTITY))
     } finally {
         dispatch(stopLoadingOfficeAction())
     }

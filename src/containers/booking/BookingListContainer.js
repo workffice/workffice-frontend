@@ -45,6 +45,8 @@ export const UserPastBookingListContainer = () => {
 
 export const OfficeBookingListContainer = () => {
     const dispatch = useDispatch()
+    const permission = useSelector(state => state.permission)
+    const entitiesNotFound = useSelector(state => state.entitiesNotFound)
     const isLoading = useSelector(state => state.loadingBooking)
     const office = useSelector(state => state.office)
     const loadOffice = useCallback(officeId => {
@@ -56,6 +58,8 @@ export const OfficeBookingListContainer = () => {
     }, [dispatch])
     return <OfficeBookings
         isLoading={isLoading}
+        entitiesNotFound={entitiesNotFound}
+        permission={permission}
         office={office}
         loadOffice={loadOffice}
         bookings={bookings}

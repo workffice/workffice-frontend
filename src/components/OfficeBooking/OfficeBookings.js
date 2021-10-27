@@ -1,14 +1,20 @@
 import { useFormik } from 'formik'
+import { includes } from 'lodash-es'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import ReactDatetimeClass from 'react-datetime'
 import { useLocation } from 'react-router'
 import { Col, Form, FormGroup, Label, Row } from 'reactstrap'
+import { OFFICE_ENTITY } from '../../stores/actions/errors/notFoundActions'
+import { BOOKING_RESOURCE } from '../../stores/actions/errors/permissionActions'
 import { BookingList } from '../Booking/BookingList'
+import Forbidden from '../Common/Forbidden/Forbidden'
 
 
 export const OfficeBookings = ({
     loadOffice,
+    entitiesNotFound,
+    permission,
     office,
     loadBookings,
     bookings,
@@ -46,8 +52,10 @@ export const OfficeBookings = ({
         }
     })
 
-    return (
-        <div className="content">
+    const renderBookings = () => {
+        if (permission.isForbidden && includes(permission.resources, BOOKING_RESOURCE))
+            return <Forbidden message="No tienes acceso a las reservas de esta sucursal" />
+        return <>
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
@@ -73,9 +81,18 @@ export const OfficeBookings = ({
                         />
                     </FormGroup>
                 </Row>
-            </Form> : <></>
+            </Form>
 
             <BookingList isLoading={isLoading} bookings={bookings} />
+        </>
+    }
+
+    return (
+        <div className="content">
+            {
+                includes(entitiesNotFound, OFFICE_ENTITY)
+                    ? <h1>La oficina que busca no existe</h1> : renderBookings()
+            }
         </div>
     )
 }

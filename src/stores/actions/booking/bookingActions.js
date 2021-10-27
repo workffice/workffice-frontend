@@ -1,4 +1,5 @@
 import { bookOfficeApi, createMercadoPagoPreferenceApi, getBookingApi, getOfficeBookingsApi, getUserCurrentBookingsApi, getUserPastBookingsApi } from '../../../api/booking/booking'
+import { OFFICE_ENTITY, setFoundEntity, setNotFoundEntity } from '../errors/notFoundActions'
 import { BOOKING_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from '../errors/permissionActions'
 import { setErrorAction, setSuccessAction } from '../notifications/writeNotificationActions'
 import { loadingBookingAction, stopLoadingBookingAction } from './loadingActions'
@@ -108,9 +109,12 @@ export const fetchOfficeBookings = (officeId, date) => async dispatch => {
     try {
         dispatch(fetchOfficeBookingsAction(await getOfficeBookingsApi(officeId, date)))
         dispatch(setSuccessAccess(BOOKING_RESOURCE))
+        dispatch(setFoundEntity(OFFICE_ENTITY))
     } catch (error) {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction(BOOKING_RESOURCE))
+        else if(error.code === "NOT_FOUND")
+            dispatch(setNotFoundEntity(OFFICE_ENTITY))
     } finally {
         dispatch(stopLoadingBookingAction())
     }
