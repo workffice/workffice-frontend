@@ -16,24 +16,20 @@ export const DashboardOfficeBooking = ({
 }) => {
     const [currentMonth, setCurrentMonth] = useState(monthFilter[new Date().getMonth()].value)
     const bookingOfficeRow = () => {
-        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0 && offices.length > 0) {
-            return bookingsQuantityPerOffice.map(office => {
-                let officeFound = offices.find(oFound => oFound.id == office.officeId)
-                const officeData = { ...office, name: officeFound.name };
-                return officeData;
-            })
-        }
+        return bookingsQuantityPerOffice.map(office => {
+            let officeFound = offices.find(oFound => oFound.id == office.officeId)
+            const officeData = { ...office, name: officeFound.name };
+            return officeData;
+        })
     }
     const bestOffice = () => {
-        if (bookingsQuantityPerOffice && bookingsQuantityPerOffice.length > 0) {
-            let bestOfficeBooking = null;
-            bookingsQuantityPerOffice.forEach(office => {
-                if (bestOfficeBooking == null) bestOfficeBooking = office;
-                if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
-            });
+        let bestOfficeBooking = null;
+        bookingsQuantityPerOffice.forEach(office => {
+            if (bestOfficeBooking == null) bestOfficeBooking = office;
+            if (bestOfficeBooking.totalBookings < office.totalBookings) bestOfficeBooking = office;
+        });
 
-            return offices.find(office => office.id === bestOfficeBooking.officeId);
-        }
+        return offices.find(office => office.id === bestOfficeBooking.officeId);
     }
 
     useEffect(() => {
@@ -63,7 +59,9 @@ export const DashboardOfficeBooking = ({
                     </CardHeader>
                     <CardBody>
                         {
-                            bestOffice() && <OfficeReportDetail office={bestOffice()} />
+                            bookingsQuantityPerOffice.length > 0 && offices.length > 0
+                                ? <OfficeReportDetail office={bestOffice()} />
+                                : <></>
                         }
                     </CardBody>
                 </Card>
@@ -111,7 +109,7 @@ export const DashboardOfficeBooking = ({
                                     </thead>
                                     <tbody>
                                         {
-                                            bookingOfficeRow()
+                                            bookingsQuantityPerOffice.length > 0 && offices.length > 0
                                                 ? bookingOfficeRow().map(office => <DashboardRowTable key={uniqueId()} title={office.name} value={office.totalBookings} />)
                                                 : <></>
                                         }
