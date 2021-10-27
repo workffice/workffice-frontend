@@ -24,3 +24,28 @@ export const reportsReducer = (state = initialState, { type, payload }) => {
             return currentState;
     }
 }
+
+
+export const revenuePerOfficeReducer = (state = [], { type, payload }) => {
+    switch (type) {
+        case FETCH_AMOUNT_PER_OFFICE:
+            return payload
+        default: return state
+    }
+}
+
+export const revenuePerMonthReducer = (state = [], { type, payload }) => {
+    switch (type) {
+        case FETCH_AMOUNT_PER_YEAR:
+            return payload
+        default: return state
+    }
+}
+
+export const bookingsQuantityPerOfficeReducer = (state = [], { type, payload }) => {
+    switch (type) {
+        case FETCH_OFFICE_BOOKING:
+            return payload
+        default: return state
+    }
+}

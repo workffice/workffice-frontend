@@ -21,9 +21,9 @@ export const DashboardContainer = () => {
     }, [dispatch]);
     const offices = useSelector(state => state.offices);
     // Reports
-    const revenuePerMonth = useSelector(state => state.reports.reports.reportOfficeYear);
-    const revenuePerOffice = useSelector(state => state.reports.reports.reportPerOffice);
-    const bookingsQuantityPerOffice = useSelector(state => state.reports.reports.reportOfficeBooking);
+    const revenuePerMonth = useSelector(state => state.revenuePerMonth);
+    const revenuePerOffice = useSelector(state => state.revenuePerOffice);
+    const bookingsQuantityPerOffice = useSelector(state => state.bookingsQuantityPerOffice);
     const loadRevenuePerMonth = useCallback(year => {
         dispatch(amountPerYear(officeBranch.id, year));
     }, [dispatch]);
