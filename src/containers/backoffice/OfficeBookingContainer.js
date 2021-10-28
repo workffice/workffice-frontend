@@ -1,14 +1,19 @@
 import { includes } from 'lodash-es'
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { OfficeBooking } from '../../components/OfficeBooking/OfficeBooking'
+import { BookingForm } from '../../components/Booking/BookingForm'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
+import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions'
 import { bookOffice, createMercadoPagoPreference } from '../../stores/actions/booking/bookingActions'
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions'
 
 export const OfficeBookingContainer = () => {
     const dispatch = useDispatch()
+    const loadOfficeBranch = useCallback(officeBranchId => {
+        dispatch(getOfficeBranchDetail(officeBranchId))
+    }, [dispatch])
+    const officeBranch = useSelector(state => state.officeBranchDetail)
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
     }, [dispatch])
@@ -30,7 +35,7 @@ export const OfficeBookingContainer = () => {
     const createMPPreference = useCallback(bookingId => {
         dispatch(createMercadoPagoPreference(bookingId))
     }, [dispatch])
-    return <OfficeBooking
+    return <BookingForm
         office={office}
         loadOffice={loadOffice}
         inactivities={inactivities}
@@ -40,6 +45,8 @@ export const OfficeBookingContainer = () => {
         createBooking={createBooking}
         officeNotFound={officeNotFound}
         booking={booking}
+        officeBranch={officeBranch}
+        loadOfficeBranch={loadOfficeBranch}
         mercadoPagoPreferenceId={mercadoPagoPreferenceId}
         createMercadoPagoPreference={createMPPreference}
     />

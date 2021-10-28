@@ -52,10 +52,7 @@ export const createOffice = async (officeBranchId, office) => {
                     {
                         method: 'POST',
                         headers: headersPost,
-                        body: JSON.stringify({
-                            "type": "RECURRING_DAY",
-                            "dayOfWeek": inactivityDay
-                        })
+                        body: JSON.stringify(inactivityDay)
                     });
             })
         }
@@ -77,6 +74,14 @@ export const updateOffice = async (officeId, office) => {
                 headers: headersPost,
                 body: imageData !== null ? JSON.stringify({ ...office, imageUrl: imageData.public_id }) : JSON.stringify(office)
             });
+        if (office.inactivityDays.length > 0) {
+            await sdkAuthRequest(`${API_URL}/offices/${officeId}/inactivities/`,
+                {
+                    method: 'PUT',
+                    headers: headersPost,
+                    body: JSON.stringify(office.inactivityDays)
+                });
+        }
         return Promise.resolve(officeUpdated);
     } catch (error) {
         return Promise.reject(error.errors[0]);

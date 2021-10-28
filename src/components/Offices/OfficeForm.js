@@ -33,43 +33,34 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
         switch (day) {
             case ("MONDAY"): return "Lunes"
             case ("TUESDAY"): return "Martes"
-            case ("WEDNESDAY"): return "Miercoles"
+            case ("WEDNESDAY"): return "Miércoles"
             case ("THURSDAY"): return "Jueves"
             case ("FRIDAY"): return "Viernes"
-            case ("SATURDAY"): return "Sabado"
+            case ("SATURDAY"): return "Sábado"
             case ("SUNDAY"): return "Domingo"
         }
     }
 
     const validate = values => {
         const errors = {};
-        if (!values.officeName) {
-            errors.officeName = 'Requerido.';
-        }
-        if (!values.officeType.value || values.officeType.value === "") {
-            errors.officeType = 'Requerido.';
-        }
-        // if (!values.enabledDays) {
-        //     errors.enabledDays = 'Requerido.';
-        // }
-        if (!values.tablesQuantity) {
-            errors.tablesQuantity = 'Requerido.';
-        }
-        if (!values.price) {
-            errors.price = 'Requerido.';
-        }
+        if (!values.officeName)
+            errors.officeName = 'Requerido';
+        if (!values.officeType.value || values.officeType.value === "")
+            errors.officeType = 'Requerido';
+        if (!values.tablesQuantity)
+            errors.tablesQuantity = 'Requerido';
+        if (!values.capacityPerTable)
+            errors.capacityPerTable = 'Requerido';
+        if (!values.price)
+            errors.price = 'Requerido';
         // if (!values.multipleSelectServ) {
         //     errors.multipleSelectServ = 'Requerido.';
         // }
         // if (!values.multipleSelectEqu) {
         //     errors.multipleSelectEqu = 'Requerido.';
         // }
-        if (!values.description) {
-            errors.description = 'Requerido.';
-        }
-        // if (!values.photo) {
-        //     errors.photo = 'Requerido.';
-        // }
+        if (!values.description)
+            errors.description = 'Requerido';
         return errors;
     };
 
@@ -110,7 +101,10 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                 tablesQuantity: tablesQuantity,
                 capacityPerTable: capacityPerTable,
                 photo: photo,
-                inactivityDays: inactivityDays.map(day => day.value),
+                inactivityDays: inactivityDays.map(day => ({
+                    type: "RECURRING_DAY",
+                    dayOfWeek: day.value
+                })),
             }
             onSubmit(officeFormData)
         },
@@ -123,7 +117,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                     <CardBody>
                         <Row>
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                <FormGroup className={formik.errors.officeName ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.officeName && formik.touched.officeName ? 'has-danger' : ''}>
                                     <Label htmlFor="officeName" className="label-form">Nombre</Label>
                                     <Input
                                         type="text"
@@ -137,7 +131,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                 </FormGroup>
 
 
-                                <FormGroup className={formik.errors.officeType ? 'has-danger' : ''}>
+                                <FormGroup>
                                     <Label htmlFor="officeType" className="label-form">Tipo de oficina</Label>
                                     <Select
                                         className="react-select primary"
@@ -150,10 +144,10 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         options={typesOptions}
 
                                     />
-                                    {formik.errors.officeType ? <Label className="error">{formik.errors.officeType}</Label> : <></>}
+                                    {formik.errors.officeType ? <Label className="text-danger">{formik.errors.officeType}</Label> : <></>}
                                 </FormGroup>
 
-                                <FormGroup className={formik.errors.tablesQuantity ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.tablesQuantity && formik.touched.tablesQuantity ? 'has-danger' : ''}>
                                     <Label htmlFor="tablesQuantity" className="label-form">Cantidad de mesas</Label>
                                     <Input
                                         type="number"
@@ -166,7 +160,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         value={formik.values.tablesQuantity}
                                     />
                                 </FormGroup>
-                                <FormGroup className={formik.errors.capacityPerTable ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.capacityPerTable && formik.touched.capacityPerTable ? 'has-danger' : ''}>
                                     <Label htmlFor="capacityPerTable" className="label-form">Cantidad de personas por mesa</Label>
                                     <Input
                                         type="number"
@@ -184,7 +178,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                     <Select
                                         className="react-select"
                                         classNamePrefix="react-select"
-                                        placeholder="Seleccione los días que la oficina no está disponible"
+                                        placeholder="Seleccione días"
                                         name="inactivityDays"
                                         id="inactivityDays"
                                         closeMenuOnSelect={false}
@@ -211,7 +205,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                             </Col>
 
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
-                                <FormGroup className={formik.errors.price ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.price && formik.touched.price ? 'has-danger' : ''}>
                                     <Label htmlFor="price" className="label-form">Precio por hora</Label>
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">
@@ -321,7 +315,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                         </Row>
                                     </FormGroup> */}
 
-                                <FormGroup className={formik.errors.description ? 'has-danger' : ''}>
+                                <FormGroup className={formik.errors.description && formik.touched.description ? 'has-danger' : ''}>
                                     <Label htmlFor="description" className="label-form">Descripción</Label>
                                     <Input
                                         type="textarea"

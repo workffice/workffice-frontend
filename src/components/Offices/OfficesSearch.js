@@ -129,6 +129,7 @@ export const OfficesSearch = ({ officeBranches, search, loading }) => {
                     xg="12"
                 >
                     <Pagination
+                        uri="/admin/search/"
                         currentPage={officeBranches.pagination ? officeBranches.pagination.currentPage : 1}
                         totalPages={officeBranches.pagination ? officeBranches.pagination.totalPages : 1}
                         queryParams={searchQueryBuilder(
@@ -150,7 +151,7 @@ export const OfficesSearch = ({ officeBranches, search, loading }) => {
                     <hr />
                     <h2>Sucursales</h2>
                     <hr />
-                    <Row style={{marginLeft: "1%", marginRight: "1%"}}>
+                    <Row style={{ marginLeft: "1%", marginRight: "1%" }}>
                         {renderOfficeBranches()}
                     </Row>
                 </Col>

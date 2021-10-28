@@ -1,13 +1,14 @@
 import { useFormik } from 'formik';
+import { includes } from 'lodash-es';
 import React from 'react';
 import { useHistory } from 'react-router';
 import Select from 'react-select';
-import { Row, Col, Card, CardBody, Form, CardHeader, FormGroup, Button } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { ROLE_RESOURCE } from '../../stores/actions/errors/permissionActions';
 import { getErrorMessage } from '../../utils/collaboratorTranslations';
-import { Notification } from '../Common/Notification/Notification';
-import Forbidden from "../Common/Forbidden/Forbidden"
-import { includes } from 'lodash-es';
 import { ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
+import Forbidden from "../Common/Forbidden/Forbidden";
+import { Notification } from '../Common/Notification/Notification';
 
 export const NewCollaborator = ({ permission, notification, hideNotification, officeBranchRoles, loadOfficeBranchRoles, createCollaborator }) => {
   React.useEffect(() => {
@@ -16,14 +17,14 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
   const validate = values => {
     const errors = {};
     if (!values.collaboratorName) {
-      errors.name = "Requerido"
+      errors.collaboratorName = "Requerido"
     }
     if (!values.collaboratorEmail) {
-      errors.email = 'Requerido'
+      errors.collaboratorEmail = 'Requerido'
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.collaboratorEmail)
     ) {
-      errors.email = 'Dirección de email inválida.'
+      errors.collaboratorEmail = 'Dirección de email inválida.'
     }
     if (values.roles.length == 0)
       errors.roles = 'Debe elegir al menos un rol'
@@ -89,15 +90,15 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
             <CardBody>
               <div className="office-branch-card-title colaborator" style={{ display: 'block', marginTop: 0 }}>
                 <div>
-                  <FormGroup className={formik.errors.name ? 'has-danger mb-3' : 'mb-3'}>
-                    <label
+                  <FormGroup className={formik.errors.collaboratorName && formik.touched.collaboratorName ? 'has-danger mb-3' : 'mb-3'}>
+                    <Label
                       htmlFor="collaboratorName"
-                      className="form-label"
+                      className="label-form"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
                       Nombre
-                    </label>
-                    <input
+                    </Label>
+                    <Input
                       type="text"
                       className="form-control"
                       id="collaboratorName"
@@ -107,19 +108,19 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
                       onBlur={formik.handleBlur}
                       value={formik.values.collaboratorName}
                     />
-                    {formik.errors.name ? (
-                      <div className="error">{formik.errors.name}</div>
+                    {formik.errors.collaboratorName && formik.touched.collaboratorName ? (
+                      <div className="error">{formik.errors.collaboratorName}</div>
                     ) : null}
                   </FormGroup>
-                  <FormGroup className={formik.errors.email ? 'has-danger mb-3' : 'mb-3'}>
-                    <label
+                  <FormGroup className={formik.errors.collaboratorEmail && formik.touched.collaboratorEmail ? 'has-danger mb-3' : 'mb-3'}>
+                    <Label
                       htmlFor="collaboratorEmail"
-                      className="form-label"
+                      className="label-form"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
                       Email
-                    </label>
-                    <input
+                    </Label>
+                    <Input
                       type="email"
                       className="form-control"
                       id="collaboratorEmail"
@@ -129,17 +130,17 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
                       onBlur={formik.handleBlur}
                       value={formik.values.collaboratorEmail}
                     />
-                    {formik.errors.email ? (
-                      <div className="error">{formik.errors.email}</div>
+                    {formik.errors.collaboratorEmail && formik.touched.collaboratorEmail ? (
+                      <div className="error">{formik.errors.collaboratorEmail}</div>
                     ) : null}
                   </FormGroup>
-                  <FormGroup className={formik.errors.roles ? 'has-danger mb-3' : 'mb-3'}>
-                    <label
-                      className="form-label"
+                  <FormGroup>
+                    <Label
+                      className="label-form"
                       style={{ fontSize: 20, color: '#081620' }}
                       htmlFor="roles">
                       Roles
-                    </label>
+                    </Label>
                     <Select
                       className="react-select"
                       classNamePrefix="react-select"
@@ -156,10 +157,10 @@ export const NewCollaborator = ({ permission, notification, hideNotification, of
                       }) : []}
                     />
                     {formik.errors.roles ? (
-                      <div className="error">{formik.errors.roles}</div>
+                      <Label className="text-danger">{formik.errors.roles}</Label>
                     ) : <div></div>}
-                    {permission.isForbidden && includes(permission.resources, "role") ?
-                    <Forbidden message={ROLE_FORBIDDEN_MESSAGE}/> : <></>}
+                    {permission.isForbidden && includes(permission.resources, ROLE_RESOURCE) ?
+                      <Forbidden message={ROLE_FORBIDDEN_MESSAGE} /> : <></>}
                   </FormGroup>
                 </div>
               </div>

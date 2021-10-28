@@ -1,12 +1,13 @@
 import { useFormik } from 'formik';
+import { includes } from 'lodash-es';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Datetime from 'react-datetime';
 import { useLocation } from 'react-router';
 import {
     Badge,
-    Button, Card, CardFooter, CardHeader, CardTitle, Col, Form,
-    FormGroup, Input, Label, Row
+    Button, Card, Col, Form,
+    FormGroup, Input, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 import { getErrorMessage } from '../../utils/bookingTranslations';
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
@@ -25,8 +26,10 @@ const addCheckout = preferenceId => {
     });
 }
 
-export const OfficeBooking = ({
+export const BookingForm = ({
     officeNotFound,
+    officeBranch,
+    loadOfficeBranch,
     office,
     loadOffice,
     notification,
@@ -39,14 +42,20 @@ export const OfficeBooking = ({
     createMercadoPagoPreference,
 }) => {
     const query = new URLSearchParams(useLocation().search)
+    const officeId = query.get("officeId")
+    const officeBranchId = query.get("officeBranchId")
     const [mpCheckout, setMpCheckout] = useState(null)
     useEffect(() => {
-        if (query.get("id"))
-            loadOffice(query.get("id"))
+        if (officeBranchId)
+            loadOfficeBranch(officeBranchId)
     }, [])
     useEffect(() => {
-        if (query.get("id"))
-            loadInactivities(query.get("id"))
+        if (officeId)
+            loadOffice(officeId)
+    }, [])
+    useEffect(() => {
+        if (officeId)
+            loadInactivities(officeId)
     }, [])
     useEffect(() => {
         const bookingId = booking ? booking.id : null
@@ -54,7 +63,6 @@ export const OfficeBooking = ({
             createMercadoPagoPreference(bookingId)
     }, [booking ? booking.id : ""])
     useEffect(() => {
-        // con el preferenceId en mano, inyectamos el script de mercadoPago
         if (mercadoPagoPreferenceId) {
             const script = document.createElement('script');
             const checkout = addCheckout(mercadoPagoPreferenceId)
@@ -82,11 +90,12 @@ export const OfficeBooking = ({
             errors.endTime = 'Requerido.';
         if (!values.numberOfAssistants)
             errors.numberOfAssistants = 'Requerido.';
+        if (values.numberOfAssistants > office.capacity)
+            errors.numberOfAssistants = 'La cantidad de asistentes no puede superar a la capacidad maxima de la oficina';
         if (values.endTime.hours() - values.startTime.hours() <= 0)
             errors.invalidTimeRange = 'La hora de ingreso debe ser previa a la hora de salida'
         return errors;
     };
-
 
     const formik = useFormik({
         initialValues: {
@@ -107,6 +116,32 @@ export const OfficeBooking = ({
             createBooking(office.id, booking)
         },
     });
+
+    const getOfficeType = () => {
+        if (office.privacy === "SHARED")
+            return <Badge color="info">Compartida</Badge>
+        return <Badge color="danger">Privada</Badge>
+    }
+
+    const daysOfWeek = [
+        "MONDAY", "TUESDAY", "WEDNESDAY",
+        "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    ]
+    const getDay = day => {
+        switch (day) {
+            case ("MONDAY"): return "Lunes"
+            case ("TUESDAY"): return "Martes"
+            case ("WEDNESDAY"): return "Miércoles"
+            case ("THURSDAY"): return "Jueves"
+            case ("FRIDAY"): return "Viernes"
+            case ("SATURDAY"): return "Sábado"
+            case ("SUNDAY"): return "Domingo"
+        }
+    }
+    const getLabelColor = day => {
+        return includes(inactivities.map(inactivity => inactivity.dayOfWeek), day)
+            ? "danger" : "info"
+    }
 
     const renderBookingForm = () => {
         return (
@@ -132,7 +167,50 @@ export const OfficeBooking = ({
                 />
                 <Card>
                     <Row>
-                        <Col>
+                        <Col xs="12" md="6" lg="6" xg="6" >
+                            <Form style={{ padding: "5%" }}>
+                                <Cloudinary publicId={office ? office.imageUrl : ""} height="300" width="500" />
+                                <Row style={{ paddingLeft: "5%", paddingRight: '5%', display: 'flex', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <Label htmlFor="officeBranchName" className="label-form">Sucursal <Label style={{ color: "#EB5D60", fontSize: 18 }}>{officeBranch ? officeBranch.name : ""}</Label> </Label>
+                                    </div>
+                                    <div>
+                                        <Label htmlFor="officeType" className="label-form">Tipo de oficina <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? getOfficeType() : ""}</Label> </Label>
+                                    </div>
+                                </Row>
+                                <Row style={{ paddingLeft: "5%", paddingRight: '5%', display: 'flex', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <Label htmlFor="officePrice" className="label-form">Precio por hora $ <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? office.price : ""}</Label> </Label>
+                                    </div>
+                                    <div>
+                                        <Label htmlFor="officeContact" className="label-form">Contacto <Label style={{ color: "#EB5D60", fontSize: 18 }}>{officeBranch ? officeBranch.phone : ""}</Label> </Label>
+                                    </div>
+                                </Row>
+                                <Row style={{ paddingLeft: "5%" }}>
+                                    <Label htmlFor="officePrice" className="label-form">Capacidad <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office ? office.capacity + " personas" : ""}</Label></Label>
+                                </Row>
+                                <Row style={{ paddingLeft: "5%" }}>
+                                    <Label htmlFor="officePrice" className="label-form">Disponibilidad </Label>
+                                </Row>
+                                <Row style={{ paddingLeft: "5%" }}>
+                                    {
+                                        daysOfWeek.map(day =>
+                                            <Badge id={`down-${day}`} key={day} color={getLabelColor(day)}>
+                                                {
+                                                    getLabelColor(day) === "danger"
+                                                        ? <UncontrolledTooltip placement="bottom" target={`down-${day}`} delay={0}>
+                                                            No disponible
+                                                        </UncontrolledTooltip> : <></>
+                                                }
+
+                                                {getDay(day)}
+                                            </Badge>
+                                        )
+                                    }
+                                </Row>
+                            </Form>
+                        </Col>
+                        <Col xs="12" md="6" lg="6" xg="6">
                             <Form onSubmit={formik.handleSubmit} style={{ padding: "5%" }}>
                                 <FormGroup className={formik.errors.date ? 'has-danger' : ''}>
                                     <Label htmlFor="date" className="label-form">Fecha</Label>
@@ -198,15 +276,17 @@ export const OfficeBooking = ({
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         min={1}
+                                        max={office && office.capacity}
                                         value={formik.values.numberOfAssistants}
                                     />
+                                    {formik.errors.numberOfAssistants ? <Label className="text-danger">{formik.errors.numberOfAssistants}</Label> : <></>}
                                 </FormGroup>
 
                                 <FormGroup>
                                     {
                                         office
                                             ? <Label className="label-form">
-                                                {` Precio total $ ${office.price * (formik.values.endTime.hours() - formik.values.startTime.hours())}`}
+                                                <Label htmlFor="officePrice" className="label-form">Precio total $ <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office.price * (formik.values.endTime.hours() - formik.values.startTime.hours())}</Label> </Label>
                                             </Label>
                                             : <Label className="label-form">
                                                 Precio total $
@@ -214,7 +294,7 @@ export const OfficeBooking = ({
                                     }
 
                                 </FormGroup>
-                                <Row>
+                                <Row style={{ marginTop: '1%', marginBottom: '1%' }}>
                                     <Col style={{ display: 'flex', justifyContent: 'center' }}>
                                         <Button
                                             className="btn-round btn-primary"
@@ -235,17 +315,6 @@ export const OfficeBooking = ({
                                     </Col>
                                 </Row>
                             </Form>
-                        </Col>
-                        <Col style={{ padding: "5%" }}>
-                            <Cloudinary publicId={office ? office.imageUrl : ""} height="300" width="500" />
-                            <CardHeader>
-                                <CardTitle>
-                                    {office ? office.name : ""}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardFooter>
-                                {inactivities && inactivities.map(inactivity => <Badge key={inactivity.id} color="info">{inactivity.dayOfWeek}</Badge>)}
-                            </CardFooter>
                         </Col>
                     </Row>
                 </Card>

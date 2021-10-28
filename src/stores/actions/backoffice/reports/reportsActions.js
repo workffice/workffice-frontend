@@ -1,6 +1,5 @@
-import { setIsLoading } from "../..";
 import { amountPerOfficeAPI, amountPerYearAPI, bookingOfficeAPI } from "../../../../api/backoffice/reports";
-import { setErrorAction } from "../../notifications/writeNotificationActions";
+import { REPORT_RESOURCE, setForbiddenAccessAction } from "../../errors/permissionActions";
 
 export const FETCH_AMOUNT_PER_OFFICE = 'FETCH_AMOUNT_PER_OFFICE';
 export const FETCH_OFFICE_BOOKING = 'FETCH_OFFICE_BOOKING';
@@ -20,35 +19,30 @@ export const fetch_amount_per_year = report => ({
 });
 
 export const amountPerOffice = (officeBranchId, month) => async (dispatch) => {
-    setIsLoading(true);
     try {
         dispatch(fetch_amount_per_office(await amountPerOfficeAPI(officeBranchId, month)));
     } catch (error) {
-        dispatch(setErrorAction(error));
-    } finally {
-        dispatch(setIsLoading(false));
+        if (error.error === "OFFICE_BRANCH_FORBIDDEN")
+            dispatch(setForbiddenAccessAction(REPORT_RESOURCE));
     }
 }
 
 export const amountPerYear = (officeBranchId, year) => async (dispatch) => {
-    setIsLoading(true);
     try {
         dispatch(fetch_amount_per_year(await amountPerYearAPI(officeBranchId, year)));
     } catch (error) {
-        dispatch(setErrorAction(error));
-    } finally {
-        dispatch(setIsLoading(false));
+        console.log(error)
+        if (error.error === "OFFICE_BRANCH_FORBIDDEN")
+            dispatch(setForbiddenAccessAction(REPORT_RESOURCE));
     }
 }
 
 
 export const booking = (officeBranchId, month) => async (dispatch) => {
-    setIsLoading(true);
     try {
         dispatch(fetch_booking_office(await bookingOfficeAPI(officeBranchId, month)));
     } catch (error) {
-        dispatch(setErrorAction(error));
-    } finally {
-        dispatch(setIsLoading(false));
+        if (error.error === "OFFICE_BRANCH_FORBIDDEN")
+            dispatch(setForbiddenAccessAction(REPORT_RESOURCE));
     }
 }

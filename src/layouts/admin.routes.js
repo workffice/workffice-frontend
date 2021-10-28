@@ -1,9 +1,9 @@
-import { BookingList } from '../components/BookingList/BookingList';
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { NewNotice } from '../components/Notice/NewNotice';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
@@ -12,10 +12,11 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
+import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
-import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 
 export const routes = [
   {
@@ -238,10 +239,34 @@ export const routes = [
     visibility: true,
     views: [
       {
+        path: '/booking',
+        name: 'Detalle de reserva',
+        mini: 'DR',
+        component: BookingDetailContainer,
+        layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/office_bookings',
+        name: 'Reservas de oficina',
+        mini: 'RO',
+        component: OfficeBookingListContainer,
+        layout: '/admin',
+        visibility: false
+      },
+      {
         path: '/bookings/list',
-        name: 'Listado de reservas',
+        name: 'Mis reservas',
         mini: 'LR',
-        component: BookingList,
+        component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/bookings/history',
+        name: 'Reservas anteriores',
+        mini: 'RA',
+        component: UserPastBookingListContainer,
         layout: '/admin',
         visibility: true
       },
@@ -251,7 +276,7 @@ export const routes = [
         mini: 'RO',
         component: OfficeBookingContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
     ]
   }
