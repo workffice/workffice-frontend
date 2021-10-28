@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-// import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from '../Offices/OfficeComponent';
@@ -75,7 +75,12 @@ export const OfficeBranchDetail = ({
                                 return (
                                     <Col key={office.id}>
                                         <div>
-                                            <OfficeComponent displayBookingButton={true} office={office} officeBranch={officeBranch} />
+                                            <OfficeComponent
+                                                displayBookingButton={true}
+                                                office={office}
+                                                officeBranch={officeBranch}
+                                                displayTableInformation
+                                            />
                                         </div>
                                     </Col>
                                 )
@@ -115,7 +120,7 @@ export const OfficeBranchDetail = ({
                                     <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
                                         <div>
                                             <div className="imageContainer">
-                                                {/* <Cloudinary className="office-branch-card-image" publicId={officeBranch ? officeBranch.images[0].url : ""} /> */}
+                                                <Cloudinary className="office-branch-card-image" height="350rem" publicId={officeBranch ? officeBranch.images[0].url : ""} />
                                             </div>
                                         </div>
 
@@ -139,7 +144,12 @@ export const OfficeBranchDetail = ({
                                                 {officeBranch ? officeBranch.description : ""}
                                             </label>
                                         </div>
-
+                                        <div style={{ marginLeft: 15, marginTop: 20 }}>
+                                            <Row>
+                                                <h3 style={{ marginBottom: 10 }}>Contacto</h3>
+                                                <strong style={{ color: "#34B18A", marginLeft: 20, fontSize: 25 }}>{officeBranch ? officeBranch.phone : ""}</strong>
+                                            </Row>
+                                        </div>
                                         <div style={{ marginLeft: 15, marginTop: 20 }}>
                                             <Row>
                                                 <h3 style={{ marginBottom: 10 }}>Oficinas registradas</h3>
