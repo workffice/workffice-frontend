@@ -262,5 +262,22 @@ export const routes = [
         visibility: false,
       },
     ]
+  },
+  {
+    collapse: true,
+    name: 'Preguntas frecuentes',
+    icon: 'fa fa-cog',
+    state: 'bookingCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/bookings/list',
+        name: 'Preguntas frecuentes',
+        mini: 'PF',
+        component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+    ]
   }
 ];

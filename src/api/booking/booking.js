@@ -1,4 +1,4 @@
-import { bookOffice, createMercadoPagoPreference, getBooking, getUserCurrentBookings, getUserPastBookings } from "../../infra/api/booking/booking"
+import { bookOffice, createMercadoPagoPreference, getBooking, getOfficeBookings, getUserCurrentBookings, getUserPastBookings } from "../../infra/api/booking/booking"
 
 export const bookOfficeApi = (officeId, bookingBody) => {
     return Promise.resolve(bookOffice(officeId, bookingBody))
@@ -12,10 +12,14 @@ export const getBookingApi = bookingId => {
     return Promise.resolve(getBooking(bookingId))
 }
 
-export const getUserCurrentBookingsApi = userEmail => {
-    return Promise.resolve(getUserCurrentBookings(userEmail))
+export const getUserCurrentBookingsApi = (userEmail, page) => {
+    return Promise.resolve(getUserCurrentBookings(userEmail, page))
 }
 
 export const getUserPastBookingsApi = (userEmail, page) => {
     return Promise.resolve(getUserPastBookings(userEmail, page))
+}
+
+export const getOfficeBookingsApi = (officeId, date) => {
+    return Promise.resolve(getOfficeBookings(officeId, date))
 }

@@ -5,7 +5,15 @@ import { Badge, Button, Card, CardBody, CardHeader, Col, Label, Row, Uncontrolle
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import './styles/OfficeComponent.css';
 
-export const OfficeComponent = ({ office, officeBranch, displayBookingButton, displayEditButton }) => {
+export const OfficeComponent = ({
+  office,
+  officeBranch,
+  displayOfficeBranchInformation,
+  displayTableInformation,
+  displayBookingButton,
+  displayEditButton,
+  displayBookingsButton,
+}) => {
   const {
     id,
     name,
@@ -25,41 +33,71 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
     <>
       <Card>
         <CardBody>
-          <Cloudinary className="office-branch-card-image" height="300" publicId={imageUrl} />
+          <Cloudinary className="office-branch-card-image" height="250rem" width="100%" publicId={imageUrl} />
           <CardHeader>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
-              <h5 style={{ marginBottom: "0", marginRight: "3%" }}>{name}</h5>
+              {
+                name.length < 20
+                  ? <h5 style={{ marginBottom: "0", marginRight: "3%" }}>
+                    {name}
+                  </h5>
+                  : <h5 style={{ marginBottom: "0", marginRight: "3%" }} id={`officeName-${id}`}>
+                    <UncontrolledTooltip placement="top" target={`officeName-${id}`} delay={0}>
+                      {name}
+                    </UncontrolledTooltip>
+                    {name.slice(0, 20) + "..."}
+                  </h5>
+              }
+
               {
                 displayEditButton ?
                   <div>
                     <Link to={`/admin/offices/edit?id=${id}`}>
-                      <Button id="right" color="primary" className="btn-round btn-icon" size="sm"><i className="nc-icon nc-ruler-pencil"></i></Button>
-                      <UncontrolledTooltip placement="right" target="right" delay={0}>
+                      <Button id={`editOffice-${id}`} color="primary" className="btn-round btn-icon" size="sm">
+                        <i className="nc-icon nc-ruler-pencil"></i>
+                      </Button>
+                      <UncontrolledTooltip placement="right" target={`editOffice-${id}`} delay={0}>
                         Editar oficina
                       </UncontrolledTooltip>
                     </Link>
                   </div> : <></>
               }
+              {
+                displayBookingsButton ?
+                  <div>
+                    <Link to={`/admin/office_bookings?id=${id}`}>
+                      <Button id={`officeBookings-${id}`} color="primary" className="btn-round btn-icon" size="sm">
+                        <i className="fa fa-ticket"></i>
+                      </Button>
+                      <UncontrolledTooltip placement="right" target={`officeBookings-${id}`} delay={0}>
+                        Ver reservas
+                      </UncontrolledTooltip>
+                    </Link>
+                  </div> : <></>
+              }
             </div>
-            <Row>
-              <Col>
-                <div className='text'>
-                  <Label className="form-label">
-                    Sucursal <small>{officeBranch ? officeBranch.name : ""}</small>
-                  </Label>
-                </div>
-              </Col>
-              <Col>
-                <div className='text' style={{marginBottom: 0}}>
-                  <Label className="form-label">
-                    Contacto <small>{officeBranch ? officeBranch.phone : ""}</small>
-                  </Label>
-                </div>
-              </Col>
-            </Row>
+            {
+              displayOfficeBranchInformation
+                ? <Row>
+                  <Col>
+                    <div className='text'>
+                      <Label className="form-label">
+                        Sucursal <small>{officeBranch ? officeBranch.name : ""}</small>
+                      </Label>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className='text' style={{ marginBottom: 0 }}>
+                      <Label className="form-label">
+                        Contacto <small>{officeBranch ? officeBranch.phone : ""}</small>
+                      </Label>
+                    </div>
+                  </Col>
+                </Row> : <></>
+            }
             {
               displayBookingButton ?
-                <Link to={`/admin/create-booking?id=${id}`}>
+                <Link to={`/admin/create-booking?officeId=${id}&officeBranchId=${officeBranch ? officeBranch.id : ""}`}>
                   <Button
                     className="btn btn-primary"
                     color="primary"
@@ -92,21 +130,23 @@ export const OfficeComponent = ({ office, officeBranch, displayBookingButton, di
           </Col>
           <hr />
           {
-            privacy === "SHARED" ?
+            displayTableInformation ?
               <Col>
                 <Row>
-                  <Col md="12">
-                    <h5 style={{ margin: "0" }}>Mesas</h5>
-                  </Col>
                   <Col>
-                    <div className='text'>
+                    <h5 style={{ marginBottom: ".1rem" }}>Mesas</h5>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col style={{ paddingRight: "0" }}>
+                    <div className="text">
                       <Label className="form-label">
                         Cantidad:  <small>{table.quantity}</small>
                       </Label>
                     </div>
                   </Col>
                   <Col>
-                    <div className='text'>
+                    <div className="text">
                       <Label className="form-label">
                         Capacidad:  <small>{table.capacity}</small>
                       </Label>
@@ -133,5 +173,8 @@ OfficeComponent.propTypes = {
     price: PropTypes.number
   }),
   displayBookingButton: PropTypes.bool,
-  displayEditButton: PropTypes.bool
+  displayEditButton: PropTypes.bool,
+  displayBookingsButton: PropTypes.bool,
+  displayOfficeBranchInformation: PropTypes.bool,
+  displayTableInformation: PropTypes.bool,
 }

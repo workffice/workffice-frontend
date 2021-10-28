@@ -1,16 +1,16 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
-import { OfficeBranchDetail } from '../../components/OfficeBranch/OfficeBranchDetail'
-import { getOfficeBranchSearch } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
+import { OfficeBranchDetail } from '../../components/OfficeBranch/OfficeBranchDetail';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
+import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
+import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
 
 export const OfficeBranchDetailContainer = () => {
     const dispatch = useDispatch();
-    const officeBranch = useSelector(state => state.officeBranchSearch)
+    const officeBranch = useSelector(state => state.officeBranchDetail)
     const officeBranchIdAdmin = readFromLocalStorage("officeBranch").id
     const loadOfficeBranch = useCallback(officeBranchId => {
-        dispatch(getOfficeBranchSearch(officeBranchId));
+        dispatch(getOfficeBranchDetail(officeBranchId));
     }, [dispatch]);
     const loadOffices = useCallback(officeBranchId => {
         dispatch(fetchOfficesList(officeBranchId));

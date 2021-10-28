@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
 
-export const BookingListComponent = (props) => {
+export const BookingComponent = (props) => {
     const {
         officeName,
         id,
@@ -19,9 +20,10 @@ export const BookingListComponent = (props) => {
         paymentMethodId,
         paymentTypeId,
         officeBranchId,
+        disableBookingLink
     } = props;
 
-    const getOfficeType = () => {
+    const getBookingStatus = () => {
         if (status === "SCHEDULED") {
             return <Badge color="success" style={{ fontSize: 18 }}>Programada</Badge>
         } else if (status === "PENDING") {
@@ -38,16 +40,21 @@ export const BookingListComponent = (props) => {
                     <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
                         <Col>
                             <h5 style={{ marginBottom: 0 }}>
-                                Código de reserva: <Label style={{ fontSize: 22, color: "#34B18A" }}>{`${id}`}</Label> - {getOfficeType()}
+                                Código de reserva: {
+                                    disableBookingLink ? <Label>{id}</Label>
+                                        : <><Link color="primary" to={`/admin/booking?id=${id}`}>
+                                            {id}
+                                        </Link> - {getBookingStatus()}</>
+                                }
                             </h5>
                         </Col>
                         <Col xs="2">
-                            <Link to={`/admin/office-branch?${officeBranchId}`}>
+                            <Link to={`/admin/office-branch?id=${officeBranchId}`}>
                                 <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
                                     Ver sucursal
                                 </UncontrolledTooltip>
-                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="sm" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                    <i className="fa fa-building-o" aria-hidden="true"></i>
                                 </Button>
                             </Link>
                         </Col>
@@ -141,4 +148,20 @@ export const BookingListComponent = (props) => {
             </Container>
         </div>
     )
+}
+
+BookingComponent.propTypes = {
+    id: PropTypes.string,
+    status: PropTypes.string,
+    attendeesQuantity: PropTypes.number,
+    scheduleDate: PropTypes.string,
+    startTime: PropTypes.string,
+    endTime: PropTypes.string,
+    transactionAmount: PropTypes.number,
+    officeBranchId: PropTypes.string,
+    providerFee: PropTypes.any,
+    currency: PropTypes.string,
+    paymentMethodId: PropTypes.string,
+    paymentTypeId: PropTypes.string,
+    disableBookingLink: PropTypes.bool,
 }

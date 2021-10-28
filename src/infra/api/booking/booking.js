@@ -38,13 +38,13 @@ export const getBooking = async bookingId => {
     }
 }
 
-export const getUserCurrentBookings = async userEmail => {
+export const getUserCurrentBookings = async (userEmail, page) => {
     try {
-        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=true`, {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=true&page=${page}&size=10`, {
             method: 'GET',
             headers: headerGet,
         });
-        return Promise.resolve(bookings.data);
+        return Promise.resolve(bookings);
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }
@@ -52,7 +52,19 @@ export const getUserCurrentBookings = async userEmail => {
 
 export const getUserPastBookings = async (userEmail, page) => {
     try {
-        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=false&page=${page}`, {
+        const bookings = await sdkAuthRequest(`${API_URL}/bookings/?renter_email=${userEmail}&current_bookings=false&page=${page}&size=10`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return Promise.resolve(bookings);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+
+export const getOfficeBookings = async (officeId, date) => {
+    try {
+        const bookings = await sdkAuthRequest(`${API_URL}/offices/${officeId}/bookings/?date=${date}`, {
             method: 'GET',
             headers: headerGet,
         });

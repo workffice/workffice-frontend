@@ -19,12 +19,12 @@ import { officeBranchDetailReducer } from './reducers/backoffice/officeBranch/of
 import { officeBranchesReducer } from './reducers/backoffice/officeBranch/officeBranchesAdminReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
-import { bookingReducer, mercadoPagoPreferenceReducer, userBookingsReducer } from './reducers/booking/bookingReducer';
+import { bookingReducer, mercadoPagoPreferenceReducer, officeBookingsReducer, userBookingsReducer } from './reducers/booking/bookingReducer';
 import { loadingBookingReducer } from './reducers/booking/loadingReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
-import { reportsReducer } from './reducers/reports/reportsReducer';
+import { bookingsQuantityPerOfficeReducer, revenuePerMonthReducer, revenuePerOfficeReducer } from './reducers/reports/reportsReducer';
 import { loadingOfficeBranchSearchReducer } from './reducers/search/loadingReducer';
 import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
@@ -58,7 +58,7 @@ export const reducers = routes =>
     officeBranches: officeBranchesReducer,
     officeBranch: officeBranchAdminReducer,
     loadingOfficeBranch: loadingOfficeBranchReducer,
-    officeBranchSearch: officeBranchDetailReducer, // TODO rename to officeBranchDetail
+    officeBranchDetail: officeBranchDetailReducer,
     officesFound: officeBranchSearchReducer, // TODO rename to officeBranchesFound
     loadingOfficeBranchSearch: loadingOfficeBranchSearchReducer,
     // Office
@@ -66,11 +66,11 @@ export const reducers = routes =>
     offices: officesReducer,
     officeInactivities: officeInactivitiesReducer,
     loadingOffice: loadingOfficeReducer,
-    reports: reportsReducer,
     // Booking
     booking: bookingReducer,
     mercadoPagoPreference: mercadoPagoPreferenceReducer,
     userBookings: userBookingsReducer,
+    officeBookings: officeBookingsReducer,
     loadingBooking: loadingBookingReducer,
     // Errors
     entitiesNotFound: entityNotFoundReducer,
@@ -78,4 +78,8 @@ export const reducers = routes =>
     // Notification
     notification: notificationReducer,
     isLoading: isLoadingReducer,
+    // Report
+    bookingsQuantityPerOffice: bookingsQuantityPerOfficeReducer,
+    revenuePerOffice: revenuePerOfficeReducer,
+    revenuePerMonth: revenuePerMonthReducer,
   });
