@@ -6,6 +6,7 @@ import { ConfirmationRecovery } from "../views/pages/authentication/Confirmation
 import { ResetPasswordContainer } from "../containers/ResetPasswordContainer";
 import { ConfirmationPassword } from "../views/pages/authentication/ConfirmationPassword";
 import { ConfirmationPage } from "../views/pages/authentication/ConfirmationPage";
+import { ConfirmationCollaboratorPage } from "../views/pages/authentication/ConfirmationCollaboratorPage";
 
 
 export const routes = [
@@ -63,6 +64,13 @@ export const routes = [
     name: 'Confirmation',
     mini: 'LS',
     component: ConfirmationPage,
+    layout: '/auth',
+  },
+  {
+    path: '/collaborator/activate',
+    name: 'ConfirmCollab',
+    mini: 'LS',
+    component: ConfirmationCollaboratorPage,
     layout: '/auth',
   },
 

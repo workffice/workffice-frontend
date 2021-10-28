@@ -147,3 +147,16 @@ export const activatePass = async (token, newPassword) => {
     return Promise.reject(new Error(error.errors[0].error));
   }
 }
+
+
+export const activateCollab = async (token) => {
+  try {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}/`, {
+      method: 'POST',
+      headers: headersPost
+    });
+    return Promise.resolve(true);
+  } catch (error) {
+    return Promise.reject(new Error(error.errors[0].error));
+  }
+}
