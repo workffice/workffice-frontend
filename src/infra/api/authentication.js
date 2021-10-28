@@ -151,7 +151,7 @@ export const activatePass = async (token, newPassword) => {
 
 export const activateCollab = async (token) => {
   try {
-    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/account_activations/${token}/`, {
+    await sdkNoAuthRequest(`${API_CONFIRMATION_TOKEN_URL}/collaborator_activations/${token}/`, {
       method: 'POST',
       headers: headersPost
     });

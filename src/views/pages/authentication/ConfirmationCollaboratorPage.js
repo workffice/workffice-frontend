@@ -14,6 +14,7 @@ export const ConfirmationCollaboratorPage = (props) => {
     const history = useHistory();
     const query = new URLSearchParams(useLocation().search);
     token = query.get("token");
+    console.log('%cMyProject%cline:16%ctoken', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px', token)
     React.useEffect(() => {
         dispatch(hideNotificationAction());
     }, [props.error]);
