@@ -9,4 +9,3 @@ export const bookingOfficeAPI = (officeBranchId, month) => {
 export const amountPerYearAPI = (officeBranchId, month) => {
     return Promise.resolve(getTotalAmountPerYear(officeBranchId, month));
 }
-

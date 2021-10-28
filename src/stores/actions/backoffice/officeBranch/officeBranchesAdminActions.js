@@ -1,5 +1,6 @@
 import { officeBranchListAPI, officeBranchListFromCollaboratorAPI } from "../../../../api/backoffice/officeBranch";
 import { setErrorAction } from "../../notifications/writeNotificationActions";
+import { loadingOfficeBranchAction, stopLoadingOfficeBranchAction } from "./loadingActions";
 
 export const FETCH_OFFICEBRANCHES_LIST = 'FETCH_OFFICEBRANCHES_LIST';
 export const FETCH_COLLABORATOR_OFFICE_BRANCHES = 'FETCH_COLLABORATOR_OFFICE_BRANCHES';
@@ -13,10 +14,14 @@ export const fetchOfficeBranchesList = officeBranches => {
 };
 
 export const officeBranchList = (userId) => async (dispatch) => {
+    dispatch(loadingOfficeBranchAction())
     try {
         dispatch(fetchOfficeBranchesList(await officeBranchListAPI(userId)));
     } catch (error) {
-        dispatch(setErrorAction(error));
+        if (error.code == "NOT_FOUND")
+            dispatch(fetchOfficeBranchesList([]));
+    } finally {
+        dispatch(stopLoadingOfficeBranchAction())
     }
 }
 

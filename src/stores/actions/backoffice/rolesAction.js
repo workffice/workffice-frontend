@@ -1,7 +1,7 @@
 import { setIsLoading } from "..";
 import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions";
 import { createRoleApi, deleteRoleApi, fetchRolesApi, fetchRolesFromCollaboratorApi } from "../../../api/backoffice/roles";
-import { setForbiddenAccessAction, setSuccessAccess } from "../errors/permissionActions";
+import { ROLE_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from "../errors/permissionActions";
 
 export const CREATE_ROLE = 'CREATE_ROLE';
 export const DELETE_ROLE = 'DELETE_ROLE';
@@ -58,10 +58,10 @@ export const rolesList = (officeBranchId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchRolesList(await fetchRolesApi(officeBranchId)));
-        dispatch(setSuccessAccess('role'))
+        dispatch(setSuccessAccess(ROLE_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
-            dispatch(setForbiddenAccessAction("role"));
+            dispatch(setForbiddenAccessAction(ROLE_RESOURCE));
     } finally {
         dispatch(setIsLoading(false));
     }
@@ -79,10 +79,10 @@ export const collaboratorRolesList = collaboratorId => async dispatch => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCollaboratorRolesList(await fetchRolesFromCollaboratorApi(collaboratorId)));
-        dispatch(setSuccessAccess('role'))
+        dispatch(setSuccessAccess(ROLE_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
-            dispatch(setForbiddenAccessAction("role"));
+            dispatch(setForbiddenAccessAction(ROLE_RESOURCE));
     } finally {
         dispatch(setIsLoading(false));
     }

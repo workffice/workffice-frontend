@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react'
-import { Card, CardBody, CardFooter, CardTitle, Col, Row } from 'reactstrap'
+import React, { useEffect, useRef } from 'react';
+import { Card, CardBody, CardFooter, CardTitle, Col, Row } from 'reactstrap';
 
 export const DashboardGeneralCards = (props) => {
-  const { reportOfficeYear } = props.reports;
+  const { currentYearRevenue, loadRevenuePerMonth } = props;
   const total = () => {
-    if (reportOfficeYear.length > 0) {
-      return reportOfficeYear.reduce((prevValue, currentValue) => {
+    if (currentYearRevenue.length > 0) {
+      return currentYearRevenue.reduce((prevValue, currentValue) => {
         return prevValue += currentValue.totalAmount;
       }, 0);
     }
   }
+
+  const countRef = useRef(0);
   useEffect(() => {
-    total();
-  }, [reportOfficeYear])
+    if (countRef.current === 0) {
+      loadRevenuePerMonth(new Date().getFullYear());
+      countRef.current++;
+    }
+  }, [])
+
   return (
     <Row>
       <Col lg="4" md="6" sm="6">
