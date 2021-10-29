@@ -12,7 +12,7 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
-import { UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
+import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
@@ -175,7 +175,7 @@ export const routes = [
         visibility: true
       }
     ]
-  },  
+  },
   {
     collapse: true,
     name: 'Reserva',
@@ -183,6 +183,14 @@ export const routes = [
     state: 'bookingCollapse',
     visibility: true,
     views: [
+      {
+        path: '/office_bookings',
+        name: 'Reservas de oficina',
+        mini: 'RO',
+        component: OfficeBookingListContainer,
+        layout: '/admin',
+        visibility: false
+      },
       {
         path: '/bookings/list',
         name: 'Mis reservas',
@@ -208,7 +216,7 @@ export const routes = [
         visibility: false,
       },
     ]
-  },  
+  },
   {
     collapse: true,
     name: 'Configuraciones',
