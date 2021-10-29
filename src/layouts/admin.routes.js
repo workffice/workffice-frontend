@@ -14,6 +14,7 @@ import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchCo
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
 import { UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
+import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
@@ -174,8 +175,40 @@ export const routes = [
         visibility: true
       }
     ]
-  },
-
+  },  
+  {
+    collapse: true,
+    name: 'Reserva',
+    icon: 'nc-icon nc-single-copy-04',
+    state: 'bookingCollapse',
+    visibility: true,
+    views: [
+      {
+        path: '/bookings/list',
+        name: 'Mis reservas',
+        mini: 'LR',
+        component: UserBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/bookings/history',
+        name: 'Reservas anteriores',
+        mini: 'RA',
+        component: UserPastBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/create-booking',
+        name: 'Reservar oficina',
+        mini: 'RO',
+        component: OfficeBookingContainer,
+        layout: '/admin',
+        visibility: false,
+      },
+    ]
+  },  
   {
     collapse: true,
     name: 'Configuraciones',
@@ -231,53 +264,11 @@ export const routes = [
     ]
   },
   {
-    collapse: true,
-    name: 'Reserva',
-    icon: 'fa fa-cog',
-    state: 'bookingCollapse',
-    visibility: true,
-    views: [
-      {
-        path: '/bookings/list',
-        name: 'Mis reservas',
-        mini: 'LR',
-        component: UserBookingListContainer,
-        layout: '/admin',
-        visibility: true
-      },
-      {
-        path: '/bookings/history',
-        name: 'Reservas anteriores',
-        mini: 'RA',
-        component: UserPastBookingListContainer,
-        layout: '/admin',
-        visibility: true
-      },
-      {
-        path: '/create-booking',
-        name: 'Reservar oficina',
-        mini: 'RO',
-        component: OfficeBookingContainer,
-        layout: '/admin',
-        visibility: false,
-      },
-    ]
-  },
-  {
-    collapse: true,
     name: 'Preguntas frecuentes',
-    icon: 'fa fa-cog',
-    state: 'bookingCollapse',
+    icon: 'nc-icon nc-bullet-list-67',
+    path: '/frequent-questions',
+    component: FrequentQuestions,
+    layout: '/admin',
     visibility: true,
-    views: [
-      {
-        path: '/bookings/list',
-        name: 'Preguntas frecuentes',
-        mini: 'PF',
-        component: UserBookingListContainer,
-        layout: '/admin',
-        visibility: true
-      },
-    ]
-  }
+  },
 ];
