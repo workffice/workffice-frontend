@@ -328,7 +328,7 @@
       @include sidebar-text-color($default-color);
     }
     &[data-color="brown"]{
-      @include sidebar-color($default-color);
+      @include sidebar-color($primary-color);
     }
 
     // Active color changing

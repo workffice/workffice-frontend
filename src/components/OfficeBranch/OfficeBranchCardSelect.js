@@ -1,7 +1,7 @@
-import { CloudinaryContext, Image } from 'cloudinary-react';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Badge, Button, Card, CardBody, ListGroup, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { CloudinaryContext, Image } from 'cloudinary-react';
 
 export const OfficeBranchCardSelect = ({ branch, select, selected, currentOfficeBranch }) => {
   const history = useHistory();

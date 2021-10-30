@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
+// import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from '../Offices/OfficeComponent';
@@ -120,11 +120,7 @@ export const OfficeBranchDetail = ({
                                     <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
                                         <div>
                                             <div className="imageContainer">
-<<<<<<< HEAD
-                                                <Cloudinary className="office-branch-card-image" height="350rem" publicId={officeBranch ? officeBranch.images[0].url : ""} />
-=======
                                                 {/* <Cloudinary className="office-branch-card-image" height="350rem" publicId={officeBranch ? officeBranch.images[0].url : ""} /> */}
->>>>>>> 13d7c69d246f888de9a52630c10a73350c604435
                                             </div>
                                         </div>
 

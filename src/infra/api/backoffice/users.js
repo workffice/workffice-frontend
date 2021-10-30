@@ -1,6 +1,7 @@
 import { headerGet, headersPost, sdkAuthRequest } from "..";
 import { API_AUTH_URL } from "../../../environments/environment";
 import { postImageToCloudinary } from "../cloudinary";
+import { USER_TYPE, writeToLocalStorage } from "../localStorage";
 
 export const getMe = async () => {
     try {
@@ -9,6 +10,7 @@ export const getMe = async () => {
                 method: 'GET',
                 headers: headerGet
             });
+            writeToLocalStorage(userData.data.userType, USER_TYPE);
         return Promise.resolve(userData.data);
     } catch (error) {
         throw Promise.reject(error.errors[0]);

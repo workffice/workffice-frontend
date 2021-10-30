@@ -9024,7 +9024,7 @@ be a descendant of the grid when it is being dragged.
     opacity: .4; }
   .sidebar[data-color="brown"]:after,
   .off-canvas-sidebar[data-color="brown"]:after {
-    background: #34b18a !important; }
+    background: linear-gradient(#133148 0%, #000 139%) !important; }
   .sidebar[data-active-color="primary"] .nav li.active > a,
   .sidebar[data-active-color="primary"] .nav li.active > a i,
   .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"],
@@ -12771,7 +12771,7 @@ License - nucleoapp.com/license/
     opacity: .4; }
   .sidebar[data-color="brown"]:after,
   .off-canvas-sidebar[data-color="brown"]:after {
-    background: #34b18a !important; }
+    background: linear-gradient(#133148 0%, #000 139%) !important; }
   .sidebar[data-active-color="primary"] .nav li.active > a,
   .sidebar[data-active-color="primary"] .nav li.active > a i,
   .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"],

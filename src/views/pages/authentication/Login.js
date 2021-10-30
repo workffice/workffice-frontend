@@ -1,6 +1,6 @@
-import { useFormik } from 'formik';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   Alert,
@@ -11,12 +11,14 @@ import {
 import { Loading } from '../../../components/Common/Loading/Loading';
 import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
+import { setIsLoading } from '../../../stores/actions';
 
 
 
 
 const Login = props => {
   const { loading, notification } = props
+  const userMe = useSelector(state => state.userMe);
   const history = useHistory();
   const dispatch = useDispatch()
   const validate = values => {
@@ -46,9 +48,15 @@ const Login = props => {
     validate,
     onSubmit: async (credentials) => {
       await props.onLogin(credentials);
-      history.push("/office-branch/select");
     }
   });
+  React.useEffect(() => {
+    if(userMe !== null ){
+      userMe.userType === 'OFFICE_HOLDER'
+      ? history.push("/office-branch/select")
+      : history.push("/admin/user-profile");
+    }
+  }, [userMe]);
 
   React.useEffect(() => {
     if (notification.show) {
@@ -64,6 +72,12 @@ const Login = props => {
       document.body.classList.toggle('login-page');
     };
   });
+
+  React.useEffect(()=>{
+    if(loading){
+      dispatch(setIsLoading(false))
+    }
+  },[loading])
 
   return (
     <div className="login-page">
