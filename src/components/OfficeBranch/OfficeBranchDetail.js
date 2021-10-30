@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-// import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
+import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading';
 import { OfficeComponent } from '../Offices/OfficeComponent';
