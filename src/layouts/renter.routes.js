@@ -236,7 +236,7 @@ export const renter = [
         mini: 'DR',
         component: BookingDetailContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
       {
         path: '/office_bookings',
@@ -244,7 +244,7 @@ export const renter = [
         mini: 'RO',
         component: OfficeBookingListContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
       {
         path: '/bookings/list',

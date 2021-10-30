@@ -12,6 +12,7 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
@@ -190,7 +191,7 @@ export const adminRoutes = [
         mini: 'DR',
         component: BookingDetailContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
       {
         path: '/office_bookings',
@@ -198,7 +199,7 @@ export const adminRoutes = [
         mini: 'RO',
         component: OfficeBookingListContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
       {
         path: '/bookings/list',
