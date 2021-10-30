@@ -6,6 +6,7 @@ import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBran
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
+import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 
 export const renter = [
@@ -270,5 +271,13 @@ export const renter = [
         visibility: false,
       },
     ]
-  }
+  },
+  {
+    name: 'Preguntas frecuentes',
+    icon: 'nc-icon nc-bullet-list-67',
+    path: '/frequent-questions',
+    component: FrequentQuestions,
+    layout: '/admin',
+    visibility: true,
+  },
 ];

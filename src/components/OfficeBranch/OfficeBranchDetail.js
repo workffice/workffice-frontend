@@ -120,7 +120,7 @@ export const OfficeBranchDetail = ({
                                     <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
                                         <div>
                                             <div className="imageContainer">
-                                                {/* <Cloudinary className="office-branch-card-image" height="350rem" publicId={officeBranch ? officeBranch.images[0].url : ""} /> */}
+                                                <Cloudinary className="office-branch-card-image" height="350rem" publicId={officeBranch ? officeBranch.images[0].url : ""} />
                                             </div>
                                         </div>
 

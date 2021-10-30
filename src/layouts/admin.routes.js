@@ -12,9 +12,9 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
-import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
+import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
@@ -280,5 +280,12 @@ export const adminRoutes = [
       },
     ]
   },
-
+  {
+    name: 'Preguntas frecuentes',
+    icon: 'nc-icon nc-bullet-list-67',
+    path: '/frequent-questions',
+    component: FrequentQuestions,
+    layout: '/admin',
+    visibility: true,
+  },
 ];
