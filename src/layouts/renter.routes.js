@@ -1,26 +1,15 @@
-import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
-import { NewMembership } from '../components/Membership/NewMembership';
-import { NewNotice } from '../components/Notice/NewNotice';
+import { NotAccess } from '../components/Common/ErrorPages/NotAccess';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
-import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
-import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
-import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContainer';
-import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
-import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
-import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
-import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
 
-
-export const adminRoutes = [
+export const renter = [
   {
     collapse: true,
     name: 'Perfil',
@@ -43,13 +32,13 @@ export const adminRoutes = [
     name: 'Dashboard',
     icon: 'nc-icon nc-chart-bar-32',
     state: 'dashboardCollapse',
-    visibility: true,
+    visibility: false,
     views: [
       {
         path: '/dashboard',
         name: 'Dashboard',
         mini: 'D',
-        component: DashboardContainer,
+        component: NotAccess,
         layout: '/admin',
         visibility: true
       },
@@ -60,7 +49,7 @@ export const adminRoutes = [
     name: 'Sucursales',
     icon: 'fa fa-building',
     state: 'officebranchCollapse',
-    visibility: true,
+    visibility: false,
     views: [
       {
         path: '/office-branch',
@@ -68,22 +57,23 @@ export const adminRoutes = [
         mini: 'MS',
         component: OfficeBranchDetailContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
       {
         path: '/edit-officebranch',
         name: 'Editar Sucursal',
         mini: 'ES',
         layout: '/admin',
-        visibility: true,
-        component: OfficeBranchEditContainer,
+        visibility: false,
+        component: NotAccess,
       },
       {
         path: '/select',
         name: 'Cambiar Sucursal',
         mini: 'NS',
         layout: '/office-branch',
-        visibility: true,
+        component: NotAccess,
+        visibility: false,
       },
     ]
   },
@@ -92,29 +82,29 @@ export const adminRoutes = [
     name: 'Oficinas',
     icon: 'fa fa-laptop',
     state: 'officesCollapse',
-    visibility: true,
+    visibility: false,
     views: [
       {
         path: '/offices',
         name: 'Oficinas',
         mini: 'O',
-        component: OfficesContainer,
+        component: NotAccess,
         layout: '/admin',
-        visibility: true
+        visibility: false
       },
       {
         path: '/new-office',
         name: 'Nueva oficina',
         mini: 'NO',
-        component: OfficeCreateContainer,
+        component: NotAccess,
         layout: '/admin',
-        visibility: true
+        visibility: false
       },
       {
         path: '/offices/edit',
         name: 'Editar oficina',
         mini: 'EO',
-        component: OfficeEditContainer,
+        component: NotAccess,
         layout: '/admin',
         visibility: false
       },
@@ -122,9 +112,9 @@ export const adminRoutes = [
         path: '/services-equipment',
         name: 'Servicios y equipamiento',
         mini: 'SE',
-        component: ServicesEquipment,
+        component: NotAccess,
         layout: '/admin',
-        visibility: true
+        visibility: false
       },
       {
         path: '/office-detail',
@@ -141,13 +131,13 @@ export const adminRoutes = [
     name: 'Colaboradores',
     icon: 'fa fa-users',
     state: 'collaboratorsCollapse',
-    visibility: true,
+    visibility: false,
     views: [
       {
         path: '/collaborators',
         name: 'Colaboradores',
         mini: 'C',
-        component: CollaboratorListContainer,
+        component: NotAccess,
         layout: '/admin',
         visibility: true
       },
@@ -155,7 +145,7 @@ export const adminRoutes = [
         path: '/new-collaborator',
         name: 'Nuevo colaborador',
         mini: 'NC',
-        component: CollaboratorContainer,
+        component: NotAccess,
         layout: '/admin',
         visibility: true
       }
@@ -176,6 +166,61 @@ export const adminRoutes = [
         layout: '/admin',
         visibility: true
       }
+    ]
+  },
+
+  {
+    collapse: true,
+    name: 'Configuraciones',
+    icon: 'fa fa-cog',
+    state: 'configurationCollapse',
+    visibility: false,
+    views: [
+      {
+        path: '/roles',
+        name: 'Gestionar Roles',
+        mini: 'GR',
+        component: NotAccess,
+        layout: '/admin',
+        visibility: false,
+      },
+      {
+        path: '/new-rol',
+        name: 'Nuevo Rol',
+        mini: 'NR',
+        component: NotAccess,
+        layout: '/admin',
+      },
+      {
+        path: '/membership',
+        name: 'Gestionar membresías',
+        mini: 'GM',
+        component: NotAccess,
+        layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/new-membership',
+        name: 'Nueva membresía',
+        mini: 'NM',
+        component: NotAccess,
+        layout: '/admin',
+      },
+      {
+        path: '/notice',
+        name: 'Gestionar noticias',
+        mini: 'GN',
+        component: NoticeListComponent,
+        layout: '/admin',
+        visibility: false
+      },
+      {
+        path: '/new-notice',
+        name: 'Nueva noticia',
+        mini: 'NN',
+        component: NotAccess,
+        layout: '/admin',
+      },
     ]
   },
   {
@@ -203,7 +248,7 @@ export const adminRoutes = [
       },
       {
         path: '/bookings/list',
-        name: 'Mis reservas',
+        name: 'Mis reservas', // Workffice22!
         mini: 'LR',
         component: UserBookingListContainer,
         layout: '/admin',
@@ -223,61 +268,7 @@ export const adminRoutes = [
         mini: 'RO',
         component: OfficeBookingContainer,
         layout: '/admin',
-        visibility: true,
-      },
-    ]
-  },
-  {
-    collapse: true,
-    name: 'Configuraciones',
-    icon: 'fa fa-cog',
-    state: 'configurationCollapse',
-    visibility: true,
-    views: [
-      {
-        path: '/roles',
-        name: 'Gestionar Roles',
-        mini: 'GR',
-        component: RolesListContainer,
-        layout: '/admin',
-        visibility: true,
-      },
-      {
-        path: '/new-rol',
-        name: 'Nuevo Rol',
-        mini: 'NR',
-        component: NewRoleContainer,
-        layout: '/admin',
-      },
-      {
-        path: '/membership',
-        name: 'Gestionar membresías',
-        mini: 'GM',
-        component: MembershipListComponent,
-        layout: '/admin',
-        visibility: true
-      },
-      {
-        path: '/new-membership',
-        name: 'Nueva membresía',
-        mini: 'NM',
-        component: NewMembership,
-        layout: '/admin',
-      },
-      {
-        path: '/notice',
-        name: 'Gestionar noticias',
-        mini: 'GN',
-        component: NoticeListComponent,
-        layout: '/admin',
-        visibility: true
-      },
-      {
-        path: '/new-notice',
-        name: 'Nueva noticia',
-        mini: 'NN',
-        component: NewNotice,
-        layout: '/admin',
+        visibility: false,
       },
     ]
   },

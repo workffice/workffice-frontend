@@ -7,6 +7,7 @@ export const ProtectedRoute = ({
     authenticationPath,
     ...routeProps
 }) => {
+    
     if (isAuthenticated) {
         return <Route {...routeProps} />;
     } else {

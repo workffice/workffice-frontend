@@ -24,6 +24,7 @@ export const Routes = (props) => (
                     path="/"
                     component={AdminLayout}
                     authenticationPath="/auth/login"
+                    
                 />
                 <Redirect to="/auth/login" />
             </Switch>

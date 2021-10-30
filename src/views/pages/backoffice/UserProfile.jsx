@@ -26,7 +26,9 @@ export const UserProfile = ({
     permission,
 }) => {
     React.useEffect(() => {
-        loadCollaborators(officeBranch.id);
+        if (userMe?.userType === "OFFICE_HOLDER") {
+            loadCollaborators(officeBranch.id);
+        }
     }, [collaborators ? collaborators.length : 0])
     const { name, bio, profileImage } = userMe || {}
     React.useEffect(() => {
@@ -91,17 +93,21 @@ export const UserProfile = ({
                             </div>
                         </CardFooter>
                     </Card>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle tag="h4">Colaboradores de {officeBranch.name}</CardTitle>
-                        </CardHeader>
-                        <CardBody>
-                            <ul className="list-unstyled team-members">
-                                {renderCollaborators()}
-                            </ul>
-                        </CardBody>
-                    </Card>
+                    {
+                        userMe?.userType === "OFFICE_HOLDER" &&
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Colaboradores de {userMe?.userType === "OFFICE_HOLDER" && officeBranch.name}</CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <ul className="list-unstyled team-members">
+                                    {renderCollaborators()}
+                                </ul>
+                            </CardBody>
+                        </Card>
+                    }
                 </Col>
+
                 <Col md="8">
                     <Notification
                         show={notification.show && notification.isSuccess}

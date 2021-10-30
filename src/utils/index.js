@@ -1,4 +1,4 @@
-import { AUTH_TOKEN, readFromLocalStorage } from '../infra/api/localStorage';
+import { AUTH_TOKEN, readFromLocalStorage, USER_TYPE } from '../infra/api/localStorage';
 
 export const getOneErrors = errors => {
   if (Array.isArray(errors) && errors.length > 0) {
@@ -25,4 +25,8 @@ export const isUserLoggedin = authData => {
 
 export const logout = ()=>{
   return 
+}
+
+export const isAuthorizedUser = ()=>{
+  return readFromLocalStorage(USER_TYPE);
 }

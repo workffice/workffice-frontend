@@ -3,16 +3,17 @@ import PerfectScrollbar from "perfect-scrollbar";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Collapse, Nav } from "reactstrap";
-import { invalidateSession } from "../../infra/api/localStorage";
+import { invalidateSession, readFromLocalStorage, USER_TYPE } from "../../infra/api/localStorage";
 import { Cloudinary } from "../Common/Cloudinary/Cloudinary";
 import { useHistory } from "react-router"
 import { useDispatch } from "react-redux";
-import { setIsLoading } from "../../stores/actions";
+import { successLogout } from "../../stores/actions/auth/logoutActions";
 
 
 var ps;
 
 function Sidebar(props) {
+  const role = readFromLocalStorage(USER_TYPE);
   const history = useHistory();
   const dispatch = useDispatch();
   const [logout, setLogout] = React.useState(false)
@@ -57,10 +58,10 @@ function Sidebar(props) {
   React.useEffect(() => {
     if (logout) {
       invalidateSession();
+      dispatch(successLogout());
       history.replace('/auth/login')
-      dispatch(setIsLoading(false));
     }
-  }, [logout,history])
+  }, [logout, history])
 
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
@@ -161,10 +162,11 @@ function Sidebar(props) {
         <p
           className="simple-text logo-normal"
         >
-          <span>Sucursal: {props.officeBranch ? props.officeBranch.name : ""}</span>
+          {role === "OFFICE_HOLDER" && <span style={{ fontFamily: 'Poppins', }}>Sucursal: <br /><small className="text-right lead" >{props.officeBranch ? props.officeBranch.name : ""}</small></span>}
         </p>
       </div>
 
+      <hr />
       <div className="sidebar-wrapper" ref={sidebar}>
         <div className="user">
           <div className="photo">

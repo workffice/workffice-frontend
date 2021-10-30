@@ -1,4 +1,5 @@
 export const AUTH_TOKEN = 'AUTH_TOKEN';
+export const USER_TYPE = 'USER_TYPE';
 // const DEFAULT_TIME = 1000 * 60 * 60;
 
 export const storeAccessToken = (data) => {
@@ -50,5 +51,6 @@ export const deleteFromLocalStorage = (key) => {
 
 export const invalidateSession = () => {
   deleteFromLocalStorage(AUTH_TOKEN);
+  deleteFromLocalStorage(USER_TYPE);
   deleteFromLocalStorage('officeBranch');
 }

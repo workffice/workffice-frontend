@@ -5,31 +5,35 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import Sidebar from '../components/Sidebar/Sidebar.js';
 import AdminNavbar from '../components/Common/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
-import { routes } from './admin.routes.js';
+import { adminRoutes } from './admin.routes.js';
+import { renter } from './renter.routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from '../stores/actions/backoffice/userActions.js';
 import { getOfficeBranch } from '../stores/actions/backoffice/officeBranch/officeBranchAdminActions';
-import { readFromLocalStorage } from '../infra/api/localStorage.js';
+import { readFromLocalStorage, USER_TYPE } from '../infra/api/localStorage.js';
 
 let ps;
 
 export const AdminLayout = props => {
-
+  const role = readFromLocalStorage(USER_TYPE);
   const location = useLocation();
   const [backgroundColor, setBackgroundColor] = React.useState("black");
-  const [activeColor, setActiveColor] = React.useState("info");
+  const [activeColor, setActiveColor] = React.useState("success");
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
-
   const officeBranch = useSelector(state => state.officeBranch);
-  React.useEffect(() => {
-    if (officeBranch === null)
-      dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
-  }, []);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, [user ? user.id : ""]);
   const user = useSelector(state => state.userMe)
+
+  const routes = role == "OFFICE_HOLDER" ? adminRoutes : renter;
+
+  React.useEffect(() => {
+    if (officeBranch === null && user?.userType === "OFFICE_HOLDER") {
+      dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
+    }
+  }, []);
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on';
@@ -49,6 +53,9 @@ export const AdminLayout = props => {
     document.scrollingElement.scrollTop = 0;
     mainPanel.current.scrollTop = 0;
   }, [location]);
+
+
+  console.log("ROUTES", routes);
   const getRoutes = routes =>
     routes.map((prop, key) => {
       if (prop.collapse) {
@@ -67,6 +74,7 @@ export const AdminLayout = props => {
         return null;
       }
     });
+
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
@@ -75,11 +83,13 @@ export const AdminLayout = props => {
   };
   return (
     <div className="wrapper">
-      <Sidebar {...props} routes={routes} bgColor={backgroundColor}
+      <Sidebar {...props} routes={routes} bgColor={backgroundColor} role={role}
         activeColor={activeColor} user={user} officeBranch={officeBranch} />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
-        <Switch>{getRoutes(routes)}</Switch>
+        {
+          role === "OFFICE_HOLDER" ? <Switch>{getRoutes(routes)}</Switch> : <Switch>{getRoutes(routes)}</Switch>
+        }
       </div>
       <FixedPlugin
         bgColor={backgroundColor}
