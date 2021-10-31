@@ -54,8 +54,6 @@ export const AdminLayout = props => {
     mainPanel.current.scrollTop = 0;
   }, [location]);
 
-
-  console.log("ROUTES", routes);
   const getRoutes = routes =>
     routes.map((prop, key) => {
       if (prop.collapse) {
