@@ -97,8 +97,8 @@ export const adminRoutes = [
     views: [
       {
         path: '/offices',
-        name: 'Oficinas',
-        mini: 'O',
+        name: 'Mis Oficinas',
+        mini: 'MO',
         component: OfficesContainer,
         layout: '/admin',
         visibility: true
@@ -224,7 +224,7 @@ export const adminRoutes = [
         mini: 'RO',
         component: OfficeBookingContainer,
         layout: '/admin',
-        visibility: true,
+        visibility: false,
       },
     ]
   },
@@ -284,7 +284,7 @@ export const adminRoutes = [
   },
   {
     name: 'Preguntas frecuentes',
-    icon: 'nc-icon nc-bullet-list-67',
+    icon: 'far fa-question-circle',
     path: '/frequent-questions',
     component: FrequentQuestions,
     layout: '/admin',
