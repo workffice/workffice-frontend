@@ -1,98 +1,107 @@
-import { useFormik } from 'formik';
 import React from 'react'
-import { Button, Card, CardBody, Form, Input, Row } from 'reactstrap';
+import { useFormik } from 'formik';
+import { Col, Button, Card, CardBody, Form, Input, Row, Label, CardHeader, CardTitle, FormGroup } from 'reactstrap';
+import Select from 'react-select';
+import { Notification } from '../Common/Notification/Notification'
 import './styles/ServEquipComponentStyles.css';
 
-export const ServEquipComponent = ({ title, typeName, elements }) => {
-
+export const ServEquipComponent = (props) => {
+    const { title, typeName, options, branch } = props;
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
             elementName: '',
-            elementSelected: '',
+            elementSelected: options[0]
         },
-        onSubmit: async (credentials) => {
-            //   await props.onLogin(credentials);
+        onSubmit: async element => {
+            const payload = {
+                category: element.elementSelected.value,
+                name: element.elementName
+            }
+            await props.create(branch.id, payload);
+            setTimeout(()=>{
+                formik.resetForm();
+            }, 2000)
+            formik.resetForm()
             //   history.push('/admin/office-branch');
-            console.log('credential: ', credentials);
         },
     });
-
-    const itemSelector = elements.map((element) =>
-        <>
-            <option>
-                {element.name}
-            </option>
-        </>
-    );
-
+    const message = `El ${typeName} ha creado exitosamente`;
     return (
         <div className='content'>
             <Row>
-                <Form className='formContainer' onSubmit={formik.handleSubmit}>
-                    <Card className='cardContainer' style={{width: '80%', marginRight: '10%', marginLeft: '10%'}}>
-                        <CardBody>
-                            <div className='elementsTitleContainer'>
-                                <h2>{title}</h2>
-                            </div>
-                            <div className='elementsInformationContainer'>
-                                <div className='elementsTypeContainer'>
-                                    <div className='type-element-name'>
-                                        <label for="nameElement" className="form-label">{`Tipo de ${typeName}`}</label>
-                                    </div>
-                                    <row className='row-form-select'>
-                                        <select
-                                            className="form-select"
-                                            name='elementSelected'
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.elementSelected}
-                                            placeholder={`Seleccione el tipo de ${typeName}`}
+                <Col>
+                    <Form onSubmit={formik.handleSubmit}>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h3">{title}</CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <Row>
+                                    <Col md="6">
+                                        <FormGroup>
+                                            <Label htmlFor="officeType" className="label-form">{title}</Label>
+                                            <Select
+                                                className="react-select primary"
+                                                classNamePrefix="react-select"
+                                                name="officeType"
+                                                id="officeType"
+                                                value={formik.values.elementSelected}
+                                                onChange={value => formik.setFieldValue("elementSelected", value)}
+                                                onBlur={formik.handleBlur}
+                                                options={options}
+
+                                            />
+
+                                        </FormGroup>
+                                    </Col>
+                                    <Col md="6">
+                                        <FormGroup>
+                                            <Label htmlFor="officeType" className="label-form">Nombre</Label>
+                                            <Input
+                                                name='elementName'
+                                                type="text"
+                                                placeholder={`Ingrese el nombre del ${typeName}`}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.elementName}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                                    <Col md="3">
+                                        <Button
+                                            block
+                                            className="btn-round btn-primary mb-3"
+                                            type="submit"
                                         >
-                                            <option className='value-select' defaultValue>{`Seleccione el tipo de ${typeName}`}</option>
-                                            {itemSelector}
-                                        </select>
-                                    </row>
-                                </div>
-                                <div className='elementsNameContainer'>
-                                    <div className='element-name'>
-                                        <label for="nameOffice" className="form-label">{`Nombre del ${typeName}`}</label>
-                                        <Input
-                                            name='elementName'
-                                            type="text"
-                                            placeholder={`Ingrese el nombre del ${typeName}`}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.elementName}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='buttonContainer'>
-                                <div class="col-auto">
-                                    <Button
-                                        block
-                                        className="btn-round btn-primary mb-3"
-                                        type="submit"
-                                    >
-                                        Crear
-                                    </Button>
-                                </div>
-                                <div class="col-auto">
-                                    {/* <button type="reset" class="btn btn-primary mb-3" style={{ backgroundColor: '#EB5D60' }}>Cancelar</button> */}
-                                    <Button
-                                        block
-                                        className="btn-round btn-primary mb-3"
-                                        type="reset"
-                                        color="danger"
-                                    >
-                                        Cancelar
-                                    </Button>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Form>
-            </Row>
+                                            Crear
+                                        </Button>
+                                    </Col>
+                                    <Col md="3">
+                                        <Button
+                                            block
+                                            className="btn-round btn-primary mb-3"
+                                            type="reset"
+                                            color="danger"
+                                        >
+                                            Cancelar
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Form>
+                </Col>
+                <Col md="12">
+                    <Notification
+                        show={props.notification.show && props.notification.isSuccess}
+                        message={message}
+                        hideNotification={props.hideNotification}
+                    />
+                </Col>
+            </Row >
         </div>
     )
 }

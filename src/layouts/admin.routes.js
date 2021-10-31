@@ -12,12 +12,13 @@ import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContaine
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/RoleContainer';
+import { ServicesEquipmentsContainer } from '../containers/backoffice/ServicesEquipmentsContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
-import { ServicesEquipment } from '../views/pages/backoffice/ServicesEquipment';
+
 
 
 export const adminRoutes = [
@@ -122,7 +123,7 @@ export const adminRoutes = [
         path: '/services-equipment',
         name: 'Servicios y equipamiento',
         mini: 'SE',
-        component: ServicesEquipment,
+        component: ServicesEquipmentsContainer,
         layout: '/admin',
         visibility: true
       },

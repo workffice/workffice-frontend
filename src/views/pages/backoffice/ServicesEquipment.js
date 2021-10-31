@@ -2,39 +2,29 @@ import React from 'react'
 import { Col, Row } from 'reactstrap'
 import { ServEquipComponent } from '../../../components/ServicesEquip/ServEquipComponent'
 
-export const ServicesEquipment = () => {
+export const ServicesEquipment = (props) => {
 
-    // const services = ['Comida', 'Confort', 'Conectividad'];
-    // const equipamiento = ['Tecnología', 'Confort'];
-
-    const services= [
+    const services = [
         {
-            value: 'comida',
-            name: 'Comida',
+            value: "",
+            label: "Seleccione una opción",
         },
-        {
-            value: 'confort',
-            name: 'Confort',
-        },
-        {
-            value: 'conectividad',
-            name: 'Conectividad',
-        },
+        { value: "FOOD", label: "Comida" },
+        { value: "CONFORT", label: "Confort" },
+        { value: "CONECTIVITY", label: "Conectividad" },
     ];
 
-    const equipamiento= [
+    const equipaments = [
         {
-            value: 'tecnologia',
-            name: 'Tecnología',
+            value: "",
+            label: "Seleccione una opción",
         },
-        {
-            value: 'confort',
-            name: 'Confort',
-        },
-    ]; 
+        { value: 'TECNOLOGY', label: 'Tecnología' },
+        { value: 'CONFORT', label: 'Confort' }
+    ];
 
     return (
-        <div class= 'content'>
+        <div class='content'>
             <Row className='titleTop'>
                 <Col xs="12" md="12" lg="12" xg="12">
                     <h1>
@@ -43,8 +33,24 @@ export const ServicesEquipment = () => {
                     <hr />
                 </Col>
             </Row>
-            <ServEquipComponent title='Servicios' typeName='servicio' elements={services} key={services.toString()}/>
-            <ServEquipComponent title='Equipamiento' typeName='equipamiento' elements={equipamiento} key={equipamiento.toString()}/>
+            <ServEquipComponent
+                title='Servicios'
+                typeName='Servicio'
+                options={services}
+                create={props.onCreateService}
+                branch={props.branch}
+                notification={props.notification}
+                hideNotification={props.hideNotification}
+            />
+            <ServEquipComponent
+                title='Equipamiento'
+                typeName='Equipamiento'
+                options={equipaments}
+                create={props.onCreateEquipment}
+                branch={props.branch}
+                notification={props.notification}
+                hideNotification={props.hideNotification}
+            />
         </div>
     )
 }
