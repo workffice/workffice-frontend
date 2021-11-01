@@ -26,6 +26,7 @@ const FrequentQuestions = () => {
                 </Col>
             </Row>
             <Row>
+
                 <div
                     aria-multiselectable={true}
                     className="card-collapse"
@@ -574,9 +575,9 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseThirteen"}
                         >
                             <CardBody>
-                                Para ver las reservas de una oficina debe ir al menú lateral, seleccionar 
+                                Para ver las reservas de una oficina debe ir al menú lateral, seleccionar
                                 <strong>Oficinas</strong> y luego <strong>Mis Oficinas</strong>. Una vez allí
-                                presione el botón de <strong>ver reservas</strong>. Será redirigido a una página donde 
+                                presione el botón de <strong>ver reservas</strong>. Será redirigido a una página donde
                                 podrá ver todas las reservas por fecha.
                             </CardBody>
                         </Collapse>
@@ -638,7 +639,7 @@ const FrequentQuestions = () => {
                                 <Row style={{ display: "flex", justifyContent: "space-between" }}>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18, marginTop: "auto", marginBottom: "auto" }}>
-                                            - ¿Cómo generar un reporte?
+                                            - ¿Cómo ver los reporte?
                                         </Label>
                                     </div>
                                     <i
@@ -658,16 +659,17 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseFiveteen"}
                         >
                             <CardBody>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                non cupidatat skateboard dolor brunch. Food truck quinoa
-                                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-                                put a bird on it squid single-origin coffee nulla assumenda
-                                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                                wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                                excepteur butcher vice lomo. Leggings occaecat craft beer
-                                farm-to-table, raw denim aesthetic synth nesciunt you probably
-                                haven't heard of them accusamus labore sustainable VHS.
+                                Para los reportes debes tener acceso al menu <strong>Dashboard</strong>. Como dueño de oficina es <strong>por defecto tienes acceso.</strong> Al hacer click ahí podrás
+                                ver <strong>información respecto de los reporte que actualmente Workffice te puede ofrecer </strong>. Entre estos están: <br />
+                                <ul>
+                                    <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Cantidad de colaboradores</li>
+                                    <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Ingresos por año</li>
+                                    <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Ingresos por oficina</li>
+                                    <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Cantidad de reservar por oficina</li>
+                                    <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Oficina destacada</li>
+                                </ul>
+                                
+                                <p style={{color: 'rgb(52, 177, 138)'}}><strong>Próximamente estaremos trabajando en Nuevos reportes para que puedas mejorar la calidad de la información de tu oficina</strong></p>
                             </CardBody>
                         </Collapse>
                     </Card>

@@ -19,7 +19,7 @@ export const ServEquipComponent = (props) => {
                 name: element.elementName
             }
             await props.create(branch.id, payload);
-            setTimeout(()=>{
+            setTimeout(() => {
                 formik.resetForm();
             }, 2000)
             formik.resetForm()

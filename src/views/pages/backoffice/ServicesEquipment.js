@@ -19,7 +19,7 @@ export const ServicesEquipment = (props) => {
             value: "",
             label: "Seleccione una opción",
         },
-        { value: 'TECNOLOGY', label: 'Tecnología' },
+        { value: 'TECHNOLOGY', label: 'Tecnología' },
         { value: 'CONFORT', label: 'Confort' }
     ];
 

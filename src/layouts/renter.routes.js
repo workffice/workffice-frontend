@@ -274,7 +274,7 @@ export const renter = [
   },
   {
     name: 'Preguntas frecuentes',
-    icon: 'nc-icon nc-bullet-list-67',
+    icon: 'far fa-question-circle',
     path: '/frequent-questions',
     component: FrequentQuestions,
     layout: '/admin',
