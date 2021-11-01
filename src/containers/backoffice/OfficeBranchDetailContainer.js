@@ -8,9 +8,9 @@ import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBra
 export const OfficeBranchDetailContainer = () => {
     const dispatch = useDispatch();
     const officeBranch = useSelector(state => state.officeBranchDetail)
-    const role = readFromLocalStorage(USER_TYPE);
+    let role = readFromLocalStorage(USER_TYPE);
     let officeBranchIdAdmin;
-    if (role === "OFFICE_HOLDER") { return officeBranchIdAdmin = readFromLocalStorage("officeBranch").id }
+    role === "OFFICE_HOLDER" ? officeBranchIdAdmin = readFromLocalStorage("officeBranch").id : undefined
     const loadOfficeBranch = useCallback(officeBranchId => {
         dispatch(getOfficeBranchDetail(officeBranchId));
     }, [dispatch]);
