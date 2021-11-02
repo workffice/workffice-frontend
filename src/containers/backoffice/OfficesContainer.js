@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficesListComponent } from '../../components/Offices/OfficesListComponent';
+import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 
 export const OfficesContainer = () => {
   const loading = useSelector(state => state.loadingOffice);
   const error = useSelector(state => state.error);
   const userMe = useSelector(state => state.userMe)
-  const officeBranch = useSelector(state => state.officeBranch);
+  const officeBranch = readFromLocalStorage("officeBranch")
   const dispatch = useDispatch();
   const offices = useSelector(state => state.offices)
   const loadOffices = useCallback((officeBranchId) => {

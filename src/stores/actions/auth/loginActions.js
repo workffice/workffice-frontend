@@ -16,7 +16,7 @@ export const userLogin = (credentials) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchLogin(await loginAPI(credentials)));
-    dispatch(await getUserMe());
+    dispatch(getUserMe());
     dispatch(setSuccessAction())
   } catch (error) {
     dispatch(setErrorAction(error));
