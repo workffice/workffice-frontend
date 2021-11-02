@@ -4,6 +4,12 @@ import { Col, Container, Row } from 'reactstrap'
 import { BookingComponent } from './BookingComponent'
 
 export const BookingDetail = ({ loadBooking, booking }) => {
+    const formatDate = datetime => {
+        return datetime.match("(.*)T.*")[1]
+    }
+    const formatHour = datetime => {
+        return datetime.match(".*T(.*):00")[1]
+    }
 
     const query = new URLSearchParams(useLocation().search)
 
@@ -23,11 +29,12 @@ export const BookingDetail = ({ loadBooking, booking }) => {
                 <Container>
                     <BookingComponent
                         id={booking.id}
+                        officeName={booking.officeName}
                         status={booking.status}
                         attendeesQuantity={booking.attendeesQuantity}
-                        scheduleDate={booking.scheduleDate}
-                        startTime={booking.startTime}
-                        endTime={booking.endTime}
+                        scheduleDate={booking.startTime ? formatDate(booking.startTime) : ""}
+                        startTime={booking.startTime ? formatHour(booking.startTime) : ""}
+                        endTime={booking.startTime ? formatHour(booking.endTime) : ""}
                         transactionAmount={booking.totalAmount}
                         officeBranchId={booking.officeBranchId}
                         providerFee={booking.payment ? booking.payment.providerFee : "-"}

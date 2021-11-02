@@ -1,7 +1,7 @@
 import { setIsLoading } from '..';
 import { loginAPI } from '../../../api/login';
 import { getUserMe } from '../backoffice/userActions';
-import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions";
+import { setErrorAction } from "../notifications/writeNotificationActions";
 
 export const FETCH_LOGIN = 'FETCH_LOGIN';
 
@@ -16,8 +16,7 @@ export const userLogin = (credentials) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
     dispatch(fetchLogin(await loginAPI(credentials)));
-    dispatch(await getUserMe());
-    dispatch(setSuccessAction())
+    dispatch(getUserMe());
   } catch (error) {
     dispatch(setErrorAction(error));
   } finally {

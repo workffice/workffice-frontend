@@ -27,10 +27,10 @@ export const AdminLayout = props => {
   }, [user ? user.id : ""]);
   const user = useSelector(state => state.userMe)
 
-  const routes = role == "OFFICE_HOLDER" ? adminRoutes : renter;
+  const routes = role !== "RENTER" ? adminRoutes : renter;
 
   React.useEffect(() => {
-    if (officeBranch === null && user?.userType === "OFFICE_HOLDER") {
+    if (officeBranch === null && user && user.userType !== "RENTER") {
       dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
     }
   }, []);

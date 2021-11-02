@@ -52,9 +52,9 @@ const Login = props => {
   });
   React.useEffect(() => {
     if(userMe !== null ){
-      userMe.userType === 'OFFICE_HOLDER'
-      ? history.push("/office-branch/select")
-      : history.push("/admin/user-profile");
+      userMe.userType === 'RENTER' 
+      ? history.push("/admin/user-profile")
+      : history.push("/office-branch/select");
     }
   }, [userMe]);
 
@@ -105,7 +105,7 @@ const Login = props => {
                     </CardHeader>
                     <CardBody>
                       <FormGroup
-                        className={formik.errors.email ? 'has-danger' : ''}>
+                        className={formik.errors.email && formik.touched.email ? 'has-danger' : ''}>
                         <InputGroup>
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
@@ -127,7 +127,7 @@ const Login = props => {
                         ) : null}
                       </FormGroup>
                       <FormGroup
-                        className={formik.errors.password ? 'has-danger' : ''}>
+                        className={formik.errors.password && formik.touched.password ? 'has-danger' : ''}>
                         <InputGroup>
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>

@@ -109,8 +109,8 @@ export const BookingForm = ({
             const start = startTime.hours() < 10 ? "0" + startTime.hours() : startTime.hours()
             const end = endTime.hours() < 10 ? "0" + endTime.hours() : endTime.hours()
             const booking = {
-                startTime: `${date.year()}-${date.month() + 1}-${date.date()}T${start}:00:00`,
-                endTime: `${date.year()}-${date.month() + 1}-${date.date()}T${end}:00:00`,
+                startTime: `${date.format("YYYY-MM-DD")}T${start}:00:00`,
+                endTime: `${date.format("YYYY-MM-DD")}T${end}:00:00`,
                 attendeesQuantity: numberOfAssistants
             }
             createBooking(office.id, booking)
@@ -268,7 +268,7 @@ export const BookingForm = ({
 
 
                                 <FormGroup className={formik.errors.numberOfAssistants ? 'has-danger' : ''}>
-                                    <Label htmlFor="numberOfAssistants" className="label-form">Cantidad de personas</Label>
+                                    <Label htmlFor="numberOfAssistants" className="label-form">Cantidad de asistentes</Label>
                                     <Input
                                         type="number"
                                         placeholder="Ingrese el número de personas..."
