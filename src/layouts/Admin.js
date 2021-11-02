@@ -1,16 +1,15 @@
-import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
-
 import PerfectScrollbar from 'perfect-scrollbar';
-import Sidebar from '../components/Sidebar/Sidebar.js';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import AdminNavbar from '../components/Common/Navbars/AdminNavbar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
-import { adminRoutes } from './admin.routes.js';
-import { renter } from './renter.routes.js';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserMe } from '../stores/actions/backoffice/userActions.js';
-import { getOfficeBranch } from '../stores/actions/backoffice/officeBranch/officeBranchAdminActions';
+import Sidebar from '../components/Sidebar/Sidebar.js';
 import { readFromLocalStorage, USER_TYPE } from '../infra/api/localStorage.js';
+import { getUserMe } from '../stores/actions/backoffice/userActions.js';
+import { adminRoutes } from './admin.routes.js';
+import { renterRoutes } from './renter.routes.js';
+
 
 let ps;
 
@@ -21,19 +20,13 @@ export const AdminLayout = props => {
   const [activeColor, setActiveColor] = React.useState("success");
   const mainPanel = React.useRef();
   const dispatch = useDispatch();
-  const officeBranch = useSelector(state => state.officeBranch);
   React.useEffect(() => {
     dispatch(getUserMe());
   }, [user ? user.id : ""]);
   const user = useSelector(state => state.userMe)
 
-  const routes = role !== "RENTER" ? adminRoutes : renter;
+  const routes = role === "RENTER" ? renterRoutes : adminRoutes;
 
-  React.useEffect(() => {
-    if (officeBranch === null && user && user.userType !== "RENTER") {
-      dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
-    }
-  }, []);
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on';
@@ -82,7 +75,7 @@ export const AdminLayout = props => {
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} bgColor={backgroundColor} role={role}
-        activeColor={activeColor} user={user} officeBranch={officeBranch} />
+        activeColor={activeColor} user={user} />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} />
         {

@@ -94,10 +94,10 @@ export const UserProfile = ({
                         </CardFooter>
                     </Card>
                     {
-                        userMe?.userType === "OFFICE_HOLDER" &&
+                        userMe?.userType !== "RENTER" &&
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Colaboradores de {userMe?.userType === "OFFICE_HOLDER" && officeBranch.name}</CardTitle>
+                                <CardTitle tag="h4">Colaboradores de {userMe?.userType !== "RENTER" && officeBranch.name}</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <ul className="list-unstyled team-members">

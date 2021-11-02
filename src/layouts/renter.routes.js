@@ -9,7 +9,7 @@ import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingLi
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 
-export const renter = [
+export const renterRoutes = [
   {
     collapse: true,
     name: 'Perfil',

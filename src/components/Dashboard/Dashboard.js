@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { REPORT_RESOURCE } from "../../stores/actions/errors/permissionActions";
 import { monthFilter, yearFilter } from '../../utils/filters';
-import Forbidden from '../Common/Forbidden/Forbidden';
+import { NotAccess } from "../Common/ErrorPages/NotAccess";
 import { DashboardGeneralCards } from "./DashboardGeneralCards.jsx";
 import { DashboardIncomeStatistics } from "./DashboardIncomeStatistics.jsx";
 import { DashboardOfficeBooking } from "./DashboardOfficeBooking.jsx";
@@ -87,7 +87,9 @@ function Dashboard({
     // if (isLoading)
     //   return <Row style={{display:"flex", justifyContent:"center"}}><Loading /></Row>
     if (permission.isForbidden && includes(permission.resources, REPORT_RESOURCE))
-      return <Forbidden message="No tienes acceso a los reportes de esta sucursal" />
+      return <Row style={{justifyContent: "center"}}>
+        <NotAccess message="No tienes acceso a los reportes de esta sucursal" />
+      </Row>
     else
       return renderDashboard()
   }

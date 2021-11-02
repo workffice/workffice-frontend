@@ -5,7 +5,7 @@ import { Button, Col, Row } from 'reactstrap';
 import { ROLE_RESOURCE } from '../../stores/actions/errors/permissionActions';
 import { getErrorMessage, ROLE_FORBIDDEN_MESSAGE } from '../../utils/rolesTranslation';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
-import Forbidden from "../Common/Forbidden/Forbidden";
+import { NotAccess } from '../Common/ErrorPages/NotAccess';
 import { Notification } from '../Common/Notification/Notification';
 import { RoleCard } from './RoleCard';
 
@@ -28,7 +28,7 @@ export const RoleListComponent = ({
 
   const renderRoles = () => {
     if (permission.isForbidden && includes(permission.resources, ROLE_RESOURCE))
-      return <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
+      return <NotAccess message={ROLE_FORBIDDEN_MESSAGE} />
     return roles !== undefined && roles.length !== 0 ? roles.map((role) => {
       return <Col key={role.id} xs="10" md="4" lg="4" xg="4">
         <RoleCard {...role} onDelete={() => deleteRole(role.id)} />

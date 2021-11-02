@@ -5,7 +5,7 @@ import { Button, Col, Row } from 'reactstrap';
 import { COLLABORATOR_RESOURCE } from '../../stores/actions/errors/permissionActions';
 import { ACCESS_TYPE_READ, COLLABORATOR_FORBIDDEN_MESSAGE, getErrorMessage } from '../../utils/collaboratorTranslations';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
-import Forbidden from '../Common/Forbidden/Forbidden';
+import { NotAccess } from '../Common/ErrorPages/NotAccess';
 import { Loading } from '../Common/Loading/Loading';
 import { Notification } from '../Common/Notification/Notification';
 import { CollaboratorCard } from './CollaboratorCard';
@@ -42,7 +42,7 @@ export const Collaborators = ({
     if (loading)
       return <Loading />
     if (permission.isForbidden && includes(permission.resources, COLLABORATOR_RESOURCE))
-      return <Forbidden message={COLLABORATOR_FORBIDDEN_MESSAGE} />
+      return <NotAccess message={COLLABORATOR_FORBIDDEN_MESSAGE} />
     else {
       return collaborators && collaborators.length !== 0 ? collaborators.map(collaborator => {
         return <Col key={collaborator.id} xs="10" md="4" lg="4" xg="4">

@@ -4,13 +4,13 @@ import { OfficeBranchDetail } from '../../components/OfficeBranch/OfficeBranchDe
 import { readFromLocalStorage, USER_TYPE } from '../../infra/api/localStorage';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
+import { OFFICE_BRANCH_ENTITY } from '../../stores/actions/errors/notFoundActions';
 
 export const OfficeBranchDetailContainer = () => {
     const dispatch = useDispatch();
     const officeBranch = useSelector(state => state.officeBranchDetail)
-    let role = readFromLocalStorage(USER_TYPE);
-    let officeBranchIdAdmin;
-    role === "OFFICE_HOLDER" ? officeBranchIdAdmin = readFromLocalStorage("officeBranch").id : undefined
+    const role = readFromLocalStorage(USER_TYPE);
+    const officeBranchIdAdmin = role === "RENTER" ? undefined : readFromLocalStorage("officeBranch").id
     const loadOfficeBranch = useCallback(officeBranchId => {
         dispatch(getOfficeBranchDetail(officeBranchId));
     }, [dispatch]);
@@ -19,7 +19,7 @@ export const OfficeBranchDetailContainer = () => {
     }, [dispatch]);
     const offices = useSelector(state => state.offices)
     const loadingOffices = useSelector(state => state.loadingOffice);
-    const error = useSelector(state => state.entitiesNotFound.includes("officeBranch"))
+    const error = useSelector(state => state.entitiesNotFound.includes(OFFICE_BRANCH_ENTITY))
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
