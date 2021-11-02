@@ -107,7 +107,7 @@ export const DashboardOfficeBooking = ({
             <Col lg="6" md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Oficinia del mes: <small>{formik.values.month.label}</small></CardTitle>
+                        <CardTitle tag="h4">Oficina del mes: <small>{formik.values.month.label}</small></CardTitle>
                         <Row style={{ display: 'flex', alignContent: 'center', alignItems: 'flex-end' }}>
                             <Col sm="6">
                                 <p className="card-category" style={{ color: '#34b18a' }}>Oficina con más reservas</p>

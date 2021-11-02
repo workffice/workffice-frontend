@@ -124,8 +124,8 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseTwo"}
                         >
                             <CardBody>
-                                Para reservar una oficina debe precionar el botón <strong>"Alquilar oficina"</strong>. Esto lo llevará a un pequeño
-                                formulario donde deberá seleccionar la <strong>fecha, hora de ingreso, hora de salida y la cantidad de personas</strong>
+                                Para reservar una oficina debe presionar el botón <strong>"Alquilar oficina"</strong>. Esto lo llevará a un pequeño
+                                formulario donde deberá seleccionar la <strong>fecha, hora de ingreso, hora de salida y la cantidad de personas </strong>
                                 que utilizarán esa oficina. Luego debe presionar <strong>"Alquilar oficina"</strong> y seguir las instrucciones de pago.
                             </CardBody>
                         </Collapse>
@@ -385,7 +385,7 @@ const FrequentQuestions = () => {
                             <CardBody>
                                 Para crear un perfil de colaborador, debe dirigirse al menú lateral y
                                 dentro de <strong>Colaboradores</strong> seleccionar <strong>"Nuevo colaborador"</strong>.
-                                Una vez allí solo deberá completar el formulario presionar <strong>Crear </strong>
+                                Una vez allí solo deberá completar el formulario, presionar <strong>Crear </strong>
                                 y el perfil quedará creado.
                             </CardBody>
                         </Collapse>
@@ -461,7 +461,7 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseTen"}
                         >
                             <CardBody>
-                                Para crear una oficina, diríjase al menú lateral y dentro de <strong>Oficinas</strong>
+                                Para crear una oficina, diríjase al menú lateral y dentro de <strong>Oficinas </strong>
                                 seleccione <strong>Nueva oficinas</strong>. Luego complete el formlario con todos los datos
                                 que se solicitan y presione <strong>Crear</strong>. De esta forma su oficina quedará creada.
                             </CardBody>
@@ -536,7 +536,7 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseTwelve"}
                         >
                             <CardBody>
-                                Para crear una membresía, diríjase al menú lateral y dentro de <strong>Configuraciones</strong>
+                                Para crear una membresía, diríjase al menú lateral y dentro de <strong>Configuraciones </strong>
                                 seleccione <strong>Gestionar Membresía</strong>. Allí aparecerán todas las membresías existentes.
                                 Para crear una nueva presione en <strong>Nueva Membresía</strong>. Luego complete el formlario con todos los datos
                                 que se solicitan y presione <strong>Crear</strong>. De esta forma su membresía quedará creada.
@@ -576,7 +576,7 @@ const FrequentQuestions = () => {
                         >
                             <CardBody>
                                 Para ver las reservas de una oficina debe ir al menú lateral, seleccionar
-                                <strong>Oficinas</strong> y luego <strong>Mis Oficinas</strong>. Una vez allí
+                                <strong> Oficinas</strong> y luego <strong>Mis Oficinas</strong>. Una vez allí
                                 presione el botón de <strong>ver reservas</strong>. Será redirigido a una página donde
                                 podrá ver todas las reservas por fecha.
                             </CardBody>
@@ -659,8 +659,8 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseFiveteen"}
                         >
                             <CardBody>
-                                Para los reportes debes tener acceso al menu <strong>Dashboard</strong>. Como dueño de oficina es <strong>por defecto tienes acceso.</strong> Al hacer click ahí podrás
-                                ver <strong>información respecto de los reporte que actualmente Workffice te puede ofrecer </strong>. Entre estos están: <br />
+                                Para los reportes debe tener acceso al menu <strong>Dashboard</strong>. Como dueño de oficina <strong>por defecto tienes acceso.</strong> Al hacer click ahí podrá
+                                ver <strong>información respecto de los reporte que actualmente Workffice le puede ofrecer </strong>. Entre estos están: <br />
                                 <ul>
                                     <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Cantidad de colaboradores</li>
                                     <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Ingresos por año</li>
@@ -669,7 +669,7 @@ const FrequentQuestions = () => {
                                     <li style={{color:'rgb(235, 93, 96)', fontWeight:'bold'}}>Oficina destacada</li>
                                 </ul>
                                 
-                                <p style={{color: 'rgb(52, 177, 138)'}}><strong>Próximamente estaremos trabajando en Nuevos reportes para que puedas mejorar la calidad de la información de tu oficina</strong></p>
+                                <p style={{color: 'rgb(52, 177, 138)'}}><strong>Próximamente estaremos trabajando en Nuevos reportes para que pueda mejorar la calidad de la información de su oficina</strong></p>
                             </CardBody>
                         </Collapse>
                     </Card>
