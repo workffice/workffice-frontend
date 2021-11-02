@@ -32,9 +32,9 @@ export const BookingDetail = ({ loadBooking, booking }) => {
                         officeName={booking.officeName}
                         status={booking.status}
                         attendeesQuantity={booking.attendeesQuantity}
-                        scheduleDate={formatDate(booking.startTime)}
-                        startTime={formatHour(booking.startTime)}
-                        endTime={formatHour(booking.endTime)}
+                        scheduleDate={booking.startTime ? formatDate(booking.startTime) : ""}
+                        startTime={booking.startTime ? formatHour(booking.startTime) : ""}
+                        endTime={booking.startTime ? formatHour(booking.endTime) : ""}
                         transactionAmount={booking.totalAmount}
                         officeBranchId={booking.officeBranchId}
                         providerFee={booking.payment ? booking.payment.providerFee : "-"}
