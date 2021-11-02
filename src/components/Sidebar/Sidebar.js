@@ -1,13 +1,14 @@
 
 import PerfectScrollbar from "perfect-scrollbar";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
 import { Collapse, Nav } from "reactstrap";
 import { invalidateSession, readFromLocalStorage, USER_TYPE } from "../../infra/api/localStorage";
-import { Cloudinary } from "../Common/Cloudinary/Cloudinary";
-import { useHistory } from "react-router"
-import { useDispatch } from "react-redux";
 import { successLogout } from "../../stores/actions/auth/logoutActions";
+import { getOfficeBranch } from "../../stores/actions/backoffice/officeBranch/officeBranchAdminActions";
+import { Cloudinary } from "../Common/Cloudinary/Cloudinary";
 
 
 var ps;
@@ -16,6 +17,16 @@ function Sidebar(props) {
   const role = readFromLocalStorage(USER_TYPE);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (role !== "RENTER") {
+      dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
+    }
+  }, [officeBranch ? officeBranch.id : ""]);
+  const officeBranch = useSelector(state => state.officeBranch);
+
+
+
   const [logout, setLogout] = React.useState(false)
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
@@ -162,7 +173,7 @@ function Sidebar(props) {
         <p
           className="simple-text logo-normal"
         >
-          {role === "OFFICE_HOLDER" && <span style={{ fontFamily: 'Poppins', }}>Sucursal: <br /><small className="text-right lead" >{props.officeBranch ? props.officeBranch.name : ""}</small></span>}
+          {role !== "RENTER" && <span style={{ fontFamily: 'Poppins', }}>Sucursal: <br /><small className="text-right lead" >{officeBranch ? officeBranch.name : ""}</small></span>}
         </p>
       </div>
 
