@@ -284,7 +284,7 @@ export const BookingForm = ({
 
                                 <FormGroup>
                                     {
-                                        office
+                                        office && !formik.errors.invalidTimeRange
                                             ? <Label className="label-form">
                                                 <Label htmlFor="officePrice" className="label-form">Precio total $ <Label style={{ color: "#EB5D60", fontSize: 18 }}>{office.price * (formik.values.endTime.hours() - formik.values.startTime.hours())}</Label> </Label>
                                             </Label>
