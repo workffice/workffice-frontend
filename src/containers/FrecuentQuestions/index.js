@@ -258,7 +258,7 @@ const FrequentQuestions = () => {
                             </CardBody>
                         </Collapse>
                     </Card>
-                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                    <Card className="card-plain" style={{ marginLeft: "2%" }}>
                         <CardHeader role="tab">
                             <a
                                 aria-expanded={openedCollapses === "collapseSix"}
@@ -293,6 +293,47 @@ const FrequentQuestions = () => {
                                 Para ver su historial de reservas, despliegue la opción <strong>Reserva</strong> en el menú lateral y
                                 seleccione <strong>"Mis Reservas"</strong>. Si desea ver las reservas con fechas anteriores
                                 seleccione <strong>"Reservas Anteriores"</strong>.
+                            </CardBody>
+                        </Collapse>
+                    </Card>
+                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                        <CardHeader role="tab">
+                            <a
+                                aria-expanded={openedCollapses === "collapseSeventeen"}
+                                href="#"
+                                data-parent="#accordion"
+                                data-toggle="collapse"
+                                onClick={(e) => { e.preventDefault(); collapsesToggle("collapseSeventeen") }}
+                            >
+                                <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                                    <div className='text'>
+                                        <Label className="form-label" style={{ fontSize: 18, marginTop: "auto", marginBottom: "auto" }}>
+                                            - ¿Cómo ver el manual de usuario de inquilino?
+                                        </Label>
+                                    </div>
+                                    <i
+                                        className="nc-icon nc-minimal-down"
+                                        style={{
+                                            marginTop: "auto",
+                                            marginBottom: "auto",
+                                            color: "#133148",
+                                            fontWeight: 'bold',
+                                        }}
+                                    />
+                                </Row>
+                            </a>
+                        </CardHeader>
+                        <Collapse
+                            role="tabpanel"
+                            isOpen={openedCollapses === "collapseSeventeen"}
+                        >
+                            <CardBody>
+                                Para ver y descargar el manual de usuario acceda al siguiete link {" "}
+                                <strong>
+                                    <Link to='/auth/register' style={{ textDecoration: 'none' }}>
+                                        www.worffice.com/auth/register
+                                    </Link>
+                                </strong>. Allí debe ver el documento llamado <strong>Manual de usuario inquilino</strong>.
                             </CardBody>
                         </Collapse>
                     </Card>
@@ -670,6 +711,47 @@ const FrequentQuestions = () => {
                                 </ul>
                                 
                                 <p style={{color: 'rgb(52, 177, 138)'}}><strong>Próximamente estaremos trabajando en Nuevos reportes para que pueda mejorar la calidad de la información de su oficina</strong></p>
+                            </CardBody>
+                        </Collapse>
+                    </Card>
+                    <Card className="card-plain" style={{ marginLeft: "2%" }}>
+                        <CardHeader role="tab">
+                            <a
+                                aria-expanded={openedCollapses === "collapseSixteen"}
+                                href="#"
+                                data-parent="#accordion"
+                                data-toggle="collapse"
+                                onClick={(e) => { e.preventDefault(); collapsesToggle("collapseSixteen") }}
+                            >
+                                <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                                    <div className='text'>
+                                        <Label className="form-label" style={{ fontSize: 18, marginTop: "auto", marginBottom: "auto" }}>
+                                            - ¿Cómo ver el manual de usuario de propietario de oficina?
+                                        </Label>
+                                    </div>
+                                    <i
+                                        className="nc-icon nc-minimal-down"
+                                        style={{
+                                            marginTop: "auto",
+                                            marginBottom: "auto",
+                                            color: "#133148",
+                                            fontWeight: 'bold',
+                                        }}
+                                    />
+                                </Row>
+                            </a>
+                        </CardHeader>
+                        <Collapse
+                            role="tabpanel"
+                            isOpen={openedCollapses === "collapseSixteen"}
+                        >
+                            <CardBody>
+                                Para ver y descargar el manual de usuario acceda al siguiete link {" "}
+                                <strong>
+                                    <Link to='/auth/register' style={{ textDecoration: 'none' }}>
+                                        www.worffice.com/auth/register
+                                    </Link>
+                                </strong>. Allí debe ver el documento llamado <strong>Manual de usuario propietario de oficina</strong>.
                             </CardBody>
                         </Collapse>
                     </Card>
