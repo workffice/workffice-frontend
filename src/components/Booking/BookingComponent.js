@@ -152,6 +152,7 @@ export const BookingComponent = (props) => {
 
 BookingComponent.propTypes = {
     id: PropTypes.string,
+    officeName: PropTypes.string,
     status: PropTypes.string,
     attendeesQuantity: PropTypes.number,
     scheduleDate: PropTypes.string,
