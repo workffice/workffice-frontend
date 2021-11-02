@@ -8,7 +8,7 @@ import { Col, Form, FormGroup, Label, Row } from 'reactstrap'
 import { OFFICE_ENTITY } from '../../stores/actions/errors/notFoundActions'
 import { BOOKING_RESOURCE } from '../../stores/actions/errors/permissionActions'
 import { BookingList } from '../Booking/BookingList'
-import Forbidden from '../Common/Forbidden/Forbidden'
+import { NotAccess } from '../Common/ErrorPages/NotAccess'
 
 
 export const OfficeBookings = ({
@@ -53,8 +53,8 @@ export const OfficeBookings = ({
     })
 
     const renderBookings = () => {
-        if (permission.isForbidden && includes(permission.resources, BOOKING_RESOURCE))
-            return <Forbidden message="No tienes acceso a las reservas de esta sucursal" />
+        // if (permission.isForbidden && includes(permission.resources, BOOKING_RESOURCE))
+        //     return <NotAccess message="No tienes acceso a las reservas de esta sucursal" />
         return <>
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
@@ -64,26 +64,33 @@ export const OfficeBookings = ({
                     <hr />
                 </Col>
             </Row>
-            <Form onSubmit={formik.handleSubmit}>
-                <Row style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
-                    <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
-                    <FormGroup style={{ marginLeft: 20, marginTop: 10 }}>
-                        <ReactDatetimeClass
-                            initialValue={formik.values.date}
-                            name="date"
-                            id="date"
-                            onChange={value => {
-                                formik.setFieldValue("date", value)
-                                formik.submitForm()
-                            }}
-                            timeFormat={false}
-                            inputProps={{ placeholder: "Seleccione una fecha" }}
-                        />
-                    </FormGroup>
-                </Row>
-            </Form>
+            {
+                permission.isForbidden && includes(permission.resources, BOOKING_RESOURCE)
+                    ? <Row style={{ justifyContent: "center" }}>
+                        <NotAccess message="No tienes acceso a las reservas de esta sucursal" />
+                    </Row>
+                    : <> <Form onSubmit={formik.handleSubmit}>
+                        <Row style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+                            <Label htmlFor="date" className="label-form" style={{ fontSize: 20 }}>Seleccione una fecha</Label>
+                            <FormGroup style={{ marginLeft: 20, marginTop: 10 }}>
+                                <ReactDatetimeClass
+                                    initialValue={formik.values.date}
+                                    name="date"
+                                    id="date"
+                                    onChange={value => {
+                                        formik.setFieldValue("date", value)
+                                        formik.submitForm()
+                                    }}
+                                    timeFormat={false}
+                                    inputProps={{ placeholder: "Seleccione una fecha" }}
+                                />
+                            </FormGroup>
+                        </Row>
+                    </Form>
 
-            <BookingList isLoading={isLoading} bookings={bookings} disableBookingLinks={true}/>
+                        <BookingList isLoading={isLoading} bookings={bookings} disableBookingLinks={true} />
+                    </>
+            }
         </>
     }
 

@@ -79,12 +79,10 @@ export const collaboratorRolesList = collaboratorId => async dispatch => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchCollaboratorRolesList(await fetchRolesFromCollaboratorApi(collaboratorId)));
-        dispatch(setSuccessAccess(ROLE_RESOURCE))
     } catch (error) {
         if (error.code === "FORBIDDEN")
             dispatch(setForbiddenAccessAction(ROLE_RESOURCE));
     } finally {
         dispatch(setIsLoading(false));
     }
-
 }

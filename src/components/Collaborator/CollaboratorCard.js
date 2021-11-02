@@ -143,7 +143,7 @@ export const CollaboratorCard = props => {
             />
             {
               includes(permission.resources, ROLE_RESOURCE) ?
-                <Forbidden className="color-red-error" message={ROLE_FORBIDDEN_MESSAGE} />
+                <Forbidden message={ROLE_FORBIDDEN_MESSAGE} />
                 : <></>
             }
           </FormGroup>
