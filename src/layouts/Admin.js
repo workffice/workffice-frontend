@@ -22,7 +22,7 @@ export const AdminLayout = props => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getUserMe());
-  }, [user ? user.id : ""]);
+  }, [dispatch]);
   const user = useSelector(state => state.userMe)
 
   const routes = role === "RENTER" ? renterRoutes : adminRoutes;
