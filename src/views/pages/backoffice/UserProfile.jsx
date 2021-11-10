@@ -3,6 +3,7 @@ import { CloudinaryContext, Image } from 'cloudinary-react';
 import { includes } from "lodash-es";
 import React from "react";
 import {
+    Badge,
     Card, CardBody,
     CardFooter, CardHeader, CardTitle, Col, Row
 } from "reactstrap";
@@ -70,6 +71,16 @@ export const UserProfile = ({
                             <div className="author">
                                 <PictureUpload avatar={profileImage} onChange={(imageData) => updateUser(imageData)} />
                                 <h5 className="title">{name || ""}</h5>
+                                <Badge
+                                    color={userMe?.userType === "RENTER" ? "info" : userMe?.userType === "COLLABORATOR" ? "warning" : "success"}
+                                    pill>
+                                    {userMe?.userType === "RENTER" ?
+                                        "Inquilino" :
+                                        userMe?.userType ===
+                                            "COLLABORATOR" ?
+                                            "Colaborador" :
+                                            "Dueño de oficina"}
+                                </Badge>
                             </div>
                             <p className="description text-center">{bio}</p>
                         </CardBody>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Badge, Button, Card, CardBody, ListGroup, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
-import { CloudinaryContext, Image } from 'cloudinary-react';
+// import { CloudinaryContext, Image } from 'cloudinary-react';
 
 export const OfficeBranchCardSelect = ({ branch, select, selected, currentOfficeBranch }) => {
   const history = useHistory();
@@ -10,18 +10,18 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
   }
   useEffect(() => {
     if (selected)
-      history.push('/admin/offices');
+      history.push('/admin/user-profile');
   }, [currentOfficeBranch ? currentOfficeBranch.id : ""])
 
   return (
     <>
       <Card>
         <CardBody>
-          <CloudinaryContext cloudName="workffice" width="310" height="175">
+          {/* <CloudinaryContext cloudName="workffice" width="310" height="175">
             <div>
               <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width={310} />
             </div>
-          </CloudinaryContext>
+          </CloudinaryContext> */}
           <ListGroup>
             <ListGroupItemHeading>
               <small>{branch.name}</small>
