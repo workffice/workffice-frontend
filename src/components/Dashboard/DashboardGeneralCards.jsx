@@ -27,13 +27,13 @@ export const DashboardGeneralCards = (props) => {
             <Row>
               <Col md="4" xs="5">
                 <div className="icon-big text-center icon-warning">
-                  <i className="fa fa-users text-primary" />
+                  <i className="fas fa-users text-primary" />
                 </div>
               </Col>
               <Col md="8" xs="7">
                 <div className="numbers">
                   <p className="card-category">Colaboradores</p>
-                  <CardTitle tag="p">{props.collaboratorTotal} <i className="fa-solid fa-user-tie" ></i></CardTitle>
+                  <CardTitle tag="p">{props.collaboratorTotal}</CardTitle>
                   <p />
                 </div>
               </Col>
@@ -53,13 +53,13 @@ export const DashboardGeneralCards = (props) => {
             <Row>
               <Col md="4" xs="5">
                 <div className="icon-big text-center icon-warning">
-                  <i className="fa fa-user text-warning" />
+                  <i className="fas fa-user-plus text-warning" />
                 </div>
               </Col>
               <Col md="8" xs="7">
                 <div className="numbers">
                   <p className="card-category">Capacidad</p>
-                  <CardTitle tag="p">{props.capacityTotal} <i className="fa-solid fa-user-tie" ></i></CardTitle>
+                  <CardTitle tag="p">{props.capacityTotal} </CardTitle>
                   <p />
                 </div>
               </Col>
