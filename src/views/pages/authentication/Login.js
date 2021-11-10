@@ -13,9 +13,6 @@ import { customizedErrorAuth } from '../../../infra/errorsAuth';
 import { hideNotificationAction } from '../../../stores/actions/notifications/writeNotificationActions';
 import { setIsLoading } from '../../../stores/actions';
 
-
-
-
 const Login = props => {
   const { loading, notification } = props
   const userMe = useSelector(state => state.userMe);

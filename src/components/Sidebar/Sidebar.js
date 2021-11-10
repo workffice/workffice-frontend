@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
-import { Collapse, Nav } from "reactstrap";
+import { Badge, Collapse, Nav } from "reactstrap";
 import { invalidateSession, readFromLocalStorage, USER_TYPE } from "../../infra/api/localStorage";
 import { successLogout } from "../../stores/actions/auth/logoutActions";
 import { getOfficeBranch } from "../../stores/actions/backoffice/officeBranch/officeBranchAdminActions";
@@ -184,15 +184,27 @@ function Sidebar(props) {
             <Cloudinary publicId={props.user ? props.user.profileImage : ""} />
             {/* <img src={avatar} alt="Avatar" /> */}
           </div>
-          <div className="info">
+          <div className="info" >
             <a
               href="#pablo"
               data-toggle="collapse"
               aria-expanded={openAvatar}
               onClick={() => setOpenAvatar(!openAvatar)}
             >
-              <span>
+              <span style={{ display: 'flex', flexDirection: 'column' }}>
                 {props.user ? `${props.user.name || 'Username'} ${props.user.lastname || ''}` : ""}
+                <br />
+                <Badge
+                  color={props.user?.userType === "RENTER" ? "info" : props.user?.userType === "COLLABORATOR" ? "warning" : "success"}
+                  pill style={{width: '68%'}}>
+                  {props.user?.userType === "RENTER" ?
+                    "Inquilino" :
+                    props.user?.userType ===
+                      "COLLABORATOR" ?
+                      "Colaborador" :
+                      "Dueño de oficina"}
+                </Badge>
+
                 <b className="caret" />
               </span>
             </a>
