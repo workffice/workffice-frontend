@@ -22,7 +22,7 @@ function Sidebar(props) {
     if (role !== "RENTER") {
       dispatch(getOfficeBranch(readFromLocalStorage("officeBranch").id));
     }
-  }, [officeBranch ? officeBranch.id : ""]);
+  }, [dispatch]);
   const officeBranch = useSelector(state => state.officeBranch);
 
 
