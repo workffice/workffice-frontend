@@ -5,7 +5,7 @@ import React from "react";
 import {
     Badge,
     Card, CardBody,
-    CardFooter, CardHeader, CardTitle, Col, Row
+    CardHeader, CardTitle, Col, Row
 } from "reactstrap";
 import PictureUpload from '../../../components/Common/CustomUpload/PictureUpload';
 import { EmptyComponent } from "../../../components/Common/Empty/EmptyComponent";
@@ -84,25 +84,6 @@ export const UserProfile = ({
                             </div>
                             <p className="description text-center">{bio}</p>
                         </CardBody>
-                        <CardFooter>
-                            <hr />
-                            <div className="button-container">
-                                <Row>
-                                    <Col className="ml-auto">
-                                        <h5>
-                                            4 <br />
-                                            <small>Sucursales</small>
-                                        </h5>
-                                    </Col>
-                                    <Col className="mr-auto">
-                                        <h5>
-                                            8.5 <br />
-                                            <small>Valoración</small>
-                                        </h5>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </CardFooter>
                     </Card>
                     {
                         userMe?.userType !== "RENTER" &&

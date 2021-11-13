@@ -106,7 +106,7 @@ export const OfficeBranchDetail = ({
                 <Row style={{ display: 'grid', paddingTop: 40 }}>
                     <Col xs="12" md="6" lg="12" xg="12">
                         <h1>
-                            Detalle sucursal <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                            Sucursal <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
                         </h1>
                         <hr />
                     </Col>

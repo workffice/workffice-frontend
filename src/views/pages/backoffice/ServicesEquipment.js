@@ -28,7 +28,7 @@ export const ServicesEquipment = (props) => {
             <Row className='titleTop'>
                 <Col xs="12" md="12" lg="12" xg="12">
                     <h1>
-                        Crear <small>servicios y equipamiento</small>
+                        Crear <small>servicios y equipamientos</small>
                     </h1>
                     <hr />
                 </Col>
