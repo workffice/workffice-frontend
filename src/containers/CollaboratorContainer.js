@@ -9,16 +9,16 @@ import { collaboratorRolesList, rolesList } from '../stores/actions/backoffice/r
 import { hideNotificationAction } from '../stores/actions/notifications/writeNotificationActions';
 
 export const CollaboratorContainer = () => {
+  const dispatch = useDispatch();
   const loading = useSelector(state => state.isLoading);
   const notification = useSelector(state => state.notification);
-  const hideNotification = useCallback(async () => {
-    await dispatch(hideNotificationAction());
+  const hideNotification = useCallback(() => {
+    dispatch(hideNotificationAction());
   }, [dispatch]);
   const officeBranch = readFromLocalStorage("officeBranch");
-  const dispatch = useDispatch();
   const officeBranchRoles = useSelector(state => state.roles);
-  const loadOfficeBranchRoles = useCallback(async () => {
-    await dispatch(rolesList(officeBranch.id));
+  const loadOfficeBranchRoles = useCallback(() => {
+    dispatch(rolesList(officeBranch.id));
   }, [dispatch]);
   const onCreateColaborator = useCallback(collaboratorBody => {
     dispatch(createColaborator(officeBranch.id, collaboratorBody));
