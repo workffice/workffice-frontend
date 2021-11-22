@@ -6,12 +6,13 @@ import {
     CardBody, CardHeader, Col, Container, Form, FormGroup, Input,
     Label, Row
 } from 'reactstrap';
+import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
 
 
-export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit }) => {
+export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit, deleteOfficeBranch }) => {
     const { province, city, street, zipCode } = officeBranch ? officeBranch.location : {};
     const validate = values => {
         const errors = {};
@@ -38,6 +39,16 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
         }
         return errors;
     };
+
+    const handleDelete =async values => {
+        const officeBranch = readFromLocalStorage('officeBranch')
+        alert(`va a dar de baja una sucursal =>`)
+        console.log(values)
+        console.log(officeBranch.id)
+        // TODO: Revisar que se puede verificar que no tiene reservas
+        await deleteOfficeBranch(officeBranch.id);
+
+    }
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -81,6 +92,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                             message="La sucursal se actualizo correctamente"
                             hideNotification={hideNotification}
                         />
+                        <h1 className="text-center"><small>{formik.values.name}</small></h1>
                     </CardHeader>
                     <CardBody>
                         <Row>
@@ -196,7 +208,13 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                         </Row>
                         <Row style={{ textAlign: 'center' }}>
                             <Col>
-
+                                <Button
+                                    className="btn-round"
+                                    color="danger"
+                                    onClick={() => handleDelete(formik.values)}
+                                    disabled={formik.isSubmitting}>
+                                    Dar de baja
+                                </Button>
                                 <Button
                                     className="btn-round"
                                     color="primary"
