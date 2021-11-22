@@ -35,7 +35,7 @@ export const OfficesListComponent = ({ offices, officeBranch, loading, loadOffic
       <Row style={{ display: 'grid', paddingTop: 40 }}>
         <Col xs="12" md="6" lg="12" xg="12">
           <h1>
-            Gestionar <small color="red">oficinas</small>
+            Mis <small color="red">oficinas</small>
           </h1>
           <hr />
         </Col>

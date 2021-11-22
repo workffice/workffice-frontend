@@ -18,6 +18,7 @@ export const OfficesSearch = ({ officeBranches, search, loading }) => {
             officeType: query.get("office_type") || "",
             officeBranchName: query.get("name") || "",
             page: query.get("page") ? query.get("page") - 1 : 0,
+            size: 10,
         }
         search(data)
     }, []);
@@ -43,6 +44,7 @@ export const OfficesSearch = ({ officeBranches, search, loading }) => {
                 ...values,
                 officeType: values.officeType.value,
                 page: 0,
+                size: 10,
             }
             await search(data);
         }

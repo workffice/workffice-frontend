@@ -65,7 +65,7 @@ export const Collaborators = ({
       <Row style={{ display: 'grid', paddingTop: 40 }}>
         <Col xs="12" md="12" lg="12" xg="12">
           <h1>
-            Gestionar <small color="red">Colaboradores</small>
+            Mis <small color="red">Colaboradores</small>
           </h1>
           <hr />
         </Col>
