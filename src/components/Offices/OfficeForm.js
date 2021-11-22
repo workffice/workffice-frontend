@@ -4,7 +4,7 @@ import React from 'react';
 import Select from 'react-select';
 import {
     Button, Card,
-    CardBody, Col, Container, Form,
+    CardBody, CardHeader, Col, Container, Form,
     FormGroup, Input,
     InputGroup,
     InputGroupAddon,
@@ -64,6 +64,14 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
         return errors;
     };
 
+    const handleDelete = async values => {
+        alert(`va a dar de baja una sucursal =>`)
+        console.log(values)
+        // TODO: Revisar que se puede verificar que no tiene reservas
+        // await deleteOfficeBranch(officeBranch.id);
+
+    }
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -114,6 +122,24 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
         <Container>
             <Form onSubmit={formik.handleSubmit} >
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
+                    <CardHeader style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <h1><small>{formik.values.officeName}</small></h1>
+                        <Button type="reset"
+                            className="btn btn-round text-center"
+                            onClick={() => handleDelete(formik.values)}
+                            color="danger"
+                            style={{
+                                backgroundColor: 'rgb(235, 93, 96)',
+                                width: '0px',
+                                height: '45px',
+                                display: 'flex',
+                                alignContent: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                            <i className="fa fa-trash" style={{ marginLeft: '4px' }}></i>
+                        </Button>
+                    </CardHeader>
                     <CardBody>
                         <Row>
                             <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -361,7 +387,7 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                     </CardBody>
                 </Card>
             </Form>
-        </Container>
+        </Container >
     );
 }
 
