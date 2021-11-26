@@ -1,44 +1,27 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
+import { readFromLocalStorage } from '../../infra/api/localStorage';
+import { EmptyComponent } from '../Common/Empty/EmptyComponent';
+import { Notification } from "../Common/Notification/Notification";
 import { NoticeComponent } from './NoticeComponent';
+
 // import { EmptyComponent } from '../Empty/EmptyComponent';
 
-export const NoticeListComponent = () => {
-  // const { notice } = props;
-
-  const notice1 = {
-    name: "Noticia 1",
-    subject: "Cerrado por mantenimiento",
-    date: "10/10/2021",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    active: true,
-  };
-
-  const notice2 = {
-    name: "Noticia 2",
-    subject: "Desinfección y refacciónes",
-    date: "05/10/2021",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    active: false,
-  };
-
-  const notice3 = {
-    name: "Noticia 3",
-    subject: "Simulacro Incendios",
-    date: "02/10/2021",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    active: true,
-  };
-
-  const notice4 = {
-    name: "Noticia 4",
-    subject: "Cerrado por feriado",
-    date: "01/10/2021",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    active: false,
-  };
-
+export const NoticeListComponent = props => {
+  const newsOperation = useSelector(state => state.news.news);
+  const { news, sendNews, deleteNews, notification, hideNotification } = props;
+  const userType = readFromLocalStorage("USER_TYPE");
+  const displayEditButton = userType === "RENTER" ? false : true;
+  const displaySendButton = userType === "RENTER" ? false : true;
+  const displayDeleteButton = userType === "OFFICE_HOLDER" ? true : false;
+  
+  React.useEffect(() => {
+    setTimeout(() => {
+      hideNotification()
+    }, 1000)
+  }, [notification.show])
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -49,6 +32,7 @@ export const NoticeListComponent = () => {
           <hr />
         </Col>
       </Row>
+
       <Row>
         <Col
           xs="6"
@@ -64,21 +48,34 @@ export const NoticeListComponent = () => {
           </Button>
         </Col>
       </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        {/* {notice ? props.notice.data.map((notice) => {
-          return <Col xs="10" md="4" lg="4" xg="4">
-            <NoticeComponent notice={notice} />
-          </Col>
-        }) : <EmptyComponent />
-
-        } */}
-
-        <NoticeComponent notice={notice1} />
-        <NoticeComponent notice={notice2} />
-        <NoticeComponent notice={notice3} />
-        <NoticeComponent notice={notice4} />
-
+      <Row>
+        <Col xs="12" md="12" lg="12" xg="12">
+          <Notification
+            show={notification.show && notification.isSuccess && newsOperation != null}
+            message="La operacion ha sido realizada correctamente"
+            hideNotification={hideNotification}
+          />
+        </Col>
+      </Row>
+      <Row style={{ display: 'flex', justifyContent: 'start', marginTop: 16 }}>
+        {
+           news && news.length > 0 ? news.map((n) => {
+            if (n.status === "DRAFT") {
+              return <Col xs="10" md="6" lg="6" xg="4">
+                <NoticeComponent
+                  key={n.id}
+                  id={n.id}
+                  news={n}
+                  displayEditButton={displayEditButton}
+                  displaySendButton={displaySendButton}
+                  displayDeleteButton={displayDeleteButton}
+                  sendNews={sendNews}
+                  deleteNews={deleteNews}
+                />
+              </Col>
+            }
+          }) : <EmptyComponent />
+        }
       </Row>
     </div >
   );

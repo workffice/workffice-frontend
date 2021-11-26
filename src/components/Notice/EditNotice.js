@@ -1,6 +1,6 @@
-import { useFormik } from 'formik';
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useFormik } from 'formik';
+import { useHistory, useParams } from 'react-router';
 import {
     Row,
     Col,
@@ -17,9 +17,10 @@ import {
 import { Notification } from '../Common/Notification/Notification';
 import './styles/NoticeStyle.css';
 
-export const NewNotice = props => {
+export const EditNotice = props => {
     const history = useHistory();
-    const { notification, hideNotification } = props;
+    const { notification, hideNotification, update, loadNews } = props;
+    const newsId = useParams().id;
     const validate = values => {
         const errors = {};
         if (!values.title) {
@@ -33,19 +34,20 @@ export const NewNotice = props => {
         }
         return errors;
     };
+    let news = loadNews(newsId);
+
 
     const formik = useFormik({
         initialValues: {
-            subject: "",
-            title: "",
-            body: "",
+            subject: news ? news.subject : "",
+            title: news ? news.title : "",
+            body: news ? news.body : ""
         },
         validate,
         onSubmit: async (values) => {
-            props.onCreate(props.officeBranch.id, values)
+            await update(newsId, values)
         },
     });
-
     React.useEffect(() => {
         if (notification.show) {
             if (notification.isSuccess)
@@ -58,12 +60,15 @@ export const NewNotice = props => {
         }
     }, [notification.show]);
 
+    const goBack = () => {
+        history.push('/admin/notice');
+    }
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
                 <Col xs="12" md="6" lg="12" xg="12">
                     <h1>
-                        Nueva <small color="red">noticia</small>
+                        Editar <small color="red">noticia</small>
                     </h1>
                     <hr />
                 </Col>
@@ -124,7 +129,7 @@ export const NewNotice = props => {
                                         color="primary"
                                         style={{ minWidth: 107 }}
                                     >
-                                        Crear
+                                        Actualizar
                                     </Button>
                                 </div>
                                 <div className="col-auto">
@@ -132,6 +137,7 @@ export const NewNotice = props => {
                                         type="reset"
                                         className="btn-round btn-primary mb-3"
                                         style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
+                                        onClick={() => goBack()}
                                     >
                                         Cancelar
                                     </Button>
