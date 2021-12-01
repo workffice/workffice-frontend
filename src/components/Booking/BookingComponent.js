@@ -33,6 +33,8 @@ export const BookingComponent = (props) => {
         }
     }
 
+    console.log('status: ', status);
+
     return (
         <div className="content">
             <Container>
@@ -63,10 +65,10 @@ export const BookingComponent = (props) => {
                                 status === "SCHEDULED" && (
                                     <Col>
                                         <Link to='/admin/new-review'>
-                                            <UncontrolledTooltip placement="right">
-                                                Cargar reseña
+                                            <UncontrolledTooltip placement="right" target={`review-${officeBranchId}`}>
+                                                Crear reseña
                                             </UncontrolledTooltip>
-                                            <Button id='/admin/new-review' margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                            <Button id={`review-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
                                                 <i className="nc-icon nc-paper" aria-hidden="true"></i>
                                             </Button>
                                         </Link>
