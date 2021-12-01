@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Card, CardBody, CardTitle, CardFooter, CardText } from 'reactstrap';
 import './styles/reviewsStyles.css';
 
