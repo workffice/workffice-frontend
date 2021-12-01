@@ -1,6 +1,7 @@
 import { NotAccess } from '../components/Common/ErrorPages/NotAccess';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { NewReviews } from '../components/reviews/NewReviews';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
@@ -123,6 +124,12 @@ export const renterRoutes = [
         component: OfficeDetailComponent,
         layout: '/admin',
         visibility: true
+      },
+      {
+        path: '/new-review',
+        component: NewReviews,
+        layout: '/admin',
+        visibility: false,
       },
     ]
   },
