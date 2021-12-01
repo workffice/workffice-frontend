@@ -1,10 +1,11 @@
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
-import { NewNotice } from '../components/Notice/NewNotice';
-import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
 import { NewReviews } from '../components/reviews/NewReviews';
 import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
+import { newsContainer } from '../containers/backoffice/news/newsContainer';
+import { NewsEditContainer } from '../containers/backoffice/news/NewsEditContainer';
+import { NewsListContainer } from '../containers/backoffice/news/NewsListContainer';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
@@ -276,7 +277,7 @@ export const adminRoutes = [
         path: '/notice',
         name: 'Gestionar noticias',
         mini: 'GN',
-        component: NoticeListComponent,
+        component: NewsListContainer,
         layout: '/admin',
         visibility: true
       },
@@ -284,8 +285,16 @@ export const adminRoutes = [
         path: '/new-notice',
         name: 'Nueva noticia',
         mini: 'NN',
-        component: NewNotice,
+        component: newsContainer,
         layout: '/admin',
+      },
+      {
+        path: '/notice/edit/:id',
+        name: 'Editarnoticia',
+        mini: 'NN',
+        component: NewsEditContainer,
+        layout: '/admin',
+        visibility: false
       },
     ]
   },
