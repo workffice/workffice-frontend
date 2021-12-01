@@ -9,6 +9,7 @@ import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaborator/collaboratorsReducer';
 import { loadingCollaboratorReducer } from './reducers/backoffice/collaborator/loading';
+import { newsReducer } from './reducers/backoffice/news/newsReducer';
 import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
 import { officeInactivitiesReducer } from './reducers/backoffice/office/officeInactivitiesReducer';
 import { officeReducer } from './reducers/backoffice/office/officeReducer';
@@ -82,4 +83,6 @@ export const reducers = routes =>
     bookingsQuantityPerOffice: bookingsQuantityPerOfficeReducer,
     revenuePerOffice: revenuePerOfficeReducer,
     revenuePerMonth: revenuePerMonthReducer,
+    //NEWS
+    news: newsReducer
   });
