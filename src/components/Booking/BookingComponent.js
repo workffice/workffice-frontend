@@ -48,15 +48,31 @@ export const BookingComponent = (props) => {
                                 }
                             </h5>
                         </Col>
-                        <Col xs="2">
-                            <Link to={`/admin/office-branch?id=${officeBranchId}`}>
-                                <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
-                                    Ver sucursal
-                                </UncontrolledTooltip>
-                                <Button id={`officeBranch-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i className="fa fa-building-o" aria-hidden="true"></i>
-                                </Button>
-                            </Link>
+                        <Col xs="2" style={{ display: 'flex' }}>
+                            <Col>
+                                <Link to={`/admin/office-branch?id=${officeBranchId}`}>
+                                    <UncontrolledTooltip placement="right" target={`officeBranch-${officeBranchId}`}>
+                                        Ver sucursal
+                                    </UncontrolledTooltip>
+                                    <Button id={`officeBranch-${officeBranchId}`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                        <i className="fa fa-building-o" aria-hidden="true"></i>
+                                    </Button>
+                                </Link>
+                            </Col>
+                            {
+                                status === "SCHEDULED" && (
+                                    <Col>
+                                        <Link to='/admin/new-review'>
+                                            <UncontrolledTooltip placement="right">
+                                                Cargar reseña
+                                            </UncontrolledTooltip>
+                                            <Button id='/admin/new-review' margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
+                                                <i className="nc-icon nc-paper" aria-hidden="true"></i>
+                                            </Button>
+                                        </Link>
+                                    </Col>
+                                )
+                            }
                         </Col>
                     </Row>
                     <CardBody style={{ paddingTop: 0 }}>

@@ -1,6 +1,7 @@
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
 import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
+import { NewReviews } from '../components/reviews/NewReviews';
 import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 import { newsContainer } from '../containers/backoffice/news/newsContainer';
 import { NewsEditContainer } from '../containers/backoffice/news/NewsEditContainer';
@@ -224,6 +225,12 @@ export const adminRoutes = [
         name: 'Reservar oficina',
         mini: 'RO',
         component: OfficeBookingContainer,
+        layout: '/admin',
+        visibility: false,
+      },
+      {
+        path: '/new-review',
+        component: NewReviews,
         layout: '/admin',
         visibility: false,
       },
