@@ -33,8 +33,6 @@ export const BookingComponent = (props) => {
         }
     }
 
-    console.log('status: ', status);
-
     return (
         <div className="content">
             <Container>

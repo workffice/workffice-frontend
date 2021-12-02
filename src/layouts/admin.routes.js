@@ -131,11 +131,9 @@ export const adminRoutes = [
       },
       {
         path: '/office-detail',
-        // name: 'Detalle',
-        // mini: 'SE',
         component: OfficeDetailComponent,
         layout: '/admin',
-        visibility: true
+        visibility: false,
       },
     ]
   },
