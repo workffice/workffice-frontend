@@ -108,6 +108,19 @@ export const OfficeComponent = ({
                 </Link>
                 : <div></div>
             }
+            {
+              displayBookingButton ?
+                <Link to={`/admin/office-detail?id=${office.id}`}>
+                  <Button
+                    className="btn btn-primary"
+                    color="primary"
+                    type="submit"
+                  >
+                    Ver reseñas
+                  </Button>
+                </Link>
+                : <div></div>
+            }
           </CardHeader>
           <hr />
           <Col>
