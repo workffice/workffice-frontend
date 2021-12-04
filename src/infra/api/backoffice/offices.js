@@ -130,3 +130,17 @@ export const getOfficeInactivities = async officeId => {
         return Promise.reject(error.errors[0])
     }
 }
+export const deleteOfficeInfra = async officeId => {
+    try {
+        const inactivities = await sdkAuthRequest(
+            `${API_URL}/offices/${officeId}/`,
+            {
+                method: 'DELETE',
+                headers: headerGet
+            }
+        )
+        return Promise.resolve(inactivities.data)
+    } catch (error) {
+        return Promise.reject(error.errors[0])
+    }
+}

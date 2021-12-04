@@ -15,6 +15,7 @@ export const EditOffice = ({
     update,
     notification,
     hideNotification,
+    deleteOffice
 }) => {
     const query = new URLSearchParams(useLocation().search)
     useEffect(() => {
@@ -56,6 +57,7 @@ export const EditOffice = ({
                     loading ? <Row><Col md="12"><Loading /></Col></Row> :
                         <OfficeForm
                             office={office}
+                            deleteOffice={deleteOffice}
                             onSubmit={officeFormData => update(office.id, officeFormData)}
                             inactivities={inactivities}
                             confirmButtonName="Guardar"

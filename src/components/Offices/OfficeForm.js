@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import {
     Button, Card,
@@ -12,8 +12,11 @@ import {
 } from 'reactstrap';
 import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import { useHistory } from 'react-router';
 
-export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }) => {
+export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, deleteOffice }) => {
+    const history = useHistory()
     const typesOptions = [
         {
             value: "",
@@ -64,12 +67,46 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
         return errors;
     };
 
-    const handleDelete = async values => {
-        alert(`va a dar de baja una sucursal =>`)
-        console.log(values)
-        // TODO: Revisar que se puede verificar que no tiene reservas
-        // await deleteOfficeBranch(officeBranch.id);
+    const [alert, setAlert] = useState(null)
 
+    const hideAlert = () => {
+        setAlert(null)
+    }
+    const successAlert = () => {
+        setAlert(
+
+            <SweetAlert
+                danger
+                showCancel
+                confirmBtnBsStyle="primary"
+                confirmBtnCssClass="btn-round"
+                cancelBtnBsStyle="danger"
+                confirmBtnText="Eliminar"
+                cancelBtnText="Cancelar"
+                cancelBtnCssClass="btn-round"
+                focusCancelBtn
+                style={{ display: "block", marginTop: "-100px" }}
+                btnSize="xs"
+                title="¿Estás seguro?"
+                onConfirm={() => {
+                    handleDelete();
+                    hideAlert();
+                }}
+                onCancel={() => hideAlert()}
+            >
+                La oficina cumplirá con las reservas que tiene hechas o deberá contactarse con los inquilinos para devolverles el dinero.
+                Una vez efectuado estos pasos la oficina será dada de baja
+            </SweetAlert>
+        )
+
+    }
+
+    const handleDelete = async () => {
+        await deleteOffice(office.id);
+
+        setTimeout(()=>{
+            history.push('/admin/offices');
+        },2800)
     }
 
     const formik = useFormik({
@@ -124,21 +161,6 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                 <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <CardHeader style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <h1><small>{formik.values.officeName}</small></h1>
-                        <Button type="reset"
-                            className="btn btn-round text-center"
-                            onClick={() => handleDelete(formik.values)}
-                            color="danger"
-                            style={{
-                                backgroundColor: 'rgb(235, 93, 96)',
-                                width: '0px',
-                                height: '45px',
-                                display: 'flex',
-                                alignContent: 'center',
-                                flexDirection: 'row',
-                                justifyContent: 'center'
-                            }}>
-                            <i className="fa fa-trash" style={{ marginLeft: '4px' }}></i>
-                        </Button>
                     </CardHeader>
                     <CardBody>
                         <Row>
@@ -375,13 +397,13 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName }
                                     {confirmButtonName}
                                 </Button>
                                 <Button
-                                    type="reset"
-                                    className="btn btn-round btn-primary"
+                                    className="btn-round"
                                     color="danger"
-                                    style={{ backgroundColor: '#EB5D60', minWidth: 107 }}
+                                    fill
+                                    onClick={() => successAlert()}
                                 >
-                                    Cancelar
-                                </Button>
+                                    Dar de baja
+                                </Button>{alert}
                             </Col>
                         </Row>
                     </CardBody>

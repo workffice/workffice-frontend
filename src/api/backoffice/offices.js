@@ -1,4 +1,4 @@
-import { createOffice, getOffice, getOfficeInactivities, getOffices, searchOfficeBranches, updateOffice } from "../../infra/api/backoffice/offices";
+import { createOffice, deleteOfficeInfra, getOffice, getOfficeInactivities, getOffices, searchOfficeBranches, updateOffice } from "../../infra/api/backoffice/offices";
 
 export const getOfficesAPI = officeHolderId => {
     return Promise.resolve(getOffices(officeHolderId));
@@ -22,4 +22,8 @@ export const searchOfficeBranchesAPI = (params) => {
 
 export const getOfficeInactivitiesApi = officeId => {
     return Promise.resolve(getOfficeInactivities(officeId))
+}
+
+export const deleteOfficeAPI = officeId => {
+    return Promise.resolve(deleteOfficeInfra(officeId))
 }

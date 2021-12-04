@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { EditOffice } from '../../components/Offices/EditOffice'
-import { getOffice, updateOffice } from '../../stores/actions/backoffice/office/officeActions'
+import { getOffice, updateOffice, deleteOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { getOfficeInactivities } from '../../stores/actions/backoffice/office/officeInactivitiesAction'
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions'
 
@@ -20,6 +20,9 @@ export const OfficeEditContainer = () => {
     const update = useCallback((officeId, office) => {
         dispatch(updateOffice(officeId, office))
     }, [dispatch])
+    const deleteOff = useCallback((officeId) => {
+        dispatch(deleteOffice(officeId, office))
+    }, [dispatch])
     const inactivities = useSelector(state => state.officeInactivities)
     const loadInactivities = useCallback(officeId => {
         dispatch(getOfficeInactivities(officeId))
@@ -33,5 +36,6 @@ export const OfficeEditContainer = () => {
         update={update}
         notification={notification}
         hideNotification={hideNotification}
+        deleteOffice={deleteOff}
     />
 }
