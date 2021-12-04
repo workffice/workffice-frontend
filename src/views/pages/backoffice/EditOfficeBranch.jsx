@@ -8,6 +8,7 @@ export const EditOfficeBranch = ({
     notification,
     officeBranch,
     loadOfficeBranch,
+    onDelete
 }) => {
     React.useEffect(() => {
         if (officeBranch === null)
@@ -27,6 +28,7 @@ export const EditOfficeBranch = ({
                 <Col xs="12" md="6" lg="12" xg="12">
                     <OfficeBranchEdit
                         edit={edit}
+                        onDelete={onDelete}
                         officeBranch={officeBranch}
                         notification={notification}
                         hideNotification={hideNotification}
