@@ -9,7 +9,7 @@ import {
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
 import SweetAlert from 'react-bootstrap-sweetalert';
-// import ImageUpload from '../Common/CustomUpload/ImageUpload';
+import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
 
 
@@ -227,11 +227,11 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                     <Row>
                                         <Col lg="6">
                                             <Label className="label-form"> Foto </Label>
-                                            {/* <ImageUpload
+                                            <ImageUpload
                                                 className="text-center"
                                                 onChange={imageData => formik.setFieldValue("image", imageData)}
                                                 avatar={officeBranch ? officeBranch.images[0].url : ""}
-                                            /> */}
+                                            />
                                         </Col>
                                     </Row>
                                 </FormGroup>
