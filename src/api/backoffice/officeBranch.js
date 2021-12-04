@@ -1,5 +1,6 @@
 import {
     createOfficeBranchInfra,
+    deleteOfficeBranchInfra,
     editOfficeBranchInfra,
     getOfficeBranchesFromCollaborator,
     getOfficeBranchesInfra,
@@ -25,5 +26,7 @@ export const officeBranchListFromCollaboratorAPI = collaboratorEmail => {
 
 export const getOfficeBranchIdAPI = (officeBranchId) => {
     return Promise.resolve(getOfficeBranchInfra(officeBranchId));
-
+}
+export const deleteOfficeBranchAPI = (officeBranchId) => {
+    return Promise.resolve(deleteOfficeBranchInfra(officeBranchId));
 }

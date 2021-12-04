@@ -1,13 +1,14 @@
 import { setIsLoading } from "../../";
 import { setErrorAction, setSuccessAction } from "../../notifications/writeNotificationActions";
-import { createOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI } from "../../../../api/backoffice/officeBranch";
+import { createOfficeBranchAPI, deleteOfficeBranchAPI, editOfficeBranchAPI, getOfficeBranchIdAPI } from "../../../../api/backoffice/officeBranch";
 import { readFromLocalStorage, writeToLocalStorage } from "../../../../infra/api/localStorage";
 
 
 export const CREATE_OFFICE_BRANCH = 'FETCH_CREATE_OFFICEBRANCH';
 export const FETCH_EDIT_OFFICEBRANCH = 'FETCH_EDIT_OFFICEBRANCH';
 export const FETCH_OFFICEBRANCH_ID = 'FETCH_OFFICEBRANCH_ID';
-export const CLEAN_OFFICE_BRANCH = 'CLEAN_OFFICE_BRANCH'
+export const CLEAN_OFFICE_BRANCH = 'CLEAN_OFFICE_BRANCH';
+export const DELETE_OFFICE_BRANCH = 'DELETE_OFFICE_BRANCH';
 
 
 export const cleanOfficeBranchAction = () => ({
@@ -67,6 +68,24 @@ export const getOfficeBranch = id => async dispatch => {
         const officeBranchResponse = await getOfficeBranchIdAPI(id)
         await dispatch(fetchOfficebranchId(officeBranchResponse))
         writeToLocalStorage(officeBranchResponse, "officeBranch")
+    } catch (error) {
+        dispatch(setErrorAction(error));
+    } finally {
+        dispatch(setIsLoading(false));
+    }
+}
+export const deleteOB = officeBranchId => {
+    return {
+        type: DELETE_OFFICE_BRANCH,
+        payload: officeBranchId
+    }
+};
+
+export const deleteOfficeBranch = id => async dispatch => {
+    dispatch(setIsLoading(true));
+    try {
+        dispatch(deleteOB(await deleteOfficeBranchAPI(id)))
+        dispatch(setSuccessAction())
     } catch (error) {
         dispatch(setErrorAction(error));
     } finally {

@@ -78,15 +78,30 @@ export const editOfficeBranchInfra = async ({
 
 export const getOfficeBranchesInfra = async (userId) => {
     try {
-        const officesBranches = await sdkNoAuthRequest(
+        const officesBranch = await sdkNoAuthRequest(
             `${API_OFFICE_HOLDERS}/${userId}/office_branches/`,
             {
                 method: 'GET',
                 headers: headerGet
             }
         )
-        return Promise.resolve(officesBranches.data)
+        return Promise.resolve(officesBranch.data)
     } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+export const deleteOfficeBranchInfra = async (id) => {
+    try {
+        const officesBranches = await sdkAuthRequest(
+            `${API_OFFICE_BRANCHES}/${id}/`,
+            {
+                method: 'DELETE',
+                headers: headerGet
+            }
+        )
+        return Promise.resolve(officesBranches);
+    } catch (error) {
+        console.log("CHAU")
         return Promise.reject(error.errors[0]);
     }
 }

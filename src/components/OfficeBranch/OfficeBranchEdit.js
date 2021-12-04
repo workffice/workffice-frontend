@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -8,11 +8,12 @@ import {
 } from 'reactstrap';
 import { readFromLocalStorage } from '../../infra/api/localStorage';
 import { getErrorMessage } from '../../utils/officeBranchTranslations';
-import ImageUpload from '../Common/CustomUpload/ImageUpload';
+import SweetAlert from 'react-bootstrap-sweetalert';
+// import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import { Notification } from '../Common/Notification/Notification';
 
 
-export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit, deleteOfficeBranch }) => {
+export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch, edit, onDelete }) => {
     const { province, city, street, zipCode } = officeBranch ? officeBranch.location : {};
     const validate = values => {
         const errors = {};
@@ -40,13 +41,43 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
         return errors;
     };
 
-    const handleDelete =async values => {
+    const [alert, setAlert] = useState(null)
+
+    const hideAlert = () => {
+        setAlert(null)
+    }
+    const successAlert = () => {
+        setAlert(
+
+            <SweetAlert
+                danger
+                showCancel
+                confirmBtnBsStyle="primary"
+                confirmBtnCssClass="btn-round"
+                cancelBtnBsStyle="danger"
+                confirmBtnText="Eliminar"
+                cancelBtnText="Cancelar"
+                cancelBtnCssClass="btn-round"
+                focusCancelBtn
+                style={{ display: "block", marginTop: "-100px" }}
+                btnSize="xs"
+                title="¿Estás seguro?"
+                onConfirm={() => {
+                    handleDelete();
+                    hideAlert();
+                }}
+                onCancel={() => hideAlert()}
+            >
+                Recuerde que la sucursal ya no recibirá más reservas ni cambios y debe cumplir con las reservas previstas en los dos meses siguientes
+            </SweetAlert>
+        )
+
+    }
+
+    const handleDelete = async () => {
         const officeBranch = readFromLocalStorage('officeBranch')
-        alert(`va a dar de baja una sucursal =>`)
-        console.log(values)
-        console.log(officeBranch.id)
-        // TODO: Revisar que se puede verificar que no tiene reservas
-        await deleteOfficeBranch(officeBranch.id);
+
+       await onDelete(officeBranch.id);
 
     }
 
@@ -196,11 +227,11 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                     <Row>
                                         <Col lg="6">
                                             <Label className="label-form"> Foto </Label>
-                                            <ImageUpload
+                                            {/* <ImageUpload
                                                 className="text-center"
                                                 onChange={imageData => formik.setFieldValue("image", imageData)}
                                                 avatar={officeBranch ? officeBranch.images[0].url : ""}
-                                            />
+                                            /> */}
                                         </Col>
                                     </Row>
                                 </FormGroup>
@@ -210,18 +241,19 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                             <Col>
                                 <Button
                                     className="btn-round"
-                                    color="danger"
-                                    onClick={() => handleDelete(formik.values)}
-                                    disabled={formik.isSubmitting}>
-                                    Dar de baja
-                                </Button>
-                                <Button
-                                    className="btn-round"
                                     color="primary"
                                     type="submit"
                                     disabled={formik.isSubmitting}>
                                     Guardar
                                 </Button>
+                                <Button
+                                    className="btn-round"
+                                    color="danger"
+                                    fill
+                                    onClick={() => successAlert()}
+                                >
+                                    Dar de baja
+                                </Button>{alert}
                             </Col>
                         </Row>
                     </CardBody >
