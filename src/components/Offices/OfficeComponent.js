@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Button, Card, CardBody, CardHeader, Col, Label, Row, UncontrolledTooltip } from 'reactstrap';
+import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Col, Label, Row, UncontrolledTooltip } from 'reactstrap';
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import './styles/OfficeComponent.css';
 
@@ -169,6 +169,9 @@ export const OfficeComponent = ({
               </Col> : <></>
           }
         </CardBody>
+        <CardFooter>
+          <Badge color={office.deletedAt === null ? 'success' : 'danger'}>{office.deletedAt === null ? 'Disponible' : 'No disponible'}</Badge> {office.deletedAt === null ? '' : `Desde el ${new Date().getDay(office.deletedAt)}/${new Date().getMonth(office.deletedAt)}/${new Date().getFullYear(office.deletedAt)}`}
+        </CardFooter>
       </Card>
     </>
   );
