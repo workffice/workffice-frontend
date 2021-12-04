@@ -6,9 +6,6 @@ import RatingIcon from '../RatingIcon';
 export const NewReviews = ({ createReview }) => {
   const validate = values => {
     const errors = {};
-    if (!values.stars) {
-      errors.stars = "Requerido"
-    }
     if (!values.comment) {
       errors.comment = "Requerido"
     }
@@ -36,15 +33,14 @@ export const NewReviews = ({ createReview }) => {
 
   const formik = useFormik({
     initialValues: {
-      stars: 0,
       comment: "",
       renterEmail: "",
     },
     validate,
-    onSubmit: async ({ officeId, stars, comment, renterEmail }) => {
+    onSubmit: async ({ officeId, rating, comment, renterEmail }) => {
       await createReview({
         officeId,
-        stars,
+        rating,
         comment,
         renterEmail,
       });
@@ -88,7 +84,7 @@ export const NewReviews = ({ createReview }) => {
                         >
                           Ingrese una calificación
                         </Label>
-                        <div style={{ display: 'flex', width: '25%', marginTop: 10 }}>
+                        <div style={{ display: 'flex', width: 300, marginTop: 15 }}>
                           {[1, 2, 3, 4, 5].map((index) => {
                             return (
                               <RatingIcon
