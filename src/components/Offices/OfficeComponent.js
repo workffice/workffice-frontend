@@ -96,7 +96,7 @@ export const OfficeComponent = ({
                 </Row> : <></>
             }
             {
-              displayBookingButton ?
+              displayBookingButton && office.deletedAt===null ?
                 <Link to={`/admin/create-booking?officeId=${id}&officeBranchId=${officeBranch ? officeBranch.id : ""}`}>
                   <Button
                     className="btn btn-primary"
