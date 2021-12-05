@@ -56,6 +56,26 @@ export const createOffice = async (officeBranchId, office) => {
                     });
             })
         }
+        if (office.services.length > 0) {
+            const officeId = officeCreated.data.uri.match("/api/offices/(.*)/")[1]
+            await sdkAuthRequest(`${API_URL}/offices/${officeId}/services/`,
+                {
+                    method: 'PUT',
+                    headers: headersPost,
+                    body: JSON.stringify(office.services)
+                });
+
+        }
+        if (office.equipments.length > 0) {
+            const officeId = officeCreated.data.uri.match("/api/offices/(.*)/")[1]
+            await sdkAuthRequest(`${API_URL}/offices/${officeId}/equipments/`,
+                {
+                    method: 'PUT',
+                    headers: headersPost,
+                    body: JSON.stringify(office.equipments)
+                });
+        }
+        
         return Promise.resolve(officeCreated);
     } catch (error) {
         return Promise.reject(error.errors[0]);
@@ -82,6 +102,51 @@ export const updateOffice = async (officeId, office) => {
                     body: JSON.stringify(office.inactivityDays)
                 });
         }
+         if (office.services.length >= 0) {
+            await sdkAuthRequest(`${API_URL}/offices/${officeId}/services/`,
+                {
+                    method: 'PUT',
+                    headers: headersPost,
+                    body: JSON.stringify(office.services)
+                });
+
+        }
+        if (office.equipments.length >= 0) {
+            await sdkAuthRequest(`${API_URL}/offices/${officeId}/equipments/`,
+                {
+                    method: 'PUT',
+                    headers: headersPost,
+                    body: JSON.stringify(office.equipments)
+                });
+        }
+        return Promise.resolve(officeUpdated);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+export const addServicesInfra = async (officeId, services) => {
+    try {
+        const officeUpdated = await sdkAuthRequest(
+            `${API_URL}/offices/${officeId}/services/`,
+            {
+                method: 'PUT',
+                headers: headersPost,
+                body: JSON.stringify(services)
+            });
+        return Promise.resolve(officeUpdated);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+}
+export const addEquipmentsInfra = async (officeId, equipments) => {
+    try {
+        const officeUpdated = await sdkAuthRequest(
+            `${API_URL}/offices/${officeId}/equipments/`,
+            {
+                method: 'PUT',
+                headers: headersPost,
+                body: JSON.stringify(equipments)
+            });
         return Promise.resolve(officeUpdated);
     } catch (error) {
         return Promise.reject(error.errors[0]);

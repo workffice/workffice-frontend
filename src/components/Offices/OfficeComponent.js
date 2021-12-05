@@ -96,7 +96,7 @@ export const OfficeComponent = ({
                 </Row> : <></>
             }
             {
-              displayBookingButton && office.deletedAt===null ?
+              displayBookingButton && office.deletedAt === null ?
                 <Link to={`/admin/create-booking?officeId=${id}&officeBranchId=${officeBranch ? officeBranch.id : ""}`}>
                   <Button
                     className="btn btn-primary"
@@ -169,10 +169,41 @@ export const OfficeComponent = ({
               </Col> : <></>
           }
         </CardBody>
-        <CardFooter>
-          <Badge color={office.deletedAt === null ? 'success' : 'danger'}>{office.deletedAt === null ? 'Disponible' : 'No disponible'}</Badge> {office.deletedAt === null ? '' : `Desde el ${new Date().getDay(office.deletedAt)}/${new Date().getMonth(office.deletedAt)}/${new Date().getFullYear(office.deletedAt)}`}
-        </CardFooter>
-      </Card>
+        <CardFooter style={{ marginTop: '-30px' }}>
+          <Row>
+            <Col lg={2} xl={2}><Label>Estado:  {'     '}</Label></Col>
+            <Col lg={4} xl={4}>
+              <Badge color={office.deletedAt === null ? 'success' : 'danger'}>{office.deletedAt === null ? 'Disponible' : 'No disponible'}</Badge>
+            </Col>
+            <Col lg={6} xl={6}>
+            {office.deletedAt === null ? '' : `Desde el ${ new Date(Date.parse(office.deletedAt)).getDay() }/${new Date(Date.parse(office.deletedAt)).getUTCMonth()+1}/${new Date(Date.parse(office.deletedAt)).getFullYear()}`}
+            </Col>
+
+
+          </Row>
+          <Row>
+            <Col>
+              <Label>Servicios</Label>
+              <br />
+              {office.services.length > 0
+                ? office.services.map(o => <Badge color={'warning'}>{o.name}</Badge>)
+                : <p style={{fontSize:'12px', color:'gray', fontStyle:'oblique'}}>No tiene</p>
+              }
+          </Col>
+
+          <Col>
+            <Label>Equipamiento</Label>
+            <br />
+            {office.equipments.length > 0
+              ? office.equipments.map(o => <Badge color={'warning'}>{o.name}</Badge>)
+              : <p style={{ fontSize: '12px', color: 'gray', fontStyle: 'oblique' }}>No tiene</p>
+            }
+          </Col>
+
+        </Row>
+
+      </CardFooter>
+    </Card>
     </>
   );
 }

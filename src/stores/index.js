@@ -9,6 +9,7 @@ import { registerReducer } from './reducers/auth/registerReducer';
 import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaborator/collaboratorsReducer';
 import { loadingCollaboratorReducer } from './reducers/backoffice/collaborator/loading';
+import { equipmentsReducer } from './reducers/backoffice/equipments/equipmentsReducer';
 import { newsReducer } from './reducers/backoffice/news/newsReducer';
 import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
 import { officeInactivitiesReducer } from './reducers/backoffice/office/officeInactivitiesReducer';
@@ -19,6 +20,7 @@ import { officeBranchAdminReducer } from './reducers/backoffice/officeBranch/off
 import { officeBranchDetailReducer } from './reducers/backoffice/officeBranch/officeBranchDetailReducer';
 import { officeBranchesReducer } from './reducers/backoffice/officeBranch/officeBranchesAdminReducer';
 import { collaboratorRolesReducer, rolesReducer } from './reducers/backoffice/rolesReducer';
+import { servicesReducer } from './reducers/backoffice/services/servicesReducer';
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { bookingReducer, mercadoPagoPreferenceReducer, officeBookingsReducer, userBookingsReducer } from './reducers/booking/bookingReducer';
 import { loadingBookingReducer } from './reducers/booking/loadingReducer';
@@ -67,6 +69,9 @@ export const reducers = routes =>
     offices: officesReducer,
     officeInactivities: officeInactivitiesReducer,
     loadingOffice: loadingOfficeReducer,
+    // Services & Equipments
+    services: servicesReducer,
+    equipments: equipmentsReducer,
     // Booking
     booking: bookingReducer,
     mercadoPagoPreference: mercadoPagoPreferenceReducer,
