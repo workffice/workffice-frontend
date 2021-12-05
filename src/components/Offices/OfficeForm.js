@@ -14,8 +14,9 @@ import ImageUpload from '../Common/CustomUpload/ImageUpload';
 import './styles/OfficeStyle.css';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
-export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, deleteOffice }) => {
+export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, deleteOffice, equip, serv }) => {
     const history = useHistory()
     const typesOptions = [
         {
@@ -31,6 +32,21 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
         else
             return "Compartida"
     }
+
+    const servOpt = serv.map(s => {
+        let newServ = {
+            value: s.id,
+            label: s.name
+        }
+        return newServ;
+    })
+    const equipOpt = equip.map(e => {
+        let newEquip = {
+            value: e.id,
+            label: e.name
+        }
+        return newEquip;
+    })
 
     const getDay = day => {
         switch (day) {
@@ -56,12 +72,12 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
             errors.capacityPerTable = 'Requerido';
         if (!values.price)
             errors.price = 'Requerido';
-        // if (!values.multipleSelectServ) {
-        //     errors.multipleSelectServ = 'Requerido.';
-        // }
-        // if (!values.multipleSelectEqu) {
-        //     errors.multipleSelectEqu = 'Requerido.';
-        // }
+        if (!values.services) {
+            errors.services = 'Requerido.';
+        }
+        if (!values.equipments) {
+            errors.equipments = 'Requerido.';
+        }
         if (!values.description)
             errors.description = 'Requerido';
         return errors;
@@ -104,9 +120,9 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
     const handleDelete = async () => {
         await deleteOffice(office.id);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             history.push('/admin/offices');
-        },2800)
+        }, 2800)
     }
 
     const formik = useFormik({
@@ -121,8 +137,14 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
             tablesQuantity: office ? office.table.quantity : 0,
             capacityPerTable: office ? office.table.capacity : 0,
             price: office ? office.price : 0,
-            multipleSelectServ: null,
-            multipleSelectEqu: null,
+            services: office ? office.services.map(o => (
+                    servOpt.find(s=> s.value === o.id)
+                ))
+                : [],
+            equipments: office ? office.equipments.map(o => (
+                equipOpt.find(e=> e.value === o.id)
+            ))
+            : [],
             description: office ? office.description : "",
             photo: "",
         },
@@ -136,7 +158,11 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
             price,
             description,
             photo,
+            services,
+            equipments
         }) => {
+            const servicesIds = services.map(s => s.value);
+            const equipmentsIds = equipments.map(s => s.value);
             const officeFormData = {
                 name: officeName,
                 description: description,
@@ -150,8 +176,11 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
                     type: "RECURRING_DAY",
                     dayOfWeek: day.value
                 })),
+                services: servicesIds,
+                equipments: equipmentsIds,
             }
-            onSubmit(officeFormData)
+            onSubmit(officeFormData);
+
         },
     });
 
@@ -272,96 +301,65 @@ export const OfficeForm = ({ office, onSubmit, inactivities, confirmButtonName, 
                                     </InputGroup>
                                 </FormGroup>
 
-                                {/* <FormGroup className={formik.errors.multipleSelectServ ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
-                                        <Row className='row-label-services'>
-                                            <Label htmlFor="multipleSelectServ" className="label-form">Servicios</Label>
+                                <FormGroup className={formik.errors.services ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
+                                    <Row className='row-label-services'>
+                                        <Label htmlFor="services" className="label-form">Servicios</Label>
 
-                                            <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
-                                                <div style={{ width: '80%' }}>
-                                                    <Select
-                                                        className="react-select"
-                                                        classNamePrefix="react-select"
-                                                        placeholder='Seleccione los servicios...'
-                                                        name="multipleSelectServ"
-                                                        closeMenuOnSelect={false}
-                                                        isMulti
-                                                        value={multipleSelectServ}
-                                                        onChange={value => setMultipleSelectServ(value)}
-                                                        onBlur={formik.handleBlur}
-                                                        options={[
-                                                            {
-                                                                value: "",
-                                                                label: " Servicios",
-                                                                isDisabled: true
-                                                            },
-                                                            { value: "2", label: "Cafetería" },
-                                                            { value: "3", label: "Wifi" },
-                                                            { value: "4", label: "Estacionamiento" },
-                                                            { value: "5", label: "Cafetería " },
-                                                            { value: "6", label: "Wifi" },
-                                                            { value: "7", label: "Estacionamiento" },
-                                                            { value: "8", label: "Cafetería " },
-                                                            { value: "9", label: "Wifi" },
-                                                            { value: "10", label: "Estacionamiento" },
-                                                        ]}
-                                                    />
-                                                </div>
-                                                <div className='button-container'>
-                                                    <Link to="/admin/services-equipment">
-                                                        <Button className='btn btn-primary' id='servicesButton' type='button'>
-                                                            Crear
-                                                        </Button>
-                                                    </Link>
-                                                </div>
+                                        <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
+                                            <div style={{ width: '80%' }}>
+                                                <Select
+                                                    className="react-select"
+                                                    classNamePrefix="react-select"
+                                                    placeholder='Seleccione los servicios...'
+                                                    name="services"
+                                                    closeMenuOnSelect={false}
+                                                    isMulti
+                                                    value={formik.values.services}
+                                                    onChange={value => formik.setFieldValue('services', value)}
+                                                    onBlur={formik.handleBlur}
+                                                    options={servOpt}
+                                                />
                                             </div>
-                                        </Row>
-                                    </FormGroup>
-
-                                    <FormGroup className={formik.errors.multipleSelectEqu ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
-                                        <Row className='row-label-equipment'>
-                                            <Label htmlFor="multipleSelectEqu" className="label-form">Equipamiento</Label>
-
-                                            <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
-                                                <div style={{ width: '80%' }}>
-                                                    <Select
-                                                        className="react-select"
-                                                        classNamePrefix="react-select"
-                                                        placeholder='Seleccione el equipamiento...'
-                                                        name="multipleSelectEqu"
-                                                        closeMenuOnSelect={false}
-                                                        isMulti
-                                                        value={multipleSelectEqu}
-                                                        onChange={value => setMultipleSelectEqu(value)}
-                                                        onBlur={formik.handleBlur}
-                                                        options={[
-                                                            {
-                                                                value: "",
-                                                                label: "Equipamiento",
-                                                                isDisabled: true
-                                                            },
-                                                            { value: "2", label: "Monitores" },
-                                                            { value: "3", label: "Silla ergonómica" },
-                                                            { value: "4", label: "Parlante" },
-                                                            { value: "5", label: "Teclado" },
-                                                            { value: "6", label: "Proyector" },
-                                                            { value: "7", label: "Monitores " },
-                                                            { value: "8", label: "Silla ergonómica" },
-                                                            { value: "9", label: "Parlante" },
-                                                            { value: "10", label: "Teclado" },
-                                                            { value: "11", label: "Proyector" },
-                                                        ]}
-                                                    />
-                                                </div>
-                                                <div className='button-container'>
-                                                    <Link to="/admin/services-equipment">
-                                                        <Button className='btn btn-primary' id='equipmentButton'>
-                                                            Crear
-                                                        </Button>
-                                                    </Link>
-                                                </div>
+                                            <div className='button-container'>
+                                                <Link to="/admin/services-equipment">
+                                                    <Button className='btn btn-primary' id='servicesButton' type='button'>
+                                                        Crear
+                                                    </Button>
+                                                </Link>
                                             </div>
-                                        </Row>
-                                    </FormGroup> */}
+                                        </div>
+                                    </Row>
+                                </FormGroup>
+
+                                <FormGroup className={formik.errors.equipments ? 'has-danger' : ''} style={{ marginLeft: '4%' }}>
+                                    <Row className='row-label-equipment'>
+                                        <Label htmlFor="equipments" className="label-form">Equipamiento</Label>
+
+                                        <div className='row-form-select' style={{ width: '100%', display: 'flex' }}>
+                                            <div style={{ width: '80%' }}>
+                                                <Select
+                                                    className="react-select"
+                                                    classNamePrefix="react-select"
+                                                    placeholder='Seleccione el equipamiento...'
+                                                    name="equipments"
+                                                    closeMenuOnSelect={false}
+                                                    isMulti
+                                                    value={formik.values.equipments}
+                                                    onChange={value => formik.setFieldValue('equipments', value)}
+                                                    onBlur={formik.handleBlur}
+                                                    options={equipOpt}
+                                                />
+                                            </div>
+                                            <div className='button-container'>
+                                                <Link to="/admin/services-equipment">
+                                                    <Button className='btn btn-primary' id='equipmentButton'>
+                                                        Crear
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </Row>
+                                </FormGroup>
 
                                 <FormGroup className={formik.errors.description && formik.touched.description ? 'has-danger' : ''}>
                                     <Label htmlFor="description" className="label-form">Descripción</Label>

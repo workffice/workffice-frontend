@@ -6,7 +6,7 @@ import { Notification } from '../Common/Notification/Notification';
 import { OfficeForm } from './OfficeForm';
 import './styles/OfficeStyle.css';
 
-export const NewOffice = ({ hideNotification, notification, create, branch }) => {
+export const NewOffice = ({ hideNotification, notification, create,branch, equip, serv }) => {
     const history = useHistory();
 
     React.useEffect(() => {
@@ -49,6 +49,8 @@ export const NewOffice = ({ hideNotification, notification, create, branch }) =>
             <Row style={{ justifyContent: 'center' }}>
                 <OfficeForm
                     onSubmit={createOffice}
+                    equip={equip}
+                    serv={serv}
                     confirmButtonName="Crear"
                 />
             </Row>
