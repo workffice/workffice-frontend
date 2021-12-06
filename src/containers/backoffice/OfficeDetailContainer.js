@@ -25,7 +25,6 @@ export const OfficeDetailContainer = () => {
         dispatch(getOffice(officeId))
     }, [dispatch])
     const reviews = useSelector(state => state.reviews.reviewList.data);
-    console.log('%cMyProject%cline:27%creviews', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px', reviews)
     const user = useSelector(state => state.userMe);
 
     const loadInactivities = useCallback(officeId => {
