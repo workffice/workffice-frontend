@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory, useParams } from 'react-router';
 import Select from 'react-select';
 import {
     Row,
@@ -17,22 +18,35 @@ import {
     CardHeader,
     Container
 } from 'reactstrap';
+import { Notification } from '../Common/Notification/Notification';
 import './styles/MembershipStyle.css';
 
-export const NewMembership = () => {
+export const NewMembership = props => {
+    const { notification, hideNotification, onCreate, officeBranch, edit, memberships, loadMembership, memb, onUpdate } = props;
+    const history = useHistory();
+    React.useEffect(() => {
+        if (edit) {
+            loadMembership(officeBranch.id);
+        }
+    }, [])
+    let membership = null;
+    if (edit) {
+        var id = useParams().id;
+        if (memberships.length > 0) {
+            membership = memberships.find(m => m.id === id);
+        }
+    }
     const validate = values => {
         const errors = {};
         if (!values.name) {
             errors.name = 'Requerido.';
         }
-        if (!values.multipleSelectOffices) {
-            errors.multipleSelectOffices = 'Requerido.';
+
+        if (!values.pricePerMonth) {
+            errors.pricePerMonth = 'Requerido.';
         }
-        if (!values.price) {
-            errors.price = 'Requerido.';
-        }
-        if (!values.multipleSelectDays) {
-            errors.multipleSelectDays = 'Requerido.';
+        if (!values.accessDays) {
+            errors.accessDays = 'Requerido.';
         }
         if (!values.description) {
             errors.description = 'Requerido.';
@@ -40,41 +54,47 @@ export const NewMembership = () => {
         return errors;
     };
 
-    const [multipleSelectDays, setMultipleSelectDays] = useState(null);
-    const [multipleSelectOffices, setMultipleSelectOffices] = useState(null);
+    const daysOfWeek = [
+        { value: "MONDAY", label: "Lunes" },
+        { value: "TUESDAY", label: "Martes" },
+        { value: "WEDNESDAY", label: "Miércoles" },
+        { value: "THURSDAY", label: "Jueves" },
+        { value: "FRIDAY", label: "Viernes" },
+        { value: "SATURDAY", label: "Sábado" },
+        { value: "SUNDAY", label: "Domingo" }
+    ]
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            // offices: props.branch.data.id,
-            multipleSelectOffices: null,
-            price: 0,
-            multipleSelectDays: null,
-            description: "",
+            name: membership ? membership.name : "",
+            pricePerMonth: membership ? membership.pricePerMonth : 0,
+            accessDays: membership ? membership.accessDays.map(day => (
+                daysOfWeek.find(dow => dow.value === day)
+            )) : null,
+            description: membership ? membership.description : "",
         },
         validate,
         onSubmit: async (values) => {
-            console.log('values: ', values)
-            // props.create(membership);
+            const days = values.accessDays.map(ad => ad.value)
+            const newMembership = {
+                ...values,
+                accessDays: days
+            }
+            !edit ? onCreate(officeBranch.id, newMembership) : onUpdate(id ? id : membership.id, newMembership);
         },
     });
 
-
-    // React.useEffect(() => {
-    //     if (props.membership !== null) {
-    //         history.push('/admin/membership');
-    //     }
-    // }, [props.membership]);
-
-    // React.useEffect(() => {
-    //     if (error.show) {
-    //         setTimeout(() => {
-    //             dispatch({ type: HIDE_ERROR });
-    //         }, 2500);
-    //     }
-    // }, [error]);
-
-
+    React.useEffect(() => {
+        if (notification.show) {
+            if (notification.isSuccess && memb)
+                setTimeout(() => {
+                    history.push('/admin/membership');
+                }, 2500);
+            setTimeout(() => {
+                hideNotification()
+            }, 1000);
+        }
+    }, [notification.show]);
     return (
         <div className="content">
             <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -89,15 +109,11 @@ export const NewMembership = () => {
                 <Form onSubmit={formik.handleSubmit} >
                     <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                         <CardHeader>
-                            {/* {
-                                <Alert
-                                    isOpen={error.show}
-                                    color="danger"
-                                    fade={false}
-                                >
-                                    {'Ocurrió un error. Intente nuevamente'}
-                                </Alert> */}
-                            {/* } */}
+                            <Notification
+                                show={notification.show && notification.isSuccess && memb}
+                                message={!edit ? "La membresía ha sido creada correctamente" : "La membresía ha sido actualizada"}
+                                hideNotification={hideNotification}
+                            />
                         </CardHeader>
                         <CardBody>
                             <Row>
@@ -114,48 +130,18 @@ export const NewMembership = () => {
                                         />
                                     </FormGroup>
 
-                                    <FormGroup className={formik.errors.multipleSelectOffices ? 'has-danger' : ''}>
-                                        <Label htmlFor="multipleSelectOffices" className="label-form">Oficinas</Label>
+                                    <FormGroup className={formik.errors.accessDays ? 'has-danger' : ''}>
+                                        <Label htmlFor="accessDays" className="label-form">Días Disponibles</Label>
                                         <Select
                                             className="react-select"
                                             classNamePrefix="react-select"
-                                            placeholder='Seleccione las oficinas que incluye...'
-                                            name="multipleSelectOffices"
+                                            placeholder="Seleccione días"
+                                            name="accessDays"
+                                            id="accessDays"
                                             closeMenuOnSelect={false}
                                             isMulti
-                                            value={multipleSelectOffices}
-                                            onChange={value => setMultipleSelectOffices(value)}
-                                            onBlur={formik.handleBlur}
-                                            options={[
-                                                {
-                                                    value: "",
-                                                    label: " Oficinas",
-                                                    isDisabled: true
-                                                },
-                                                { value: "2", label: "Cafetería" },
-                                                { value: "3", label: "Wifi" },
-                                                { value: "4", label: "Estacionamiento" },
-                                                { value: "5", label: "Cafetería " },
-                                                { value: "6", label: "Wifi" },
-                                                { value: "7", label: "Estacionamiento" },
-                                                { value: "8", label: "Cafetería " },
-                                                { value: "9", label: "Wifi" },
-                                                { value: "10", label: "Estacionamiento" },
-                                            ]}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup className={formik.errors.multipleSelectDays ? 'has-danger' : ''}>
-                                        <Label htmlFor="multipleSelectOffices" className="label-form">Días</Label>
-                                        <Select
-                                            className="react-select"
-                                            classNamePrefix="react-select"
-                                            placeholder="Seleccione los días que incluye la membresía"
-                                            name="multipleSelectDays"
-                                            closeMenuOnSelect={false}
-                                            isMulti
-                                            value={multipleSelectDays}
-                                            onChange={value => setMultipleSelectDays(value)}
+                                            value={formik.values.accessDays}
+                                            onChange={value => formik.setFieldValue("accessDays", value)}
                                             onBlur={formik.handleBlur}
                                             options={[
                                                 {
@@ -163,19 +149,37 @@ export const NewMembership = () => {
                                                     label: "Seleccione uno más días días",
                                                     isDisabled: true
                                                 },
-                                                { value: "2", label: "Lunes" },
-                                                { value: "3", label: "Martes" },
-                                                { value: "4", label: "Miércoles" },
-                                                { value: "5", label: "Jueves" },
-                                                { value: "6", label: "Viernes" },
-                                                { value: "7", label: "Sábado" },
-                                                { value: "8", label: "Domingo" },
+                                                { value: "MONDAY", label: "Lunes" },
+                                                { value: "TUESDAY", label: "Martes" },
+                                                { value: "WEDNESDAY", label: "Miércoles" },
+                                                { value: "THURSDAY", label: "Jueves" },
+                                                { value: "FRIDAY", label: "Viernes" },
+                                                { value: "SATURDAY", label: "Sábado" },
+                                                { value: "SUNDAY", label: "Domingo" },
                                             ]}
                                         />
                                     </FormGroup>
                                 </Col>
 
                                 <Col xs="12" md="12" lg="6" xg="6" style={{ paddingLeft: 20, paddingRight: 20 }}>
+
+                                    <FormGroup className={formik.errors.pricePerMonth ? 'has-danger' : ''}>
+                                        <Label htmlFor="pricePerMonth" className="label-form">Precio mensual </Label>
+                                        <InputGroup>
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>$ {'  '}</InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input
+                                                type="number"
+                                                placeholder="Ingrese"
+                                                name="pricePerMonth"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                min={0}
+                                                value={formik.values.pricePerMonth}
+                                            />
+                                        </InputGroup>
+                                    </FormGroup>
                                     <FormGroup className={formik.errors.description ? 'has-danger' : ''}>
                                         <Label htmlFor="description" className="label-form">Descripción</Label>
                                         <Input
@@ -186,23 +190,6 @@ export const NewMembership = () => {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.description}
                                         />
-                                    </FormGroup>
-                                    <FormGroup className={formik.errors.price ? 'has-danger' : ''}>
-                                        <Label htmlFor="price" className="label-form">Precio </Label>
-                                        <InputGroup>
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>$ {'  '}</InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input
-                                                type="number"
-                                                placeholder="Ingrese el precio por hora"
-                                                name="price"
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                min={0}
-                                                value={formik.values.price}
-                                            />
-                                        </InputGroup>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -215,7 +202,7 @@ export const NewMembership = () => {
                                         color="primary"
                                         style={{ minWidth: 107 }}
                                     >
-                                        Crear
+                                        {!edit ? 'Crear' : 'Actualizar'}
                                     </Button>
                                 </div>
                                 <div className="col-auto">

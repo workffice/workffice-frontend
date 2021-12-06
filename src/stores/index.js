@@ -10,6 +10,7 @@ import { resetPasswordReducer } from './reducers/auth/resetPassReducer';
 import { collaboratorsReducer } from './reducers/backoffice/collaborator/collaboratorsReducer';
 import { loadingCollaboratorReducer } from './reducers/backoffice/collaborator/loading';
 import { equipmentsReducer } from './reducers/backoffice/equipments/equipmentsReducer';
+import { membershipReducer } from './reducers/backoffice/membership/membershipReducer';
 import { newsReducer } from './reducers/backoffice/news/newsReducer';
 import { loadingOfficeReducer } from './reducers/backoffice/office/loading';
 import { officeInactivitiesReducer } from './reducers/backoffice/office/officeInactivitiesReducer';
@@ -92,5 +93,7 @@ export const reducers = routes =>
     //NEWS
     news: newsReducer,
     //Review
-    reviews: reviewReducer
+    reviews: reviewReducer,
+    //Membership
+    memberships: membershipReducer
   });

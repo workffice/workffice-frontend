@@ -1,6 +1,6 @@
-import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
-import { NewMembership } from '../components/Membership/NewMembership';
 import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
+import { MembershipsContainer } from '../containers/backoffice/mebmership/MembershipContainer';
+import { MembershipCreateContainer, MembershipEditContainer } from '../containers/backoffice/mebmership/MembershipCreateContainer';
 import { newsContainer } from '../containers/backoffice/news/newsContainer';
 import { NewsEditContainer } from '../containers/backoffice/news/NewsEditContainer';
 import { NewsListContainer } from '../containers/backoffice/news/NewsListContainer';
@@ -260,7 +260,7 @@ export const adminRoutes = [
         path: '/membership',
         name: 'Gestionar membresías',
         mini: 'GM',
-        component: MembershipListComponent,
+        component: MembershipsContainer,
         layout: '/admin',
         visibility: true
       },
@@ -268,8 +268,16 @@ export const adminRoutes = [
         path: '/new-membership',
         name: 'Nueva membresía',
         mini: 'NM',
-        component: NewMembership,
+        component: MembershipCreateContainer,
         layout: '/admin',
+      },
+      {
+        path: '/membership/edit/:id',
+        name: 'Editar Membresía',
+        mini: 'NN',
+        component: MembershipEditContainer,
+        layout: '/admin',
+        visibility: false
       },
       {
         path: '/notice',

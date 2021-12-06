@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Card, CardBody, CardHeader, UncontrolledTooltip } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader, UncontrolledTooltip } from 'reactstrap';
 import './styles/NoticeComponent.css';
 import ima from '../../assets/img/flags/noticias.png'
 import { Link } from 'react-router-dom';
+
 
 export const NoticeComponent = (props) => {
 
@@ -83,6 +84,9 @@ export const NoticeComponent = (props) => {
           <hr />
 
         </CardBody>
+        <CardFooter>
+          <p style={{fontStyle:'oblique', fontSize:'12px'}}>Estado:  {news.status==='DRAFT'?'Borrador':'Enviada'}</p>
+        </CardFooter>
       </Card>
     </>
   );
