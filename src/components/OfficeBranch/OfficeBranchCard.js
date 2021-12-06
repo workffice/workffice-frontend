@@ -6,7 +6,7 @@ import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 
 export const OfficeBranchCard = ({ branch }) => {
   const images = branch.images
-  console.log(branch)
+
 
   const cheapestPrice = offices => {
     const prices = offices.map(office => office.price)

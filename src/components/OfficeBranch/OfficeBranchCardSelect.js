@@ -19,7 +19,7 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
         <CardBody>
           {<CloudinaryContext cloudName="workffice" width="310" height="175">
             <div>
-              <Image publicId={branch.images ? branch.images[0].url || "sample" : "sample"} width={310} />
+              <Image publicId={branch.images ? branch.images[0]?.url || "sample" : "sample"} width={310} />
             </div>
           </CloudinaryContext>}
           <ListGroup>
@@ -30,7 +30,6 @@ export const OfficeBranchCardSelect = ({ branch, select, selected, currentOffice
               {branch.collaborator ? <Badge color="danger">Colaborador</Badge> : <Badge color="primary">Dueño</Badge>}
             </ListGroupItemText>
             <ListGroupItemText>
-              {console.log("branch",branch)}
               <b>{branch.location.province}, {branch.location.city}, {branch.location.street}</b>
             </ListGroupItemText>
             <Button className="btn-round" color="primary" size="large" onClick={onSelect}>Administrar</Button>

@@ -28,6 +28,7 @@ import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
 import { bookingsQuantityPerOfficeReducer, revenuePerMonthReducer, revenuePerOfficeReducer } from './reducers/reports/reportsReducer';
+import { reviewReducer } from './reducers/reviews/reviewReducer';
 import { loadingOfficeBranchSearchReducer } from './reducers/search/loadingReducer';
 import { officeBranchSearchReducer } from './reducers/search/officeBranchSearchReducer';
 
@@ -89,5 +90,7 @@ export const reducers = routes =>
     revenuePerOffice: revenuePerOfficeReducer,
     revenuePerMonth: revenuePerMonthReducer,
     //NEWS
-    news: newsReducer
+    news: newsReducer,
+    //Review
+    reviews: reviewReducer
   });

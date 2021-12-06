@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
     Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip
@@ -20,9 +21,17 @@ export const BookingComponent = (props) => {
         paymentMethodId,
         paymentTypeId,
         officeBranchId,
-        disableBookingLink
+        disableBookingLink,
+        loadOffices,
+        loadOffice
     } = props;
-
+    const officeAux = useSelector(state => state.offices.find(of => of.name === officeName));    
+    React.useEffect(() => {
+        loadOffices(officeBranchId)
+        if (officeAux) {
+            loadOffice(officeAux.id)
+        }
+    }, [])
     const getBookingStatus = () => {
         if (status === "SCHEDULED") {
             return <Badge color="success" style={{ fontSize: 18 }}>Programada</Badge>
@@ -32,8 +41,6 @@ export const BookingComponent = (props) => {
             return <Badge color="danger" style={{ fontSize: 18 }}>Cancelada</Badge>
         }
     }
-
-    console.log('status: ', status);
 
     return (
         <div className="content">
@@ -64,7 +71,7 @@ export const BookingComponent = (props) => {
                             {
                                 status === "SCHEDULED" && (
                                     <Col>
-                                        <Link to='/admin/new-review'>
+                                        <Link to={`/admin/office/${officeAux?.id}/new-review`}>
                                             <UncontrolledTooltip placement="right" target={`review-${officeBranchId}`}>
                                                 Crear reseña
                                             </UncontrolledTooltip>

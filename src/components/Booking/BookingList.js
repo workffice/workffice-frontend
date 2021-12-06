@@ -6,7 +6,7 @@ import { Loading } from '../Common/Loading/Loading'
 import { BookingComponent } from './BookingComponent'
 
 
-export const BookingList = ({ isLoading, bookings, disableBookingLinks }) => {
+export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffices, loadOffice, office }) => {
     const formatDate = datetime => {
         return datetime.match("(.*)T.*")[1]
     }
@@ -40,6 +40,9 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks }) => {
                 paymentTypeId={booking.payment ? booking.payment.paymentTypeId : "No definido"}
                 officeBranchId={booking.officeBranchId}
                 disableBookingLink={disableBookingLinks}
+                loadOffice={loadOffice}
+                loadOffices={loadOffices}
+                office={office}
             />
         }) : <EmptyComponent />
     }

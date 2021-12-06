@@ -1,7 +1,5 @@
 import { MembershipListComponent } from '../components/Membership/MembershipListComponent';
 import { NewMembership } from '../components/Membership/NewMembership';
-import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { NewReviews } from '../components/reviews/NewReviews';
 import { DashboardContainer } from '../containers/backoffice/DashboardContainer';
 import { newsContainer } from '../containers/backoffice/news/newsContainer';
 import { NewsEditContainer } from '../containers/backoffice/news/NewsEditContainer';
@@ -10,6 +8,7 @@ import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingCo
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
 import { OfficeBranchEditContainer } from '../containers/backoffice/OfficeBranchEditContainer';
 import { OfficeCreateContainer } from '../containers/backoffice/OfficeCreateContainer';
+import { OfficeDetailContainer } from '../containers/backoffice/OfficeDetailContainer';
 import { OfficeEditContainer } from '../containers/backoffice/OfficeEditContainer';
 import { OfficesContainer } from '../containers/backoffice/OfficesContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
@@ -19,6 +18,7 @@ import { BookingDetailContainer } from '../containers/booking/BookingDetailConta
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
+import { NewReviewContainer } from '../containers/reviews/NewReviewContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 
 
@@ -131,7 +131,7 @@ export const adminRoutes = [
       },
       {
         path: '/office-detail',
-        component: OfficeDetailComponent,
+        component: OfficeDetailContainer,
         layout: '/admin',
         visibility: false,
       },
@@ -227,8 +227,8 @@ export const adminRoutes = [
         visibility: false,
       },
       {
-        path: '/new-review',
-        component: NewReviews,
+        path: '/office/:id/new-review',
+        component: NewReviewContainer,
         layout: '/admin',
         visibility: false,
       },

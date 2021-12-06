@@ -14,6 +14,9 @@ export const UserBookings = ({
     isLoading,
     pageInfo,
     title,
+    loadOffices,
+    loadOffice,
+    office
 }) => {
 
     const query = new URLSearchParams(useLocation().search);
@@ -40,7 +43,7 @@ export const UserBookings = ({
                 totalPages={pageInfo.totalPages || 1}
                 uri="/admin/bookings/list"
             />
-            {<BookingList isLoading={isLoading} bookings={bookings} />}
+            {<BookingList isLoading={isLoading} bookings={bookings} loadOffices={loadOffices} loadOffice={loadOffice} office={office} />}
         </div >
     )
 }

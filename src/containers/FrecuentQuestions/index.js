@@ -7,7 +7,6 @@ const FrequentQuestions = () => {
     const [openedCollapses, setOpenedCollapses] = useState("");
 
     const collapsesToggle = (collapse) => {
-        console.log('collapse: ', collapse);
         if (openedCollapses === collapse) {
             setOpenedCollapses("");
         } else {

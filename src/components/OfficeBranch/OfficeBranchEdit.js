@@ -230,7 +230,7 @@ export const OfficeBranchEdit = ({ hideNotification, notification, officeBranch,
                                             <ImageUpload
                                                 className="text-center"
                                                 onChange={imageData => formik.setFieldValue("image", imageData)}
-                                                avatar={officeBranch ? officeBranch.images[0].url : ""}
+                                                avatar={officeBranch ? officeBranch.images[0]?.url : ""}
                                             />
                                         </Col>
                                     </Row>

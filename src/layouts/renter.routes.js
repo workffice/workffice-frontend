@@ -1,13 +1,13 @@
 import { NotAccess } from '../components/Common/ErrorPages/NotAccess';
 import { NoticeListComponent } from '../components/Notice/NoticeListComponent';
-import { OfficeDetailComponent } from '../components/Offices/OfficeDetailComponent';
-import { NewReviews } from '../components/reviews/NewReviews';
 import { OfficeBookingContainer } from '../containers/backoffice/OfficeBookingContainer';
 import { OfficeBranchDetailContainer } from '../containers/backoffice/OfficeBranchDetailContainer';
+import { OfficeDetailContainer } from '../containers/backoffice/OfficeDetailContainer';
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
+import { NewReviewContainer } from '../containers/reviews/NewReviewContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
 
 export const renterRoutes = [
@@ -121,13 +121,13 @@ export const renterRoutes = [
         path: '/office-detail',
         // name: 'Detalle',
         // mini: 'SE',
-        component: OfficeDetailComponent,
+        component: OfficeDetailContainer,
         layout: '/admin',
         visibility: true
       },
       {
-        path: '/new-review',
-        component: NewReviews,
+        path: '/office/:officeId/new-review',
+        component: NewReviewContainer,
         layout: '/admin',
         visibility: false,
       },

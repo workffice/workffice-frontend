@@ -31,7 +31,6 @@ export const amountPerYear = (officeBranchId, year) => async (dispatch) => {
     try {
         dispatch(fetch_amount_per_year(await amountPerYearAPI(officeBranchId, year)));
     } catch (error) {
-        console.log(error)
         if (error.error === "OFFICE_BRANCH_FORBIDDEN")
             dispatch(setForbiddenAccessAction(REPORT_RESOURCE));
     }

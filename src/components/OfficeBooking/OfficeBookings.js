@@ -12,6 +12,7 @@ import { NotAccess } from '../Common/ErrorPages/NotAccess'
 
 
 export const OfficeBookings = ({
+    loadOffices,
     loadOffice,
     entitiesNotFound,
     permission,
@@ -88,7 +89,7 @@ export const OfficeBookings = ({
                         </Row>
                     </Form>
 
-                        <BookingList isLoading={isLoading} bookings={bookings} disableBookingLinks={true} />
+                        <BookingList isLoading={isLoading} bookings={bookings} loadOffices={loadOffices} disableBookingLinks={true} office={office} />
                     </>
             }
         </>

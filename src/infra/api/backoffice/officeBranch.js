@@ -101,7 +101,6 @@ export const deleteOfficeBranchInfra = async (id) => {
         )
         return Promise.resolve(officesBranches);
     } catch (error) {
-        console.log("CHAU")
         return Promise.reject(error.errors[0]);
     }
 }

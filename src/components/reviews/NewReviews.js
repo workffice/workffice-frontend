@@ -1,9 +1,22 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router';
 import { Button, Card, CardBody, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { getOffice } from '../../stores/actions/backoffice/office/officeActions';
+import { getUserMe } from '../../stores/actions/backoffice/userActions';
+import { Notification } from '../Common/Notification/Notification';
 import RatingIcon from '../RatingIcon';
 
-export const NewReviews = ({ createReview }) => {
+export const NewReviews = ({ office, onCreate, branch, notification, hideNotification, }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const officeId = useParams().id;
+  React.useEffect(() => {
+    dispatch(getOffice(officeId))
+    dispatch(getUserMe());
+  }, [])
+  const user = useSelector(state => state.userMe)
   const validate = values => {
     const errors = {};
     if (!values.comment) {
@@ -33,19 +46,32 @@ export const NewReviews = ({ createReview }) => {
 
   const formik = useFormik({
     initialValues: {
+      officeId,
       comment: "",
-      renterEmail: "",
+      renterEmail: user ? user.email : '',
+      stars: rating,
     },
     validate,
-    onSubmit: async ({ officeId, rating, comment, renterEmail }) => {
-      await createReview({
-        officeId,
-        rating,
-        comment,
-        renterEmail,
-      });
+    onSubmit: async (values) => {
+      const review = {
+        ...values,
+        stars: rating
+      }
+      onCreate(branch.id, review);
     }
   })
+  React.useEffect(() => {
+    if (notification.show) {
+      if (notification.isSuccess)
+        setTimeout(() => {
+          history.push('/admin/booking/list');
+        }, 2500);
+      setTimeout(() => {
+        hideNotification()
+      }, 2000);
+    }
+  }, [notification.show]);
+
 
   return (
 
@@ -56,6 +82,11 @@ export const NewReviews = ({ createReview }) => {
             Nueva <small color="red">Reseña</small>
           </h1>
           <hr />
+          <Notification
+            show={notification.show && notification.isSuccess}
+            message="La reseña ha sido creada correctamente"
+            hideNotification={hideNotification}
+          />
         </Col>
       </Row>
 
@@ -67,61 +98,53 @@ export const NewReviews = ({ createReview }) => {
                 <div>
                   <FormGroup>
                     <Label
-                      htmlFor="comment"
+                      htmlFor="officeId"
                       className="label-form"
                       style={{ fontSize: 20, color: '#081620' }}
                     >
                       Oficina
                     </Label>
-                    <Input type="office" disabled defaultValue="Oficina A" />
+                    <Input type="office" disabled defaultValue={office?.name} />
                   </FormGroup>
                   <FormGroup>
-                    <Row style={{paddingBottom: 10, paddingRight: 15, paddingLeft: 15, paddingTop: 15}}>
-                        <Label
-                          htmlFor="calification"
-                          className="label-form"
-                          style={{ fontSize: 20, color: '#081620' }}
-                        >
-                          Ingrese una calificación
-                        </Label>
-                        <div style={{ display: 'flex', width: 300, marginTop: 15 }}>
-                          {[1, 2, 3, 4, 5].map((index) => {
-                            return (
-                              <RatingIcon
-                                index={index}
-                                rating={rating}
-                                hoverRating={hoverRating}
-                                onMouseEnter={onMouseEnter}
-                                onMouseLeave={onMouseLeave}
-                                onSaveRating={onSaveRating}
-                              />
-                            )
-                          })}
-                        </div>
+                    <Row style={{ paddingBottom: 10, paddingRight: 15, paddingLeft: 15, paddingTop: 15 }}>
+                      <Label
+                        htmlFor="stars"
+                        className="label-form"
+                        style={{ fontSize: 20, color: '#081620' }}
+                      >
+                        Ingrese una calificación
+                      </Label>
+                      <div style={{ display: 'flex', width: 300, marginTop: 15 }}>
+                        {[1, 2, 3, 4, 5].map((index) => {
+                          return (
+                            <RatingIcon
+                              index={index}
+                              rating={rating}
+                              hoverRating={hoverRating}
+                              onMouseEnter={onMouseEnter}
+                              onMouseLeave={onMouseLeave}
+                              onSaveRating={onSaveRating}
+                            />
+                          )
+                        })}
+                      </div>
                     </Row>
                   </FormGroup>
-                  <FormGroup className={formik.errors.comment && formik.touched.comment ? 'has-danger mb-3' : 'mb-3'}>
-                    <Label
-                      htmlFor="comment"
-                      className="label-form"
-                      style={{ fontSize: 20, color: '#081620' }}
-                    >
-                      Ingrese una reseña
-                    </Label>
+                  <FormGroup className={formik.errors.comment && formik.touched.comment ? 'has-danger' : ''}>
+                    <Label htmlFor="comment" className="label-form">Descripción</Label>
                     <Input
                       type="textarea"
-                      className="form-control"
+                      name="comment"
                       id="comment"
-                      name='comment'
-                      placeholder="Ingrese su reseña..."
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.comment}
                     />
-                    {formik.errors.comment && formik.touched.comment ? (
-                      <div className="error">{formik.errors.comment}</div>
-                    ) : null}
                   </FormGroup>
+                  {formik.errors.comment && formik.touched.comment ? (
+                    <div className="error">{formik.errors.comment}</div>
+                  ) : null}
                   <FormGroup className={formik.errors.renterEmail && formik.touched.renterEmail ? 'has-danger mb-3' : 'mb-3'}>
                     <Label
                       htmlFor="renterEmail"
@@ -158,6 +181,6 @@ export const NewReviews = ({ createReview }) => {
           </Card>
         </Form>
       </Row>
-    </div>
+    </div >
   )
 };

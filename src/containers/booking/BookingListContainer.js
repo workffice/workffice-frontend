@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UserBookings } from '../../components/Booking/UserBookings'
 import { OfficeBookings } from '../../components/OfficeBooking/OfficeBookings'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
+import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions'
 import { fetchOfficeBookings, fetchUserCurrentBookings, fetchUserPastBookings } from '../../stores/actions/booking/bookingActions'
 
 
@@ -15,9 +16,19 @@ export const UserBookingListContainer = () => {
     const loadBookings = useCallback((userEmail, page) => {
         dispatch(fetchUserCurrentBookings(userEmail, page))
     }, [dispatch])
+    const office = useSelector(state => state.office)
+    const loadOffices = useCallback(id => {
+        dispatch(fetchOfficesList(id))
+    }, [dispatch]);
+    const loadOffice = useCallback(id => {
+        dispatch(getOffice(id))
+    }, []);
     return <UserBookings
         bookings={bookings}
         loadBookings={loadBookings}
+        loadOffices={loadOffices}
+        office={office}
+        loadOffice={loadOffice}
         user={user}
         isLoading={isLoading}
         pageInfo={pageInfo}
@@ -29,12 +40,22 @@ export const UserPastBookingListContainer = () => {
     const user = useSelector(state => state.userMe)
     const isLoading = useSelector(state => state.loadingBooking)
     const bookings = useSelector(state => state.userBookings.data)
+    const office = useSelector(state => state.office)
+    const loadOffices = useCallback(id => {
+        dispatch(fetchOfficesList(id))
+    }, [dispatch]);
+    const loadOffice = useCallback(id => {
+        dispatch(getOffice(id))
+    }, [dispatch]);
     const loadBookings = useCallback((userEmail, page) => {
         dispatch(fetchUserPastBookings(userEmail, page))
     }, [dispatch])
     const pageInfo = useSelector(state => state.userBookings.pagination)
     return <UserBookings
         bookings={bookings}
+        office={office}
+        loadOffice={loadOffice}
+        loadOffices={loadOffices}
         loadBookings={loadBookings}
         user={user}
         isLoading={isLoading}
@@ -51,7 +72,10 @@ export const OfficeBookingListContainer = () => {
     const office = useSelector(state => state.office)
     const loadOffice = useCallback(officeId => {
         dispatch(getOffice(officeId))
-    }, [dispatch])
+    }, [])
+    const loadOffices = useCallback(id => {
+        dispatch(fetchOfficesList(id))
+    }, [dispatch]);
     const bookings = useSelector(state => state.officeBookings)
     const loadBookings = useCallback((officeId, date) => {
         dispatch(fetchOfficeBookings(officeId, date))
@@ -62,6 +86,7 @@ export const OfficeBookingListContainer = () => {
         permission={permission}
         office={office}
         loadOffice={loadOffice}
+        loadOffices={loadOffices}
         bookings={bookings}
         loadBookings={loadBookings}
     />
