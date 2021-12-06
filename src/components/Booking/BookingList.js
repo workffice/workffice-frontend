@@ -6,7 +6,7 @@ import { Loading } from '../Common/Loading/Loading'
 import { BookingComponent } from './BookingComponent'
 
 
-export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffices, loadOffice, office }) => {
+export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffices, loadOffice, office}) => {
     const formatDate = datetime => {
         return datetime.match("(.*)T.*")[1]
     }
@@ -24,6 +24,7 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffi
                 </Row>
             </Row>
         return bookings.length !== 0 ? bookings.map(booking => {
+            console.log("booking.officeId",booking.officeId)
             return <BookingComponent
                 officeName={booking.officeName}
                 key={booking.id}
@@ -43,6 +44,7 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffi
                 loadOffice={loadOffice}
                 loadOffices={loadOffices}
                 office={office}
+                officeId={booking.officeId}
             />
         }) : <EmptyComponent />
     }

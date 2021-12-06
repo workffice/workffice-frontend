@@ -3,7 +3,7 @@ import { useLocation } from 'react-router'
 import { Col, Container, Row } from 'reactstrap'
 import { BookingComponent } from './BookingComponent'
 
-export const BookingDetail = ({ loadBooking, booking }) => {
+export const BookingDetail = ({ loadBooking, booking, loadOffice, loadOffices}) => {
     const formatDate = datetime => {
         return datetime.match("(.*)T.*")[1]
     }
@@ -15,7 +15,7 @@ export const BookingDetail = ({ loadBooking, booking }) => {
 
     useEffect(() => {
         loadBooking(query.get("id"))
-    }, [booking ? booking.id : ""])
+    }, [])
 
     return (
         <div className="content">
@@ -36,7 +36,10 @@ export const BookingDetail = ({ loadBooking, booking }) => {
                         startTime={booking.startTime ? formatHour(booking.startTime) : ""}
                         endTime={booking.startTime ? formatHour(booking.endTime) : ""}
                         transactionAmount={booking.totalAmount}
+                        officeId={booking.officeId}
                         officeBranchId={booking.officeBranchId}
+                        loadOffice={loadOffice}
+                        loadOffices={loadOffices}
                         providerFee={booking.payment ? booking.payment.providerFee : "-"}
                         currency={booking.payment ? booking.payment.currency : "No definido"}
                         paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}
