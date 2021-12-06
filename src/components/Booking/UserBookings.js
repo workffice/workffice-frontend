@@ -18,7 +18,7 @@ export const UserBookings = ({
     loadOffice,
     office
 }) => {
-
+    console.log("bookings",bookings)
     const query = new URLSearchParams(useLocation().search);
     const currentPage = query.get('page')
     useEffect(() => {
