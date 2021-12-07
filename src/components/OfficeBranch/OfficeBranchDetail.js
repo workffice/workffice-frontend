@@ -38,7 +38,9 @@ export const OfficeBranchDetail = ({
     loadMemberships,
     memberships,
     buyMembership,
-    mercadoPagoPreferenceId = null,
+    membershipAcquisitionId,
+    createMercadoPagoPreference,
+    mercadoPagoPreferenceId
 }) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
@@ -69,6 +71,11 @@ export const OfficeBranchDetail = ({
         if (officeBranch)
             loadMemberships(officeBranch.id)
     }, [officeBranch ? officeBranch.id : ""])
+
+    useEffect(() => {
+        if (membershipAcquisitionId)
+            createMercadoPagoPreference(membershipAcquisitionId)
+    }, [membershipAcquisitionId ? membershipAcquisitionId : ""])
 
     const [mpCheckout, setMpCheckout] = useState(null)
     useEffect(() => {

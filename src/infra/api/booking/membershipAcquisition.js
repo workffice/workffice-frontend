@@ -25,3 +25,15 @@ export const getMembershipAcquisitions = async () => {
         return Promise.reject(error.errors[0]);
     }
 };
+
+export const createMercadoPagoPreference = async membershipAcquisitionId => {
+    try {
+        const mercadoPagoPreference = await sdkAuthRequest(`${API_URL}/membership_acquisitions/${membershipAcquisitionId}/mp_preferences/`, {
+            method: 'POST',
+            headers: headersPost,
+        });
+        return Promise.resolve(mercadoPagoPreference.data.id);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+};
