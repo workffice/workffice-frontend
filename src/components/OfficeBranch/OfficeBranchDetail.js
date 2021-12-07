@@ -87,7 +87,6 @@ export const OfficeBranchDetail = ({
             script.addEventListener('load', addCheckout); // Cuando cargue el script, se ejecutará la función addCheckout
             document.body.appendChild(script);
             setMpCheckout(checkout)
-            mpCheckout.open
         }
     }, [mercadoPagoPreferenceId]);
 
@@ -223,9 +222,12 @@ export const OfficeBranchDetail = ({
                                 </Row>
                                 <Row>
                                     {memberships.map(membership => <MembershipComponent
+                                        key={membership.id}
                                         membership={membership}
                                         onBuy={() => buyMembership(membership.id)}
                                         displayBuyButton
+                                        mpCheckout={mpCheckout}
+                                        mercadoPagoPreferenceId={mpCheckout}
                                     />)}
                                 </Row>
                             </CardBody>
