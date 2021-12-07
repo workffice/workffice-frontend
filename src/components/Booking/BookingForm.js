@@ -59,7 +59,7 @@ export const BookingForm = ({
     }, [])
     useEffect(() => {
         const bookingId = booking ? booking.id : null
-        if (bookingId)
+        if (bookingId && !formik.values.membershipAcquisitionCode)
             createMercadoPagoPreference(bookingId)
     }, [booking ? booking.id : ""])
     useEffect(() => {

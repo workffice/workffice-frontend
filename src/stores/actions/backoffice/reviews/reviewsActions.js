@@ -3,7 +3,7 @@ import { createReviewAPI, getReviewsAPI } from "../../../../api/reviews/reviewsA
 import { setErrorAction, setSuccessAction } from "../../notifications/writeNotificationActions";
 
 export const FETCH_REVIEWS = 'FETCH_REVIEWS';
-export const CREATE_REVIEW= 'CREATE_REVIEW';
+export const CREATE_REVIEW = 'CREATE_REVIEW';
 
 
 export const fetchReviewsAction = reviews => {
@@ -24,7 +24,6 @@ export const getReviews = (officeId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(fetchReviewsAction(await getReviewsAPI(officeId)));
-        dispatch(setSuccessAction())
     } catch (error) {
         dispatch(setErrorAction(error));
     } finally {
