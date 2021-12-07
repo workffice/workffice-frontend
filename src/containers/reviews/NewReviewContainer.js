@@ -4,6 +4,7 @@ import { NewReviews } from '../../components/reviews/NewReviews'
 import { readFromLocalStorage } from '../../infra/api/localStorage'
 import { getOffice } from '../../stores/actions/backoffice/office/officeActions'
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions'
+import { getOfficeBranch } from '../../stores/actions/backoffice/officeBranch/officeBranchAdminActions'
 import { createReview } from '../../stores/actions/backoffice/reviews/reviewsActions'
 import { hideNotificationAction } from '../../stores/actions/notifications/writeNotificationActions'
 
@@ -19,7 +20,7 @@ export const NewReviewContainer = () => {
     const user = useSelector(state => state.userMe);
     const office = useSelector(state => state.office);
     const loadBranch = useCallback(id => {
-        dispatch(getOffice(id));
+        dispatch(getOfficeBranch(id));
     }, [dispatch]);
     const loadOffice = useCallback(id => {
         dispatch(getOffice(id));
