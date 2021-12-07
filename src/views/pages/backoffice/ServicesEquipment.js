@@ -11,7 +11,7 @@ export const ServicesEquipment = (props) => {
         },
         { value: "FOOD", label: "Comida" },
         { value: "CONFORT", label: "Confort" },
-        { value: "CONECTIVITY", label: "Conectividad" },
+        { value: "CONNECTIVITY", label: "Conectividad" },
     ];
 
     const equipaments = [
