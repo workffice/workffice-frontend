@@ -53,6 +53,7 @@ export const OfficeBranchDetail = ({
     };
 
     const [slider, setSlider] = useState(null)
+    const [membershipIdSelected, setMembershipIdSelected] = useState(null)
 
     useEffect(() => {
         if (query.get("id") === null) {
@@ -224,10 +225,16 @@ export const OfficeBranchDetail = ({
                                     {memberships.map(membership => <MembershipComponent
                                         key={membership.id}
                                         membership={membership}
-                                        onBuy={() => buyMembership(membership.id)}
+                                        onBuy={() => {
+                                            buyMembership(membership.id)
+                                            setMembershipIdSelected(membership.id)
+                                        }}
                                         displayBuyButton
                                         mpCheckout={mpCheckout}
-                                        mercadoPagoPreferenceId={mpCheckout}
+                                        mercadoPagoPreferenceId={
+                                            membershipIdSelected === membership.id ?
+                                                mercadoPagoPreferenceId : null
+                                        }
                                     />)}
                                 </Row>
                             </CardBody>
