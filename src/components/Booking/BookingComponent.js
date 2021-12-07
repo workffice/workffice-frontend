@@ -73,7 +73,7 @@ export const BookingComponent = (props) => {
                             {
                                 status === "SCHEDULED" && (
                                     <Col>
-                                        <Link to={userRole === 'RENTER' ? `officebranch/${officeBranchId}/office/${officeId}/new-review` : `/admin/office/${officeId}/new-review`}>
+                                        <Link to={userRole === 'RENTER' ? `/admin/officebranch/${officeBranchId}/office/${officeId}/new-review` : `/admin/office/${officeId}/new-review`}>
                                             <UncontrolledTooltip placement="right" target={`review-${officeBranchId}`}>
                                                 Crear reseña
                                             </UncontrolledTooltip>

@@ -1,12 +1,14 @@
 import { includes } from "lodash-es";
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "reactstrap";
+import { readFromLocalStorage } from "../../infra/api/localStorage";
 import { REPORT_RESOURCE } from "../../stores/actions/errors/permissionActions";
 import { monthFilter, yearFilter } from '../../utils/filters';
 import { NotAccess } from "../Common/ErrorPages/NotAccess";
 import { DashboardGeneralCards } from "./DashboardGeneralCards.jsx";
 import { DashboardIncomeStatistics } from "./DashboardIncomeStatistics.jsx";
 import { DashboardOfficeBooking } from "./DashboardOfficeBooking.jsx";
+import { DashboardsMembershipComponent } from "./DashboardsMembershipComponent";
 
 function Dashboard({
   officeBranch,
@@ -29,7 +31,7 @@ function Dashboard({
     loadOffices()
     loadCollaborators()
   }, [officeBranch.id])
-
+  const officeBranchId = readFromLocalStorage('officeBranch').id;
   const renderDashboard = () => {
     return <>
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -80,6 +82,8 @@ function Dashboard({
         loadBookingsQuantityPerOffice={loadBookingsQuantityPerOffice}
         offices={offices}
       />
+      <DashboardsMembershipComponent officeBranchId={officeBranchId} />
+
     </>
   }
 
@@ -87,7 +91,7 @@ function Dashboard({
     // if (isLoading)
     //   return <Row style={{display:"flex", justifyContent:"center"}}><Loading /></Row>
     if (permission.isForbidden && includes(permission.resources, REPORT_RESOURCE))
-      return <Row style={{justifyContent: "center"}}>
+      return <Row style={{ justifyContent: "center" }}>
         <NotAccess message="No tienes acceso a los reportes de esta sucursal" />
       </Row>
     else
