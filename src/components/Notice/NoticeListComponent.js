@@ -20,8 +20,16 @@ export const NoticeListComponent = props => {
   React.useEffect(() => {
     setTimeout(() => {
       hideNotification()
-    }, 1000)
+    }, 2500)
   }, [notification.show])
+
+  const getErrorMessage = errorCode => {
+    switch (errorCode) {
+      case "NEWS_IS_NOT_DRAFT": return "No se puede enviar una noticia en estado ENVIADA"
+      default: "Oops algo salio mal"
+    }
+  }
+
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -49,6 +57,14 @@ export const NoticeListComponent = props => {
         </Col>
       </Row>
       <Row>
+        <Col xs="12" md="12" lg="12" xg="12">
+          <Notification
+            show={notification.show && notification.isError}
+            isError
+            message={getErrorMessage(notification.errorCode)}
+            hideNotification={hideNotification}
+          />
+        </Col>
         <Col xs="12" md="12" lg="12" xg="12">
           <Notification
             show={notification.show && notification.isSuccess && newsOperation != null}
