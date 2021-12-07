@@ -1,4 +1,4 @@
-import { ACQUIRE_MEMBERSHIP, FETCH_MEMBERSHIP_ACQUISITIONS } from "../../actions/booking/membershipAcquisitionActions"
+import { ACQUIRE_MEMBERSHIP, CREATE_MERCADO_PAGO_PREFERENCE, FETCH_MEMBERSHIP_ACQUISITIONS } from "../../actions/booking/membershipAcquisitionActions"
 
 export const membershipAcquisitionReducer = (state = {}, { type, payload }) => {
     switch (type) {
@@ -11,6 +11,13 @@ export const membershipAcquisitionReducer = (state = {}, { type, payload }) => {
 export const membershipAcquisitionsReducer = (state = [], { type, payload }) => {
     switch (type) {
         case (FETCH_MEMBERSHIP_ACQUISITIONS): return payload
+        default: return state
+    }
+}
+
+export const mercadoPagoPreferenceReducer = (state = null, { type, payload }) => {
+    switch (type) {
+        case (CREATE_MERCADO_PAGO_PREFERENCE): return payload
         default: return state
     }
 }

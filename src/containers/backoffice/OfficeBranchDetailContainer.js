@@ -5,7 +5,7 @@ import { readFromLocalStorage, USER_TYPE } from '../../infra/api/localStorage';
 import { getAllMembership } from '../../stores/actions/backoffice/membership/membership';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
-import { acquireMembership } from '../../stores/actions/booking/membershipAcquisitionActions';
+import { acquireMembership, createMercadoPagoPreference } from '../../stores/actions/booking/membershipAcquisitionActions';
 import { OFFICE_BRANCH_ENTITY } from '../../stores/actions/errors/notFoundActions';
 
 export const OfficeBranchDetailContainer = () => {
@@ -29,6 +29,11 @@ export const OfficeBranchDetailContainer = () => {
     const buyMembership = useCallback(membershipId => {
         dispatch(acquireMembership(membershipId))
     }, [dispatch])
+    const membershipAcquisitionId = useSelector(state => state.newMembershipAcquisition.id)
+    const createMercadoPagoPreferenceForMembershipAcquisition = useCallback(membershipAcquisitionId => {
+        dispatch(createMercadoPagoPreference(membershipAcquisitionId))
+    }, [dispatch])
+    const mercadoPagoPreferenceId = useSelector(state => state.mercadoPagoPreferenceMembershipAcquisition)
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
@@ -39,6 +44,9 @@ export const OfficeBranchDetailContainer = () => {
         error={error}
         loadMemberships={loadMemberships}
         memberships={memberships}
+        membershipAcquisitionId={membershipAcquisitionId}
         buyMembership={buyMembership}
+        createMercadoPagoPreference={createMercadoPagoPreferenceForMembershipAcquisition}
+        mercadoPagoPreferenceId={mercadoPagoPreferenceId}
     />;
 };

@@ -58,7 +58,6 @@ export const getAllNews = (officeBranchId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(getNews(await getNewsAPI(officeBranchId)));
-        dispatch(setSuccessAction())
     } catch (error) {
         dispatch(setErrorAction(error));
     } finally {

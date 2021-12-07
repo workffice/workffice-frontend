@@ -8,13 +8,19 @@ import { getUserMe } from '../../stores/actions/backoffice/userActions';
 import { Notification } from '../Common/Notification/Notification';
 import RatingIcon from '../RatingIcon';
 
-export const NewReviews = ({ office, onCreate, branch, notification, hideNotification, }) => {
+export const NewReviews = ({ office, onCreate, branch, notification, hideNotification, loadBranch }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const officeId = useParams().id;
+  const { officeId, officeBranchId } = useParams();
+  console.log('%cMyProject%cline:14%cofficeBranchId', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(222, 125, 44);padding:3px;border-radius:2px', officeBranchId)
+  console.log('%cMyProject%cline:14%cofficeId', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px', officeId)
+
   React.useEffect(() => {
     dispatch(getOffice(officeId))
     dispatch(getUserMe());
+  }, [])
+  React.useEffect(() => {
+    loadBranch(officeBranchId);
   }, [])
   const user = useSelector(state => state.userMe)
   const validate = values => {
@@ -73,8 +79,14 @@ export const NewReviews = ({ office, onCreate, branch, notification, hideNotific
   }, [notification.show]);
 
 
-  return (
+  const getErrorMessage = errorCode => {
+    switch (errorCode) {
+      case "REVIEW_ALREADY_CREATED": return "Ya valoraste esta oficina"
+      case "NO_BOOKING": return "No posees reservas para esta oficina"
+    }
+  }
 
+  return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
         <Col xs="6" md="6" lg="12" xg="12">
@@ -82,6 +94,12 @@ export const NewReviews = ({ office, onCreate, branch, notification, hideNotific
             Nueva <small color="red">Reseña</small>
           </h1>
           <hr />
+          <Notification
+            show={notification.show && notification.isError}
+            isError
+            message={getErrorMessage(notification.errorCode)}
+            hideNotification={hideNotification}
+          />
           <Notification
             show={notification.show && notification.isSuccess}
             message="La reseña ha sido creada correctamente"

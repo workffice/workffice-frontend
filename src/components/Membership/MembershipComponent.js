@@ -10,6 +10,8 @@ export const MembershipComponent = ({
   displayDeleteButton = false,
   displayBuyButton = false,
   onBuy,
+  mpCheckout,
+  mercadoPagoPreferenceId
 }) => {
 
   const { id, name, description, pricePerMonth } = membership;
@@ -66,8 +68,17 @@ export const MembershipComponent = ({
             {
               displayBuyButton ?
                 <div>
-                  <Button color="success" className="btn-round" size="sm" onClick={onBuy}>
+                  <Button className="btn-round btn-primary" onClick={onBuy}>
                     Comprar Membresía
+                  </Button>
+                  <Button
+                    type="reset"
+                    className="btn-round btn-info"
+                    color="info"
+                    onClick={mpCheckout ? mpCheckout.open : null}
+                    disabled={mercadoPagoPreferenceId ? false : true}
+                  >
+                    Pagar
                   </Button>
                 </div> : <></>
             }
@@ -86,7 +97,7 @@ export const MembershipComponent = ({
               Días:<br />
               {membership && membership.accessDays.length > 0 ?
                 membership.accessDays.map(day => {
-                  return <Badge color='info'>{getDay(day)}</Badge>
+                  return <Badge key={day} color='info'>{getDay(day)}</Badge>
                 }) : 'No disponible'
               }
             </label>
