@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OfficeBranchDetail } from '../../components/OfficeBranch/OfficeBranchDetail';
 import { readFromLocalStorage, USER_TYPE } from '../../infra/api/localStorage';
+import { getAllMembership } from '../../stores/actions/backoffice/membership/membership';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
 import { OFFICE_BRANCH_ENTITY } from '../../stores/actions/errors/notFoundActions';
@@ -20,6 +21,10 @@ export const OfficeBranchDetailContainer = () => {
     const offices = useSelector(state => state.offices)
     const loadingOffices = useSelector(state => state.loadingOffice);
     const error = useSelector(state => state.entitiesNotFound.includes(OFFICE_BRANCH_ENTITY))
+    const loadMemberships = useCallback(officeBranchId => {
+        dispatch(getAllMembership(officeBranchId));
+    }, [dispatch])
+    const memberships = useSelector(state => state.memberships.membershipList);
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
@@ -28,5 +33,7 @@ export const OfficeBranchDetailContainer = () => {
         officeBranchIdAdmin={officeBranchIdAdmin}
         loadingOffices={loadingOffices}
         error={error}
+        loadMemberships={loadMemberships}
+        memberships={memberships}
     />;
 };
