@@ -29,6 +29,7 @@ export const OfficeBranchDetailContainer = () => {
     const buyMembership = useCallback(membershipId => {
         dispatch(acquireMembership(membershipId))
     }, [dispatch])
+    const mercadoPagoPreferenceId = useSelector(state => state.membeshipAcquisitionPreferenceId)
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
@@ -40,5 +41,6 @@ export const OfficeBranchDetailContainer = () => {
         loadMemberships={loadMemberships}
         memberships={memberships}
         buyMembership={buyMembership}
+        mercadoPagoPreferenceId={mercadoPagoPreferenceId}
     />;
 };
