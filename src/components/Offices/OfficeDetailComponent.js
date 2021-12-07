@@ -84,7 +84,7 @@ export const OfficeDetailComponent = props => {
                     </Col>
                     <Col md="10">
                         <Slider ref={s => setSlider(s)} {...settings} className="slider">
-                            {reviews && reviews.map(review => {
+                            {reviews ? reviews.length > 0 && reviews.map(review => {
                                 return (
                                     <Col key={review.id}>
                                         <div>
@@ -92,7 +92,7 @@ export const OfficeDetailComponent = props => {
                                         </div>
                                     </Col>
                                 )
-                            })}
+                            }): <></>}
                         </Slider>
                     </Col>
                     <Col md="1" style={{ display: "flex", alignItems: "center" }}>
