@@ -16,7 +16,6 @@ export const NoticeListComponent = props => {
   const displayEditButton = userType === "RENTER" ? false : true;
   const displaySendButton = userType === "RENTER" ? false : true;
   const displayDeleteButton = userType === "OFFICE_HOLDER" ? true : false;
-  console.log("news", news)
 
   React.useEffect(() => {
     setTimeout(() => {

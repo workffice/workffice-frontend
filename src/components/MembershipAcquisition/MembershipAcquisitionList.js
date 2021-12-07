@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Col, Row } from "reactstrap"
+import { MembershipAcquisitionComponent } from "./MembershipAcquisitionComponent"
 
 export const MembershipAcquisitionList = ({
     membershipAcquisitions,
@@ -8,6 +9,7 @@ export const MembershipAcquisitionList = ({
     useEffect(() => {
         loadMembershipAcquisitions()
     }, [""])
+
     return <div className="content">
         <Row style={{ display: 'grid', paddingTop: 40 }}>
             <Col xs="12" md="6" lg="12" xg="12">
@@ -17,6 +19,6 @@ export const MembershipAcquisitionList = ({
                 <hr />
             </Col>
         </Row>
-        {membershipAcquisitions.map(membershipAcquisition => <h1>{membershipAcquisition.id}</h1>)}
+        {membershipAcquisitions.map(membershipAcquisition => <MembershipAcquisitionComponent key={membershipAcquisition.id} {...membershipAcquisition}/>)}
     </div>
 }
