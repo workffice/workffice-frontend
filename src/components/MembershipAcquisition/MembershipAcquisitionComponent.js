@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom"
-import { Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip } from "reactstrap"
+import { Badge, Card, CardBody, Col, Container, Label, Row } from "reactstrap"
 
 export const MembershipAcquisitionComponent = ({
     id,
     status,
-    disableBookingLink = false,
     paymentTypeId = "No definido",
     currency = "No definido",
     paymentMethodId = "No definido",
     providerFee = 0,
-    transactionAmount = 0,
+    month,
+    buyerEmail,
+    price = 0,
+    accessDays,
 }) => {
     const getStatus = () => {
         if (status === "BOUGHT") {
@@ -19,31 +20,43 @@ export const MembershipAcquisitionComponent = ({
         }
     }
 
+    const getMonth = () => {
+        switch (month) {
+            case "JANUARY": return "ENERO"
+            case "FEBRUARY": return "FEBRERO"
+            case "MARCH": return "MARZO"
+            case "APRIL": return "ABRIL"
+            case "MAY": return "MAYO"
+            case "JUNE": return "JUNIO"
+            case "JULY": return "JULIO"
+            case "AUGUST": return "AGOSTO"
+            case "SEPTEMBER": return "SEPTIEMBRE"
+            case "OCTOBER": return "OCTUBRE"
+            case "NOVEMBER": return "NOVIEMBRE"
+            case "DECEMBER": return "DICIEMBRE"
+        }
+    }
+
+    const getAccessDay = (accessDay) => {
+        switch (accessDay) {
+            case "MONDAY": return "LUNES"
+            case "TUESDAY": return "MARTES"
+            case "WEDNESDAY": return "MIERCOLES"
+            case "THURSDAY": return "JUEVES"
+            case "FRIDAY": return "VIERNES"
+            case "SATURDAY": return "SABADO"
+            case "SUNDAY": return "DOMINGO"
+        }
+    }
+
     return <div className="content">
         <Container>
             <Card style={{ paddingLeft: 20, paddingRight: 20 }}>
                 <Row style={{ display: "flex", paddingTop: "2%", alignContent: "center" }}>
                     <Col>
                         <h5 style={{ marginBottom: 0 }}>
-                            Código de membresia: {
-                                disableBookingLink ? <Label>{id}</Label>
-                                    : <><Link color="primary" to={`/admin/booking?id=${id}`}>
-                                        {id}
-                                    </Link> - {getStatus()}</>
-                            }
+                            Código de compra: <Label>{id}</Label> - {getStatus()}
                         </h5>
-                    </Col>
-                    <Col xs="2" style={{ display: 'flex' }}>
-                        <Col>
-                            <Link to={`/admin/office-branch?id=`}>
-                                <UncontrolledTooltip placement="right" target={`officeBranch-`}>
-                                    Ver sucursal
-                                </UncontrolledTooltip>
-                                <Button id={`officeBranch-`} margin="0" size="md" className="btn btn-round btn-icon btn-primary m-0" style={{ fontSize: 18 }}>
-                                    <i className="fa fa-building-o" aria-hidden="true"></i>
-                                </Button>
-                            </Link>
-                        </Col>
                     </Col>
                 </Row>
                 <CardBody style={{ paddingTop: 0 }}>
@@ -52,14 +65,14 @@ export const MembershipAcquisitionComponent = ({
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Nombre oficina
+                                        Mes de acceso: {getMonth()}
                                     </Label>
                                 </div>
                             </Col>
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Cantidad de personas
+                                        Comprador: {buyerEmail}
                                     </Label>
                                 </div>
                             </Col>
@@ -68,21 +81,7 @@ export const MembershipAcquisitionComponent = ({
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Fecha: <small style={{ fontSize: 18 }}></small>
-                                    </Label>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className='text'>
-                                    <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Hora desde: <small style={{ fontSize: 18 }}></small>
-                                    </Label>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className='text'>
-                                    <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Hora hasta: <small style={{ fontSize: 18 }}></small>
+                                        Días de acceso: {accessDays.map(accessDay => <Badge color="success">{getAccessDay(accessDay)}</Badge>)}
                                     </Label>
                                 </div>
                             </Col>
@@ -124,7 +123,7 @@ export const MembershipAcquisitionComponent = ({
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Monto total: <small style={{ fontSize: 18 }}>{`$ ${transactionAmount}`}</small>
+                                        Monto total: <small style={{ fontSize: 18 }}>{`$ ${price}`}</small>
                                     </Label>
                                 </div>
                             </Col>
