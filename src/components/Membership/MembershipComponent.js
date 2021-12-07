@@ -9,6 +9,7 @@ export const MembershipComponent = ({
   displayEditButton = false,
   displayDeleteButton = false,
   displayBuyButton = false,
+  onBuy,
 }) => {
 
   const { id, name, description, pricePerMonth } = membership;
@@ -65,7 +66,7 @@ export const MembershipComponent = ({
             {
               displayBuyButton ?
                 <div>
-                  <Button color="success" className="btn-round" size="sm">
+                  <Button color="success" className="btn-round" size="sm" onClick={onBuy}>
                     Comprar Membresía
                   </Button>
                 </div> : <></>

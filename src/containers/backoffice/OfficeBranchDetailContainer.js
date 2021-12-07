@@ -5,6 +5,7 @@ import { readFromLocalStorage, USER_TYPE } from '../../infra/api/localStorage';
 import { getAllMembership } from '../../stores/actions/backoffice/membership/membership';
 import { fetchOfficesList } from '../../stores/actions/backoffice/office/officesActions';
 import { getOfficeBranchDetail } from '../../stores/actions/backoffice/officeBranch/officeBranchDetailActions';
+import { acquireMembership } from '../../stores/actions/booking/membershipAcquisitionActions';
 import { OFFICE_BRANCH_ENTITY } from '../../stores/actions/errors/notFoundActions';
 
 export const OfficeBranchDetailContainer = () => {
@@ -25,6 +26,9 @@ export const OfficeBranchDetailContainer = () => {
         dispatch(getAllMembership(officeBranchId));
     }, [dispatch])
     const memberships = useSelector(state => state.memberships.membershipList);
+    const buyMembership = useCallback(membershipId => {
+        dispatch(acquireMembership(membershipId))
+    }, [dispatch])
     return <OfficeBranchDetail
         officeBranch={officeBranch}
         offices={offices}
@@ -35,5 +39,6 @@ export const OfficeBranchDetailContainer = () => {
         error={error}
         loadMemberships={loadMemberships}
         memberships={memberships}
+        buyMembership={buyMembership}
     />;
 };

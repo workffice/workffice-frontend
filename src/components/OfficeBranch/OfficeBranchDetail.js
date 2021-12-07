@@ -24,7 +24,8 @@ export const OfficeBranchDetail = ({
     loadingOffices,
     error,
     loadMemberships,
-    memberships
+    memberships,
+    buyMembership,
 }) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
@@ -189,6 +190,7 @@ export const OfficeBranchDetail = ({
                                 <Row>
                                     {memberships.map(membership => <MembershipComponent
                                         membership={membership}
+                                        onBuy={() => buyMembership(membership.id)}
                                         displayBuyButton
                                     />)}
                                 </Row>
