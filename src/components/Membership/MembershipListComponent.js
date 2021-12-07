@@ -5,17 +5,18 @@ import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { MembershipComponent } from './MembershipComponent';
 
 export const MembershipListComponent = props => {
-  const { memberships, loadMemberships, officeBranch, hideNotification,deleteMembership } = props;
+  const { memberships, loadMemberships, officeBranch, hideNotification, deleteMembership } = props;
   React.useEffect(() => {
     if (officeBranch)
       loadMemberships(officeBranch.id);
   }, [])
-  
+
   React.useEffect(() => {
     setTimeout(() => {
       hideNotification()
     }, 0)
   }, []);
+
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -45,7 +46,12 @@ export const MembershipListComponent = props => {
       <Row style={{ justifyContent: 'center' }}>
         {memberships ? memberships.map((membership) => {
           return <Col xs="10" md="4" lg="4" xg="4">
-            <MembershipComponent deleteMembership={deleteMembership} membership={membership} />
+            <MembershipComponent
+              displayEditButton
+              displayDeleteButton
+              deleteMembership={deleteMembership}
+              membership={membership}
+            />
           </Col>
         }) : <EmptyComponent />
 
