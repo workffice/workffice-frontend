@@ -19,6 +19,10 @@ export const MembershipAcquisitionList = ({
                 <hr />
             </Col>
         </Row>
-        {membershipAcquisitions.map(membershipAcquisition => <MembershipAcquisitionComponent key={membershipAcquisition.id} {...membershipAcquisition}/>)}
+        {membershipAcquisitions.map(membershipAcquisition => <MembershipAcquisitionComponent
+            key={membershipAcquisition.id}
+            {...membershipAcquisition}
+            paymentInformation={membershipAcquisition.paymentInformation || {}}
+        />)}
     </div>
 }

@@ -14,6 +14,7 @@ export const BookingComponent = (props) => {
         scheduleDate,
         startTime,
         endTime,
+        totalAmount,
         transactionAmount,
         providerFee,
         currency,
@@ -155,14 +156,21 @@ export const BookingComponent = (props) => {
                                 <Col>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18 }}>
-                                            Tarifa: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
+                                            Monto total: <small style={{ fontSize: 18 }}>{`$ ${totalAmount}`}</small>
                                         </Label>
                                     </div>
                                 </Col>
                                 <Col>
                                     <div className='text'>
                                         <Label className="form-label" style={{ fontSize: 18 }}>
-                                            Monto total: <small style={{ fontSize: 18 }}>{`$ ${transactionAmount}`}</small>
+                                            Total abonado: <small style={{ fontSize: 18 }}>{`$ ${transactionAmount}`}</small>
+                                        </Label>
+                                    </div>
+                                </Col>
+                                <Col>
+                                    <div className='text'>
+                                        <Label className="form-label" style={{ fontSize: 18 }}>
+                                            Tarifa: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
                                         </Label>
                                     </div>
                                 </Col>

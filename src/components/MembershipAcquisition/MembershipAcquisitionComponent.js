@@ -3,15 +3,19 @@ import { Badge, Card, CardBody, Col, Container, Label, Row } from "reactstrap"
 export const MembershipAcquisitionComponent = ({
     id,
     status,
-    paymentTypeId = "No definido",
-    currency = "No definido",
-    paymentMethodId = "No definido",
-    providerFee = 0,
     month,
     buyerEmail,
     price = 0,
     accessDays,
+    paymentInformation,
 }) => {
+    const {
+        paymentTypeId = "No definido",
+        currency = "No definido",
+        paymentMethodId = "No definido",
+        providerFee = 0,
+        transactionAmount,
+    } = paymentInformation
     const getStatus = () => {
         if (status === "BOUGHT") {
             return <Badge color="success" style={{ fontSize: 18 }}>Comprada</Badge>
@@ -116,14 +120,21 @@ export const MembershipAcquisitionComponent = ({
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Tarifa: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
+                                        Monto total: <small style={{ fontSize: 18 }}>{`$ ${price}`}</small>
                                     </Label>
                                 </div>
                             </Col>
                             <Col>
                                 <div className='text'>
                                     <Label className="form-label" style={{ fontSize: 18 }}>
-                                        Monto total: <small style={{ fontSize: 18 }}>{`$ ${price}`}</small>
+                                        Total abonado: <small style={{ fontSize: 18 }}>{`$ ${transactionAmount}`}</small>
+                                    </Label>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className='text'>
+                                    <Label className="form-label" style={{ fontSize: 18 }}>
+                                        Tarifa: <small style={{ fontSize: 18 }}>{`$ ${providerFee}`}</small>
                                     </Label>
                                 </div>
                             </Col>
