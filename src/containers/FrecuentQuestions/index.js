@@ -288,7 +288,7 @@ const FrequentQuestions = () => {
                             </CardBody>
                         </Collapse>
                     </Card>
-                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                    <Card className="card-plain" style={{ marginLeft: "2%" }}>
                         <CardHeader role="tab">
                             <a
                                 aria-expanded={openedCollapses === "collapseSeventeen"}
@@ -326,6 +326,47 @@ const FrequentQuestions = () => {
                                         www.worffice.com/manual
                                     </a>
                                 </strong>. Allí debe ver el documento llamado <strong>Manual de usuario inquilino</strong>.
+                            </CardBody>
+                        </Collapse>
+                    </Card>
+                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                        <CardHeader role="tab">
+                            <a
+                                aria-expanded={openedCollapses === "collapseFour"}
+                                href="#"
+                                data-parent="#accordion"
+                                data-toggle="collapse"
+                                onClick={(e) => { e.preventDefault(); collapsesToggle("collapseFour") }}
+                            >
+                                <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                                    <div className='text'>
+                                        <Label className="form-label" style={{ fontSize: 18, marginTop: "auto", marginBottom: "auto" }}>
+                                            - Videos tutoriales
+                                        </Label>
+                                    </div>
+                                    <i
+                                        className="nc-icon nc-minimal-down"
+                                        style={{
+                                            marginTop: "auto",
+                                            marginBottom: "auto",
+                                            color: "#133148",
+                                            fontWeight: 'bold',
+                                        }}
+                                    />
+                                </Row>
+                            </a>
+                        </CardHeader>
+                        <Collapse
+                            role="tabpanel"
+                            isOpen={openedCollapses === "collapseFour"}
+                        >
+                            <CardBody>
+                                Para poder ver los videos tutoriales referentes al usuario inquilino debe acceder al siguiete link {" "}
+                                <strong>
+                                    <a href='https://www.youtube.com/playlist?list=PLCTdkDqj4jQ1EhsV2Ww_Wx5NtdJLk4Kz7' style={{ textDecoration: 'none' }}>
+                                        "Tutoriales para usuario inquilino".
+                                    </a>
+                                </strong>.
                             </CardBody>
                         </Collapse>
                     </Card>
@@ -706,7 +747,7 @@ const FrequentQuestions = () => {
                             </CardBody>
                         </Collapse>
                     </Card>
-                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                    <Card className="card-plain" style={{ marginLeft: "2%"}}>
                         <CardHeader role="tab">
                             <a
                                 aria-expanded={openedCollapses === "collapseSixteen"}
@@ -744,6 +785,47 @@ const FrequentQuestions = () => {
                                         www.worffice.com/manual
                                     </a>
                                 </strong>. Allí debe ver el documento llamado <strong>Manual de usuario propietario de oficina</strong>.
+                            </CardBody>
+                        </Collapse>
+                    </Card>
+                    <Card className="card-plain" style={{ marginLeft: "2%", marginBottom: "2%" }}>
+                        <CardHeader role="tab">
+                            <a
+                                aria-expanded={openedCollapses === "twenty"}
+                                href="#"
+                                data-parent="#accordion"
+                                data-toggle="collapse"
+                                onClick={(e) => { e.preventDefault(); collapsesToggle("twenty") }}
+                            >
+                                <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                                    <div className='text'>
+                                        <Label className="form-label" style={{ fontSize: 18, marginTop: "auto", marginBottom: "auto" }}>
+                                            - Videos tutoriales
+                                        </Label>
+                                    </div>
+                                    <i
+                                        className="nc-icon nc-minimal-down"
+                                        style={{
+                                            marginTop: "auto",
+                                            marginBottom: "auto",
+                                            color: "#133148",
+                                            fontWeight: 'bold',
+                                        }}
+                                    />
+                                </Row>
+                            </a>
+                        </CardHeader>
+                        <Collapse
+                            role="tabpanel"
+                            isOpen={openedCollapses === "twenty"}
+                        >
+                            <CardBody>
+                                Para poder ver los videos tutoriales referentes al usuario propietario de oficina debe acceder al siguiete link {" "}
+                                <strong>
+                                    <a href='https://www.youtube.com/playlist?list=PLCTdkDqj4jQ0eGiKOLv3s4z7Udd2fBJ5a' style={{ textDecoration: 'none' }}>
+                                        "Tutoriales para usuario propietario de oficina".
+                                    </a>
+                                </strong>.
                             </CardBody>
                         </Collapse>
                     </Card>
