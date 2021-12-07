@@ -1,5 +1,6 @@
 import { acquireMembershipApi } from "../../../api/booking/membershipAcquisition"
 import { getMembershipAcquisitions } from "../../../infra/api/booking/membershipAcquisition"
+import { MEMBERSHIP_ACQUISITION_RESOURCE, setForbiddenAccessAction, setSuccessAccess } from "../errors/permissionActions"
 import { setErrorAction, setSuccessAction } from "../notifications/writeNotificationActions"
 
 export const ACQUIRE_MEMBERSHIP = 'ACQUIRE_MEMBERSHIP'
@@ -28,8 +29,8 @@ export const fetchMembershipAcquisitionsAction = membershipAcquisitions => ({
 export const fetchMembershipAcquisitions = () => async dispatch => {
     try {
         dispatch(fetchMembershipAcquisitionsAction(await getMembershipAcquisitions()))
-        dispatch(setSuccessAction())
+        dispatch(setSuccessAccess(MEMBERSHIP_ACQUISITION_RESOURCE))
     } catch (error) {
-        dispatch(setErrorAction(error))
+        dispatch(setForbiddenAccessAction(MEMBERSHIP_ACQUISITION_RESOURCE))
     }
 }
