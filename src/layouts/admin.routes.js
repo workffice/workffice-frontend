@@ -266,7 +266,7 @@ export const adminRoutes = [
         layout: '/admin',
       },
       {
-        path: '/membership',
+        path: '/my-memberships',
         name: 'Gestionar membresías',
         mini: 'GM',
         component: MembershipsContainer,
