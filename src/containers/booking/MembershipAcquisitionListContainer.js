@@ -1,3 +1,5 @@
+import { MembershipAcquisitionList } from "../../components/MembershipAcquisition/MembershipAcquisitionList"
+
 export const MembershipAcquisitionListContainer = () => {
-    return <h1>Membresias adquiridas</h1>
+    return <MembershipAcquisitionList membershipAcquisitions={[{ id: 'asdasd' }]} />
 }

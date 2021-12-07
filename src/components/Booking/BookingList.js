@@ -24,7 +24,6 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffi
                 </Row>
             </Row>
         return bookings.length !== 0 ? bookings.map(booking => {
-            console.log("booking.officeId",booking.officeId)
             return <BookingComponent
                 officeName={booking.officeName}
                 key={booking.id}
