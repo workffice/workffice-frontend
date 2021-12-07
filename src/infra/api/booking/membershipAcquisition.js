@@ -1,4 +1,4 @@
-import { headersPost, sdkAuthRequest } from "..";
+import { headerGet, headersPost, sdkAuthRequest } from "..";
 import { API_URL } from "../../../environments/environment";
 
 export const acquireMembership = async membershipId => {
@@ -8,6 +8,19 @@ export const acquireMembership = async membershipId => {
             headers: headersPost,
         });
         return Promise.resolve(membershipAcquired.data.uri.match("/api/membership_acquisitions/(.*)/")[1]);
+    } catch (error) {
+        return Promise.reject(error.errors[0]);
+    }
+};
+
+
+export const getMembershipAcquisitions = async () => {
+    try {
+        const membershipAcquisitions = await sdkAuthRequest(`${API_URL}/membership_acquisitions/`, {
+            method: 'GET',
+            headers: headerGet,
+        });
+        return Promise.resolve(membershipAcquisitions.data);
     } catch (error) {
         return Promise.reject(error.errors[0]);
     }

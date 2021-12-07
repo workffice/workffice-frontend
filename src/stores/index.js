@@ -25,7 +25,7 @@ import { servicesReducer } from './reducers/backoffice/services/servicesReducer'
 import { userMeReducer } from './reducers/backoffice/userReducer';
 import { bookingReducer, mercadoPagoPreferenceReducer, officeBookingsReducer, userBookingsReducer } from './reducers/booking/bookingReducer';
 import { loadingBookingReducer } from './reducers/booking/loadingReducer';
-import { membershipAcquisitionReducer } from './reducers/booking/membershipAcquisitionReducer';
+import { membershipAcquisitionReducer, membershipAcquisitionsReducer } from './reducers/booking/membershipAcquisitionReducer';
 import { entityNotFoundReducer } from './reducers/errors/notFoundReducer';
 import { permissionReducer } from './reducers/errors/permissionReducer';
 import { notificationReducer } from './reducers/notification/writeNotificationReducer';
@@ -98,5 +98,6 @@ export const reducers = routes =>
     // Membership
     memberships: membershipReducer,
     // Membership acquisitions
-    membershipAcquisitions: membershipAcquisitionReducer
+    newMembershipAcquisition: membershipAcquisitionReducer,
+    membershipAcquisitions: membershipAcquisitionsReducer,
   });
