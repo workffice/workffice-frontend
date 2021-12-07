@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
     Badge, Button, Card, CardBody, Col, Container, Label, Row, UncontrolledTooltip
 } from 'reactstrap';
+import { readFromLocalStorage } from '../../infra/api/localStorage';
 
 export const BookingComponent = (props) => {
     const {
@@ -26,7 +27,7 @@ export const BookingComponent = (props) => {
         loadOffice,
         officeId
     } = props;
-
+    const userRole = readFromLocalStorage('USER_TYPE');
     React.useEffect(() => {
         loadOffices(officeBranchId)
         if (officeId) {
@@ -72,7 +73,7 @@ export const BookingComponent = (props) => {
                             {
                                 status === "SCHEDULED" && (
                                     <Col>
-                                        <Link to={`/admin/office/${officeId}/new-review`}>
+                                        <Link to={userRole === 'RENTER' ? 'officebranch/:officeBranchId/office/:officeId/new-review' : `/admin/office/${officeId}/new-review`}>
                                             <UncontrolledTooltip placement="right" target={`review-${officeBranchId}`}>
                                                 Crear reseña
                                             </UncontrolledTooltip>

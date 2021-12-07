@@ -127,7 +127,7 @@ export const renterRoutes = [
         visibility: true
       },
       {
-        path: '/office/:officeId/new-review',
+        path: 'officebranch/:officeBranchId/office/:officeId/new-review',
         component: NewReviewContainer,
         layout: '/admin',
         visibility: false,

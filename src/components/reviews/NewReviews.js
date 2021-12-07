@@ -8,13 +8,17 @@ import { getUserMe } from '../../stores/actions/backoffice/userActions';
 import { Notification } from '../Common/Notification/Notification';
 import RatingIcon from '../RatingIcon';
 
-export const NewReviews = ({ office, onCreate, branch, notification, hideNotification, }) => {
+export const NewReviews = ({ office, onCreate, branch, notification, hideNotification, loadBranch }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const officeId = useParams().id;
+  const { officeId, officeBranchId } = useParams();
+
   React.useEffect(() => {
     dispatch(getOffice(officeId))
     dispatch(getUserMe());
+  }, [])
+  React.useEffect(() => {
+    loadBranch(officeBranchId);
   }, [])
   const user = useSelector(state => state.userMe)
   const validate = values => {
