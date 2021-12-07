@@ -10,13 +10,13 @@ import { NoticeComponent } from './NoticeComponent';
 // import { EmptyComponent } from '../Empty/EmptyComponent';
 
 export const NoticeListComponent = props => {
-  const newsOperation = useSelector(state => state.news.news);
   const { news, sendNews, deleteNews, notification, hideNotification } = props;
+  const newsOperation = useSelector(state => state.news.news);
   const userType = readFromLocalStorage("USER_TYPE");
   const displayEditButton = userType === "RENTER" ? false : true;
   const displaySendButton = userType === "RENTER" ? false : true;
   const displayDeleteButton = userType === "OFFICE_HOLDER" ? true : false;
-  
+
   React.useEffect(() => {
     setTimeout(() => {
       hideNotification()
@@ -59,8 +59,8 @@ export const NoticeListComponent = props => {
       </Row>
       <Row style={{ display: 'flex', justifyContent: 'start', marginTop: 16 }}>
         {
-           news && news.length > 0 ? news.map((n) => {
-            if (n.status === "DRAFT") {
+          news != null && news.length > 0 ? news.map((n) => {
+            if (n.status !== "DELETED") {
               return <Col xs="10" md="6" lg="6" xg="4">
                 <NoticeComponent
                   key={n.id}

@@ -24,7 +24,6 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffi
                 </Row>
             </Row>
         return bookings.length !== 0 ? bookings.map(booking => {
-            console.log("booking.officeId",booking.officeId)
             return <BookingComponent
                 officeName={booking.officeName}
                 key={booking.id}
@@ -34,7 +33,8 @@ export const BookingList = ({ isLoading, bookings, disableBookingLinks, loadOffi
                 scheduleDate={formatDate(booking.startTime)}
                 startTime={formatHour(booking.startTime)}
                 endTime={formatHour(booking.endTime)}
-                transactionAmount={booking.totalAmount}
+                totalAmount={booking.totalAmount}
+                transactionAmount={booking.payment ? booking.payment.transactionAmount : "-"}
                 providerFee={booking.payment ? booking.payment.providerFee : "-"}
                 currency={booking.payment ? booking.payment.currency : "No definido"}
                 paymentMethodId={booking.payment ? booking.payment.paymentMethodId : "No definido"}

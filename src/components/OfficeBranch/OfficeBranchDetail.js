@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading';
+import { MembershipComponent } from '../Membership/MembershipComponent';
 import { OfficeComponent } from '../Offices/OfficeComponent';
 
 
@@ -22,6 +23,9 @@ export const OfficeBranchDetail = ({
     offices,
     loadingOffices,
     error,
+    loadMemberships,
+    memberships,
+    buyMembership,
 }) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
@@ -46,6 +50,11 @@ export const OfficeBranchDetail = ({
     useEffect(() => {
         if (officeBranch)
             loadOffices(officeBranch.id)
+    }, [officeBranch ? officeBranch.id : ""])
+
+    useEffect(() => {
+        if (officeBranch)
+            loadMemberships(officeBranch.id)
     }, [officeBranch ? officeBranch.id : ""])
 
     const renderOffices = () => {
@@ -169,6 +178,21 @@ export const OfficeBranchDetail = ({
                                 </Row>
                                 <Row style={{ paddingBottom: "5%", display: "flex", justifyContent: "center" }}>
                                     {renderOffices()}
+                                </Row>
+                                <Row style={{ display: 'grid', paddingTop: 40 }}>
+                                    <Col xs="12" md="6" lg="12" xg="12">
+                                        <h1 style={{ marginBottom: 0 }}>
+                                            Membresías de  <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                                        </h1>
+                                        <hr />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    {memberships.map(membership => <MembershipComponent
+                                        membership={membership}
+                                        onBuy={() => buyMembership(membership.id)}
+                                        displayBuyButton
+                                    />)}
                                 </Row>
                             </CardBody>
                         </Card>

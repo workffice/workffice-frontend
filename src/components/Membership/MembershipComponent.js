@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import { Badge, Button, Card, CardBody, CardHeader, UncontrolledTooltip } from 'reactstrap';
 import './styles/OfficeComponent.css';
 
-export const MembershipComponent = (props) => {
+export const MembershipComponent = ({
+  membership,
+  deleteMembership,
+  displayEditButton = false,
+  displayDeleteButton = false,
+  displayBuyButton = false,
+  onBuy,
+}) => {
 
-  const { membership, deleteMembership } = props;
   const { id, name, description, pricePerMonth } = membership;
-  const displayEditButton = true;
-  const displayDeleteButton = true;
 
   const getDay = day => {
     switch (day) {
@@ -59,14 +63,17 @@ export const MembershipComponent = (props) => {
                   </UncontrolledTooltip>
                 </div> : <></>
             }
+            {
+              displayBuyButton ?
+                <div>
+                  <Button color="success" className="btn-round" size="sm" onClick={onBuy}>
+                    Comprar Membresía
+                  </Button>
+                </div> : <></>
+            }
           </div>
         </CardHeader>
         <CardBody>
-          <div className="office-branch-card-title">
-            <h5 style={{ marginBottom: 0 }}>
-              {name}
-            </h5>
-          </div>
           <hr />
           <div className='text'>
             <label className="form-label">
@@ -77,7 +84,7 @@ export const MembershipComponent = (props) => {
           <div className='text'>
             <label className="form-label">
               Días:<br />
-              {membership && membership. accessDays.length > 0 ?
+              {membership && membership.accessDays.length > 0 ?
                 membership.accessDays.map(day => {
                   return <Badge color='info'>{getDay(day)}</Badge>
                 }) : 'No disponible'
