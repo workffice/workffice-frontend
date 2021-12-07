@@ -21,11 +21,11 @@ export const acquireMembership = membershipId => async dispatch => {
 export const FETCH_MEMBERSHIP_ACQUISITIONS = 'FETCH_MEMBERSHIP_ACQUISITIONS'
 
 export const fetchMembershipAcquisitionsAction = membershipAcquisitions => ({
-    type: ACQUIRE_MEMBERSHIP,
+    type: FETCH_MEMBERSHIP_ACQUISITIONS,
     payload: membershipAcquisitions,
 })
 
-export const fetchMembershipAcquisition = () => async dispatch => {
+export const fetchMembershipAcquisitions = () => async dispatch => {
     try {
         dispatch(fetchMembershipAcquisitionsAction(await getMembershipAcquisitions()))
         dispatch(setSuccessAction())
