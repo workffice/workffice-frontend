@@ -59,7 +59,7 @@ export const BookingForm = ({
     }, [])
     useEffect(() => {
         const bookingId = booking ? booking.id : null
-        if (bookingId)
+        if (bookingId && !formik.values.membershipAcquisitionCode)
             createMercadoPagoPreference(bookingId)
     }, [booking ? booking.id : ""])
     useEffect(() => {
@@ -103,15 +103,17 @@ export const BookingForm = ({
             startTime: moment().hour(8),
             endTime: moment().hour(9),
             numberOfAssistants: 0,
+            membershipAcquisitionCode: null,
         },
         validate,
-        onSubmit: async ({ date, startTime, endTime, numberOfAssistants }) => {
+        onSubmit: async ({ date, startTime, endTime, numberOfAssistants, membershipAcquisitionCode }) => {
             const start = startTime.hours() < 10 ? "0" + startTime.hours() : startTime.hours()
             const end = endTime.hours() < 10 ? "0" + endTime.hours() : endTime.hours()
             const booking = {
                 startTime: `${date.format("YYYY-MM-DD")}T${start}:00:00`,
                 endTime: `${date.format("YYYY-MM-DD")}T${end}:00:00`,
-                attendeesQuantity: numberOfAssistants
+                attendeesQuantity: numberOfAssistants,
+                membershipAcquisitionId: membershipAcquisitionCode,
             }
             createBooking(office.id, booking)
         },
@@ -280,6 +282,18 @@ export const BookingForm = ({
                                         value={formik.values.numberOfAssistants}
                                     />
                                     {formik.errors.numberOfAssistants ? <Label className="text-danger">{formik.errors.numberOfAssistants}</Label> : <></>}
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label htmlFor="membershipAcquisitionCode" className="label-form">Código de compra de membresía</Label>
+                                    <Input
+                                        type="string"
+                                        placeholder="Ingrese el código de compra"
+                                        name="membershipAcquisitionCode"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.membershipAcquisitionCode}
+                                    />
                                 </FormGroup>
 
                                 <FormGroup>

@@ -11,7 +11,7 @@ export const NewsListContainer = () => {
     const userMe = useSelector(state => state.userMe)
     useEffect(() => {
         dispatch(getAllNews(branch.id));
-    }, [dispatch]);
+    }, []);
     const hideNotification = useCallback(() => {
         dispatch(hideNotificationAction())
     }, [dispatch]);
@@ -22,17 +22,22 @@ export const NewsListContainer = () => {
     const deleteNews = useCallback((id) => {
         dispatch(deleteN(id, branch.id));
     }, [dispatch]);
-    const loadNewsUpdated = useCallback(()=>{
+    const loadNewsUpdated = useCallback(() => {
         dispatch(getAllNews(branch.id));
-    },[dispatch])
-    const news = useSelector(state => state.news.newsList);
+    }, [dispatch])
+    const newsList = useSelector(state => state.news.newsList);
     const notification = useSelector(state => state.notification);
-
-    const newsList = news.sort((a, b) => {
-        a = new Date(a.created);
-        b = new Date(b.created);
-        return a > b ? -1 : a < b ? 1 : 0;
-    })
+    let news = newsList;
+    React.useEffect(() => {
+        news = loadNews();
+    }, [])
+    const loadNews = () => {
+        return newsList.sort((a, b) => {
+            a = new Date(a.created);
+            b = new Date(b.created);
+            return a > b ? -1 : a < b ? 1 : 0;
+        });
+    }
 
     return (<NoticeListComponent
         notification={notification}
@@ -40,7 +45,7 @@ export const NewsListContainer = () => {
         newsUpdated={loadNewsUpdated}
         officeBranch={branch}
         userMe={userMe}
-        news={newsList}
+        news={news}
         sendNews={sendNews}
         deleteNews={deleteNews}
     />);

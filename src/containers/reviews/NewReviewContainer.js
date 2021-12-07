@@ -16,6 +16,7 @@ export const NewReviewContainer = () => {
         dispatch(hideNotificationAction());
     }, [dispatch]);
     const branch = useSelector(() => readFromLocalStorage("officeBranch")) ? useSelector(() => readFromLocalStorage("officeBranch")) : useSelector(state => state.officeBranchSelected);
+    console.log('%cMyProject%cline:18%cbranch', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px', branch)
     const user = useSelector(state => state.userMe);
     const office = useSelector(state => state.office);
     const loadOffice = useCallback(id => {

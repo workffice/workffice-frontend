@@ -10,18 +10,26 @@ import { NoticeComponent } from './NoticeComponent';
 // import { EmptyComponent } from '../Empty/EmptyComponent';
 
 export const NoticeListComponent = props => {
-  const newsOperation = useSelector(state => state.news.news);
   const { news, sendNews, deleteNews, notification, hideNotification } = props;
+  const newsOperation = useSelector(state => state.news.news);
   const userType = readFromLocalStorage("USER_TYPE");
   const displayEditButton = userType === "RENTER" ? false : true;
   const displaySendButton = userType === "RENTER" ? false : true;
   const displayDeleteButton = userType === "OFFICE_HOLDER" ? true : false;
-  
+
   React.useEffect(() => {
     setTimeout(() => {
       hideNotification()
-    }, 1000)
+    }, 2500)
   }, [notification.show])
+
+  const getErrorMessage = errorCode => {
+    switch (errorCode) {
+      case "NEWS_IS_NOT_DRAFT": return "No se puede enviar una noticia en estado ENVIADA"
+      default: "Oops algo salio mal"
+    }
+  }
+
   return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
@@ -51,6 +59,14 @@ export const NoticeListComponent = props => {
       <Row>
         <Col xs="12" md="12" lg="12" xg="12">
           <Notification
+            show={notification.show && notification.isError}
+            isError
+            message={getErrorMessage(notification.errorCode)}
+            hideNotification={hideNotification}
+          />
+        </Col>
+        <Col xs="12" md="12" lg="12" xg="12">
+          <Notification
             show={notification.show && notification.isSuccess && newsOperation != null}
             message="La operacion ha sido realizada correctamente"
             hideNotification={hideNotification}
@@ -59,8 +75,8 @@ export const NoticeListComponent = props => {
       </Row>
       <Row style={{ display: 'flex', justifyContent: 'start', marginTop: 16 }}>
         {
-           news && news.length > 0 ? news.map((n) => {
-            if (n.status === "DRAFT") {
+          news != null && news.length > 0 ? news.map((n) => {
+            if (n.status !== "DELETED") {
               return <Col xs="10" md="6" lg="6" xg="4">
                 <NoticeComponent
                   key={n.id}

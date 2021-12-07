@@ -58,7 +58,6 @@ export const getAllNews = (officeBranchId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
         dispatch(getNews(await getNewsAPI(officeBranchId)));
-        dispatch(setSuccessAction())
     } catch (error) {
         dispatch(setErrorAction(error));
     } finally {
@@ -79,7 +78,7 @@ export const updateN = (newsId, newsData) => async (dispatch) => {
 export const send = (newsId) => async (dispatch) => {
     dispatch(setIsLoading(true));
     try {
-        dispatch(getNews(await sendNewsAPI(newsId)));
+        dispatch(sendNews(await sendNewsAPI(newsId)));
         dispatch(setSuccessAction())
     } catch (error) {
         dispatch(setErrorAction(error));

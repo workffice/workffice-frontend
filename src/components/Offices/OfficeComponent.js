@@ -186,7 +186,7 @@ export const OfficeComponent = ({
               <Label>Servicios</Label>
               <br />
               {office.services.length > 0
-                ? office.services.map(o => <Badge color={'warning'}>{o.name}</Badge>)
+                ? office.services.map(o => <Badge key={o.id} color={'warning'}>{o.name}</Badge>)
                 : <p style={{fontSize:'12px', color:'gray', fontStyle:'oblique'}}>No tiene</p>
               }
           </Col>
@@ -195,7 +195,7 @@ export const OfficeComponent = ({
             <Label>Equipamiento</Label>
             <br />
             {office.equipments.length > 0
-              ? office.equipments.map(o => <Badge color={'warning'}>{o.name}</Badge>)
+              ? office.equipments.map(o => <Badge key={o.id} color={'warning'}>{o.name}</Badge>)
               : <p style={{ fontSize: '12px', color: 'gray', fontStyle: 'oblique' }}>No tiene</p>
             }
           </Col>

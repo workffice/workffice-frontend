@@ -129,7 +129,7 @@ const FrequentQuestions = () => {
                             </CardBody>
                         </Collapse>
                     </Card>
-                    {/* <Card className="card-plain" style={{ marginLeft: "2%" }}>
+                    <Card className="card-plain" style={{ marginLeft: "2%" }}>
                         <CardHeader role="tab">
                             <a
                                 aria-expanded={openedCollapses === "collapseThree"}
@@ -161,19 +161,12 @@ const FrequentQuestions = () => {
                             isOpen={openedCollapses === "collapseThree"}
                         >
                             <CardBody>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                non cupidatat skateboard dolor brunch. Food truck quinoa
-                                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-                                put a bird on it squid single-origin coffee nulla assumenda
-                                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                                wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                                excepteur butcher vice lomo. Leggings occaecat craft beer
-                                farm-to-table, raw denim aesthetic synth nesciunt you probably
-                                haven't heard of them accusamus labore sustainable VHS.
+                                Para acceder a una membresía debe ponerse en contacto con la
+                                sucursal a la que desea asistir y solicitarla. De esta manera
+                                podrá armar un paquete de días y oficinas que se adapte a sus necesidades.
                             </CardBody>
                         </Collapse>
-                    </Card> */}
+                    </Card>
                     {/* <Card className="card-plain" style={{ marginLeft: "2%" }}>
                         <CardHeader role="tab">
                             <a

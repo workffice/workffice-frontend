@@ -11,7 +11,20 @@ import "slick-carousel/slick/slick.css";
 import { Cloudinary } from '../Common/Cloudinary/Cloudinary';
 import { EmptyComponent } from '../Common/Empty/EmptyComponent';
 import { Loading } from '../Common/Loading/Loading';
+import { MembershipComponent } from '../Membership/MembershipComponent';
 import { OfficeComponent } from '../Offices/OfficeComponent';
+
+
+const addCheckout = preferenceId => {
+    const mp = new window.MercadoPago('TEST-34c7f33c-0c48-4dfd-b26c-61fb7700fbc5', {
+        locale: 'es-AR'
+    });
+
+    // Inicializa el checkout
+    return mp.checkout({
+        preference: { id: preferenceId },
+    });
+}
 
 
 export const OfficeBranchDetail = ({
@@ -22,6 +35,12 @@ export const OfficeBranchDetail = ({
     offices,
     loadingOffices,
     error,
+    loadMemberships,
+    memberships,
+    buyMembership,
+    membershipAcquisitionId,
+    createMercadoPagoPreference,
+    mercadoPagoPreferenceId
 }) => {
     const query = new URLSearchParams(useLocation().search);
     const settings = {
@@ -34,6 +53,7 @@ export const OfficeBranchDetail = ({
     };
 
     const [slider, setSlider] = useState(null)
+    const [membershipIdSelected, setMembershipIdSelected] = useState(null)
 
     useEffect(() => {
         if (query.get("id") === null) {
@@ -47,6 +67,29 @@ export const OfficeBranchDetail = ({
         if (officeBranch)
             loadOffices(officeBranch.id)
     }, [officeBranch ? officeBranch.id : ""])
+
+    useEffect(() => {
+        if (officeBranch)
+            loadMemberships(officeBranch.id)
+    }, [officeBranch ? officeBranch.id : ""])
+
+    useEffect(() => {
+        if (membershipAcquisitionId)
+            createMercadoPagoPreference(membershipAcquisitionId)
+    }, [membershipAcquisitionId ? membershipAcquisitionId : ""])
+
+    const [mpCheckout, setMpCheckout] = useState(null)
+    useEffect(() => {
+        if (mercadoPagoPreferenceId) {
+            const script = document.createElement('script');
+            const checkout = addCheckout(mercadoPagoPreferenceId)
+            script.type = 'text/javascript';
+            script.src = 'https://sdk.mercadopago.com/js/v2';
+            script.addEventListener('load', addCheckout); // Cuando cargue el script, se ejecutará la función addCheckout
+            document.body.appendChild(script);
+            setMpCheckout(checkout)
+        }
+    }, [mercadoPagoPreferenceId]);
 
     const renderOffices = () => {
         if (loadingOffices)
@@ -169,6 +212,30 @@ export const OfficeBranchDetail = ({
                                 </Row>
                                 <Row style={{ paddingBottom: "5%", display: "flex", justifyContent: "center" }}>
                                     {renderOffices()}
+                                </Row>
+                                <Row style={{ display: 'grid', paddingTop: 40 }}>
+                                    <Col xs="12" md="6" lg="12" xg="12">
+                                        <h1 style={{ marginBottom: 0 }}>
+                                            Membresías de  <label style={{ color: "#EB5D60" }}>{officeBranch ? officeBranch.name : ""}</label>
+                                        </h1>
+                                        <hr />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    {memberships.map(membership => <MembershipComponent
+                                        key={membership.id}
+                                        membership={membership}
+                                        onBuy={() => {
+                                            buyMembership(membership.id)
+                                            setMembershipIdSelected(membership.id)
+                                        }}
+                                        displayBuyButton
+                                        mpCheckout={mpCheckout}
+                                        mercadoPagoPreferenceId={
+                                            membershipIdSelected === membership.id ?
+                                                mercadoPagoPreferenceId : null
+                                        }
+                                    />)}
                                 </Row>
                             </CardBody>
                         </Card>

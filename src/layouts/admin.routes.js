@@ -16,6 +16,7 @@ import { NewRoleContainer, RolesListContainer } from '../containers/backoffice/R
 import { ServicesEquipmentsContainer } from '../containers/backoffice/ServicesEquipmentsContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
+import { MembershipAcquisitionListContainer } from '../containers/booking/MembershipAcquisitionListContainer';
 import { CollaboratorContainer, CollaboratorListContainer } from '../containers/CollaboratorContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { NewReviewContainer } from '../containers/reviews/NewReviewContainer';
@@ -219,6 +220,14 @@ export const adminRoutes = [
         visibility: true
       },
       {
+        path: '/memberships/acquisitions',
+        name: 'Membresias adquiridas',
+        mini: 'MA',
+        component: MembershipAcquisitionListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
         path: '/create-booking',
         name: 'Reservar oficina',
         mini: 'RO',
@@ -257,7 +266,7 @@ export const adminRoutes = [
         layout: '/admin',
       },
       {
-        path: '/membership',
+        path: '/my-memberships',
         name: 'Gestionar membresías',
         mini: 'GM',
         component: MembershipsContainer,
