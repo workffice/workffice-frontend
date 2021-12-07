@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import { Badge, Button, Card, CardBody, CardHeader, UncontrolledTooltip } from 'reactstrap';
 import './styles/OfficeComponent.css';
 
-export const MembershipComponent = (props) => {
+export const MembershipComponent = ({
+  membership,
+  deleteMembership,
+  displayEditButton = false,
+  displayDeleteButton = false,
+  displayBuyButton = false,
+}) => {
 
-  const {
-    membership,
-    deleteMembership,
-    displayEditButton = true,
-    displayDeleteButton = true,
-    displayBuyButton = false,
-  } = props;
   const { id, name, description, pricePerMonth } = membership;
 
   const getDay = day => {

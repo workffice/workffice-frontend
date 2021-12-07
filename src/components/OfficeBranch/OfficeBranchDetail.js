@@ -189,8 +189,6 @@ export const OfficeBranchDetail = ({
                                 <Row>
                                     {memberships.map(membership => <MembershipComponent
                                         membership={membership}
-                                        displayEditButton={false}
-                                        displayDeleteButton={false}
                                         displayBuyButton
                                     />)}
                                 </Row>
