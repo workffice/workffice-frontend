@@ -73,8 +73,14 @@ export const NewReviews = ({ office, onCreate, branch, notification, hideNotific
   }, [notification.show]);
 
 
-  return (
+  const getErrorMessage = errorCode => {
+    switch (errorCode) {
+      case "REVIEW_ALREADY_CREATED": return "Ya valoraste esta oficina"
+      case "NO_BOOKING": return "No posees reservas para esta oficina"
+    }
+  }
 
+  return (
     <div className="content">
       <Row style={{ display: 'grid', paddingTop: 40 }}>
         <Col xs="6" md="6" lg="12" xg="12">
@@ -82,6 +88,12 @@ export const NewReviews = ({ office, onCreate, branch, notification, hideNotific
             Nueva <small color="red">Reseña</small>
           </h1>
           <hr />
+          <Notification
+            show={notification.show && notification.isError}
+            isError
+            message={getErrorMessage(notification.errorCode)}
+            hideNotification={hideNotification}
+          />
           <Notification
             show={notification.show && notification.isSuccess}
             message="La reseña ha sido creada correctamente"
