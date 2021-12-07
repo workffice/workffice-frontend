@@ -15,7 +15,8 @@ export const NoticeComponent = (props) => {
     displayDeleteButton,
     sendNews,
     deleteNews,
-    } = props;
+    // recipients
+  } = props;
 
   const { title, subject, body, created } = news;
 
@@ -51,7 +52,7 @@ export const NoticeComponent = (props) => {
                 </div> : <></>
             }
             {
-              displaySendButton ?
+              displaySendButton  ?
                 <div>
                   <Button id={`sendNews-${id}`} color="success" className="btn-round btn-icon" size="sm" onClick={() => send(id)} >
                     <i className="nc-icon nc-bell-55"></i>
@@ -85,7 +86,7 @@ export const NoticeComponent = (props) => {
 
         </CardBody>
         <CardFooter>
-          <p style={{fontStyle:'oblique', fontSize:'12px'}}>Estado:  {news.status==='DRAFT'?'Borrador':'Enviada'}</p>
+          <p style={{ fontStyle: 'oblique', fontSize: '12px' }}>Estado:  {news.status === 'DRAFT' ? 'Borrador' : 'Enviada'}</p>
         </CardFooter>
       </Card>
     </>
