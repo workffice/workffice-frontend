@@ -6,6 +6,7 @@ import { OfficeDetailContainer } from '../containers/backoffice/OfficeDetailCont
 import { OfficesSearchContainer } from '../containers/backoffice/OfficesSearchContainer';
 import { BookingDetailContainer } from '../containers/booking/BookingDetailContainer';
 import { OfficeBookingListContainer, UserBookingListContainer, UserPastBookingListContainer } from '../containers/booking/BookingListContainer';
+import { MembershipAcquisitionListContainer } from '../containers/booking/MembershipAcquisitionListContainer';
 import FrequentQuestions from '../containers/FrecuentQuestions';
 import { NewReviewContainer } from '../containers/reviews/NewReviewContainer';
 import { UserProfileContainer } from '../containers/UserProfileContainer';
@@ -266,6 +267,14 @@ export const renterRoutes = [
         name: 'Reservas anteriores',
         mini: 'RA',
         component: UserPastBookingListContainer,
+        layout: '/admin',
+        visibility: true
+      },
+      {
+        path: '/memberships/acquisitions',
+        name: 'Membresias adquiridas',
+        mini: 'MA',
+        component: MembershipAcquisitionListContainer,
         layout: '/admin',
         visibility: true
       },
